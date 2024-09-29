@@ -74,11 +74,6 @@
                                                 <Image url="@images/Men/CamisaHombre.png" />
                                              </image>
                                           </ImageView>
-                                          <ImageView fitHeight="134.0" fitWidth="249.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
-                                             <image>
-                                                <Image url="@images/DunimaSinFondo.png" />
-                                             </image>
-                                          </ImageView>
                                        </children>
                                     </GridPane>
                                     <TextField layoutX="356.0" layoutY="14.0" />
@@ -191,7 +186,7 @@
                                           <Button layoutX="202.0" layoutY="12.0" mnemonicParsing="false" text="Ver Estadisticas" />
                                           <ImageView fitHeight="58.0" fitWidth="70.0" layoutY="2.0" pickOnBounds="true">
                                              <image>
-                                                <Image url="@images/DunimaSinFondo.png" />
+                                                <Image url="@DunimaSinFondo.png" />
                                              </image>
                                           </ImageView>
                                           <Label layoutX="171.0" layoutY="52.0" prefHeight="83.0" prefWidth="307.0" text="       SALE">
@@ -281,7 +276,7 @@
                         </SplitPane>
                         <ImageView fitHeight="51.0" fitWidth="62.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true">
                            <image>
-                              <Image url="@images/DunimaSinFondo.png" />
+                              <Image url="@DunimaSinFondo.png" />
                            </image>
                         </ImageView>
                      </children></AnchorPane>
