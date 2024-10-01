@@ -1,10 +1,10 @@
-package co.edu.uniquindio.marketplace_fx.marketplace_app.controller;
+package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
-public class SellerController {
-
+public class SellerViewController {
     @FXML
     private Button ButtonAddProduct;
 
@@ -31,5 +31,7 @@ public class SellerController {
 
     @FXML
     private Button ButtonViewStatistics;
+    @FXML
+    private TextField textFindSeller;
 
 }
