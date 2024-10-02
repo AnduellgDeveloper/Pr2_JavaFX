@@ -1,5 +1,7 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.factory;
 
+
+
 public class ModelFactory {
     private static ModelFactory modelFactory;
     public static ModelFactory getInstance() {
@@ -8,7 +10,13 @@ public class ModelFactory {
         }
         return modelFactory;
     }
+
     private void inicializarDatos(){
 
+    }
+
+    @Override
+    public List<SellerDto> getSellers() {
+        return mapper.getSellersDto(prestamoObjeto.getListaClientes());
     }
 }

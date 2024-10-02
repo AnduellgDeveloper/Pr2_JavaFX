@@ -1,40 +1,30 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.controller;
-
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
-
+import co.edu.uniquindio.marketplace_fx.marketplace_app.factory.ModelFactory;
 public class ProductController {
+    ModelFactory modelFactory;
+    public ProductController{
+        modelFactory = ModelFactory.getInstance();
+    }
 
-    @FXML
-    private Button ButtonAddProduct;
+    public List<SellerDto> getSellers () {
+        return modelFactory.getSellers();
+    }
 
-    @FXML
-    private Button ButtonRemoveProduct;
 
-    @FXML
-    private Button ButtonUpdateProduct;
 
-    @FXML
-    private RadioButton RadioButtonCancelled;
 
-    @FXML
-    private RadioButton RadioButtonPublished;
 
-    @FXML
-    private RadioButton RadioButtonSold;
 
-    @FXML
-    private TextField textCategory;
 
-    @FXML
-    private TextField textImage;
 
-    @FXML
-    private TextField textName;
 
-    @FXML
-    private TextField textPrice;
+
+
+
+
+
+
+
+
 
 }
