@@ -1,6 +1,5 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Authentication {

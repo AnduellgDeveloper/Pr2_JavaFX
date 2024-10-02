@@ -1,6 +1,6 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.model.builder;
+
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Seller;
 
 import java.util.List;
 

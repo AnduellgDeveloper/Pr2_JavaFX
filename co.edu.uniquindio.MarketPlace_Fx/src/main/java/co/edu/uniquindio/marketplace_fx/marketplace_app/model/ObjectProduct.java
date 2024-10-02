@@ -7,6 +7,15 @@ import java.util.List;
 public class ObjectProduct {
     List<Product> listProducts = new ArrayList<>();
     List<Seller> listSellers = new ArrayList<>();
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public void setListProducts(List<Product> listProducts) {
         this.listProducts = listProducts;
@@ -28,9 +37,20 @@ public class ObjectProduct {
                 .publicationDate(publicationDate)
                 .build();
     }
+    private Product getProduct(String name) {
+        Product product = null;
+        for (Product product1: getListProducts()) {
+            if(product1.getName().equalsIgnoreCase(name)){
+                product = product1;
+                break;
+            }
+        }
+
+        return product;
+    }
 
 
-    public List<Product> getListProducts() {
+    public static List<Product> getListProducts() {
         return listProducts;
     }
     public List<Seller> getListSellers() {
