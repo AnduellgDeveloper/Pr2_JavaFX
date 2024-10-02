@@ -1,22 +1,27 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.factory;
 
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.mappers.MarketPlaceMappingImpl;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.utils.DataUtil;
+
+import java.util.List;
 
 public class ModelFactory {
     private static ModelFactory modelFactory;
+
     public static ModelFactory getInstance() {
         if(modelFactory == null) {
             modelFactory = new ModelFactory();
         }
         return modelFactory;
     }
-
-    private void inicializarDatos(){
-
+    private ModelFactory(){
+        mapper = new MarketPlaceMappingImpl();
+        objectProduct = DataUtil.initializeData();
     }
-
     @Override
-    public List<SellerDto> getSellers() {
-        return mapper.getSellersDto(prestamoObjeto.getListaClientes());
+    public List<ProductDto> getProducts() {
+        return mapper.getProductsDto(objectProduct.getListProducts());
     }
 }

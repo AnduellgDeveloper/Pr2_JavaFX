@@ -7,8 +7,4 @@ public class SellerController {
     public SellerController(){
         modelFactory = ModelFactory.getInstance();
     }
-
-    public List<SellerDto> getSellers () {
-        return modelFactory.getSellers();
-    }
 }
