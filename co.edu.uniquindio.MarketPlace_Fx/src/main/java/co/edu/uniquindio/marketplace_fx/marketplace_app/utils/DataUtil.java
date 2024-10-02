@@ -1,5 +1,6 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.utils;
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.ObjectProduct;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
 
 import java.time.LocalDateTime;
@@ -50,11 +51,14 @@ public class DataUtil {
                 .build();
 
 
-        ObjectProduct.getListaProductos().add(product1);
-        ObjectProduct.getListaProductos().add(product2);
-        ObjectProduct.getListaProductos().add(product3);
+        ObjectProduct.getListProducts().add(product1);
+        ObjectProduct.getListProducts().add(product2);
+        ObjectProduct.getListProducts().add(product3);
+        ObjectProduct.getListProducts().add(product4);
+        ObjectProduct.getListProducts().add(product5);
 
-        return prestamoObjeto;
+
+        return objectProduct;
     }
 
 }
