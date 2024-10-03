@@ -17,10 +17,6 @@ public class ObjectProduct {
         this.name = name;
     }
 
-    public void setListProducts(List<Product> listProducts) {
-        this.listProducts = listProducts;
-    }
-
     public void setListSellers(List<Seller> listSellers) {
         this.listSellers = listSellers;
     }
@@ -50,8 +46,11 @@ public class ObjectProduct {
     }
 
 
-    public static List<Product> getListProducts() {
+    public List<Product> getListProducts() {
         return listProducts;
+    }
+    public void setListProducts(List<Product> listProducts) {
+        this.listProducts = listProducts;
     }
     public List<Seller> getListSellers() {
         return listSellers;

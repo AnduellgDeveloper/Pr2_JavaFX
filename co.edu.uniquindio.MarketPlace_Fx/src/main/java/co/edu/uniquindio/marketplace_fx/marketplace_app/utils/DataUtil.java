@@ -5,6 +5,7 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
 
 import java.time.LocalDateTime;
 
+
 public class DataUtil {
     public static ObjectProduct initializeData() {
         ObjectProduct objectProduct = new ObjectProduct();
@@ -51,11 +52,11 @@ public class DataUtil {
                 .build();
 
 
-        ObjectProduct.getListProducts().add(product1);
-        ObjectProduct.getListProducts().add(product2);
-        ObjectProduct.getListProducts().add(product3);
-        ObjectProduct.getListProducts().add(product4);
-        ObjectProduct.getListProducts().add(product5);
+        objectProduct.getListProducts().add(product1);
+        objectProduct.getListProducts().add(product2);
+        objectProduct.getListProducts().add(product3);
+        objectProduct.getListProducts().add(product4);
+        objectProduct.getListProducts().add(product5);
 
 
         return objectProduct;
