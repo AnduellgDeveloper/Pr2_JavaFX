@@ -51,14 +51,11 @@ public class DataUtil {
                 .publicationDate(LocalDateTime.of(2023, 6, 25, 9, 15))
                 .build();
 
-
         objectProduct.getListProducts().add(product1);
         objectProduct.getListProducts().add(product2);
         objectProduct.getListProducts().add(product3);
         objectProduct.getListProducts().add(product4);
         objectProduct.getListProducts().add(product5);
-
-
         return objectProduct;
     }
 
