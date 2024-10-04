@@ -77,6 +77,7 @@ public class ProductViewController {
     @FXML
     private ImageView viewProduct;
 
+    // Método para agregar un producto a la lista y actualizar la tabla
     @FXML
     void onAddProduct(ActionEvent event) {
         try {
@@ -86,6 +87,7 @@ public class ProductViewController {
                     txtCategory.getText(),
                     "Published",
                     price,
+                    txtImage.getText(),
                     LocalDateTime.now()
             );
 
@@ -95,10 +97,10 @@ public class ProductViewController {
 
         } catch (NumberFormatException e) {
             System.out.println("El precio debe ser un número válido.");
-
         }
     }
 
+    // Método para eliminar el producto seleccionado
     @FXML
     void onRemoveProduct(ActionEvent event) {
         if (selectProduct != null) {
@@ -110,6 +112,7 @@ public class ProductViewController {
         }
     }
 
+    // Método para actualizar el estado del producto a "Cancelled"
     @FXML
     void onStatusCancelled(ActionEvent event) {
         if (selectProduct != null) {
@@ -118,12 +121,14 @@ public class ProductViewController {
                     selectProduct.category(),
                     "Cancelled",
                     selectProduct.price(),
+                    selectProduct.image(),
                     selectProduct.publicationDate()
             );
             tbProducts.refresh();
         }
     }
 
+    // Método para actualizar el estado del producto a "Published"
     @FXML
     void onStatusPublished(ActionEvent event) {
         if (selectProduct != null) {
@@ -132,12 +137,14 @@ public class ProductViewController {
                     selectProduct.category(),
                     "Published",
                     selectProduct.price(),
+                    selectProduct.image(),
                     selectProduct.publicationDate()
             );
             tbProducts.refresh();
         }
     }
 
+    // Método para actualizar el estado del producto a "Sold"
     @FXML
     void onStatusSold(ActionEvent event) {
         if (selectProduct != null) {
@@ -146,12 +153,14 @@ public class ProductViewController {
                     selectProduct.category(),
                     "Sold",
                     selectProduct.price(),
+                    selectProduct.image(),
                     selectProduct.publicationDate()
             );
             tbProducts.refresh();
         }
     }
 
+    // Método para actualizar la información de un producto
     @FXML
     void onUpdateProduct(ActionEvent event) {
         if (selectProduct != null) {
@@ -163,11 +172,11 @@ public class ProductViewController {
                         txtCategory.getText(),
                         selectProduct.status(),
                         price,
+                        txtImage.getText(),
                         selectProduct.publicationDate()
                 );
 
                 productController.updateProduct(selectProduct);
-
                 tbProducts.refresh();
                 clearFields();
 
@@ -179,12 +188,14 @@ public class ProductViewController {
         }
     }
 
+    // Método que inicializa el controlador y configura la vista
     @FXML
     void initialize() {
         productController = new ProductController();
         initView();
     }
 
+    // Método para inicializar la vista, las tablas y los listeners
     private void initView() {
         initDataBinding();
         getProducts();
@@ -193,22 +204,35 @@ public class ProductViewController {
         listenerSelection();
     }
 
+    // Método para cargar los productos de la base de datos
     private void getProducts() {
         listProducts.addAll(productController.getProducts());
     }
 
+    // Método que enlaza los datos de los productos con las columnas de la tabla
     private void initDataBinding() {
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().name()));
         tcCategory.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().category()));
         tcEstatus.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().status()));
         tcPrice.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().price()));
-        tcPublicationDate.setCellValueFactory(cellData -> {
-            LocalDateTime publicationDate = cellData.getValue().publicationDate();
-            String formattedDate = publicationDate.format(formatter);
-            return new SimpleStringProperty(formattedDate);
+
+        tcPublicationDate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().publicationDate()));
+        tcPublicationDate.setCellFactory(column -> {
+            return new javafx.scene.control.TableCell<ProductDto, LocalDateTime>() {
+                @Override
+                protected void updateItem(LocalDateTime item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                    } else {
+                        setText(item.format(formatter));
+                    }
+                }
+            };
         });
     }
-    // Seleccion de la tabla
+
+    // Método para escuchar los cambios de selección en la tabla
     private void listenerSelection() {
         tbProducts.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             selectProduct = newSelection;
@@ -216,7 +240,7 @@ public class ProductViewController {
         });
     }
 
-    // Muestra la información del producto
+    // Método que muestra la información del producto seleccionado en los campos de texto
     private void showProductInformation(ProductDto selectProduct) {
         if (selectProduct != null) {
             txtName.setText(selectProduct.name());
@@ -224,11 +248,11 @@ public class ProductViewController {
             txtImage.setText(selectProduct.image());
             txtPrice.setText(String.valueOf(selectProduct.price()));
 
-
             loadImage(selectProduct.image());
         }
     }
-    // Carga la imagen del producto
+
+    // Método para cargar la imagen del producto en el ImageView
     private void loadImage(String imagePath) {
         try {
             Image image = new Image(getClass().getResourceAsStream(imagePath));
@@ -237,7 +261,8 @@ public class ProductViewController {
             System.out.println("No se pudo cargar la imagen: " + imagePath);
         }
     }
-    // Limpias los campos de txt
+
+    // Método para limpiar los campos de texto
     private void clearFields() {
         txtName.clear();
         txtCategory.clear();
