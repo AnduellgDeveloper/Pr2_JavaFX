@@ -41,7 +41,7 @@
                   <RadialGradient centerX="0.5" centerY="0.5935960591133005" radius="1.0">
                      <stops>
                         <Stop color="#930a9a" />
-                        <Stop color="WHITE" offset="1.0" />
+                        <Stop color="#3d123f" offset="1.0" />
                      </stops>
                   </RadialGradient>
                </textFill>
@@ -67,7 +67,7 @@
             <RadialGradient centerX="0.5173410404624278" centerY="0.5935960591133005" radius="1.0">
                <stops>
                   <Stop color="#930a9a" />
-                  <Stop color="WHITE" offset="1.0" />
+                  <Stop color="#3d123f" offset="1.0" />
                </stops>
             </RadialGradient>
          </textFill>
