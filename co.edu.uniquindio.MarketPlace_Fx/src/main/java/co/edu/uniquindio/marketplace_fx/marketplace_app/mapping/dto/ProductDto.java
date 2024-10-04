@@ -10,4 +10,5 @@ public record ProductDto(
         String status,
         LocalDateTime publicationDate
 
-) {}
+) {
+}

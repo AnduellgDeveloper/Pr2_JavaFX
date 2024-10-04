@@ -1,6 +1,5 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.factory;
 
-
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.mappers.MarketPlaceMappingImpl;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.ObjectProduct;
@@ -15,18 +14,37 @@ public class ModelFactory implements IModelFactoryService {
     private ObjectProduct objectProduct;
     private IMarketPlaceMapping mapper;
 
+    // Método para obtener la instancia singleton
     public static ModelFactory getInstance() {
-        if(modelFactory == null) {
+        if (modelFactory == null) {
             modelFactory = new ModelFactory();
         }
         return modelFactory;
     }
-    private ModelFactory(){
+
+    private ModelFactory() {
         mapper = new MarketPlaceMappingImpl();
         objectProduct = DataUtil.initializeData();
     }
+
+    // Obtener la lista de productos
     @Override
     public List<ProductDto> getProducts() {
         return mapper.getProductsDto(objectProduct.getListProducts());
+    }
+
+    // Añadir un nuevo producto a la lista
+    public void addProduct(ProductDto product) {
+        objectProduct.addProduct(mapper.toObjectProduct(product)); // Convertir ProductDto a ObjectProduct y añadir
+    }
+
+    // Eliminar un producto de la lista
+    public void removeProduct(ProductDto product) {
+        objectProduct.removeProduct(mapper.toObjectProduct(product)); // Convertir ProductDto a ObjectProduct y eliminar
+    }
+
+    // Actualizar un producto existente
+    public void updateProduct(ProductDto updatedProduct) {
+        objectProduct.updateProduct(mapper.toObjectProduct(updatedProduct)); // Convertir ProductDto a ObjectProduct y actualizar
     }
 }

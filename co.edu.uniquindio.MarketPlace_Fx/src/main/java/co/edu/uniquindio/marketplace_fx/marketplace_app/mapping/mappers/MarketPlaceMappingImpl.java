@@ -11,17 +11,23 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
 
     @Override
     public List<ProductDto> getProductsDto(List<Product> listProducts) {
-        if(listProducts == null) {
-            return null;
+        if (listProducts == null) {
+            return new ArrayList<>();
         }
+
         List<ProductDto> listProductsDto = new ArrayList<>(listProducts.size());
         for (Product product : listProducts) {
             listProductsDto.add(productToProductDto(product));
         }
         return listProductsDto;
     }
+
     @Override
     public ProductDto productToProductDto(Product product) {
+        if (product == null) {
+            return null;
+        }
+
         return new ProductDto(
                 product.getName(),
                 product.getImage(),
@@ -30,8 +36,13 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                 product.getStatus(),
                 product.getPublicationDate());
     }
+
     @Override
     public Product productDtoToProduct(ProductDto productDto) {
+        if (productDto == null) {
+            return null;
+        }
+
         return Product.builder()
                 .name(productDto.name())
                 .image(productDto.image())
@@ -42,4 +53,3 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                 .build();
     }
 }
-

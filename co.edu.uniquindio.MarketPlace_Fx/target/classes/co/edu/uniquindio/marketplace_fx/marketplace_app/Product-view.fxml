@@ -16,73 +16,73 @@
 <AnchorPane prefHeight="492.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.ProductViewController">
 
     <children>
-          <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="492.0" prefWidth="723.0">
-              <items>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="197.0" prefWidth="739.0" style="-fx-background-color: #9370DB;">
-                      <children>
-                          <Button fx:id="btnAddProduct" layoutX="38.0" layoutY="196.0" mnemonicParsing="false" onAction="#onAddProduct" prefHeight="25.0" prefWidth="165.0" text="Add Product" />
-                          <TextField fx:id="txtImage" layoutX="220.0" layoutY="68.0" promptText="Image">
-                              <font>
-                                  <Font name="System Bold" size="12.0" />
-                              </font>
-                          </TextField>
-                          <TextField fx:id="txtName" layoutX="18.0" layoutY="68.0" promptText="Name">
-                              <font>
-                                  <Font name="System Bold" size="12.0" />
-                              </font>
-                          </TextField>
-                          <Button fx:id="btnRemoveProduct" layoutX="281.0" layoutY="196.0" mnemonicParsing="false" onAction="#onRemoveProduct" prefHeight="25.0" prefWidth="159.0" text="Remove Product" />
-                          <TextField fx:id="txtCategory" layoutX="18.0" layoutY="109.0" promptText="Category">
-                              <font>
-                                  <Font name="System Bold" size="12.0" />
-                              </font>
-                          </TextField>
-                          <Button fx:id="btnUpdateProduct" layoutX="509.0" layoutY="196.0" mnemonicParsing="false" onAction="#onUpdateProduct" prefHeight="25.0" prefWidth="144.0" text="Update Product" />
-                          <RadioButton fx:id="rdBtnPublished" layoutX="446.0" layoutY="113.0" mnemonicParsing="false" onAction="#onStatusPublished" text="Published" />
-                          <RadioButton fx:id="rdBtnSold" layoutX="536.0" layoutY="113.0" mnemonicParsing="false" onAction="#onStatusSold" text="Sold" />
-                          <RadioButton fx:id="rdBtnCancelled" layoutX="603.0" layoutY="113.0" mnemonicParsing="false" onAction="#onStatusCancelled" text="Cancelled" />
-                          <Text layoutX="446.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estatus" wrappingWidth="73.0">
-                              <font>
-                                  <Font name="Wingdings 3" size="18.0" />
-                              </font>
-                          </Text>
-                          <TextField fx:id="txtPrice" layoutX="220.0" layoutY="109.0" promptText="Price">
-                              <font>
-                                  <Font name="System Bold" size="12.0" />
-                              </font>
-                          </TextField>
-                      <Text layoutX="200.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products" wrappingWidth="199.13671875">
-                          <font>
-                              <Font name="Wingdings 3" size="36.0" />
-                          </font>
-                      </Text>
-                      <ImageView fitHeight="51.0" fitWidth="62.0" layoutX="7.0" layoutY="5.0" pickOnBounds="true">
-                          <image>
-                              <Image url="@DunimaSinFondo.png" />
-                          </image>
-                      </ImageView>
-                  <Separator layoutX="18.0" layoutY="166.0" prefHeight="17.0" prefWidth="663.0" />
-                      </children>
-                  </AnchorPane>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="206.0" prefWidth="584.0">
-                      <children>
-                          <TableView fx:id="tbProducts" layoutX="-4.0" layoutY="-3.0" prefHeight="242.0" prefWidth="525.0">
-                              <columns>
-                                  <TableColumn fx:id="tcName" prefWidth="96.0" text="Name" />
-                                  <TableColumn fx:id="tcCategory" prefWidth="92.0" text="Category" />
-                                  <TableColumn fx:id="tcPrice" prefWidth="127.0" text="Price" />
-                                  <TableColumn fx:id="tcEstatus" minWidth="0.0" prefWidth="108.0" text="Estatus" />
-                        <TableColumn fx:id="tcPublication" prefWidth="101.0" text="Publicación" />
-                              </columns>
-                          </TableView>
-                          <ImageView fx:id="viewProduct" fitHeight="189.0" fitWidth="174.0" layoutX="547.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
-                              <image>
-                                  <Image url="@images/Men/ChaquetaAzul.png" />
-                              </image>
-                          </ImageView>
-                      </children>
-                  </AnchorPane>
-              </items>
-          </SplitPane>
+        <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="492.0" prefWidth="723.0">
+            <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="197.0" prefWidth="739.0" style="-fx-background-color: #9370DB;">
+                    <children>
+                        <Button fx:id="btnAddProduct" layoutX="38.0" layoutY="196.0" mnemonicParsing="false" onAction="#onAddProduct" prefHeight="25.0" prefWidth="165.0" text="Add Product" />
+                        <TextField fx:id="txtImage" layoutX="220.0" layoutY="68.0" promptText="Image">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </TextField>
+                        <TextField fx:id="txtName" layoutX="18.0" layoutY="68.0" promptText="Name">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </TextField>
+                        <Button fx:id="btnRemoveProduct" layoutX="281.0" layoutY="196.0" mnemonicParsing="false" onAction="#onRemoveProduct" prefHeight="25.0" prefWidth="159.0" text="Remove Product" />
+                        <TextField fx:id="txtCategory" layoutX="18.0" layoutY="109.0" promptText="Category">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </TextField>
+                        <Button fx:id="btnUpdateProduct" layoutX="509.0" layoutY="196.0" mnemonicParsing="false" onAction="#onUpdateProduct" prefHeight="25.0" prefWidth="144.0" text="Update Product" />
+                        <RadioButton fx:id="rdBtnPublished" layoutX="446.0" layoutY="113.0" mnemonicParsing="false" onAction="#onStatusPublished" text="Published" />
+                        <RadioButton fx:id="rdBtnSold" layoutX="536.0" layoutY="113.0" mnemonicParsing="false" onAction="#onStatusSold" text="Sold" />
+                        <RadioButton fx:id="rdBtnCancelled" layoutX="603.0" layoutY="113.0" mnemonicParsing="false" onAction="#onStatusCancelled" text="Cancelled" />
+                        <Text layoutX="446.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estatus" wrappingWidth="73.0">
+                            <font>
+                                <Font name="Wingdings 3" size="18.0" />
+                            </font>
+                        </Text>
+                        <TextField fx:id="txtPrice" layoutX="220.0" layoutY="109.0" promptText="Price">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </TextField>
+                        <Text layoutX="200.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Products" wrappingWidth="199.13671875">
+                            <font>
+                                <Font name="Wingdings 3" size="36.0" />
+                            </font>
+                        </Text>
+                        <ImageView fitHeight="51.0" fitWidth="62.0" layoutX="7.0" layoutY="5.0" pickOnBounds="true">
+                            <image>
+                                <Image url="@DunimaSinFondo.png" />
+                            </image>
+                        </ImageView>
+                        <Separator layoutX="18.0" layoutY="166.0" prefHeight="17.0" prefWidth="663.0" />
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="206.0" prefWidth="584.0">
+                    <children>
+                        <TableView fx:id="tbProducts" layoutX="-4.0" layoutY="-3.0" prefHeight="242.0" prefWidth="525.0">
+                            <columns>
+                                <TableColumn fx:id="tcName" prefWidth="96.0" text="Name" />
+                                <TableColumn fx:id="tcCategory" prefWidth="92.0" text="Category" />
+                                <TableColumn fx:id="tcPrice" prefWidth="127.0" text="Price" />
+                                <TableColumn fx:id="tcEstatus" minWidth="0.0" prefWidth="108.0" text="Estatus" />
+                                <TableColumn fx:id="tcPublication" prefWidth="101.0" text="Publicación" />
+                            </columns>
+                        </TableView>
+                        <ImageView fx:id="viewProduct" fitHeight="189.0" fitWidth="174.0" layoutX="547.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@images/Men/ChaquetaAzul.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
     </children>
 </AnchorPane>
