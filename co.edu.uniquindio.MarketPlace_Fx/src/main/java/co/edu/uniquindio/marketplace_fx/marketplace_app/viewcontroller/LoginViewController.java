@@ -28,33 +28,8 @@ public class LoginViewController {
     @FXML
     private Button buttonRegister;
 
-    @FXML
-    void 930a9a(ActionEvent event) {
 
-    }
 
-    @FXML
-    void 3d123f(ActionEvent event) {
 
-    }
-
-    @FXML
-    void 930a9a(ActionEvent event) {
-
-    }
-
-    @FXML
-    void 3d123f(ActionEvent event) {
-
-    }
-
-    @FXML
-    void initialize() {
-        assert textPassword != null : "fx:id=\"textPassword\" was not injected: check your FXML file 'Login-view.fxml'.";
-        assert buttonLogin != null : "fx:id=\"buttonLogin\" was not injected: check your FXML file 'Login-view.fxml'.";
-        assert textUser != null : "fx:id=\"textUser\" was not injected: check your FXML file 'Login-view.fxml'.";
-        assert buttonRegister != null : "fx:id=\"buttonRegister\" was not injected: check your FXML file 'Login-view.fxml'.";
-
-    }
 }
 
