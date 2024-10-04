@@ -52,4 +52,9 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                 .publicationDate(productDto.publicationDate())
                 .build();
     }
+
+    @Override
+    public Product toObjectProduct(ProductDto product) {
+        return null;
+    }
 }

@@ -24,7 +24,6 @@ public class ObjectProduct {
     public ObjectProduct() {
     }
 
-    // Método privado para construir un producto
     private Product getBuildProduct(String name, String image, String category, int price, String status, LocalDateTime publicationDate) {
         return Product.builder()
                 .name(name)
@@ -43,9 +42,8 @@ public class ObjectProduct {
                 return product;
             }
         }
-        return null; // Retorna null si no se encuentra el producto
+        return null;
     }
-
     // Método para obtener la lista de productos
     public List<Product> getListProducts() {
         return listProducts;
@@ -80,7 +78,6 @@ public class ObjectProduct {
         if (updatedProduct != null) {
             Product existingProduct = getProduct(updatedProduct.getName());
             if (existingProduct != null) {
-                // Actualiza los atributos del producto existente
                 existingProduct.setImage(updatedProduct.getImage());
                 existingProduct.setCategory(updatedProduct.getCategory());
                 existingProduct.setPrice(updatedProduct.getPrice());

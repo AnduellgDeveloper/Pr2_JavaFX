@@ -9,4 +9,6 @@ public interface IMarketPlaceMapping {
     List<ProductDto> getProductsDto(List<Product> listProducts);
     ProductDto productToProductDto(Product product);
     Product productDtoToProduct(ProductDto productDto);
+
+    Product toObjectProduct(ProductDto product);
 }

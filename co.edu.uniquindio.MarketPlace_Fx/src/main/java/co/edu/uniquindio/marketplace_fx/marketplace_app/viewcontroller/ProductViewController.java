@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -255,12 +256,24 @@ public class ProductViewController {
     // Método para cargar la imagen del producto en el ImageView
     private void loadImage(String imagePath) {
         try {
-            Image image = new Image(getClass().getResourceAsStream(imagePath));
-            viewProduct.setImage(image);
+            // Obtener el recurso de la imagen
+            InputStream imageStream = getClass().getResourceAsStream(imagePath);
+
+            // Verificar si el recurso no es nulo
+            if (imageStream != null) {
+                // Si el recurso no es nulo, crear la imagen
+                Image image = new Image(imageStream);
+                viewProduct.setImage(image);
+            } else {
+                // Si es nulo, mostrar mensaje de error
+                System.out.println("No se pudo encontrar la imagen: " + imagePath);
+            }
         } catch (Exception e) {
-            System.out.println("No se pudo cargar la imagen: " + imagePath);
+            System.out.println("Ocurrió un error al cargar la imagen: " + imagePath);
+            e.printStackTrace();
         }
     }
+
 
     // Método para limpiar los campos de texto
     private void clearFields() {

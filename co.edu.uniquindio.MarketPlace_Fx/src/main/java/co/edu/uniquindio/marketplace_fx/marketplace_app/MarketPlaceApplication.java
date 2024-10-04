@@ -12,7 +12,7 @@ public class MarketPlaceApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MarketPlaceApplication.class.getResource("Product-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("MarketPlace - Login");
+        stage.setTitle("MarketPlace");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
