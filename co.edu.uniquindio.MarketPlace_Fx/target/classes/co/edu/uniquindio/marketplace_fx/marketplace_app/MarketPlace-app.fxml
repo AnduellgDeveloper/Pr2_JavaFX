@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="507.0" prefWidth="672.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.MarketPlaceAppController">
+   <children>
+      <TabPane fx:id="TabPane" prefHeight="507.0" prefWidth="702.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="TabSeller" text="Vendedor">
+              <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="478.0" prefWidth="772.0">
+                      <children>
+                          <SplitPane layoutX="-1.0" layoutY="1.0" orientation="VERTICAL" prefHeight="627.0" prefWidth="946.0">
+                              <items>
+                                  <fx:include source="Seller-view.fxml" />
+                              </items>
+                          </SplitPane>
+                      </children>
+                  </AnchorPane>
+              </content>
+          </Tab>
+          <Tab fx:id="TabProduct" text="Producto">
+              <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <children>
+                          <SplitPane orientation="VERTICAL" prefHeight="570.0" prefWidth="576.0">
+                              <items>
+                                  <fx:include source="Product-view.fxml" />
+                              </items>
+                          </SplitPane>
+                      </children>
+                  </AnchorPane>
+              </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
