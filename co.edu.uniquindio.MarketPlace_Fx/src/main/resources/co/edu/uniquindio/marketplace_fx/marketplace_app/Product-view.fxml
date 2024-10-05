@@ -69,7 +69,7 @@
                         <Font size="36.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnAddProduct1" layoutX="56.0" layoutY="198.0" mnemonicParsing="false" onAction="#onAddProduct" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="New/ Clear Fields">
+                  <Button fx:id="btnNewClearFields" layoutX="56.0" layoutY="198.0" mnemonicParsing="false" onAction="#onNewClearFields" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="New/ Clear Fields">
                      <textFill>
                         <RadialGradient centerX="0.5115606936416185" centerY="0.41133004926108374" radius="0.6772151898734178">
                            <stops>
@@ -85,9 +85,9 @@
                   <Separator layoutX="13.0" layoutY="179.0" prefHeight="11.0" prefWidth="697.0" />
                   <Pane layoutX="497.0" layoutY="77.0" prefHeight="61.0" prefWidth="221.0">
                      <children>
-                        <RadioButton alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="5.0" layoutY="32.0" mnemonicParsing="false" selected="true" text="Published" />
-                        <RadioButton layoutX="88.0" layoutY="32.0" mnemonicParsing="false" text="Sold" />
-                        <RadioButton contentDisplay="CENTER" layoutX="140.0" layoutY="32.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="88.0" text="Cancelled" />
+                        <RadioButton fx:id="rdBtnPublished" alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="5.0" layoutY="32.0" mnemonicParsing="false" text="Published" />
+                        <RadioButton fx:id="rdBtnSold" layoutX="88.0" layoutY="32.0" mnemonicParsing="false" text="Sold" />
+                        <RadioButton fx:id="rdBtnCancelled" contentDisplay="CENTER" layoutX="140.0" layoutY="32.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="88.0" text="Cancelled" />
                         <Text layoutX="5.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estatus">
                            <font>
                               <Font size="18.0" />

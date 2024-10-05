@@ -8,11 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -34,6 +30,9 @@ public class ProductViewController {
     private Button btnRemoveProduct;
 
     @FXML
+    private Button btnNewClearFields;
+
+    @FXML
     private Button btnUpdateProduct;
 
     @FXML
@@ -53,6 +52,9 @@ public class ProductViewController {
 
     @FXML
     private TableColumn<ProductDto, String> tcEstatus;
+
+    @FXML
+    private TableColumn<ProductDto, String> tcImage;
 
     @FXML
     private TableColumn<ProductDto, String> tcName;
@@ -78,6 +80,10 @@ public class ProductViewController {
     @FXML
     private ImageView viewProduct;
 
+    @FXML
+    void onNewClearFields(ActionEvent event) {
+        clearFields();
+    }
     // Método para agregar un producto a la lista y actualizar la tabla
     @FXML
     void onAddProduct(ActionEvent event) {
@@ -91,16 +97,13 @@ public class ProductViewController {
                     txtImage.getText(),
                     LocalDateTime.now()
             );
-
             productController.addProduct(newProduct);
             listProducts.add(newProduct);
             clearFields();
-
         } catch (NumberFormatException e) {
             System.out.println("El precio debe ser un número válido.");
         }
     }
-
     // Método para eliminar el producto seleccionado
     @FXML
     void onRemoveProduct(ActionEvent event) {
@@ -112,7 +115,6 @@ public class ProductViewController {
             System.out.println("No se ha seleccionado ningún producto.");
         }
     }
-
     // Método para actualizar el estado del producto a "Cancelled"
     @FXML
     void onStatusCancelled(ActionEvent event) {
@@ -125,7 +127,6 @@ public class ProductViewController {
                     selectProduct.image(),
                     selectProduct.publicationDate()
             );
-            tbProducts.refresh();
         }
     }
 
@@ -192,10 +193,24 @@ public class ProductViewController {
     // Método que inicializa el controlador y configura la vista
     @FXML
     void initialize() {
+        ToggleGroup toggleGroup = new ToggleGroup();
         productController = new ProductController();
+        rdBtnPublished.setToggleGroup(toggleGroup);
+        rdBtnSold.setToggleGroup(toggleGroup);
+        rdBtnCancelled.setToggleGroup(toggleGroup);
         initView();
+        rdBtnPublished.setSelected(true);
+        toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (rdBtnPublished.isSelected()) {
+                onStatusPublished(null);
+            } else if (rdBtnSold.isSelected()) {
+                onStatusSold(null);
+            } else if (rdBtnCancelled.isSelected()) {
+                onStatusCancelled(null);
+            }
+        });
     }
-
+// ----------------------------------------- TABLA -----------------------------------------
     // Método para inicializar la vista, las tablas y los listeners
     private void initView() {
         initDataBinding();
@@ -215,25 +230,24 @@ public class ProductViewController {
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().name()));
         tcCategory.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().category()));
         tcEstatus.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().status()));
+        tcImage.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().image()));
         tcPrice.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().price()));
 
         tcPublicationDate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().publicationDate()));
-        tcPublicationDate.setCellFactory(column -> {
-            return new javafx.scene.control.TableCell<ProductDto, LocalDateTime>() {
-                @Override
-                protected void updateItem(LocalDateTime item, boolean empty) {
-                    super.updateItem(item, empty);
-                    if (empty || item == null) {
-                        setText(null);
-                    } else {
-                        setText(item.format(formatter));
-                    }
+        tcPublicationDate.setCellFactory(column -> new TableCell<ProductDto, LocalDateTime>() {
+            @Override
+            protected void updateItem(LocalDateTime item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.format(formatter));
                 }
-            };
+            }
         });
     }
 
-    // Método para escuchar los cambios de selección en la tabla
+    // Método para ver los cambios de selección en la tabla
     private void listenerSelection() {
         tbProducts.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             selectProduct = newSelection;
@@ -248,7 +262,6 @@ public class ProductViewController {
             txtCategory.setText(selectProduct.category());
             txtImage.setText(selectProduct.image());
             txtPrice.setText(String.valueOf(selectProduct.price()));
-
             loadImage(selectProduct.image());
         }
     }
@@ -256,16 +269,11 @@ public class ProductViewController {
     // Método para cargar la imagen del producto en el ImageView
     private void loadImage(String imagePath) {
         try {
-            // Obtener el recurso de la imagen
             InputStream imageStream = getClass().getResourceAsStream(imagePath);
-
-            // Verificar si el recurso no es nulo
             if (imageStream != null) {
-                // Si el recurso no es nulo, crear la imagen
                 Image image = new Image(imageStream);
                 viewProduct.setImage(image);
             } else {
-                // Si es nulo, mostrar mensaje de error
                 System.out.println("No se pudo encontrar la imagen: " + imagePath);
             }
         } catch (Exception e) {
@@ -273,7 +281,6 @@ public class ProductViewController {
             e.printStackTrace();
         }
     }
-
 
     // Método para limpiar los campos de texto
     private void clearFields() {

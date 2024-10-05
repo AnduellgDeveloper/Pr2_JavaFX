@@ -12,7 +12,7 @@ public class DataUtil {
 
         Product product1 = Product.builder()
                 .name("Producto 1")
-                .image("resources/co.edu.uniquindio.marketplace_fx.marketplace_app/images/Men/camisaHombre.png")
+                .image("@/resources/camisaHombre.png")
                 .category("Electrónica")
                 .price(1500)
                 .status("Disponible")
