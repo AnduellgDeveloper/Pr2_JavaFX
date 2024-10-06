@@ -2,23 +2,13 @@
 
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Blend?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: d76ae8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.LoginViewController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: d76ae8;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.RegisterViewController">
     <children>
         <VBox layoutX="111.0" layoutY="-4.0" prefHeight="145.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF;" AnchorPane.rightAnchor="-1.0" />
         <Pane layoutX="42.0" layoutY="148.0" prefHeight="304.0" prefWidth="200.0">
@@ -39,7 +29,7 @@
         </Pane>
         <ImageView fitHeight="162.0" fitWidth="152.0" layoutX="166.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@DunimaSinFondo.png" />
+                <Image url="@images/Men/DunimaSinFondo.png" />
             </image>
         </ImageView>
         <VBox layoutY="-6.0" prefHeight="506.0" prefWidth="25.0" style="-fx-background-color: #000000;" />

@@ -15,6 +15,7 @@ co\edu\uniquindio\marketplace_fx\marketplace_app\mapping\dto\SellerDto.class
 co\edu\uniquindio\marketplace_fx\marketplace_app\utils\SellerConstants.class
 co\edu\uniquindio\marketplace_fx\marketplace_app\mapping\mappers\MarketPlaceMappingImpl.class
 co\edu\uniquindio\marketplace_fx\marketplace_app\model\builder\LoginBuilder.class
+co\edu\uniquindio\marketplace_fx\marketplace_app\viewcontroller\ProductViewController$1.class
 co\edu\uniquindio\marketplace_fx\marketplace_app\controller\RegisterController.class
 co\edu\uniquindio\marketplace_fx\marketplace_app\model\Administrator.class
 co\edu\uniquindio\marketplace_fx\marketplace_app\model\Product.class

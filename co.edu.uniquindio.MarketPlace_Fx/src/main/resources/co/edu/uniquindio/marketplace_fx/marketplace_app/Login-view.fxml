@@ -43,7 +43,7 @@
       </Pane>
       <ImageView fitHeight="162.0" fitWidth="152.0" layoutX="166.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@DunimaSinFondo.png" />
+            <Image url="@images/Men/DunimaSinFondo.png" />
          </image>
       </ImageView>
       <VBox layoutY="-6.0" prefHeight="506.0" prefWidth="37.0" style="-fx-background-color: #000000;" />

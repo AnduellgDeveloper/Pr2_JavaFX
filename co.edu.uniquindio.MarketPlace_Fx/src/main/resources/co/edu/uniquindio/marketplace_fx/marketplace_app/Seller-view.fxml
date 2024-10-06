@@ -164,7 +164,7 @@
                               <Button fx:id="ButtonViewStatistics" layoutX="202.0" layoutY="12.0" mnemonicParsing="false" text="Ver Estadisticas" />
                               <ImageView fitHeight="58.0" fitWidth="70.0" layoutY="2.0" pickOnBounds="true">
                                  <image>
-                                    <Image url="@DunimaSinFondo.png" />
+                                    <Image url="@images/Men/DunimaSinFondo.png" />
                                  </image>
                               </ImageView>
                               <Label layoutX="171.0" layoutY="52.0" prefHeight="83.0" prefWidth="307.0" text="       SALE">

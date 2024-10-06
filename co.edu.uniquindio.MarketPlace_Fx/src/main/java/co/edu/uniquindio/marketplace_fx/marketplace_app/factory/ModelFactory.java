@@ -35,16 +35,16 @@ public class ModelFactory implements IModelFactoryService {
 
     // Añadir un nuevo producto a la lista
     public void addProduct(ProductDto product) {
-        objectProduct.addProduct(mapper.toObjectProduct(product)); // Convertir ProductDto a ObjectProduct y añadir
+        objectProduct.addProduct(mapper.toObjectProduct(product));
     }
 
     // Eliminar un producto de la lista
     public void removeProduct(ProductDto product) {
-        objectProduct.removeProduct(mapper.toObjectProduct(product)); // Convertir ProductDto a ObjectProduct y eliminar
+        objectProduct.removeProduct(mapper.toObjectProduct(product));
     }
 
     // Actualizar un producto existente
     public void updateProduct(ProductDto updatedProduct) {
-        objectProduct.updateProduct(mapper.toObjectProduct(updatedProduct)); // Convertir ProductDto a ObjectProduct y actualizar
+        objectProduct.updateProduct(mapper.toObjectProduct(updatedProduct));
     }
 }
