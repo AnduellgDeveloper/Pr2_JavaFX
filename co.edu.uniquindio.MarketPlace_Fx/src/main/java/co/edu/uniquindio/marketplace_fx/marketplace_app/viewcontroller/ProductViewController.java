@@ -15,6 +15,9 @@ import javafx.scene.image.ImageView;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.*;
+
+
 
 public class ProductViewController {
 
@@ -89,6 +92,7 @@ public class ProductViewController {
         removeProduct();
     }
 
+
     private void addProduct() {
         try {
             Integer price = Integer.parseInt(txtPrice.getText());
@@ -103,8 +107,9 @@ public class ProductViewController {
             productController.addProduct(newProduct);
             listProducts.add(newProduct);
             clearFields();
+            showMessage(TITULO_PRODUCTO_AGREGADO, HEADER, BODY_PRODUCTO_AGREGADO,Alert.AlertType.INFORMATION);
         } catch (NumberFormatException e) {
-            System.out.println("El precio debe ser un número válido.");
+            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO,Alert.AlertType.ERROR);
         }
     }
 
@@ -113,39 +118,19 @@ public class ProductViewController {
             productController.removeProduct(selectProduct);
             listProducts.remove(selectProduct);
             clearFields();
+            showMessage(TITULO_PRODUCTO_REMOVIDO, HEADER, BODY_PRODUCTO_REMOVIDO,Alert.AlertType.INFORMATION);
         } else {
-            System.out.println("No se ha seleccionado ningún producto.");
+            showMessage(TITULO_PRODUCTO_NO_REMOVIDO, HEADER, BODY_PRODUCTO_NO_REMOVIDO,Alert.AlertType.ERROR);
         }
     }
 
+
     @FXML
     void onStatusCancelled(ActionEvent event) {
-        if (selectProduct != null) {
-            ProductDto updatedProduct = new ProductDto(
-                    selectProduct.name(),
-                    selectProduct.category(),
-                    "Cancelled",
-                    selectProduct.price(),
-                    selectProduct.image(),
-                    selectProduct.publicationDate()
-            );
-            updateProductInTable(updatedProduct);
-        }
     }
 
     @FXML
     void onStatusPublished(ActionEvent event) {
-        if (selectProduct != null) {
-            ProductDto updatedProduct = new ProductDto(
-                    selectProduct.name(),
-                    selectProduct.category(),
-                    "Published",
-                    selectProduct.price(),
-                    selectProduct.image(),
-                    selectProduct.publicationDate()
-            );
-            updateProductInTable(updatedProduct);
-        }
     }
 
     @FXML
@@ -161,14 +146,19 @@ public class ProductViewController {
     void initialize() {
         ToggleGroup toggleGroup = new ToggleGroup();
         productController = new ProductController();
-        rdBtnPublished.setToggleGroup(toggleGroup);
-        rdBtnSold.setToggleGroup(toggleGroup);
-        rdBtnCancelled.setToggleGroup(toggleGroup);
         initView();
+        toogleGroupRdBtns();
         txtImage.textProperty().addListener((observable, oldValue, newValue) -> {
             changeImage(newValue);
         });
+
+    }
+    private void toogleGroupRdBtns (){
         rdBtnPublished.setSelected(true);
+        ToggleGroup toggleGroup = null;
+        rdBtnPublished.setToggleGroup(toggleGroup);
+        rdBtnSold.setToggleGroup(toggleGroup);
+        rdBtnCancelled.setToggleGroup(toggleGroup);
         toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (rdBtnPublished.isSelected()) {
                 onStatusPublished(null);
@@ -178,15 +168,18 @@ public class ProductViewController {
                 onStatusCancelled(null);
             }
         });
+
     }
+
 
     private void changeImage(String imagePath) {
         File imageFile = new File(imagePath);
         if (imageFile.exists()) {
             Image newImage = new Image(imageFile.toURI().toString());
             viewProduct.setImage(newImage);
+            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO,Alert.AlertType.ERROR);
         } else {
-            System.out.println("El archivo de imagen no existe: " + imagePath);
+            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO,Alert.AlertType.ERROR);
         }
     }
 
@@ -195,8 +188,9 @@ public class ProductViewController {
         if (imageFile.exists()) {
             Image image = new Image(imageFile.toURI().toString());
             viewProduct.setImage(image);
+            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO,Alert.AlertType.ERROR);
         } else {
-            System.out.println("El archivo de imagen no existe: " + imagePath);
+            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO,Alert.AlertType.ERROR);
         }
     }
 
@@ -262,5 +256,12 @@ public class ProductViewController {
         int index = listProducts.indexOf(selectProduct);
         listProducts.set(index, updatedProduct);
         tbProducts.refresh();
+    }
+    private void showMessage(String titulo, String header, String contenido, Alert.AlertType alertType) {
+        Alert aler = new Alert(alertType);
+        aler.setTitle(titulo);
+        aler.setHeaderText(header);
+        aler.setContentText(contenido);
+        aler.showAndWait();
     }
 }
