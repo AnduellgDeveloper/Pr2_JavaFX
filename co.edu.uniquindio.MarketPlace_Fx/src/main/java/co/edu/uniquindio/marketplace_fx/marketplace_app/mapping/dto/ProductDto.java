@@ -9,6 +9,5 @@ public record ProductDto(
         int price,
         String status,
         LocalDateTime publicationDate
-
 ) {
 }

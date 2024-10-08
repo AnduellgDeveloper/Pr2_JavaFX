@@ -12,5 +12,4 @@ public record SellerDto(
         String username,
         String password,
         List<Product>products
-
 ){}

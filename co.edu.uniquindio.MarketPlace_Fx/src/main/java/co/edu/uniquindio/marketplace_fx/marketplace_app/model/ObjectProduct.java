@@ -34,6 +34,15 @@ public class ObjectProduct {
                 .publicationDate(publicationDate)
                 .build();
     }
+    public boolean createProduct(Product newProduct){
+        Product productFound = getProduct(newProduct.getName());
+        if(productFound == null){
+            getListProducts().add(newProduct);
+            return true;
+        }else{
+            return  false;
+        }
+    }
 
     // Método para buscar un producto por nombre
     private Product getProduct(String name) {

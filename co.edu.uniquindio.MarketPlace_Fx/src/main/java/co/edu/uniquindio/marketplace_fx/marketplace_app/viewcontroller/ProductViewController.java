@@ -9,10 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -96,57 +94,41 @@ public class ProductViewController {
     void onRemoveProduct(ActionEvent event) {
         removeProduct();
     }
+
     @FXML
     void onStatusCancelled(ActionEvent event) {
+        
     }
 
     @FXML
     void onStatusPublished(ActionEvent event) {
+
     }
 
     @FXML
     void onStatusSold(ActionEvent event) {
+
     }
 
     @FXML
     void onUpdateProduct(ActionEvent event) {
 
     }
+
     @FXML
-    // La mamá de los pollitos
     void initialize() {
         ToggleGroup toggleGroup = new ToggleGroup();
         productController = new ProductController();
         initView();
         toogleGroupRdBtns();
-
     }
+
     private void initView() {
         initDataBinding();
         getProducts();
         tbProducts.getItems().clear();
         tbProducts.setItems(listProducts);
         listenerSelection();
-    }
-
-    private void addProduct() {
-        try {
-            Integer price = Integer.parseInt(txtPrice.getText());
-            ProductDto newProduct = new ProductDto(
-                    txtName.getText(),
-                    txtCategory.getText(),
-                    "Published",
-                    price,
-                    txtImage.getText(),
-                    LocalDateTime.now()
-            );
-            productController.addProduct(newProduct);
-            listProducts.add(newProduct);
-            clearFields();
-            showMessage(TITULO_PRODUCTO_AGREGADO, HEADER, BODY_PRODUCTO_AGREGADO, Alert.AlertType.INFORMATION);
-        } catch (NumberFormatException e) {
-            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO, Alert.AlertType.ERROR);
-        }
     }
 
     private void removeProduct() {
@@ -216,6 +198,39 @@ public class ProductViewController {
             txtImage.setText(selectProduct.image());
             txtPrice.setText(String.valueOf(selectProduct.price()));
         }
+    }
+
+    // Validación de los datos del producto
+    private boolean validData(ProductDto productDto) {
+        return !productDto.name().isBlank() &&
+                !productDto.image().isBlank() &&
+                productDto.price() != 0 &&
+                productDto.publicationDate() != null;
+    }
+
+    private void addProduct() {
+        ProductDto productDto = createProductDto();
+        if (validData(productDto)) {
+            if (productController.addProduct(productDto)) {
+                listProducts.add(productDto);
+                clearFields();
+                showMessage(TITULO_PRODUCTO_AGREGADO, HEADER, BODY_PRODUCTO_AGREGADO, Alert.AlertType.INFORMATION);
+            } else {
+                showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO, Alert.AlertType.ERROR);
+            }
+        } else {
+            showMessage(TITULO_INCOMPLETO,HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
+        }
+    }
+
+    private ProductDto createProductDto() {
+        return new ProductDto(
+                txtName.getText(),
+                txtCategory.getText(),
+                Integer.parseInt(txtPrice.getText()),
+                txtImage.getText(),
+                LocalDateTime.now()
+        );
     }
 
     private void clearFields() {

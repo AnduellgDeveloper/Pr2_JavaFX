@@ -3,13 +3,15 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.factory;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.mappers.MarketPlaceMappingImpl;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.ObjectProduct;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IMarketPlaceMapping;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IModelFactoryService;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IProductCrud;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.utils.DataUtil;
 
 import java.util.List;
 
-public class ModelFactory implements IModelFactoryService {
+public class ModelFactory implements IModelFactoryService, IProductCrud {
     private static ModelFactory modelFactory;
     private ObjectProduct objectProduct;
     private IMarketPlaceMapping mapper;
@@ -34,8 +36,9 @@ public class ModelFactory implements IModelFactoryService {
     }
 
     // Añadir un nuevo producto a la lista
-    public void addProduct(ProductDto product) {
-        objectProduct.addProduct(mapper.toObjectProduct(product));
+    public boolean addProduct(ProductDto productDto) {
+        Product product = mapper.productDtoToProduct(productDto);
+        return objectProduct.createProduct(product);
     }
 
     // Eliminar un producto de la lista

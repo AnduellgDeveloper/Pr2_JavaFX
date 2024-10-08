@@ -6,14 +6,10 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
 import java.util.List;
 
 public class ProductController {
-
-    private final ModelFactory modelFactory;
-
-    public ProductController() {
-        // Obtenemos la instancia de ModelFactory
-        this.modelFactory = ModelFactory.getInstance();
+    ModelFactory modelFactory;
+    public ProductController(){
+        modelFactory = ModelFactory.getInstance();
     }
-
     // Retorna una lista de todos los productos
     public List<ProductDto> getProducts() {
         return modelFactory.getProducts();

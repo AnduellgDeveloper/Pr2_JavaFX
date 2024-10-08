@@ -21,7 +21,6 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
         }
         return listProductsDto;
     }
-
     @Override
     public ProductDto productToProductDto(Product product) {
         if (product == null) {
@@ -36,7 +35,6 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                 product.getStatus(),
                 product.getPublicationDate());
     }
-
     @Override
     public Product productDtoToProduct(ProductDto productDto) {
         if (productDto == null) {
@@ -52,7 +50,6 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                 .publicationDate(productDto.publicationDate())
                 .build();
     }
-
     @Override
     public Product toObjectProduct(ProductDto product) {
         return null;
