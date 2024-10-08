@@ -18,152 +18,140 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="492.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.ProductViewController">
-
     <children>
         <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="492.0" prefWidth="723.0">
             <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="197.0" prefWidth="739.0" style="-fx-background-color: d76ae8;">
                     <children>
                         <Button fx:id="btnAddProduct" layoutX="212.0" layoutY="198.0" mnemonicParsing="false" onAction="#onAddProduct" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Add Product">
-                     <textFill>
-                        <RadialGradient centerX="0.5115606936416185" centerY="0.41133004926108374" radius="0.6772151898734178">
-                           <stops>
-                              <Stop color="#99148e" />
-                              <Stop color="#240722" offset="1.0" />
-                           </stops>
-                        </RadialGradient>
-                     </textFill>
-                     <font>
-                        <Font name="Arial Black" size="12.0" />
-                     </font></Button>
+                            <textFill>
+                                <RadialGradient centerX="0.5115606936416185" centerY="0.41133004926108374" radius="0.6772151898734178">
+                                    <stops>
+                                        <Stop color="#99148e" />
+                                        <Stop color="#240722" offset="1.0" />
+                                    </stops>
+                                </RadialGradient>
+                            </textFill>
+                            <font>
+                                <Font name="Arial Black" size="12.0" />
+                            </font></Button>
                         <ImageView fitHeight="47.0" fitWidth="50.0" layoutX="6.0" layoutY="6.0">
-                     <image>
-                        <Image url="@images/Men/DunimaSinFondo.png" />
-                     </image></ImageView>
-                  <Button fx:id="btnRemoveProduct" layoutX="361.0" layoutY="198.0" mnemonicParsing="false" onAction="#onRemoveProduct" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Remove Product">
-                     <textFill>
-                        <RadialGradient centerX="0.5115606936416185" centerY="0.41133004926108374" radius="0.6772151898734178">
-                           <stops>
-                              <Stop color="#99148e" />
-                              <Stop color="#240722" offset="1.0" />
-                           </stops>
-                        </RadialGradient>
-                     </textFill>
-                     <font>
-                        <Font name="Arial Black" size="12.0" />
-                     </font></Button>
-                  <Button fx:id="btnUpdateProduct" layoutX="517.0" layoutY="198.0" mnemonicParsing="false" onAction="#onUpdateProduct" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Update Product">
-                     <textFill>
-                        <RadialGradient centerX="0.5115606936416185" centerY="0.41133004926108374" radius="0.6772151898734178">
-                           <stops>
-                              <Stop color="#99148e" />
-                              <Stop color="#240722" offset="1.0" />
-                           </stops>
-                        </RadialGradient>
-                     </textFill>
-                     <font>
-                        <Font name="Arial Black" size="12.0" />
-                     </font></Button>
-                  <Label layoutX="72.0" layoutY="6.0" text="Products">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="btnNewClearFields" layoutX="56.0" layoutY="198.0" mnemonicParsing="false" onAction="#onNewClearFields" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="New/ Clear Fields">
-                     <textFill>
-                        <RadialGradient centerX="0.5115606936416185" centerY="0.41133004926108374" radius="0.6772151898734178">
-                           <stops>
-                              <Stop color="#99148e" />
-                              <Stop color="#240722" offset="1.0" />
-                           </stops>
-                        </RadialGradient>
-                     </textFill>
-                     <font>
-                        <Font name="Arial Black" size="12.0" />
-                     </font>
-                  </Button>
-                  <Separator layoutX="13.0" layoutY="179.0" prefHeight="11.0" prefWidth="697.0" />
-                  <Pane layoutX="497.0" layoutY="77.0" prefHeight="61.0" prefWidth="221.0">
-                     <children>
-                        <RadioButton fx:id="rdBtnPublished" alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="5.0" layoutY="32.0" mnemonicParsing="false" text="Published" />
-                        <RadioButton fx:id="rdBtnSold" layoutX="88.0" layoutY="32.0" mnemonicParsing="false" text="Sold" />
-                        <RadioButton fx:id="rdBtnCancelled" contentDisplay="CENTER" layoutX="140.0" layoutY="32.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="88.0" text="Cancelled" />
-                        <Text layoutX="5.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estatus">
-                           <font>
-                              <Font size="18.0" />
-                           </font></Text>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="6.0" layoutY="59.0" prefHeight="96.0" prefWidth="475.0">
-                     <children>
-                              <TextField fx:id="txtName" layoutX="79.0" layoutY="23.0" promptText="Name" style="-fx-background-radius: 50;">
-                                  <font>
-                                      <Font name="Arial Black" size="13.0" />
-                                  </font>
-                              </TextField>
-                        <Label alignment="CENTER_RIGHT" layoutY="22.0" prefHeight="25.0" prefWidth="68.0" text="Name:">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
+                            <Image url="@images/Men/DunimaSinFondo.png" />
+                        </ImageView>
+                        <Button fx:id="btnRemoveProduct" layoutX="361.0" layoutY="198.0" mnemonicParsing="false" onAction="#onRemoveProduct" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Remove Product">
+                            <textFill>
+                                <RadialGradient centerX="0.5115606936416185" centerY="0.41133004926108374" radius="0.6772151898734178">
+                                    <stops>
+                                        <Stop color="#99148e" />
+                                        <Stop color="#240722" offset="1.0" />
+                                    </stops>
+                                </RadialGradient>
+                            </textFill>
+                            <font>
+                                <Font name="Arial Black" size="12.0" />
+                            </font></Button>
+                        <Button fx:id="btnUpdateProduct" layoutX="517.0" layoutY="198.0" mnemonicParsing="false" onAction="#onUpdateProduct" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Update Product">
+                            <textFill>
+                                <RadialGradient centerX="0.5115606936416185" centerY="0.41133004926108374" radius="0.6772151898734178">
+                                    <stops>
+                                        <Stop color="#99148e" />
+                                        <Stop color="#240722" offset="1.0" />
+                                    </stops>
+                                </RadialGradient>
+                            </textFill>
+                            <font>
+                                <Font name="Arial Black" size="12.0" />
+                            </font></Button>
+                        <Label layoutX="72.0" layoutY="6.0" text="Products">
+                            <font>
+                                <Font size="36.0" />
+                            </font>
                         </Label>
-                              <TextField fx:id="txtCategory" layoutX="79.0" layoutY="60.0" promptText="Category" style="-fx-background-radius: 50;">
-                                  <font>
-                                      <Font name="Arial Black" size="13.0" />
-                                  </font>
-                              </TextField>
-                        <Label layoutY="62.0" text="Category:">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                              <TextField fx:id="txtImage" layoutX="312.0" layoutY="23.0" promptText="Image" style="-fx-background-radius: 50;">
-                                  <font>
-                                      <Font name="Arial Black" size="13.0" />
-                                  </font>
-                              </TextField>
-                              <TextField fx:id="txtPrice" layoutX="312.0" layoutY="61.0" promptText="Price" style="-fx-background-radius: 50;">
-                                  <font>
-                                      <Font name="Arial Black" size="13.0" />
-                                  </font>
-                              </TextField>
-                        <Label alignment="CENTER_RIGHT" layoutX="251.0" layoutY="25.0" prefHeight="25.0" prefWidth="56.0" text="Image:">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER_RIGHT" layoutX="239.0" layoutY="62.0" prefHeight="25.0" prefWidth="67.0" text="Price:">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-                  <Separator layoutX="12.0" layoutY="54.0" prefHeight="11.0" prefWidth="697.0" />
+                        <Button fx:id="btnNewClearFields" layoutX="56.0" layoutY="198.0" mnemonicParsing="false" onAction="#onNewClearFields" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="New/ Clear Fields">
+                            <textFill>
+                                <RadialGradient centerX="0.5115606936416185" centerY="0.41133004926108374" radius="0.6772151898734178">
+                                    <stops>
+                                        <Stop color="#99148e" />
+                                        <Stop color="#240722" offset="1.0" />
+                                    </stops>
+                                </RadialGradient>
+                            </textFill>
+                            <font>
+                                <Font name="Arial Black" size="12.0" />
+                            </font>
+                        </Button>
+                        <Separator layoutX="13.0" layoutY="179.0" prefHeight="11.0" prefWidth="697.0" />
+                        <Pane layoutX="497.0" layoutY="77.0" prefHeight="61.0" prefWidth="221.0">
+                            <children>
+                                <RadioButton fx:id="rdBtnPublished" alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="5.0" layoutY="32.0" mnemonicParsing="false" text="Published" />
+                                <RadioButton fx:id="rdBtnSold" layoutX="88.0" layoutY="32.0" mnemonicParsing="false" text="Sold" />
+                                <RadioButton fx:id="rdBtnCancelled" contentDisplay="CENTER" layoutX="140.0" layoutY="32.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="88.0" text="Cancelled" />
+                                <Text layoutX="5.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Estatus">
+                                    <font>
+                                        <Font size="18.0" />
+                                    </font></Text>
+                            </children>
+                        </Pane>
+                        <Pane layoutX="6.0" layoutY="59.0" prefHeight="96.0" prefWidth="475.0">
+                                <TextField fx:id="txtName" layoutX="79.0" layoutY="23.0" promptText="Name" style="-fx-background-radius: 50;">
+                                    <font>
+                                        <Font name="Arial Black" size="13.0" />
+                                    </font>
+                                </TextField>
+                                <Label alignment="CENTER_RIGHT" layoutY="22.0" prefHeight="25.0" prefWidth="68.0" text="Name:">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtCategory" layoutX="79.0" layoutY="60.0" promptText="Category" style="-fx-background-radius: 50;">
+                                    <font>
+                                        <Font name="Arial Black" size="13.0" />
+                                    </font>
+                                </TextField>
+                                <Label layoutY="62.0" text="Category:">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtImage" layoutX="312.0" layoutY="23.0" promptText="Image" style="-fx-background-radius: 50;">
+                                    <font>
+                                        <Font name="Arial Black" size="13.0" />
+                                    </font>
+                                </TextField>
+                                <TextField fx:id="txtPrice" layoutX="312.0" layoutY="61.0" promptText="Price" style="-fx-background-radius: 50;">
+                                    <font>
+                                        <Font name="Arial Black" size="13.0" />
+                                    </font>
+                                </TextField>
+                                <Label alignment="CENTER_RIGHT" layoutX="251.0" layoutY="25.0" prefHeight="25.0" prefWidth="56.0" text="Image:">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER_RIGHT" layoutX="239.0" layoutY="62.0" prefHeight="25.0" prefWidth="67.0" text="Price:">
+                                    <font>
+                                        <Font size="16.0" />
+                                    </font>
+                                </Label>
+                        </Pane>
+                        <Separator layoutX="12.0" layoutY="54.0" prefHeight="11.0" prefWidth="697.0" />
                     </children>
                 </AnchorPane>
-
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="211.0" prefWidth="739.0">
-                    <children>
-                        <TableView fx:id="tbProducts" prefHeight="242.0" prefWidth="512.0">
-                            <columns>
-                                <TableColumn fx:id="tcName" prefWidth="91.0" text="Name" />
-                                <TableColumn fx:id="tcCategory" prefWidth="72.0" text="Category" />
-                                <TableColumn fx:id="tcPrice" prefWidth="70.0" text="Price" />
-                                <TableColumn fx:id="tcImage" text="Image" />
-                                <TableColumn fx:id="tcPublicationDate" prefWidth="111.0" text="Publication Date" />
-                        <TableColumn fx:id="tcEstatus" prefWidth="86.0" text="Status" />
-                            </columns>
-                        </TableView>
-                  <Pane layoutX="512.0" layoutY="-4.0" prefHeight="242.0" prefWidth="210.0">
-                     <children>
-                        <ImageView fx:id="viewProduct" fitHeight="212.0" fitWidth="210.0" layoutX="-1.0" layoutY="12.0">
-                           <image>
-                              <Image url="@images/Men/DunimaSinFondo.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                    </children>
+                    <TableView fx:id="tbProducts" layoutX="14.0" layoutY="14.0" prefHeight="183.0" prefWidth="558.0">
+                        <columns>
+                            <TableColumn fx:id="tcName" prefWidth="56.0" text="Name" />
+                            <TableColumn fx:id="tcCategory" prefWidth="69.0" text="Category" />
+                            <TableColumn fx:id="tcPrice" prefWidth="70.0" text="Price" />
+                            <TableColumn fx:id="tcStatus" prefWidth="51.0" text="Status" />
+                            <TableColumn fx:id="tcPublicationDate" prefWidth="145.0" text="Publication Date" />
+                            <TableColumn fx:id="tcImagePath" prefWidth="168.0" text="Image Path" />
+                        </columns>
+                    </TableView>
+                    <ImageView fx:id="imgProduct" fitHeight="183.0" fitWidth="140.0" layoutX="576.0" layoutY="14.0">
+                  <image>
+                     <Image url="@images/Men/SacoVerdeCuadros.png" />
+                  </image></ImageView>
                 </AnchorPane>
             </items>
         </SplitPane>

@@ -14,7 +14,7 @@ public class DataUtil {
                 .image("/images/CamisaHombre.png")
                 .category("Electrónica")
                 .price(1500)
-                .status("Disponible")
+                .status("Published")
                 .publicationDate(LocalDateTime.of(2023, 10, 2, 14, 30))
                 .build();
 
@@ -23,7 +23,7 @@ public class DataUtil {
                 .image("/images/CamisetaBlanca.png")
                 .category("Hogar")
                 .price(500)
-                .status("Disponible")
+                .status("Published")
                 .publicationDate(LocalDateTime.of(2023, 9, 15, 10, 45))
                 .build();
 
@@ -32,7 +32,7 @@ public class DataUtil {
                 .image("/images/ChaquetaAzul.png")
                 .category("Deportes")
                 .price(1200)
-                .status("Agotado")
+                .status("Published")
                 .publicationDate(LocalDateTime.of(2023, 8, 22, 16, 30))
                 .build();
 
@@ -41,7 +41,7 @@ public class DataUtil {
                 .image("/images/SacoVerdeCuadros.png")
                 .category("Moda")
                 .price(800)
-                .status("Disponible")
+                .status("Published")
                 .publicationDate(LocalDateTime.of(2023, 7, 5, 12, 0))
                 .build();
 
@@ -50,7 +50,7 @@ public class DataUtil {
                 .image("/images/SacoVerdeCuadros.png")
                 .category("Juguetes")
                 .price(300)
-                .status("Disponible")
+                .status("Published")
                 .publicationDate(LocalDateTime.of(2023, 6, 25, 9, 15))
                 .build();
 

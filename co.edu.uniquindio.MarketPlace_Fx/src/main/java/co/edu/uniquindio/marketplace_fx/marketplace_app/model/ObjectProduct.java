@@ -82,6 +82,7 @@ public class ObjectProduct {
         }
     }
 
+
     // Método para actualizar un producto existente
     public void updateProduct(Product updatedProduct) {
         if (updatedProduct != null) {
@@ -96,3 +97,5 @@ public class ObjectProduct {
         }
     }
 }
+
+

@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.time.LocalDateTime;
@@ -18,10 +19,10 @@ import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductCons
 
 public class ProductViewController {
 
-    ProductController productController;
-    ObservableList<ProductDto> listProducts = FXCollections.observableArrayList();
-    ProductDto selectProduct;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
+    private ProductController productController;
+    private ObservableList<ProductDto> listProducts = FXCollections.observableArrayList();
+    private ProductDto selectProduct;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
 
     @FXML
     private Button btnAddProduct;
@@ -51,10 +52,10 @@ public class ProductViewController {
     private TableColumn<ProductDto, String> tcCategory;
 
     @FXML
-    private TableColumn<ProductDto, String> tcEstatus;
+    private TableColumn<ProductDto, String> tcStatus;
 
     @FXML
-    private TableColumn<ProductDto, String> tcImage;
+    private TableColumn<ProductDto, String> tcImagePath;
 
     @FXML
     private TableColumn<ProductDto, String> tcName;
@@ -78,7 +79,7 @@ public class ProductViewController {
     private TextField txtPrice;
 
     @FXML
-    private ImageView viewProduct;
+    private ImageView imgProduct;
 
     @FXML
     void onNewClearFields(ActionEvent event) {
@@ -97,30 +98,26 @@ public class ProductViewController {
 
     @FXML
     void onStatusCancelled(ActionEvent event) {
-
     }
 
     @FXML
     void onStatusPublished(ActionEvent event) {
-
     }
 
     @FXML
     void onStatusSold(ActionEvent event) {
-
     }
 
     @FXML
     void onUpdateProduct(ActionEvent event) {
-
+        updateProduct();
     }
 
     @FXML
     void initialize() {
-        ToggleGroup toggleGroup = new ToggleGroup();
         productController = new ProductController();
         initView();
-        toogleGroupRdBtns();
+        toggleGroupRdBtns();
     }
 
     private void initView() {
@@ -131,23 +128,13 @@ public class ProductViewController {
         listenerSelection();
     }
 
-    private void removeProduct() {
-        if (selectProduct != null) {
-            productController.removeProduct(selectProduct);
-            listProducts.remove(selectProduct);
-            clearFields();
-            showMessage(TITULO_PRODUCTO_REMOVIDO, HEADER, BODY_PRODUCTO_REMOVIDO, Alert.AlertType.INFORMATION);
-        } else {
-            showMessage(TITULO_PRODUCTO_NO_REMOVIDO, HEADER, BODY_PRODUCTO_NO_REMOVIDO, Alert.AlertType.ERROR);
-        }
-    }
-
-    private void toogleGroupRdBtns() {
-        rdBtnPublished.setSelected(true);
+    private void toggleGroupRdBtns() {
         ToggleGroup toggleGroup = new ToggleGroup();
         rdBtnPublished.setToggleGroup(toggleGroup);
         rdBtnSold.setToggleGroup(toggleGroup);
         rdBtnCancelled.setToggleGroup(toggleGroup);
+        rdBtnPublished.setSelected(true);
+
         toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (rdBtnPublished.isSelected()) {
                 onStatusPublished(null);
@@ -166,11 +153,11 @@ public class ProductViewController {
     private void initDataBinding() {
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().name()));
         tcCategory.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().category()));
-        tcEstatus.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().status()));
-        tcImage.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().image()));
+        tcStatus.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().status()));
+        tcImagePath.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().image()));
         tcPrice.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().price()));
-
         tcPublicationDate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().publicationDate()));
+
         tcPublicationDate.setCellFactory(column -> new TableCell<ProductDto, LocalDateTime>() {
             @Override
             protected void updateItem(LocalDateTime item, boolean empty) {
@@ -185,9 +172,14 @@ public class ProductViewController {
     }
 
     private void listenerSelection() {
-        tbProducts.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+        tbProducts.getSelectionModel().selectedItemProperty().addListener((_, oldSelection, newSelection) -> {
             selectProduct = newSelection;
             showProductInformation(selectProduct);
+            if (selectProduct != null && selectProduct.image() != null && !selectProduct.image().isEmpty()) {
+                imgProduct.setImage(new Image(selectProduct.image()));
+            } else {
+                imgProduct.setImage(null);
+            }
         });
     }
 
@@ -202,27 +194,56 @@ public class ProductViewController {
 
     private void addProduct() {
         ProductDto productDto = createProductDto();
+        assert productDto != null;
         if (validDataProduct(productDto)) {
             if (productController.addProduct(productDto)) {
                 listProducts.add(productDto);
                 clearFields();
-                showMessage(TITULO_PRODUCTO_AGREGADO, HEADER, BODY_PRODUCTO_AGREGADO, Alert.AlertType.INFORMATION);
+                showMessage(TITULO_PRODUCTO_AGREGADO, BODY_PRODUCTO_AGREGADO, Alert.AlertType.INFORMATION);
             } else {
-                showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO, Alert.AlertType.ERROR);
+                showMessage(TITULO_PRODUCTO_NO_AGREGADO, BODY_PRODUCTO_NO_AGREGADO, Alert.AlertType.ERROR);
             }
         } else {
-            showMessage(TITULO_INCOMPLETO,HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
+            showMessage(TITULO_INCOMPLETO, BODY_INCOMPLETO, Alert.AlertType.WARNING);
         }
     }
 
-    // Validación de los datos del producto
+    private void updateProduct() {
+        if (selectProduct != null) {
+            ProductDto updatedProduct = createProductDto();
+            assert updatedProduct != null;
+            if (validDataProduct(updatedProduct)) {
+                productController.updateProduct(updatedProduct);
+                listProducts.set(listProducts.indexOf(selectProduct), updatedProduct);
+                showProductInformation(updatedProduct);
+                showMessage(TITULO_PRODUCTO_ACTUALIZADO, BODY_PRODUCTO_ACTUALIZADO, Alert.AlertType.INFORMATION);
+                clearFields();
+            } else {
+                showMessage(TITULO_INCOMPLETO, BODY_INCOMPLETO, Alert.AlertType.WARNING);
+            }
+        } else {
+            showMessage(TITULO_PRODUCTO_NO_SELECCIONADO, BODY_PRODUCTO_NO_SELECCIONADO, Alert.AlertType.ERROR);
+        }
+    }
+
+    private void removeProduct() {
+        if (selectProduct != null) {
+            productController.removeProduct(selectProduct);
+            listProducts.remove(selectProduct);
+            clearFields();
+            showMessage(TITULO_PRODUCTO_REMOVIDO, BODY_PRODUCTO_REMOVIDO, Alert.AlertType.INFORMATION);
+        } else {
+            showMessage(TITULO_PRODUCTO_NO_REMOVIDO, BODY_PRODUCTO_NO_REMOVIDO, Alert.AlertType.ERROR);
+        }
+    }
+
     private boolean validDataProduct(ProductDto productDto) {
         return !productDto.name().isBlank() &&
                 !productDto.image().isBlank() &&
                 productDto.price() != 0 &&
                 productDto.publicationDate() != null;
     }
-    // Crea el producto Dto con validaciones
+
     private ProductDto createProductDto() {
         String name = txtName.getText();
         String category = txtCategory.getText();
@@ -236,7 +257,7 @@ public class ProductViewController {
         } else if (rdBtnCancelled.isSelected()) {
             status = "Cancelled";
         } else {
-            showMessage(TITULO_ERROR_DEL_ESTADO, HEADER, BODY_ERROR_DEL_ESTADO, Alert.AlertType.ERROR);
+            showMessage(TITULO_ERROR_DEL_ESTADO, BODY_ERROR_DEL_ESTADO, Alert.AlertType.ERROR);
             return null;
         }
 
@@ -244,7 +265,7 @@ public class ProductViewController {
         try {
             price = Integer.parseInt(txtPrice.getText());
         } catch (NumberFormatException e) {
-            showMessage(TITULO_ERROR_EN_PRECIO, HEADER, BODY_NUMERO_INVALIDO , Alert.AlertType.ERROR);
+            showMessage(TITULO_ERROR_EN_PRECIO, BODY_NUMERO_INVALIDO , Alert.AlertType.ERROR);
             return null;
         }
 
@@ -258,20 +279,19 @@ public class ProductViewController {
         );
     }
 
-
     private void clearFields() {
         txtName.clear();
         txtCategory.clear();
         txtPrice.clear();
         txtImage.clear();
-        viewProduct.setImage(null);
+        imgProduct.setImage(null);
     }
 
-    private void showMessage(String titulo, String header, String contenido, Alert.AlertType alertType) {
+    private void showMessage(String title, String body, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
-        alert.setTitle(titulo);
-        alert.setHeaderText(header);
-        alert.setContentText(contenido);
+        alert.setTitle(title);
+        alert.setHeaderText(co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.HEADER);
+        alert.setContentText(body);
         alert.showAndWait();
     }
 }
