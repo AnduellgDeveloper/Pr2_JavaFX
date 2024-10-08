@@ -3,7 +3,7 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.utils;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.ObjectProduct;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class DataUtil {
     public static ObjectProduct initializeData() {
@@ -15,7 +15,7 @@ public class DataUtil {
                 .category("Electrónica")
                 .price(1500)
                 .status("Published")
-                .publicationDate(LocalDateTime.of(2023, 10, 2, 14, 30))
+                .publicationDate(LocalDate.of(2023, 10, 2))
                 .build();
 
         Product product2 = Product.builder()
@@ -24,7 +24,7 @@ public class DataUtil {
                 .category("Hogar")
                 .price(500)
                 .status("Published")
-                .publicationDate(LocalDateTime.of(2023, 9, 15, 10, 45))
+                .publicationDate(LocalDate.of(2024, 9, 15))
                 .build();
 
         Product product3 = Product.builder()
@@ -33,7 +33,7 @@ public class DataUtil {
                 .category("Deportes")
                 .price(1200)
                 .status("Published")
-                .publicationDate(LocalDateTime.of(2023, 8, 22, 16, 30))
+                .publicationDate(LocalDate.of(2023, 8, 22))
                 .build();
 
         Product product4 = Product.builder()
@@ -42,7 +42,7 @@ public class DataUtil {
                 .category("Moda")
                 .price(800)
                 .status("Published")
-                .publicationDate(LocalDateTime.of(2023, 7, 5, 12, 0))
+                .publicationDate(LocalDate.of(2023, 7, 5))
                 .build();
 
         Product product5 = Product.builder()
@@ -51,7 +51,7 @@ public class DataUtil {
                 .category("Juguetes")
                 .price(300)
                 .status("Published")
-                .publicationDate(LocalDateTime.of(2023, 6, 25, 9, 15))
+                .publicationDate(LocalDate.of(2023, 6, 25))
                 .build();
 
         objectProduct.getListProducts().add(product1);

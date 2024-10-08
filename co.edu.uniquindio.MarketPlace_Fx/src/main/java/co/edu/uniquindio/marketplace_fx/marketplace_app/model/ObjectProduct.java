@@ -1,5 +1,6 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class ObjectProduct {
     public ObjectProduct() {
     }
 
-    private Product getBuildProduct(String name, String image, String category, int price, String status, LocalDateTime publicationDate) {
+    private Product getBuildProduct(String name, String image, String category, int price, String status, LocalDate publicationDate) {
         return Product.builder()
                 .name(name)
                 .image(image)

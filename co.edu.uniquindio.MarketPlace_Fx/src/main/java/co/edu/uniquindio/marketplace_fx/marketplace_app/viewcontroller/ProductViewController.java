@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -21,7 +22,7 @@ public class ProductViewController {
     private ProductController productController;
     private ObservableList<ProductDto> listProducts = FXCollections.observableArrayList();
     private ProductDto selectProduct;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
 
     @FXML
     private Button btnAddProduct;
@@ -34,6 +35,8 @@ public class ProductViewController {
 
     @FXML
     private Button btnUpdateProduct;
+    @FXML
+    private DatePicker DatePicker;
 
     @FXML
     private RadioButton rdBtnCancelled;
@@ -63,7 +66,7 @@ public class ProductViewController {
     private TableColumn<ProductDto, Integer> tcPrice;
 
     @FXML
-    private TableColumn<ProductDto, LocalDateTime> tcPublicationDate;
+    private TableColumn<ProductDto, LocalDate> tcPublicationDate;
 
     @FXML
     private TextField txtCategory;
@@ -140,8 +143,6 @@ public class ProductViewController {
         rdBtnSold.setToggleGroup(toggleGroup);
         rdBtnCancelled.setToggleGroup(toggleGroup);
         rdBtnPublished.setSelected(true);
-
-        // Añade un listener para manejar el cambio de selección en los RadioButtons
         toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
             if (rdBtnPublished.isSelected()) {
                 onStatusPublished(null);
@@ -166,11 +167,9 @@ public class ProductViewController {
         tcImagePath.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().image()));
         tcPrice.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().price()));
         tcPublicationDate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().publicationDate()));
-
-        // Formatear las fechas en las celdas de la tabla
-        tcPublicationDate.setCellFactory(column -> new TableCell<ProductDto, LocalDateTime>() {
+        tcPublicationDate.setCellFactory(column -> new TableCell<ProductDto, LocalDate>() {
             @Override
-            protected void updateItem(LocalDateTime item, boolean empty) {
+            protected void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
@@ -180,20 +179,21 @@ public class ProductViewController {
             }
         });
     }
-
     // Añadir un listener para manejar la selección de un producto en la tabla
     private void listenerSelection() {
         tbProducts.getSelectionModel().selectedItemProperty().addListener((_, oldSelection, newSelection) -> {
             selectProduct = newSelection;
             showProductInformation(selectProduct);
-            if (selectProduct != null && selectProduct.image() != null && !selectProduct.image().isEmpty()) {
-                imgProduct.setImage(new Image(selectProduct.image()));
-            } else {
-                imgProduct.setImage(null);
+            if (selectProduct != null) {
+                DatePicker.setValue(selectProduct.publicationDate());
+                if (selectProduct.image() != null && !selectProduct.image().isEmpty()) {
+                    imgProduct.setImage(new Image(selectProduct.image()));
+                } else {
+                    imgProduct.setImage(null);
+                }
             }
         });
     }
-
     // Mostrar la información del producto seleccionado en los campos de texto
     private void showProductInformation(ProductDto selectProduct) {
         if (selectProduct != null) {
@@ -201,27 +201,27 @@ public class ProductViewController {
             txtCategory.setText(selectProduct.category());
             txtImage.setText(selectProduct.image());
             txtPrice.setText(String.valueOf(selectProduct.price()));
+            DatePicker.setValue(selectProduct.publicationDate());
         }
     }
-
     // Agregar un producto a la lista
     private void addProduct() {
         ProductDto productDto = createProductDto(null);
         assert productDto != null;
         if (validDataProduct(productDto)) {
             if (isProductDuplicate(productDto)) {
-                showMessage(TITULO_PRODUCTO_DUPLICADO, BODY_PRODUCTO_DUPLICADO, "Duplicado", Alert.AlertType.WARNING);
+                showMessage(TITULO_PRODUCTO_DUPLICADO, BODY_PRODUCTO_DUPLICADO, HEADER, Alert.AlertType.WARNING);
             } else {
                 if (productController.addProduct(productDto)) {
                     listProducts.add(productDto);
                     clearFields();
-                    showMessage(TITULO_PRODUCTO_AGREGADO, BODY_PRODUCTO_AGREGADO, "Producto Agregado", Alert.AlertType.INFORMATION);
+                    showMessage(TITULO_PRODUCTO_AGREGADO, BODY_PRODUCTO_AGREGADO, HEADER, Alert.AlertType.INFORMATION);
                 } else {
-                    showMessage(TITULO_PRODUCTO_NO_AGREGADO, BODY_PRODUCTO_NO_AGREGADO, "Error", Alert.AlertType.ERROR);
+                    showMessage(TITULO_PRODUCTO_NO_AGREGADO, BODY_PRODUCTO_NO_AGREGADO, HEADER, Alert.AlertType.ERROR);
                 }
             }
         } else {
-            showMessage(TITULO_INCOMPLETO, BODY_INCOMPLETO, "Datos incompletos", Alert.AlertType.WARNING);
+            showMessage(TITULO_INCOMPLETO, BODY_INCOMPLETO, HEADER, Alert.AlertType.WARNING);
         }
     }
 
@@ -255,24 +255,8 @@ public class ProductViewController {
         }
     }
 
-//    // Crear un DTO de producto usando los datos de los campos de texto
-//    private ProductDto createProductDto(LocalDateTime publicationDate) {
-//        try {
-//            String name = txtName.getText();
-//            String category = txtCategory.getText();
-//            String image = txtImage.getText();
-//            int price = Integer.parseInt(txtPrice.getText());
-//            String status = rdBtnPublished.isSelected() ? "Published" : rdBtnSold.isSelected() ? "Sold" : "Cancelled";
-//
-//            LocalDateTime pubDate = publicationDate != null ? publicationDate : LocalDateTime.now();
-//            return new ProductDto(name, image, category, price, status, pubDate);
-//        } catch (NumberFormatException e) {
-//            showMessage(TITULO_DATOS_INVALIDOS, BODY_DATOS_INVALIDOS, HEADER, Alert.AlertType.ERROR);
-//            return null;
-//        }
-//    }
     //crear producto dto
-    private ProductDto createProductDto(LocalDateTime publicationDate) {
+    private ProductDto createProductDto(LocalDate publicationDate) {
         String name = txtName.getText();
         String category = txtCategory.getText();
         String image = txtImage.getText();
@@ -296,7 +280,7 @@ public class ProductViewController {
             showMessage(TITULO_ERROR_EN_PRECIO, BODY_NUMERO_INVALIDO, HEADER, Alert.AlertType.ERROR);
             return null;
         }
-        LocalDateTime finalPublicationDate = (publicationDate != null) ? publicationDate : LocalDateTime.now();
+        LocalDate finalPublicationDate = (publicationDate != null) ? publicationDate : LocalDate.now();
 
         return new ProductDto(
                 name,
