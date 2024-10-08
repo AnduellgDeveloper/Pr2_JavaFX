@@ -81,12 +81,15 @@ public class ProductViewController {
     private ImageView viewProduct;
 
     @FXML
-    void onNewClearFields(ActionEvent event) {
-        clearFields();
+    void onNewClearFields(ActionEvent event) {clearFields();}
+    @FXML
+    void onAddProduct(ActionEvent event) {addProduct();}
+    @FXML
+    void onRemoveProduct(ActionEvent event) {
+        removeProduct();
     }
 
-    @FXML
-    void onAddProduct(ActionEvent event) {
+    private void addProduct() {
         try {
             Integer price = Integer.parseInt(txtPrice.getText());
             ProductDto newProduct = new ProductDto(
@@ -105,8 +108,7 @@ public class ProductViewController {
         }
     }
 
-    @FXML
-    void onRemoveProduct(ActionEvent event) {
+    private void removeProduct() {
         if (selectProduct != null) {
             productController.removeProduct(selectProduct);
             listProducts.remove(selectProduct);
@@ -148,44 +150,11 @@ public class ProductViewController {
 
     @FXML
     void onStatusSold(ActionEvent event) {
-        if (selectProduct != null) {
-            ProductDto updatedProduct = new ProductDto(
-                    selectProduct.name(),
-                    selectProduct.category(),
-                    "Sold",
-                    selectProduct.price(),
-                    selectProduct.image(),
-                    selectProduct.publicationDate()
-            );
-            updateProductInTable(updatedProduct);
-        }
     }
 
     @FXML
     void onUpdateProduct(ActionEvent event) {
-        if (selectProduct != null) {
-            try {
-                Integer price = Integer.parseInt(txtPrice.getText());
 
-                ProductDto updatedProduct = new ProductDto(
-                        txtName.getText(),
-                        txtCategory.getText(),
-                        selectProduct.status(),
-                        price,
-                        txtImage.getText(),
-                        selectProduct.publicationDate()
-                );
-
-                productController.updateProduct(updatedProduct);
-                updateProductInTable(updatedProduct);
-                clearFields();
-
-            } catch (NumberFormatException e) {
-                System.out.println("El precio debe ser un número válido.");
-            }
-        } else {
-            System.out.println("No se ha seleccionado ningún producto.");
-        }
     }
 
     @FXML
