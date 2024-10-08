@@ -13,8 +13,8 @@ public class ProductConstants {
     public static final String TITULO_ERROR_EN_PRECIO="Error en el precio";
     public static final String TITULO_PRODUCTO_ACTUALIZADO="Producto se ha acutalizado";
     public static final String TITULO_PRODUCTO_NO_SELECCIONADO="Error en el producto";
-
-
+    public static final String TITULO_PRODUCTO_DUPLICADO="Producto duplicado";
+    public static final String TITULO_DATOS_INVALIDOS="Datos invalidos";
 
     public static final String BODY_PRODUCTO_NO_AGREGADO = "El producto no se agregro";
     public static final String BODY_PRODUCTO_AGREGADO = "El producto se agregro con èxito";
@@ -25,6 +25,6 @@ public class ProductConstants {
     public static final String BODY_NUMERO_INVALIDO ="El precio debe ser un número entero válido";
     public static final String BODY_PRODUCTO_ACTUALIZADO="El producto ha sido actualizado";
     public static final String BODY_PRODUCTO_NO_SELECCIONADO="El producto no se ha seleccionado";
-
-
+    public static final String BODY_PRODUCTO_DUPLICADO="El producto está duplicado";
+    public static final String BODY_DATOS_INVALIDOS= "Los datos del producto son invalidos";
 }
