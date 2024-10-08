@@ -96,6 +96,38 @@ public class ProductViewController {
     void onRemoveProduct(ActionEvent event) {
         removeProduct();
     }
+    @FXML
+    void onStatusCancelled(ActionEvent event) {
+    }
+
+    @FXML
+    void onStatusPublished(ActionEvent event) {
+    }
+
+    @FXML
+    void onStatusSold(ActionEvent event) {
+    }
+
+    @FXML
+    void onUpdateProduct(ActionEvent event) {
+
+    }
+    @FXML
+    // La mamá de los pollitos
+    void initialize() {
+        ToggleGroup toggleGroup = new ToggleGroup();
+        productController = new ProductController();
+        initView();
+        toogleGroupRdBtns();
+
+    }
+    private void initView() {
+        initDataBinding();
+        getProducts();
+        tbProducts.getItems().clear();
+        tbProducts.setItems(listProducts);
+        listenerSelection();
+    }
 
     private void addProduct() {
         try {
@@ -128,38 +160,9 @@ public class ProductViewController {
         }
     }
 
-    @FXML
-    void onStatusCancelled(ActionEvent event) {
-    }
-
-    @FXML
-    void onStatusPublished(ActionEvent event) {
-    }
-
-    @FXML
-    void onStatusSold(ActionEvent event) {
-    }
-
-    @FXML
-    void onUpdateProduct(ActionEvent event) {
-
-    }
-
-    @FXML
-    void initialize() {
-        ToggleGroup toggleGroup = new ToggleGroup();
-        productController = new ProductController();
-        initView();
-        toogleGroupRdBtns();
-        txtImage.textProperty().addListener((observable, oldValue, newValue) -> {
-            changeImage(newValue);
-        });
-
-    }
-
     private void toogleGroupRdBtns() {
         rdBtnPublished.setSelected(true);
-        ToggleGroup toggleGroup = new ToggleGroup(); 
+        ToggleGroup toggleGroup = new ToggleGroup();
         rdBtnPublished.setToggleGroup(toggleGroup);
         rdBtnSold.setToggleGroup(toggleGroup);
         rdBtnCancelled.setToggleGroup(toggleGroup);
@@ -172,34 +175,6 @@ public class ProductViewController {
                 onStatusCancelled(null);
             }
         });
-    }
-
-    private void changeImage(String imagePath) {
-        File imageFile = new File(imagePath);
-        if (imageFile.exists()) {
-            Image newImage = new Image(imageFile.toURI().toString());
-            viewProduct.setImage(newImage);
-        } else {
-            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO, Alert.AlertType.ERROR);
-        }
-    }
-
-    private void loadImage(String imagePath) {
-        File imageFile = new File(imagePath);
-        if (imageFile.exists()) {
-            Image image = new Image(imageFile.toURI().toString());
-            viewProduct.setImage(image);
-        } else {
-            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO, Alert.AlertType.ERROR);
-        }
-    }
-
-    private void initView() {
-        initDataBinding();
-        getProducts();
-        tbProducts.getItems().clear();
-        tbProducts.setItems(listProducts);
-        listenerSelection();
     }
 
     private void getProducts() {
@@ -240,7 +215,6 @@ public class ProductViewController {
             txtCategory.setText(selectProduct.category());
             txtImage.setText(selectProduct.image());
             txtPrice.setText(String.valueOf(selectProduct.price()));
-            loadImage(selectProduct.image());
         }
     }
 
@@ -250,12 +224,6 @@ public class ProductViewController {
         txtPrice.clear();
         txtImage.clear();
         viewProduct.setImage(null);
-    }
-
-    private void updateProductInTable(ProductDto updatedProduct) {
-        int index = listProducts.indexOf(selectProduct);
-        listProducts.set(index, updatedProduct);
-        tbProducts.refresh();
     }
 
     private void showMessage(String titulo, String header, String contenido, Alert.AlertType alertType) {
