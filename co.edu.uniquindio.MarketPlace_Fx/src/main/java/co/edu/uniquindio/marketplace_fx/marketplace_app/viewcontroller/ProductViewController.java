@@ -15,9 +15,8 @@ import javafx.scene.image.ImageView;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.*;
-
-
 
 public class ProductViewController {
 
@@ -84,14 +83,19 @@ public class ProductViewController {
     private ImageView viewProduct;
 
     @FXML
-    void onNewClearFields(ActionEvent event) {clearFields();}
+    void onNewClearFields(ActionEvent event) {
+        clearFields();
+    }
+
     @FXML
-    void onAddProduct(ActionEvent event) {addProduct();}
+    void onAddProduct(ActionEvent event) {
+        addProduct();
+    }
+
     @FXML
     void onRemoveProduct(ActionEvent event) {
         removeProduct();
     }
-
 
     private void addProduct() {
         try {
@@ -107,9 +111,9 @@ public class ProductViewController {
             productController.addProduct(newProduct);
             listProducts.add(newProduct);
             clearFields();
-            showMessage(TITULO_PRODUCTO_AGREGADO, HEADER, BODY_PRODUCTO_AGREGADO,Alert.AlertType.INFORMATION);
+            showMessage(TITULO_PRODUCTO_AGREGADO, HEADER, BODY_PRODUCTO_AGREGADO, Alert.AlertType.INFORMATION);
         } catch (NumberFormatException e) {
-            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO,Alert.AlertType.ERROR);
+            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO, Alert.AlertType.ERROR);
         }
     }
 
@@ -118,12 +122,11 @@ public class ProductViewController {
             productController.removeProduct(selectProduct);
             listProducts.remove(selectProduct);
             clearFields();
-            showMessage(TITULO_PRODUCTO_REMOVIDO, HEADER, BODY_PRODUCTO_REMOVIDO,Alert.AlertType.INFORMATION);
+            showMessage(TITULO_PRODUCTO_REMOVIDO, HEADER, BODY_PRODUCTO_REMOVIDO, Alert.AlertType.INFORMATION);
         } else {
-            showMessage(TITULO_PRODUCTO_NO_REMOVIDO, HEADER, BODY_PRODUCTO_NO_REMOVIDO,Alert.AlertType.ERROR);
+            showMessage(TITULO_PRODUCTO_NO_REMOVIDO, HEADER, BODY_PRODUCTO_NO_REMOVIDO, Alert.AlertType.ERROR);
         }
     }
-
 
     @FXML
     void onStatusCancelled(ActionEvent event) {
@@ -153,9 +156,10 @@ public class ProductViewController {
         });
 
     }
-    private void toogleGroupRdBtns (){
+
+    private void toogleGroupRdBtns() {
         rdBtnPublished.setSelected(true);
-        ToggleGroup toggleGroup = null;
+        ToggleGroup toggleGroup = new ToggleGroup(); 
         rdBtnPublished.setToggleGroup(toggleGroup);
         rdBtnSold.setToggleGroup(toggleGroup);
         rdBtnCancelled.setToggleGroup(toggleGroup);
@@ -168,18 +172,15 @@ public class ProductViewController {
                 onStatusCancelled(null);
             }
         });
-
     }
-
 
     private void changeImage(String imagePath) {
         File imageFile = new File(imagePath);
         if (imageFile.exists()) {
             Image newImage = new Image(imageFile.toURI().toString());
             viewProduct.setImage(newImage);
-            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO,Alert.AlertType.ERROR);
         } else {
-            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO,Alert.AlertType.ERROR);
+            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO, Alert.AlertType.ERROR);
         }
     }
 
@@ -188,9 +189,8 @@ public class ProductViewController {
         if (imageFile.exists()) {
             Image image = new Image(imageFile.toURI().toString());
             viewProduct.setImage(image);
-            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO,Alert.AlertType.ERROR);
         } else {
-            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO,Alert.AlertType.ERROR);
+            showMessage(TITULO_PRODUCTO_NO_AGREGADO, HEADER, BODY_PRODUCTO_NO_AGREGADO, Alert.AlertType.ERROR);
         }
     }
 
@@ -257,11 +257,12 @@ public class ProductViewController {
         listProducts.set(index, updatedProduct);
         tbProducts.refresh();
     }
+
     private void showMessage(String titulo, String header, String contenido, Alert.AlertType alertType) {
-        Alert aler = new Alert(alertType);
-        aler.setTitle(titulo);
-        aler.setHeaderText(header);
-        aler.setContentText(contenido);
-        aler.showAndWait();
+        Alert alert = new Alert(alertType);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        alert.showAndWait();
     }
 }
