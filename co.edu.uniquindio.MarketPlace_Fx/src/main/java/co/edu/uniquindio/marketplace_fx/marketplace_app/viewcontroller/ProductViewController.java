@@ -145,11 +145,11 @@ public class ProductViewController {
             }
         });
     }
-
+     //obtener productos
     private void getProducts() {
         listProducts.addAll(productController.getProducts());
     }
-
+    //enlace datos de inicio
     private void initDataBinding() {
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().name()));
         tcCategory.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().category()));
@@ -159,6 +159,7 @@ public class ProductViewController {
         tcPublicationDate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().publicationDate()));
 
         tcPublicationDate.setCellFactory(column -> new TableCell<ProductDto, LocalDateTime>() {
+            //item actualizacion
             @Override
             protected void updateItem(LocalDateTime item, boolean empty) {
                 super.updateItem(item, empty);
@@ -191,7 +192,7 @@ public class ProductViewController {
             txtPrice.setText(String.valueOf(selectProduct.price()));
         }
     }
-
+   //agregar producto
     private void addProduct() {
         ProductDto productDto = createProductDto();
         assert productDto != null;
@@ -207,7 +208,7 @@ public class ProductViewController {
             showMessage(TITULO_INCOMPLETO, BODY_INCOMPLETO, Alert.AlertType.WARNING);
         }
     }
-
+   //actualizar producto
     private void updateProduct() {
         if (selectProduct != null) {
             ProductDto updatedProduct = createProductDto();
@@ -225,7 +226,7 @@ public class ProductViewController {
             showMessage(TITULO_PRODUCTO_NO_SELECCIONADO, BODY_PRODUCTO_NO_SELECCIONADO, Alert.AlertType.ERROR);
         }
     }
-
+    //eliminar producto
     private void removeProduct() {
         if (selectProduct != null) {
             productController.removeProduct(selectProduct);
@@ -236,14 +237,14 @@ public class ProductViewController {
             showMessage(TITULO_PRODUCTO_NO_REMOVIDO, BODY_PRODUCTO_NO_REMOVIDO, Alert.AlertType.ERROR);
         }
     }
-
+     //validar producto
     private boolean validDataProduct(ProductDto productDto) {
         return !productDto.name().isBlank() &&
                 !productDto.image().isBlank() &&
                 productDto.price() != 0 &&
                 productDto.publicationDate() != null;
     }
-
+   //crear producto dto
     private ProductDto createProductDto() {
         String name = txtName.getText();
         String category = txtCategory.getText();
@@ -278,7 +279,7 @@ public class ProductViewController {
                 LocalDateTime.now()
         );
     }
-
+    //limpiar celdas
     private void clearFields() {
         txtName.clear();
         txtCategory.clear();
@@ -286,7 +287,7 @@ public class ProductViewController {
         txtImage.clear();
         imgProduct.setImage(null);
     }
-
+    //mensaje
     private void showMessage(String title, String body, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
