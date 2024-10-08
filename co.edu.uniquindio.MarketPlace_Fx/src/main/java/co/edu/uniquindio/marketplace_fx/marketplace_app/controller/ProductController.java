@@ -18,7 +18,7 @@ public class ProductController {
     // Añadir un nuevo producto a la lista
     public boolean addProduct(ProductDto product) {
         modelFactory.addProduct(product);
-        return false;
+        return true;
     }
 
     // Eliminar un producto de la lista
