@@ -97,7 +97,7 @@ public class ProductViewController {
 
     @FXML
     void onStatusCancelled(ActionEvent event) {
-        
+
     }
 
     @FXML
@@ -200,17 +200,9 @@ public class ProductViewController {
         }
     }
 
-    // Validación de los datos del producto
-    private boolean validData(ProductDto productDto) {
-        return !productDto.name().isBlank() &&
-                !productDto.image().isBlank() &&
-                productDto.price() != 0 &&
-                productDto.publicationDate() != null;
-    }
-
     private void addProduct() {
         ProductDto productDto = createProductDto();
-        if (validData(productDto)) {
+        if (validDataProduct(productDto)) {
             if (productController.addProduct(productDto)) {
                 listProducts.add(productDto);
                 clearFields();
@@ -223,15 +215,49 @@ public class ProductViewController {
         }
     }
 
+    // Validación de los datos del producto
+    private boolean validDataProduct(ProductDto productDto) {
+        return !productDto.name().isBlank() &&
+                !productDto.image().isBlank() &&
+                productDto.price() != 0 &&
+                productDto.publicationDate() != null;
+    }
+    // Crea el producto Dto con validaciones
     private ProductDto createProductDto() {
+        String name = txtName.getText();
+        String category = txtCategory.getText();
+        String image = txtImage.getText();
+        String status = "";
+
+        if (rdBtnPublished.isSelected()) {
+            status = "Published";
+        } else if (rdBtnSold.isSelected()) {
+            status = "Sold";
+        } else if (rdBtnCancelled.isSelected()) {
+            status = "Cancelled";
+        } else {
+            showMessage(TITULO_ERROR_DEL_ESTADO, HEADER, BODY_ERROR_DEL_ESTADO, Alert.AlertType.ERROR);
+            return null;
+        }
+
+        int price;
+        try {
+            price = Integer.parseInt(txtPrice.getText());
+        } catch (NumberFormatException e) {
+            showMessage(TITULO_ERROR_EN_PRECIO, HEADER, BODY_NUMERO_INVALIDO , Alert.AlertType.ERROR);
+            return null;
+        }
+
         return new ProductDto(
-                txtName.getText(),
-                txtCategory.getText(),
-                Integer.parseInt(txtPrice.getText()),
-                txtImage.getText(),
+                name,
+                image,
+                category,
+                price,
+                status,
                 LocalDateTime.now()
         );
     }
+
 
     private void clearFields() {
         txtName.clear();
