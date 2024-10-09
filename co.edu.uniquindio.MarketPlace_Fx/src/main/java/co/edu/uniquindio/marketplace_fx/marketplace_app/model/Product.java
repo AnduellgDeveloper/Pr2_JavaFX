@@ -19,7 +19,7 @@ public class Product {
         this.category = category;
         this.price = price;
         this.status = status;
-        this.publicationDate = LocalDate.now();
+        this.publicationDate = publicationDate;
 
     }
 

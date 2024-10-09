@@ -15,7 +15,12 @@ public class ProductConstants {
     public static final String TITULO_PRODUCTO_NO_SELECCIONADO="Error en el producto";
     public static final String TITULO_PRODUCTO_DUPLICADO="Producto duplicado";
     public static final String TITULO_DATOS_INVALIDOS="Datos invalidos";
+    public static final String TITULO_ERROR_FECHA="Fecha invalida";
+    public static final String TITULO_ERRROR_IMAGEN="Error de imagen";
 
+
+
+    public static final String BODY_ERRROR_IMAGEN="Error al cargar la imagen";
     public static final String BODY_PRODUCTO_NO_AGREGADO = "El producto no se agregro";
     public static final String BODY_PRODUCTO_AGREGADO = "El producto se agregro con èxito";
     public static final String BODY_PRODUCTO_REMOVIDO = "El producto se removio con éxito";
@@ -27,4 +32,8 @@ public class ProductConstants {
     public static final String BODY_PRODUCTO_NO_SELECCIONADO="El producto no se ha seleccionado";
     public static final String BODY_PRODUCTO_DUPLICADO="El producto está duplicado";
     public static final String BODY_DATOS_INVALIDOS= "Los datos del producto son invalidos";
+    public static final String BODY_FECHA_INVALIDA="La fecha del producto es invalida";
 }
+
+
+

@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="492.0" prefWidth="723.0" stylesheets="@Css/DatePicker.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.ProductViewController">
+<AnchorPane prefHeight="500.0" prefWidth="720.0" stylesheets="@Css/DatePicker.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.ProductViewController">
     <children>
         <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="492.0" prefWidth="723.0">
             <items>
@@ -68,7 +68,7 @@
                                 <Font size="36.0" />
                             </font>
                         </Label>
-                        <Button fx:id="btnNewClearFields" layoutX="56.0" layoutY="198.0" mnemonicParsing="false" onAction="#onNewClearFields" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="New/ Clear Fields">
+                        <Button fx:id="btnClearFields" layoutX="56.0" layoutY="198.0" mnemonicParsing="false" onAction="#onClearFields" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Clear Fields">
                             <textFill>
                                 <RadialGradient centerX="0.5115606936416185" centerY="0.41133004926108374" radius="0.6772151898734178">
                                     <stops>
@@ -81,8 +81,8 @@
                                 <Font name="Arial Black" size="12.0" />
                             </font>
                         </Button>
-                        <Separator layoutX="13.0" layoutY="179.0" prefHeight="11.0" prefWidth="697.0" />
-                        <Pane layoutX="497.0" layoutY="77.0" prefHeight="61.0" prefWidth="221.0">
+                        <Separator layoutX="13.0" layoutY="184.0" prefHeight="11.0" prefWidth="697.0" />
+                        <Pane layoutX="492.0" layoutY="77.0" prefHeight="61.0" prefWidth="221.0">
                             <children>
                                 <RadioButton fx:id="rdBtnPublished" alignment="CENTER_RIGHT" contentDisplay="TOP" layoutX="5.0" layoutY="32.0" mnemonicParsing="false" text="Published" />
                                 <RadioButton fx:id="rdBtnSold" layoutX="88.0" layoutY="32.0" mnemonicParsing="false" text="Sold" />
@@ -93,7 +93,7 @@
                                     </font></Text>
                             </children>
                         </Pane>
-                        <Pane layoutX="6.0" layoutY="59.0" prefHeight="96.0" prefWidth="475.0">
+                        <Pane layoutX="6.0" layoutY="60.0" prefHeight="124.0" prefWidth="475.0">
                                 <TextField fx:id="txtName" layoutX="79.0" layoutY="23.0" promptText="Name" style="-fx-background-radius: 50;">
                                     <font>
                                         <Font name="Arial Black" size="13.0" />
@@ -136,18 +136,18 @@
                                 </Label>
                         </Pane>
                         <Separator layoutX="12.0" layoutY="54.0" prefHeight="11.0" prefWidth="697.0" />
-                  <DatePicker fx:id="DatePicker" layoutX="505.0" layoutY="138.0" />
+                  <DatePicker fx:id="dpPublicationDate" layoutX="502.0" layoutY="138.0" promptText="Publication Date" stylesheets="@Css/DatePicker.css" />
                     </children>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="211.0" prefWidth="739.0">
-                    <TableView fx:id="tbProducts" layoutX="14.0" layoutY="14.0" prefHeight="183.0" prefWidth="558.0">
+                    <TableView fx:id="tbProducts" layoutX="8.0" layoutY="10.0" prefHeight="223.0" prefWidth="558.0">
                         <columns>
-                            <TableColumn fx:id="tcName" prefWidth="56.0" text="Name" />
-                            <TableColumn fx:id="tcCategory" prefWidth="69.0" text="Category" />
-                            <TableColumn fx:id="tcPrice" prefWidth="70.0" text="Price" />
-                            <TableColumn fx:id="tcStatus" prefWidth="51.0" text="Status" />
-                            <TableColumn fx:id="tcPublicationDate" prefWidth="145.0" text="Publication Date" />
-                            <TableColumn fx:id="tcImagePath" prefWidth="168.0" text="Image Path" />
+                            <TableColumn fx:id="tcName" prefWidth="85.0" text="Name" />
+                            <TableColumn fx:id="tcCategory" prefWidth="83.0" text="Category" />
+                            <TableColumn fx:id="tcPrice" prefWidth="61.0" text="Price" />
+                            <TableColumn fx:id="tcStatus" prefWidth="77.0" text="Status" />
+                            <TableColumn fx:id="tcPublicationDate" prefWidth="118.0" text="Publication Date" />
+                            <TableColumn fx:id="tcImagePath" prefWidth="135.0" text="Image Path" />
                         </columns>
                     </TableView>
                     <ImageView fx:id="imgProduct" fitHeight="183.0" fitWidth="140.0" layoutX="572.0" layoutY="14.0">

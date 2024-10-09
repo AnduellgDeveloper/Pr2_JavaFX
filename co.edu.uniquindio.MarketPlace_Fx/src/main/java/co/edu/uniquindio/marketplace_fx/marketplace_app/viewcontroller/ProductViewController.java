@@ -13,8 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.*;
 
@@ -22,112 +21,72 @@ public class ProductViewController {
     private ProductController productController;
     private ObservableList<ProductDto> listProducts = FXCollections.observableArrayList();
     private ProductDto selectProduct;
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MMM-dd");
-
     @FXML
     private Button btnAddProduct;
-
     @FXML
-    private Button btnRemoveProduct;
-
-    @FXML
-    private Button btnNewClearFields;
-
+    private Button btnClearFields;
     @FXML
     private Button btnUpdateProduct;
     @FXML
-    private DatePicker DatePicker;
-
-    @FXML
     private RadioButton rdBtnCancelled;
-
     @FXML
     private RadioButton rdBtnPublished;
-
     @FXML
     private RadioButton rdBtnSold;
-
     @FXML
     private TableView<ProductDto> tbProducts;
-
     @FXML
     private TableColumn<ProductDto, String> tcCategory;
-
     @FXML
     private TableColumn<ProductDto, String> tcStatus;
-
     @FXML
     private TableColumn<ProductDto, String> tcImagePath;
-
     @FXML
     private TableColumn<ProductDto, String> tcName;
-
     @FXML
     private TableColumn<ProductDto, Integer> tcPrice;
-
     @FXML
     private TableColumn<ProductDto, LocalDate> tcPublicationDate;
-
+    @FXML
+    private DatePicker dpPublicationDate;
     @FXML
     private TextField txtCategory;
-
     @FXML
     private TextField txtImage;
-
     @FXML
     private TextField txtName;
-
     @FXML
     private TextField txtPrice;
-
     @FXML
     private ImageView imgProduct;
-
-    // Limpiar los campos cuando se presiona el botón "Nuevo"
+    // Método de acción para limpiar los campos de texto
     @FXML
-    void onNewClearFields(ActionEvent event) {
+    void onClearFields(ActionEvent event) {
         clearFields();
     }
-
-    // Agregar un producto cuando se presiona el botón "Agregar"
+    // Método de acción para agregar un producto
     @FXML
     void onAddProduct(ActionEvent event) {
         addProduct();
     }
-
-    // Eliminar un producto cuando se presiona el botón "Eliminar"
-    @FXML
-    void onRemoveProduct(ActionEvent event) {
-        removeProduct();
-    }
-
-    @FXML
-    void onStatusCancelled(ActionEvent event) {
-    }
-
-    @FXML
-    void onStatusPublished(ActionEvent event) {
-    }
-
-    @FXML
-    void onStatusSold(ActionEvent event) {
-    }
-
-    // Actualizar un producto cuando se presiona el botón "Actualizar"
+    // Método de acción para actualizar un producto
     @FXML
     void onUpdateProduct(ActionEvent event) {
         updateProduct();
     }
-
-    // Inicializar la vista y el controlador
+    // Método de acción para remover un producto
+    @FXML
+    void onRemoveProduct(ActionEvent event) {
+        removeProduct();
+    }
+    // Método de inicialización que se llama al cargar la vista
     @FXML
     void initialize() {
         productController = new ProductController();
         initView();
         toggleGroupRdBtns();
     }
-
-    // Inicializa la vista de la tabla y enlaza los datos
+    // Método que carga la vista inicial y los productos en la tabla
     private void initView() {
         initDataBinding();
         getProducts();
@@ -135,31 +94,19 @@ public class ProductViewController {
         tbProducts.setItems(listProducts);
         listenerSelection();
     }
-
-    // Configura los RadioButtons en un ToggleGroup para manejar el estado del producto
+    // Método que agrupa los botones de radio para seleccionar el estado del producto
     private void toggleGroupRdBtns() {
         ToggleGroup toggleGroup = new ToggleGroup();
         rdBtnPublished.setToggleGroup(toggleGroup);
         rdBtnSold.setToggleGroup(toggleGroup);
         rdBtnCancelled.setToggleGroup(toggleGroup);
         rdBtnPublished.setSelected(true);
-        toggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-            if (rdBtnPublished.isSelected()) {
-                onStatusPublished(null);
-            } else if (rdBtnSold.isSelected()) {
-                onStatusSold(null);
-            } else if (rdBtnCancelled.isSelected()) {
-                onStatusCancelled(null);
-            }
-        });
     }
-
-    // Cargar los productos desde el controlador
+    // Método que obtiene los productos del controlador y los añade a la lista
     private void getProducts() {
         listProducts.addAll(productController.getProducts());
     }
-
-    // Enlazar los datos de los productos con las columnas de la tabla
+    // Método que inicializa el enlace de datos para las columnas de la tabla
     private void initDataBinding() {
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().name()));
         tcCategory.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().category()));
@@ -167,48 +114,51 @@ public class ProductViewController {
         tcImagePath.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().image()));
         tcPrice.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().price()));
         tcPublicationDate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().publicationDate()));
-        tcPublicationDate.setCellFactory(column -> new TableCell<ProductDto, LocalDate>() {
+        tcPublicationDate.setCellFactory(_ -> new TableCell<>() {
             @Override
             protected void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
                 } else {
-                    setText(item.format(formatter));
+                    setText(item.toString());
                 }
             }
         });
     }
-    // Añadir un listener para manejar la selección de un producto en la tabla
+    // Método que añade un listener para seleccionar un producto de la tabla
     private void listenerSelection() {
-        tbProducts.getSelectionModel().selectedItemProperty().addListener((_, oldSelection, newSelection) -> {
+        tbProducts.getSelectionModel().selectedItemProperty().addListener((_, _, newSelection) -> {
             selectProduct = newSelection;
             showProductInformation(selectProduct);
-            if (selectProduct != null) {
-                DatePicker.setValue(selectProduct.publicationDate());
-                if (selectProduct.image() != null && !selectProduct.image().isEmpty()) {
-                    imgProduct.setImage(new Image(selectProduct.image()));
-                } else {
-                    imgProduct.setImage(null);
-                }
-            }
         });
     }
-    // Mostrar la información del producto seleccionado en los campos de texto
+    // Método que muestra la información del producto seleccionado en los campos de texto
     private void showProductInformation(ProductDto selectProduct) {
         if (selectProduct != null) {
             txtName.setText(selectProduct.name());
             txtCategory.setText(selectProduct.category());
             txtImage.setText(selectProduct.image());
             txtPrice.setText(String.valueOf(selectProduct.price()));
-            DatePicker.setValue(selectProduct.publicationDate());
+            dpPublicationDate.setValue(selectProduct.publicationDate());
+
+            loadImage(selectProduct.image());
         }
     }
-    // Agregar un producto a la lista
+    // Método que carga la imagen del producto en el ImageView
+    private void loadImage(String imageName) {
+        try {
+            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/co/edu/uniquindio/marketplace_fx/marketplace_app/images/Men/" + imageName)));
+            imgProduct.setImage(image);
+        } catch (Exception e) {
+            imgProduct.setImage(null);
+            showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN+ e.getMessage(), HEADER, Alert.AlertType.ERROR);
+        }
+    }
+    // Método que agrega un nuevo producto a la lista y a la base de datos
     private void addProduct() {
-        ProductDto productDto = createProductDto(null);
-        assert productDto != null;
-        if (validDataProduct(productDto)) {
+        ProductDto productDto = createProductDto();
+        if (productDto != null && validDataProduct(productDto)) {
             if (isProductDuplicate(productDto)) {
                 showMessage(TITULO_PRODUCTO_DUPLICADO, BODY_PRODUCTO_DUPLICADO, HEADER, Alert.AlertType.WARNING);
             } else {
@@ -224,13 +174,11 @@ public class ProductViewController {
             showMessage(TITULO_INCOMPLETO, BODY_INCOMPLETO, HEADER, Alert.AlertType.WARNING);
         }
     }
-
-    // Actualizar el producto seleccionado en la lista
+    // Método que actualiza el producto seleccionado en la lista y en la base de datos
     private void updateProduct() {
         if (selectProduct != null) {
-            ProductDto updatedProduct = createProductDto(selectProduct.publicationDate());
-            assert updatedProduct != null;
-            if (validDataProduct(updatedProduct)) {
+            ProductDto updatedProduct = createProductDto();
+            if (updatedProduct != null && validDataProduct(updatedProduct)) {
                 productController.updateProduct(updatedProduct);
                 listProducts.set(listProducts.indexOf(selectProduct), updatedProduct);
                 showProductInformation(updatedProduct);
@@ -242,8 +190,7 @@ public class ProductViewController {
             showMessage(TITULO_PRODUCTO_NO_SELECCIONADO, BODY_PRODUCTO_NO_SELECCIONADO, HEADER, Alert.AlertType.WARNING);
         }
     }
-
-    // Eliminar el producto seleccionado
+    // Método que elimina el producto seleccionado de la lista y de la base de datos
     private void removeProduct() {
         if (selectProduct != null) {
             productController.removeProduct(selectProduct);
@@ -254,14 +201,13 @@ public class ProductViewController {
             showMessage(TITULO_PRODUCTO_NO_REMOVIDO, BODY_PRODUCTO_NO_REMOVIDO, HEADER, Alert.AlertType.WARNING);
         }
     }
-
-    //crear producto dto
-    private ProductDto createProductDto(LocalDate publicationDate) {
+    // Método que crea un objeto ProductDto a partir de los datos ingresados en los campos de texto
+    private ProductDto createProductDto() {
         String name = txtName.getText();
         String category = txtCategory.getText();
         String image = txtImage.getText();
         String status = "";
-
+        LocalDate publicationDate = dpPublicationDate.getValue();
         if (rdBtnPublished.isSelected()) {
             status = "Published";
         } else if (rdBtnSold.isSelected()) {
@@ -280,28 +226,26 @@ public class ProductViewController {
             showMessage(TITULO_ERROR_EN_PRECIO, BODY_NUMERO_INVALIDO, HEADER, Alert.AlertType.ERROR);
             return null;
         }
-        LocalDate finalPublicationDate = (publicationDate != null) ? publicationDate : LocalDate.now();
 
-        return new ProductDto(
-                name,
-                image,
-                category,
-                price,
-                status,
-                finalPublicationDate
-        );
+        if (publicationDate == null) {
+            showMessage(TITULO_ERROR_FECHA, BODY_FECHA_INVALIDA, HEADER, Alert.AlertType.ERROR);
+            return null;
+        }
+
+        return new ProductDto(name, image, category, price, status, publicationDate);
     }
-    // Validar que los campos del producto no estén vacíos o inválidos
+    // Método que valida los datos del producto antes de añadirlo o actualizarlo
     private boolean validDataProduct(ProductDto productDto) {
         return productDto.name() != null && !productDto.name().isEmpty() &&
                 productDto.category() != null && !productDto.category().isEmpty() &&
-                productDto.price() > 0;
+                productDto.price() > 0 &&
+                productDto.publicationDate() != null;
     }
-    // Verificar si el producto ya existe en la lista
+    // Método que verifica si el producto ya existe en la lista
     private boolean isProductDuplicate(ProductDto productDto) {
         return listProducts.stream().anyMatch(p -> p.name().equalsIgnoreCase(productDto.name()));
     }
-    // Mostrar un mensaje de alerta al usuario con título, mensaje y header
+    // Método que muestra un mensaje en un cuadro de diálogo
     private void showMessage(String title, String message, String header, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -309,12 +253,13 @@ public class ProductViewController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    // Limpiar todos los campos del formulario
+    // Método que limpia los campos de texto y el ImageView
     private void clearFields() {
         txtName.clear();
         txtCategory.clear();
         txtImage.clear();
         txtPrice.clear();
+        dpPublicationDate.setValue(null);
         imgProduct.setImage(null);
     }
 }

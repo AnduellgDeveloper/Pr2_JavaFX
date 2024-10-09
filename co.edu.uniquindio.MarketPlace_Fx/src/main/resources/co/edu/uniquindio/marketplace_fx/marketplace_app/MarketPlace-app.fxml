@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.MarketPlaceAppController">
+<?import javafx.scene.control.SplitPane?>
+<AnchorPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.MarketPlaceAppController">
     <children>
-        <TabPane layoutX="14.0" layoutY="38.0" prefHeight="600.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="600.0" prefWidth="730.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Administrator">
                     <content>
@@ -17,7 +16,7 @@
                             <children>
                                 <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL">
                                     <items>
-                                        <fx:include source="Administrator-view.fxml"/>
+                                        <fx:include source="Administrator-view.fxml" />
                                     </items>
                                 </SplitPane>
                             </children>
@@ -31,7 +30,7 @@
                             <children>
                                 <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL">
                                     <items>
-                                        <fx:include source="Seller-view.fxml"/>
+                                        <fx:include source="Seller-view.fxml" />
                                     </items>
                                 </SplitPane>
                             </children>
@@ -40,15 +39,9 @@
                 </Tab>
                 <Tab text="Product">
                     <content>
-                        <AnchorPane>
+                        <AnchorPane prefHeight="520.0" prefWidth="750.0">
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                            <children>
-                                <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL">
-                                    <items>
-                                        <fx:include source="Product-view.fxml"/>
-                                    </items>
-                                </SplitPane>
-                            </children>
+                                        <fx:include source="Product-view.fxml" />
                         </AnchorPane>
                     </content>
                 </Tab>
