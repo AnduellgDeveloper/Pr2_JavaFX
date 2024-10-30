@@ -1,9 +1,11 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.factory;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.SellerDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.mappers.MarketPlaceMappingImpl;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.ObjectProduct;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Seller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IMarketPlaceMapping;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IModelFactoryService;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IProductCrud;
@@ -49,5 +51,22 @@ public class ModelFactory implements IModelFactoryService, IProductCrud {
     // Actualizar un producto existente
     public void updateProduct(ProductDto updatedProduct) {
         objectProduct.updateProduct(mapper.toObjectProduct(updatedProduct));
+    }
+    //Obtener lista vendedores
+    public List<SellerDto> getSellers() {
+        return mapper.getSellersDto(objectProduct.getListSellers());
+    }
+    // Añadir un nuevo vendedor a la lista
+    public boolean addSeller(SellerDto sellerDto) {
+        Seller seller = mapper.sellerDtoToSeller(sellerDto);
+        return objectProduct.createSeller(seller);
+    }
+    //remover vendedor de la lista
+    public void removeSeller(SellerDto seller){
+        objectProduct.removeSeller(mapper.toObjectSeller(seller));
+    }
+    // Actualizar un vendedor existente
+    public void updateSeller(SellerDto updatedSeller) {
+        objectProduct.updateSeller(mapper.toObjectSeller(updatedSeller));
     }
 }
