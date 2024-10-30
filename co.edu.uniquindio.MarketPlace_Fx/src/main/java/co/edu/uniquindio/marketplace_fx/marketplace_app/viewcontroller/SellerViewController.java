@@ -1,37 +1,92 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.SellerDto;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
 public class SellerViewController {
     @FXML
-    private Button ButtonAddProduct;
+    private Button btnAddSeller;
 
     @FXML
-    private Button ButtonAddSeller;
+    private Button btnClearFields;
 
     @FXML
-    private Button ButtonComment1;
+    private Button btnRemoveSeller;
 
     @FXML
-    private Button ButtonComment2;
+    private Button btnUpdateSeller;
 
     @FXML
-    private Button ButtonComment3;
+    private TableView<SellerDto> tabSeller;
 
     @FXML
-    private Button ButtonLike1;
+    private TableColumn<SellerDto, String> tcAddress;
 
     @FXML
-    private Button ButtonLike2;
+    private TableColumn<SellerDto, String> tcIdNumber;
 
     @FXML
-    private Button ButtonLike3;
+    private TableColumn<SellerDto, String> tcLastName;
 
     @FXML
-    private Button ButtonViewStatistics;
-    @FXML
-    private TextField textFindSeller;
+    private TableColumn<SellerDto, String> tcPassword;
 
+    @FXML
+    private TableColumn<SellerDto,String> tcSeller;
+
+    @FXML
+    private TableColumn<SellerDto,String> tcUserName;
+
+    @FXML
+    private TextField txtIdNumber;
+
+
+    @FXML
+    private TextField txtAddressSeller;
+
+    @FXML
+    private TextField txtLastNameSeller;
+
+    @FXML
+    private TextField txtNameSeller;
+
+    @FXML
+    private TextField txtPasswordSeller;
+
+    @FXML
+    private TextField txtUserNameSeller;
+
+    @FXML
+    void onAddSeller(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClearFields(ActionEvent event) {
+    clearFields();
+
+    }
+
+    @FXML
+    void onRemoveSeller(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onUpdateSeller(ActionEvent event) {
+
+    }
+    private void clearFields() {
+        txtNameSeller.clear();
+        txtLastNameSeller.clear();
+        txtIdNumber.clear();
+        txtAddressSeller.clear();
+        txtUserNameSeller.clear();
+        txtPasswordSeller.clear();
+    }
 }
