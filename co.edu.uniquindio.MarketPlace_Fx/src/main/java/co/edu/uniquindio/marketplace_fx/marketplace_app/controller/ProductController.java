@@ -15,6 +15,7 @@ public class ProductController {
         return modelFactory.getProducts();
     }
 
+
     // Añadir un nuevo producto a la lista
     public boolean addProduct(ProductDto product) {
         modelFactory.addProduct(product);

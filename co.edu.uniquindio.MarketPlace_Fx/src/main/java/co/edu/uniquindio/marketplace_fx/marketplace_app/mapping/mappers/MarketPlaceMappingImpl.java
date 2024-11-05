@@ -60,8 +60,10 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     @Override
     public List<SellerDto> getSellersDto(List<Seller> listSellers) {
         if (listSellers == null) {
-            return new ArrayList<>();
+            return null;
+
         }
+
 
         List<SellerDto> listSellersDto = new ArrayList<>(listSellers.size());
         for (Seller seller : listSellers) {

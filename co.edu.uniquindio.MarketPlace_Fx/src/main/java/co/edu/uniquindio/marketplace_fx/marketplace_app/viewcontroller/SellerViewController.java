@@ -116,11 +116,15 @@ public class SellerViewController {
 
     private void initView() {
         initDataBinding();
-        getSeller();
+//        getSeller();
         tbSeller.getItems().clear();
         tbSeller.setItems(listSellers);
         listenerSelection();
     }
+
+//    private void getSeller() {
+//            listSellers.addAll(SellerController.getSeller);
+//    }
 
     private void listenerSelection() {
             tbSeller.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection) -> {

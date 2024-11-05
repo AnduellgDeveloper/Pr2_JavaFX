@@ -13,7 +13,7 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.utils.DataUtil;
 
 import java.util.List;
 
-public class ModelFactory implements IModelFactoryService, IProductCrud {
+public class ModelFactory implements IModelFactoryService {
     private static ModelFactory modelFactory;
     private Marketplace marketplace;
     private IMarketPlaceMapping mapper;
@@ -53,7 +53,7 @@ public class ModelFactory implements IModelFactoryService, IProductCrud {
         marketplace.updateProduct(mapper.toObjectProduct(updatedProduct));
     }
     //Obtener lista vendedores
-    public List<SellerDto> getSellers() {
+    public List<SellerDto> getSeller() {
         return mapper.getSellersDto(marketplace.getListSellers());
     }
     // Añadir un nuevo vendedor a la lista

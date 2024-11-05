@@ -1,12 +1,13 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.model;
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IProductCrud;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.ISellerCrud;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Marketplace implements ISellerCrud {
+public class Marketplace implements ISellerCrud, IProductCrud {
     private List<Product> listProducts = new ArrayList<>();
     private List<Seller> listSellers = new ArrayList<>();
     private String name;
@@ -108,7 +109,7 @@ public class Marketplace implements ISellerCrud {
     }
 
     // Método para buscar un producto por nombre
-    private Product getProduct(String name) {
+    public  Product getProduct(String name) {
         for (Product product : getListProducts()) {
             if (product.getName().equalsIgnoreCase(name)) {
                 return product;
