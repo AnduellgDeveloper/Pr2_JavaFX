@@ -253,7 +253,7 @@ public class ProductViewController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    // Método que limpia los campos de texto y el ImageView
+    // Método que limpia los campos de texto y el ImageVitr6ew
     private void clearFields() {
         txtName.clear();
         txtCategory.clear();
