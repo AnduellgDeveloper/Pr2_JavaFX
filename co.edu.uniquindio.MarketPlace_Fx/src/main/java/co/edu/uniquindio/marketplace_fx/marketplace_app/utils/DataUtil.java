@@ -1,15 +1,12 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.utils;
 
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.ObjectProduct;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.ObjectSeller;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Seller;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.*;
 
 import java.time.LocalDate;
 
 public class DataUtil {
-    public static ObjectProduct initializeData() {
-        ObjectProduct objectProduct = new ObjectProduct();
+    public static Marketplace initializeData() {
+        Marketplace marketplace = new Marketplace();
 
 
         Seller seller1 = Seller.builder()
@@ -98,17 +95,17 @@ public class DataUtil {
                 .publicationDate(LocalDate.of(2023, 6, 25))
                 .build();
 
-        objectProduct.getListProducts().add(product1);
-        objectProduct.getListProducts().add(product2);
-        objectProduct.getListProducts().add(product3);
-        objectProduct.getListProducts().add(product4);
-        objectProduct.getListProducts().add(product5);
-        objectProduct.getListSellers().add(seller1);
-        objectProduct.getListSellers().add(seller2);
-        objectProduct.getListSellers().add(seller3);
-        objectProduct.getListSellers().add(seller4);
-        objectProduct.getListSellers().add(seller5);
+        marketplace.getListProducts().add(product1);
+        marketplace.getListProducts().add(product2);
+        marketplace.getListProducts().add(product3);
+        marketplace.getListProducts().add(product4);
+        marketplace.getListProducts().add(product5);
+        marketplace.getListSellers().add(seller1);
+        marketplace.getListSellers().add(seller2);
+        marketplace.getListSellers().add(seller3);
+        marketplace.getListSellers().add(seller4);
+        marketplace.getListSellers().add(seller5);
 
-        return objectProduct;
+        return marketplace;
     }
 }
