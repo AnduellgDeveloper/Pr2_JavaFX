@@ -36,6 +36,10 @@ public class ModelFactory implements IModelFactoryService {
     public List<ProductDto> getProducts() {
         return mapper.getProductsDto(marketplace.getListProducts());
     }
+    //Obtener lista vendedores
+    public List<SellerDto> getSellers() {
+        return mapper.getSellersDto(marketplace.getListSellers());
+    }
 
     // Añadir un nuevo producto a la lista
     public boolean addProduct(ProductDto productDto) {
@@ -52,10 +56,7 @@ public class ModelFactory implements IModelFactoryService {
     public void updateProduct(ProductDto updatedProduct) {
         marketplace.updateProduct(mapper.toObjectProduct(updatedProduct));
     }
-    //Obtener lista vendedores
-    public List<SellerDto> getSeller() {
-        return mapper.getSellersDto(marketplace.getListSellers());
-    }
+
     // Añadir un nuevo vendedor a la lista
     public boolean addSeller(SellerDto sellerDto) {
         Seller seller = mapper.sellerDtoToSeller(sellerDto);

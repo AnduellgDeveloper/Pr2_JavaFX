@@ -14,8 +14,8 @@ public class SellerController {
         modelFactory = ModelFactory.getInstance();
     }
     // Retorna una lista de todos los vendedores
-    public List<SellerDto> getSeller() {
-        return modelFactory.getSeller();
+    public List<SellerDto> getSellers() {
+        return modelFactory.getSellers();
     }
 
     // Añadir un nuevo vendedor a la lista

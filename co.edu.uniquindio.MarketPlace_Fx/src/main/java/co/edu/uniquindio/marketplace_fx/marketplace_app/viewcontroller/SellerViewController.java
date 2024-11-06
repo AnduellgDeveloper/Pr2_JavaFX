@@ -1,24 +1,27 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.SellerController;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.SellerDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import javax.print.DocFlavor;
 import java.util.ResourceBundle;
 
+import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.*;
+import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.HEADER;
+import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.SellerConstants.*;
+
 public class SellerViewController {
-    SellerController sellerController;
-    ObservableList<SellerDto>listSellers = FXCollections.observableArrayList();
-    SellerDto selectSeller;
+    private SellerController sellerController;
+    private ObservableList<SellerDto>listSellers = FXCollections.observableArrayList();
+    private SellerDto selectSeller;
 
         @FXML
         private ResourceBundle resources;
@@ -79,21 +82,25 @@ public class SellerViewController {
 
         @FXML
         void onAddSeller(ActionEvent event) {
+            addSeller();
 
         }
 
         @FXML
         void onClearFields(ActionEvent event) {
+            clearFields();
 
         }
 
         @FXML
         void onRemoveSeller(ActionEvent event) {
+            removerSeller();
 
         }
 
         @FXML
         void onUpdateSeller(ActionEvent event) {
+            updateSeller();
 
         }
 
@@ -116,15 +123,14 @@ public class SellerViewController {
 
     private void initView() {
         initDataBinding();
-//        getSeller();
+        getSellers();
         tbSeller.getItems().clear();
         tbSeller.setItems(listSellers);
         listenerSelection();
     }
-
-//    private void getSeller() {
-//            listSellers.addAll(SellerController.getSeller);
-//    }
+    private void getSellers() {
+            listSellers.addAll(sellerController.getSellers());
+    }
 
     private void listenerSelection() {
             tbSeller.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection) -> {
@@ -151,5 +157,73 @@ public class SellerViewController {
         tcAddress.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().address()));
         tcUserName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().username()));
         tcPassword.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().password()));
+    }
+
+    // Método que agrega un nuevo vendedor a la lista y a la base de datos
+    private void addSeller() {
+        SellerDto sellertDto = createSellerDto();
+        if (sellerDto != null && validDataSeller(sellerDto)) {
+            if (isSellerDuplicate(sellerDto)) {
+                showMessage(TITULO_VENDEDOR_DUPLICADO, BODY_VENDEDOR_DUPLICADO, HEADER, Alert.AlertType.WARNING);
+            } else {
+                if (sellerController.addSeller(sellerDto)) {
+                    listSellers.add(productDto);
+                    clearFields();
+                    showMessage(TITULO_VENDEDOR_AGREGADO, BODY_VENDEDOR_AGREGADO, HEADER, Alert.AlertType.INFORMATION);
+                } else {
+                    showMessage(TITULO_VENDEDOR_NO_AGREGADO, BODY_VENDEDOR_NO_AGREGADO, HEADER, Alert.AlertType.ERROR);
+                }
+            }
+        } else {
+            showMessage(TITULO_INCOMPLETO, BODY_INCOMPLETO, HEADER, Alert.AlertType.WARNING);
+        }
+    }
+    // Método que actualiza el vendedor seleccionado en la lista y en la base de datos
+    private void updateSeller() {
+        if (selectSeller != null) {
+            SellerDto updatedSeller = createSellerDto();
+            if (updatedSeller != null && validDataSeller(updatedSeller)) {
+                sellerController.updateSeller(updatedSeller);
+                listSellers.set(listSellers.indexOf(selectSeller), updatedSeller;
+                showSellerInformation(updatedSeller);
+                showMessage(TITULO_VENDEDOR_ACTUALIZADO, BODY_VENDEDOR_ACTUALIZADO, HEADER, Alert.AlertType.INFORMATION);
+            } else {
+                showMessage(ProductConstants.TITULO_INCOMPLETO, BODY_INCOMPLETO, HEADER, Alert.AlertType.WARNING);
+            }
+        } else {
+            showMessage(TITULO_VENDEDOR_NO_SELECCIONADO, BODY_VENDEDOR_NO_SELECCIONADO, HEADER, Alert.AlertType.WARNING);
+        }
+    }
+    // Método que elimina el vendedor seleccionado de la lista y de la base de datos
+    private void removeSeller() {
+        if (selectSeller != null) {
+            sellerController.removeSeller(selectSeller);
+            listSellers.remove(selectSeller);
+            clearFields();
+            showMessage(TITULO_VENDEDOR_REMOVIDO, BODY_VENDEDOR_REMOVIDO, HEADER, Alert.AlertType.INFORMATION);
+        } else {
+            showMessage(TITULO_VENDEDOR_NO_REMOVIDO, BODY_VENDEDOR_NO_REMOVIDO, HEADER, Alert.AlertType.WARNING);
+    }
+}
+// Método que valida los datos del vendedor antes de añadirlo o actualizarlo
+private boolean validDataSeller(SellerDto sellerDto) {
+    return sellerDto.name() != null && !sellerDto.name().isEmpty() &&
+            sellerDto.lastName() != null && !sellerDto.lastName().isEmpty() &&
+            sellerDto.idNumber()  != null && ! sellerDto.idNumber().isEmpty() &&
+            sellerDto.address() != null && ! sellerDto.address().isEmpty() &&
+            sellerDto.username() != null &&! sellerDto.username().isEmpty() &&
+            sellerDto.password() != null && ! sellerDto.password().isEmpty();
+    }
+    // Método que verifica si el producto ya existe en la lista
+    private boolean isSellerDuplicate(SellerDto sellerDto) {
+        return listSellers.stream().anyMatch(p -> p.name().equalsIgnoreCase(sellerDto.name()));
+    }
+    // Método que muestra un mensaje en un cuadro de diálogo
+    private void showMessage(String title, String message, String header, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

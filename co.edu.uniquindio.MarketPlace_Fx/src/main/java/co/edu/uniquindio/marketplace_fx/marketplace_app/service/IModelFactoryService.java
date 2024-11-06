@@ -9,5 +9,5 @@ import java.util.List;
 public interface IModelFactoryService {
     List<ProductDto> getProducts();
 //    boolean addProduct(ProductDto productDto);
-    List<SellerDto> getSeller();
+    List<SellerDto> getSellers();
 }
