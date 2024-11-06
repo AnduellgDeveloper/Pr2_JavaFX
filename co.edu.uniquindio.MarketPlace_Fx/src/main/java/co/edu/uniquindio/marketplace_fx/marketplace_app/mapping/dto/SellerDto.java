@@ -10,6 +10,6 @@ public record SellerDto(
         String idNumber,
         String address,
         String username,
-        String password,
-        List<Product>products
+        String password
+
 ){}

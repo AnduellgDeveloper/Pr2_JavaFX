@@ -39,8 +39,6 @@ public class Marketplace implements ISellerCrud, IProductCrud {
                 .idNumber(idNumber)
                 .username(username)
                 .password(password)
-                .products(new ArrayList<>())
-                .sellers(new ArrayList<>())
                 .build();
     }
     //crear vendedores

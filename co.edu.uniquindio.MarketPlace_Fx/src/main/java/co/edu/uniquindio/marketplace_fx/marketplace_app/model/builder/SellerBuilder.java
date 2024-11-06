@@ -17,7 +17,7 @@ public class SellerBuilder {
     protected  List<Seller> sellers = new ArrayList<>();
 
     public Seller build() {
-        return new Seller(name,lastName,idNumber,address,username,password, new ArrayList<Product>(), new ArrayList<Seller>());
+        return new Seller(name,lastName,idNumber,address,username,password);
     }
 
 
@@ -28,8 +28,7 @@ public class SellerBuilder {
     public SellerBuilder address(String address) {this.address = address;return this;}
     public SellerBuilder username(String username) {this.username = username;return this;}
     public SellerBuilder password(String password) {this.password = password;return this;}
-    public SellerBuilder sellers(List<Seller> sellers) {this.sellers = sellers;return this;}
-    public SellerBuilder products(List<Product> products) {this.products = products;return this;}
+
 
 
 }

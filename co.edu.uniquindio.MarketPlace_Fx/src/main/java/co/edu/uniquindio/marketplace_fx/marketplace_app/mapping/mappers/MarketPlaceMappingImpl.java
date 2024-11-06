@@ -84,8 +84,8 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                 seller.getIdNumber(),
                 seller.getAddress(),
                 seller.getUsername(),
-                seller.getPassword(),
-                seller.getProducts());
+                seller.getPassword());
+
 
     }
 

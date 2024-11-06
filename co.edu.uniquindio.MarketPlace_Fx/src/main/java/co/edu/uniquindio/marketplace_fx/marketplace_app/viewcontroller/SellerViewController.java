@@ -12,11 +12,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import javax.print.DocFlavor;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.*;
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.HEADER;
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.SellerConstants.*;
+import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.SellerConstants.TITULO_INCOMPLETO;
 
 public class SellerViewController {
     private SellerController sellerController;
@@ -26,8 +28,7 @@ public class SellerViewController {
         @FXML
         private ResourceBundle resources;
 
-        @FXML
-        private DocFlavor.URL location;
+
 
         @FXML
         private Button btnAddSeller;
@@ -94,7 +95,7 @@ public class SellerViewController {
 
         @FXML
         void onRemoveSeller(ActionEvent event) {
-            removerSeller();
+            removeSeller();
 
         }
 
@@ -162,12 +163,12 @@ public class SellerViewController {
     // Método que agrega un nuevo vendedor a la lista y a la base de datos
     private void addSeller() {
         SellerDto sellertDto = createSellerDto();
-        if (sellerDto != null && validDataSeller(sellerDto)) {
-            if (isSellerDuplicate(sellerDto)) {
+        if (sellertDto != null && validDataSeller(sellertDto)) {
+            if (isSellerDuplicate(sellertDto)) {
                 showMessage(TITULO_VENDEDOR_DUPLICADO, BODY_VENDEDOR_DUPLICADO, HEADER, Alert.AlertType.WARNING);
             } else {
-                if (sellerController.addSeller(sellerDto)) {
-                    listSellers.add(productDto);
+                if (sellerController.addSeller(sellertDto)) {
+                    listSellers.add(sellertDto);
                     clearFields();
                     showMessage(TITULO_VENDEDOR_AGREGADO, BODY_VENDEDOR_AGREGADO, HEADER, Alert.AlertType.INFORMATION);
                 } else {
@@ -184,7 +185,7 @@ public class SellerViewController {
             SellerDto updatedSeller = createSellerDto();
             if (updatedSeller != null && validDataSeller(updatedSeller)) {
                 sellerController.updateSeller(updatedSeller);
-                listSellers.set(listSellers.indexOf(selectSeller), updatedSeller;
+                listSellers.set(listSellers.indexOf(selectSeller), updatedSeller);
                 showSellerInformation(updatedSeller);
                 showMessage(TITULO_VENDEDOR_ACTUALIZADO, BODY_VENDEDOR_ACTUALIZADO, HEADER, Alert.AlertType.INFORMATION);
             } else {
@@ -194,6 +195,27 @@ public class SellerViewController {
             showMessage(TITULO_VENDEDOR_NO_SELECCIONADO, BODY_VENDEDOR_NO_SELECCIONADO, HEADER, Alert.AlertType.WARNING);
         }
     }
+
+    private SellerDto createSellerDto() {
+        String Name = txtName.getText();
+        String lastName = txtLastName.getText();
+        String idNumber = txtidNumber.getText();
+        String address  = txtAddress.getText();
+        String username = txtUserName.getText();
+        String password = txtPassword.getText();
+        if ( Name.isEmpty()|| lastName.isEmpty()||idNumber.isEmpty()||
+        address.isEmpty()||username.isEmpty()||password.isEmpty()) {
+
+        } else {
+            showMessage(TITULO_VENDEDOR_AGREGADO,BODY_VENDEDOR_AGREGADO, HEADER, Alert.AlertType.ERROR);
+            return new SellerDto(Name,lastName,idNumber,address,username,password);
+        }
+
+        return null;
+    }
+
+
+
     // Método que elimina el vendedor seleccionado de la lista y de la base de datos
     private void removeSeller() {
         if (selectSeller != null) {
