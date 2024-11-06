@@ -145,7 +145,7 @@
                     </children>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="211.0" prefWidth="739.0">
-                    <TableView fx:id="tbSeller" layoutY="9.0" prefHeight="223.0" prefWidth="649.0">
+                    <TableView fx:id="tbSeller" layoutX="27.0" layoutY="9.0" prefHeight="223.0" prefWidth="649.0">
                         <columns>
                             <TableColumn fx:id="tcName" prefWidth="135.33331298828125" text="Name" />
                             <TableColumn fx:id="tcLastName" prefWidth="86.00003051757812" text="LastName" />
