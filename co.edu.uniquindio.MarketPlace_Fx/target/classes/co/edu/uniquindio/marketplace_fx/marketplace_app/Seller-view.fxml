@@ -80,7 +80,7 @@
                         </Button>
                         <Separator layoutX="13.0" layoutY="184.0" prefHeight="11.0" prefWidth="697.0" />
                         <Pane layoutX="6.0" layoutY="60.0" prefHeight="124.0" prefWidth="475.0">
-                            <TextField fx:id="txtName" layoutX="82.0" layoutY="9.0" promptText="Name" style="-fx-background-radius: 50;" text="Name">
+                            <TextField fx:id="txtName" layoutX="82.0" layoutY="9.0" promptText="Name" style="-fx-background-radius: 50;">
                                 <font>
                                     <Font name="Arial Black" size="13.0" />
                                 </font>
@@ -90,7 +90,7 @@
                                     <Font size="16.0" />
                                 </font>
                             </Label>
-                            <TextField fx:id="txtidNumber" layoutX="82.0" layoutY="49.0" promptText="Category" style="-fx-background-radius: 50;" text="idNumber">
+                            <TextField fx:id="txtidNumber" layoutX="82.0" layoutY="49.0" promptText="IdNumber" style="-fx-background-radius: 50;">
                                 <font>
                                     <Font name="Arial Black" size="13.0" />
                                 </font>
@@ -100,12 +100,12 @@
                                     <Font size="16.0" />
                                 </font>
                             </Label>
-                            <TextField fx:id="txtLastName" layoutX="356.0" layoutY="9.0" promptText="Image" style="-fx-background-radius: 50;" text="LastName">
+                            <TextField fx:id="txtLastName" layoutX="356.0" layoutY="9.0" promptText="Image" style="-fx-background-radius: 50;">
                                 <font>
                                     <Font name="Arial Black" size="13.0" />
                                 </font>
                             </TextField>
-                            <TextField fx:id="txtAddress" layoutX="356.0" layoutY="49.0" promptText="Price" style="-fx-background-radius: 50;" text="Address">
+                            <TextField fx:id="txtAddress" layoutX="356.0" layoutY="49.0" promptText="Price" style="-fx-background-radius: 50;">
                                 <font>
                                     <Font name="Arial Black" size="13.0" />
                                 </font>
@@ -130,12 +130,12 @@
                            <Font size="16.0" />
                         </font>
                      </Label>
-                     <TextField fx:id="txtUserName" layoutX="82.0" layoutY="87.0" promptText="Name" style="-fx-background-radius: 50;" text="UserName">
+                     <TextField fx:id="txtUserName" layoutX="82.0" layoutY="87.0" promptText="Name" style="-fx-background-radius: 50;">
                         <font>
                            <Font name="Arial Black" size="13.0" />
                         </font>
                      </TextField>
-                     <TextField fx:id="txtPassword" layoutX="357.0" layoutY="87.0" promptText="Name" style="-fx-background-radius: 50;" text="Password">
+                     <TextField fx:id="txtPassword" layoutX="357.0" layoutY="87.0" promptText="Name" style="-fx-background-radius: 50;">
                         <font>
                            <Font name="Arial Black" size="13.0" />
                         </font>
@@ -145,7 +145,7 @@
                     </children>
                 </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="211.0" prefWidth="739.0">
-                    <TableView fx:id="tbSeller" layoutX="14.0" layoutY="9.0" prefHeight="223.0" prefWidth="649.0">
+                    <TableView fx:id="tbSeller" layoutX="27.0" layoutY="9.0" prefHeight="223.0" prefWidth="649.0">
                         <columns>
                             <TableColumn fx:id="tcName" prefWidth="135.33331298828125" text="Name" />
                             <TableColumn fx:id="tcLastName" prefWidth="86.00003051757812" text="LastName" />
