@@ -10,9 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-
-import javax.print.DocFlavor;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.*;
@@ -27,8 +24,6 @@ public class SellerViewController {
 
         @FXML
         private ResourceBundle resources;
-
-
 
         @FXML
         private Button btnAddSeller;
@@ -84,29 +79,19 @@ public class SellerViewController {
         @FXML
         void onAddSeller(ActionEvent event) {
             addSeller();
-
         }
-
         @FXML
         void onClearFields(ActionEvent event) {
             clearFields();
-
         }
-
         @FXML
         void onRemoveSeller(ActionEvent event) {
             removeSeller();
-
         }
-
         @FXML
         void onUpdateSeller(ActionEvent event) {
             updateSeller();
-
         }
-
-
-
 
     private void clearFields() {
         txtName.clear();
@@ -121,7 +106,6 @@ public class SellerViewController {
         sellerController = new SellerController();
         initView();
     }
-
     private void initView() {
         initDataBinding();
         getSellers();
@@ -132,14 +116,12 @@ public class SellerViewController {
     private void getSellers() {
             listSellers.addAll(sellerController.getSellers());
     }
-
     private void listenerSelection() {
             tbSeller.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection) -> {
                 selectSeller = newSelection;
                 showSellerInformation(selectSeller);
             });
     }
-
     private void showSellerInformation(SellerDto selectSeller) {
             if (selectSeller !=null){
                 txtName.setText(selectSeller.name());
@@ -150,7 +132,6 @@ public class SellerViewController {
                 txtPassword.setText(selectSeller.password());
             }
     }
-
     private void initDataBinding() {
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().name()));
         tcLastName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().lastName()));
@@ -159,7 +140,6 @@ public class SellerViewController {
         tcUserName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().username()));
         tcPassword.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().password()));
     }
-
     // Método que agrega un nuevo vendedor a la lista y a la base de datos
     private void addSeller() {
         SellerDto sellertDto = createSellerDto();
@@ -195,7 +175,6 @@ public class SellerViewController {
             showMessage(TITULO_VENDEDOR_NO_SELECCIONADO, BODY_VENDEDOR_NO_SELECCIONADO, HEADER, Alert.AlertType.WARNING);
         }
     }
-
     private SellerDto createSellerDto() {
         String Name = txtName.getText();
         String lastName = txtLastName.getText();
@@ -213,9 +192,6 @@ public class SellerViewController {
 
         return null;
     }
-
-
-
     // Método que elimina el vendedor seleccionado de la lista y de la base de datos
     private void removeSeller() {
         if (selectSeller != null) {

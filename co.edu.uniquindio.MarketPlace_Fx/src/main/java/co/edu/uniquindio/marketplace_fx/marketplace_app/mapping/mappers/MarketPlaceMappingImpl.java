@@ -2,8 +2,10 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.mappers;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.SellerDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Seller;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IMarketPlaceMapping;
 
 import java.util.ArrayList;
@@ -71,13 +73,11 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
         }
         return listSellersDto;
     }
-
     @Override
     public SellerDto sellertToSellerDto(Seller seller) {
         if (seller == null) {
             return null;
         }
-
         return new SellerDto(
                 seller.getName(),
                 seller.getLastName(),
@@ -85,16 +85,12 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                 seller.getAddress(),
                 seller.getUsername(),
                 seller.getPassword());
-
-
     }
-
     @Override
     public Seller sellerDtoToSeller(SellerDto sellerDto) {
         if (sellerDto == null) {
             return null;
         }
-
         return Seller.builder()
                 .name(sellerDto.name())
                 .lastName(sellerDto.lastName())
@@ -107,6 +103,28 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
 
     @Override
     public Seller toObjectSeller(SellerDto seller) {
+        return null;
+    }
+
+
+    // ------------------------ Users -----------------------
+    @Override
+    public List<UserDto> getUsersDto(List<UserDto> listUsers) {
+        return List.of();
+    }
+
+    @Override
+    public UserDto userToUserDto(User user) {
+        return null;
+    }
+
+    @Override
+    public User userDtoToUser(UserDto userDto) {
+        return null;
+    }
+
+    @Override
+    public User toObjectUser(UserDto User) {
         return null;
     }
 }

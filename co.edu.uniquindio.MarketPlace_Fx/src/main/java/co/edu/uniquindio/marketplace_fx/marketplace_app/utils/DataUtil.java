@@ -7,8 +7,6 @@ import java.time.LocalDate;
 public class DataUtil {
     public static Marketplace initializeData() {
         Marketplace marketplace = new Marketplace();
-
-
         Seller seller1 = Seller.builder()
                 .name("Maria camila")
                 .lastName("orozco sanchez")

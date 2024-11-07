@@ -1,5 +1,6 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.model;
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.ILogin;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IProductCrud;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.ISellerCrud;
 
@@ -7,11 +8,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Marketplace implements ISellerCrud, IProductCrud {
+public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
     private List<Product> listProducts = new ArrayList<>();
     private List<Seller> listSellers = new ArrayList<>();
+    private List<User> listRegisterUser = new ArrayList<>();
     private String name;
-
+    private User user;
     public String getName() {
         return name;
     }
@@ -26,13 +28,23 @@ public class Marketplace implements ISellerCrud, IProductCrud {
 
     public Marketplace() {
     }
-    // Método para obtener la lista de vendedores
+    // -------------------- Getters --------------------
     public List<Seller> getListSellers() {
         return listSellers;
     }
-    //seller builder
-    private Seller getBuildSeller(String name,String lastName,String idNumber , String username, String password) {
+    public List<Product> getListProducts() {
+        return listProducts;
+    }
+    public List<User> listRegisterUser() {
+        return listRegisterUser;
+    }
 
+    //seller builder
+    private Seller getBuildSeller(String name,
+                                  String lastName,
+                                  String idNumber,
+                                  String username,
+                                  String password) {
         return Seller.builder()
                 .name(name)
                 .lastName(lastName)
@@ -115,11 +127,6 @@ public class Marketplace implements ISellerCrud, IProductCrud {
         }
         return null;
     }
-    // Método para obtener la lista de productos
-    public List<Product> getListProducts() {
-        return listProducts;
-    }
-
     // Método para establecer la lista de productos
     public void setListProducts(List<Product> listProducts) {
         this.listProducts = listProducts;
@@ -154,6 +161,11 @@ public class Marketplace implements ISellerCrud, IProductCrud {
                 existingProduct.setPublicationDate(updatedProduct.getPublicationDate());
             }
         }
+    }
+    // -------------------------- Login --------------------------
+    @Override
+    public boolean validateLogin(String username, String password) {
+        return this.user.getUsername().equals(username) && this.user.getPassword().equals(password);
     }
 
 }

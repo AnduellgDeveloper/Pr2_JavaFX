@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Bilya Layered Base';
+    src: url('BILYALAYEREDBASE.eot');
+    src: local('Bilya Layered Base'), local('BILYALAYEREDBASE'),
+    url('BILYALAYEREDBASE.eot?#iefix') format('embedded-opentype'),
+    url('BILYALAYEREDBASE.woff2') format('woff2'),
+    url('BILYALAYEREDBASE.woff') format('woff'),
+    url('BILYALAYEREDBASE.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

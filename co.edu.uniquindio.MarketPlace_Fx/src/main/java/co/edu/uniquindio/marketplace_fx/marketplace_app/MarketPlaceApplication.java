@@ -10,7 +10,8 @@ import java.io.IOException;
 public class MarketPlaceApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MarketPlaceApplication.class.getResource("Marketplace-app.fxml"));
+        FXMLLoader fxmlLoader = new
+                FXMLLoader(MarketPlaceApplication.class.getResource("WelcomeDunima-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("MarketPlace");
         stage.setResizable(false);
