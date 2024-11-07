@@ -16,7 +16,6 @@ import java.io.IOException;
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.*;
 
 public class LoginViewController {
-    private final AuthService authService = new AuthService();
 
     @FXML
     private Button btnBackToHub;
@@ -50,10 +49,10 @@ public class LoginViewController {
 
     @FXML
     void onLogin(ActionEvent event) {
-        String username = txtUser.getText();
-        String password = txtPassword.getText();
-        if () {
-            showMessage(TITULO_ERROR_FECHA, BODY_FECHA_INVALIDA, HEADER, Alert.AlertType.ERROR);
+//        String username = txtUser.getText();
+//        String password = txtPassword.getText();
+//        if () {
+//            showMessage(TITULO_ERROR_FECHA, BODY_FECHA_INVALIDA, HEADER, Alert.AlertType.ERROR);
             try {
                 FXMLLoader loader = new FXMLLoader(getClass()
                         .getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/MarketPlace-app.fxml"));
@@ -68,9 +67,9 @@ public class LoginViewController {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else {
-            showMessage(TITULO_ERROR_FECHA, BODY_FECHA_INVALIDA, HEADER, Alert.AlertType.ERROR);
-        }
+//        } else {
+//            showMessage(TITULO_ERROR_FECHA, BODY_FECHA_INVALIDA, HEADER, Alert.AlertType.ERROR);
+//        }
 
     }
 
