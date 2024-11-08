@@ -18,7 +18,6 @@ public class Seller extends User {
         super(name, lastName, idNumber, address, username, password);
         this.products = new ArrayList<>();
         this.sellers = new ArrayList<>();
-
     }
     public static SellerBuilder builder(){
         return new SellerBuilder();

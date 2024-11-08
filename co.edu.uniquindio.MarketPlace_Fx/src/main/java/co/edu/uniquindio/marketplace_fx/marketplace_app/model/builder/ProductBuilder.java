@@ -3,7 +3,6 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
 
 import java.time.LocalDate;
 
-
 public class ProductBuilder {
     private String name;
     private String image;

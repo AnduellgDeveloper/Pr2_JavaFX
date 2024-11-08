@@ -1,12 +1,21 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.utils;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.*;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.builder.AdministratorBuilder;
 
 import java.time.LocalDate;
 
 public class DataUtil {
     public static Marketplace initializeData() {
         Marketplace marketplace = new Marketplace();
+        Administrator admin1 = new AdministratorBuilder()
+                .name("Admin")
+                .lastName("Principal")
+                .idNumber("111222333")
+                .address("Central Office")
+                .username("adminUser")
+                .password("adminPass123")
+                .build();
         Seller seller1 = Seller.builder()
                 .name("Maria camila")
                 .lastName("orozco sanchez")
@@ -93,16 +102,29 @@ public class DataUtil {
                 .publicationDate(LocalDate.of(2023, 6, 25))
                 .build();
 
+        marketplace.addProductToSeller(seller1, product1);
+        marketplace.addProductToSeller(seller1, product2);
+        marketplace.addProductToSeller(seller1, product3);
+        marketplace.addProductToSeller(seller1, product4);
+        marketplace.addProductToSeller(seller1, product5);
+
+        marketplace.getListAdministrators().add(admin1);
+
         marketplace.getListProducts().add(product1);
         marketplace.getListProducts().add(product2);
         marketplace.getListProducts().add(product3);
         marketplace.getListProducts().add(product4);
         marketplace.getListProducts().add(product5);
+
         marketplace.getListSellers().add(seller1);
         marketplace.getListSellers().add(seller2);
         marketplace.getListSellers().add(seller3);
         marketplace.getListSellers().add(seller4);
         marketplace.getListSellers().add(seller5);
+
+        marketplace.getListRegisterUser().add(seller1);
+
+
 
         return marketplace;
     }

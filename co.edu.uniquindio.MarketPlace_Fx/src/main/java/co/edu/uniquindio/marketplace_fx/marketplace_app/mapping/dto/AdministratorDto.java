@@ -1,6 +1,6 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto;
 
-public record UserDto(
+public record AdministratorDto(
         String name,
         String lastName,
         String idNumber,

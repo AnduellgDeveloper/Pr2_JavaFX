@@ -1,8 +1,10 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.mappers;
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.AdministratorDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.SellerDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Administrator;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Seller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
-
+    // ------------------------ Products -----------------------
     @Override
     public List<ProductDto> getProductsDto(List<Product> listProducts) {
         if (listProducts == null) {
@@ -59,14 +61,13 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
         return null;
     }
 
+    // ------------------------ Sellers -----------------------
+
     @Override
     public List<SellerDto> getSellersDto(List<Seller> listSellers) {
         if (listSellers == null) {
             return null;
-
         }
-
-
         List<SellerDto> listSellersDto = new ArrayList<>(listSellers.size());
         for (Seller seller : listSellers) {
             listSellersDto.add(sellertToSellerDto(seller));
@@ -109,22 +110,95 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
 
     // ------------------------ Users -----------------------
     @Override
-    public List<UserDto> getUsersDto(List<UserDto> listUsers) {
-        return List.of();
+    public List<UserDto> getUsersDto(List<User> listUsers) {
+        if (listUsers == null) {
+            return null;
+        }
+        List<UserDto> listUsersDto = new ArrayList<>(listUsers.size());
+        for (User user : listUsers) {
+            listUsersDto.add(userToUserDto(user));
+        }
+        return listUsersDto;
     }
 
     @Override
     public UserDto userToUserDto(User user) {
-        return null;
+        if (user == null) {
+            return null;
+        }
+        return new UserDto(
+                user.getName(),
+                user.getLastName(),
+                user.getIdNumber(),
+                user.getAddress(),
+                user.getUsername(),
+                user.getPassword());
     }
 
     @Override
     public User userDtoToUser(UserDto userDto) {
-        return null;
+        if (userDto == null) {
+            return null;
+        }
+        return Seller.builder()
+                .name(userDto.name())
+                .lastName(userDto.lastName())
+                .idNumber(userDto.idNumber())
+                .address(userDto.address())
+                .username(userDto.username())
+                .password(userDto.password())
+                .build();
     }
 
     @Override
-    public User toObjectUser(UserDto User) {
+    public User toObjectUser(UserDto user) {
+        return null;
+    }
+    // ------------------------ Administrators -----------------------
+
+    @Override
+    public List<AdministratorDto> getAdministratorsDto(List<Administrator> listAdministrators) {
+        if (listAdministrators == null) {
+            return null;
+        }
+        List<AdministratorDto> listAdministratorsDto = new ArrayList<>(listAdministrators.size());
+        for (Administrator administrator : listAdministrators) {
+            listAdministratorsDto.add(administratorToAdministratorDto(administrator));
+        }
+        return listAdministratorsDto;
+    }
+
+    @Override
+    public AdministratorDto administratorToAdministratorDto(Administrator administrator) {
+        if (administrator == null) {
+            return null;
+        }
+        return new AdministratorDto(
+                administrator.getName(),
+                administrator.getLastName(),
+                administrator.getIdNumber(),
+                administrator.getAddress(),
+                administrator.getUsername(),
+                administrator.getPassword());
+    }
+
+    @Override
+    public Administrator administratorDtoToAdministrator(AdministratorDto administratorDto) {
+        if (administratorDto == null) {
+            return null;
+        }
+        return Administrator.builder()
+                .name(administratorDto.name())
+                .lastName(administratorDto.lastName())
+                .idNumber(administratorDto.idNumber())
+                .address(administratorDto.address())
+                .username(administratorDto.username())
+                .password(administratorDto.password())
+                .build();
+    }
+
+    @Override
+    public Administrator toObjectAdministrator(AdministratorDto administrator) {
         return null;
     }
 }

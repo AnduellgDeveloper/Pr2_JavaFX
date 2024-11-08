@@ -12,7 +12,34 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
     private List<Product> listProducts = new ArrayList<>();
     private List<Seller> listSellers = new ArrayList<>();
     private List<User> listRegisterUser = new ArrayList<>();
+    private List<User> listUsers = new ArrayList<>();
+    private List<Administrator> listAdministrators = new ArrayList<>();
     private String name;
+
+    public List<User> getListRegisterUser() {
+        return listRegisterUser;
+    }
+
+    public void setListRegisterUser(List<User> listRegisterUser) {
+        this.listRegisterUser = listRegisterUser;
+    }
+
+    public void setListUsers(List<User> listUsers) {
+        this.listUsers = listUsers;
+    }
+
+    public void setListAdministrators(List<Administrator> listAdministrators) {
+        this.listAdministrators = listAdministrators;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     private User user;
     public String getName() {
         return name;
@@ -34,6 +61,12 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
     }
     public List<Product> getListProducts() {
         return listProducts;
+    }
+    public List<User> getListUsers() {
+        return listUsers;
+    }
+    public List<Administrator> getListAdministrators() {
+        return listAdministrators;
     }
     public List<User> listRegisterUser() {
         return listRegisterUser;
@@ -98,7 +131,12 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
             }
         }
     }
-    private Product getBuildProduct(String name, String image, String category, int price, String status, LocalDate publicationDate) {
+    private Product getBuildProduct(String name,
+                                    String image,
+                                    String category,
+                                    int price,
+                                    String status,
+                                    LocalDate publicationDate) {
         return Product.builder()
                 .name(name)
                 .image(image)
@@ -133,12 +171,16 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
     }
 
 
-
-    // Método para agregar un producto a la lista
-    public void addProduct(Product product) {
-        if (product != null) {
+    public void addProductToSeller(Seller seller, Product product) {
+        if (listSellers.contains(seller)) {
+            addProduct(product);
             listProducts.add(product);
+        } else {
+            System.out.println("El vendedor no está registrado en el marketplace.");
         }
+    }
+    public void addProduct(Product product) {
+        listProducts.add(product);
     }
 
     // Método para eliminar un producto de la lista
@@ -163,9 +205,38 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
         }
     }
     // -------------------------- Login --------------------------
+
+    // Validar el inicio de sesion
     @Override
     public boolean validateLogin(String username, String password) {
-        return this.user.getUsername().equals(username) && this.user.getPassword().equals(password);
+        for (User user : listRegisterUser) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                this.user = user;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //
+    @Override
+    public User authenticate(String username, String password) {
+        for (User user : listRegisterUser) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String getUserRole(User user) {
+        if (user instanceof Seller) {
+            return "seller";
+        } else if (user instanceof Administrator) {
+            return "administrator";
+        }
+        return "unknown";
     }
 
 }
