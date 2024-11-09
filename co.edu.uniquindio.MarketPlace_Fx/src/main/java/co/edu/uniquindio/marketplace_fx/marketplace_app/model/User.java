@@ -1,5 +1,7 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.model;
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.builder.UserBuilder;
+
 public class User {
     private String name;
     private String lastName;
@@ -16,6 +18,21 @@ public class User {
         this.username = username;
         this.password = password;
     }
+    public static UserBuilder builder() {
+        return new UserBuilder() {
+            @Override
+            protected UserBuilder self() {
+                return this;
+            }
+
+            @Override
+            public User build() {
+                return new User(name, lastName, idNumber, address, username, password);
+            }
+        };
+    }
+
+
 
     public User(String username, String password) {
         this.username = username;

@@ -1,28 +1,28 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.utils;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.*;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.builder.AdministratorBuilder;
 
 import java.time.LocalDate;
 
 public class DataUtil {
     public static Marketplace initializeData() {
         Marketplace marketplace = new Marketplace();
-        Administrator admin1 = new AdministratorBuilder()
+
+        Administrator admin1 = Administrator.builder()
                 .name("Admin")
                 .lastName("Principal")
-                .idNumber("111222333")
+                .idNumber("01")
                 .address("Central Office")
-                .username("adminUser")
-                .password("adminPass123")
+                .username("AnduellAdmin")
+                .password("123")
                 .build();
         Seller seller1 = Seller.builder()
-                .name("Maria camila")
-                .lastName("orozco sanchez")
-                .idNumber("24567891")
-                .address("parla-madrid")
-                .username("camii98")
-                .password("ninsoo234")
+                .name("Duvan Felipe")
+                .lastName("Palomares Cerquera")
+                .idNumber("1077722000")
+                .address("El prado")
+                .username("AnduellSeller")
+                .password("123")
                 .build();
         Seller seller2 = Seller.builder()
                 .name("Andres felipe")
@@ -102,6 +102,12 @@ public class DataUtil {
                 .publicationDate(LocalDate.of(2023, 6, 25))
                 .build();
 
+        marketplace.addSeller(seller1);
+        marketplace.addSeller(seller2);
+        marketplace.addSeller(seller3);
+        marketplace.addSeller(seller4);
+        marketplace.addSeller(seller5);
+
         marketplace.addProductToSeller(seller1, product1);
         marketplace.addProductToSeller(seller1, product2);
         marketplace.addProductToSeller(seller1, product3);
@@ -110,21 +116,19 @@ public class DataUtil {
 
         marketplace.getListAdministrators().add(admin1);
 
-        marketplace.getListProducts().add(product1);
-        marketplace.getListProducts().add(product2);
-        marketplace.getListProducts().add(product3);
-        marketplace.getListProducts().add(product4);
-        marketplace.getListProducts().add(product5);
-
         marketplace.getListSellers().add(seller1);
         marketplace.getListSellers().add(seller2);
         marketplace.getListSellers().add(seller3);
         marketplace.getListSellers().add(seller4);
         marketplace.getListSellers().add(seller5);
+        // Usuarios Registrados
+        marketplace.getListRegisterUser().add(admin1);
 
         marketplace.getListRegisterUser().add(seller1);
-
-
+        marketplace.getListRegisterUser().add(seller2);
+        marketplace.getListRegisterUser().add(seller3);
+        marketplace.getListRegisterUser().add(seller4);
+        marketplace.getListRegisterUser().add(seller5);
 
         return marketplace;
     }

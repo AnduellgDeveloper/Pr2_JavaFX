@@ -2,50 +2,19 @@
 
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
 
-<?import javafx.scene.control.SplitPane?>
-<AnchorPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.MarketPlaceAppController">
-    <children>
-        <TabPane prefHeight="600.0" prefWidth="730.0" tabClosingPolicy="UNAVAILABLE">
-            <tabs>
-                <Tab text="Administrator">
-                    <content>
-                        <AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                            <children>
-                                <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL">
-                                    <items>
-                                        <fx:include source="Administrator-view.fxml" />
-                                    </items>
-                                </SplitPane>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Seller">
-                    <content>
-                        <AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                            <children>
-                                <SplitPane layoutX="14.0" layoutY="7.0" orientation="VERTICAL">
-                                    <items>
-                                        <fx:include source="Seller-view.fxml" />
-                                    </items>
-                                </SplitPane>
-                            </children>
-                        </AnchorPane>
-                    </content>
-                </Tab>
-                <Tab text="Product">
-                    <content>
-                        <AnchorPane prefHeight="520.0" prefWidth="750.0">
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                                        <fx:include source="Product-view.fxml" />
-                        </AnchorPane>
-                    </content>
-                </Tab>
-            </tabs>
-        </TabPane>
-    </children>
-</AnchorPane>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="761.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22">
+  <tabs>
+    <Tab text="Untitled Tab 1">
+      <content>
+        <fx:include source="PostWall-view.fxml" />
+      </content>
+    </Tab>
+    <Tab closable="false" text="Seller">
+      <content>
+        <fx:include source="Product-view.fxml" />
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>

@@ -40,7 +40,7 @@ public class ModelFactory implements IModelFactoryService {
     // Obtener la lista de productos
     @Override
     public List<ProductDto> getProducts() {
-        return mapper.getProductsDto(marketplace.getListProducts());
+        return mapper.getProductsDto(marketplace.getProducts());
     }
     //Obtener lista vendedores
     public List<SellerDto> getSellers() {
@@ -51,7 +51,6 @@ public class ModelFactory implements IModelFactoryService {
     public List<UserDto> getUsers() {
         return mapper.getUsersDto(marketplace.getListUsers());
     }
-
     // -------------------------- Product --------------------------
 
     // Añadir un nuevo producto a la lista
@@ -89,12 +88,16 @@ public class ModelFactory implements IModelFactoryService {
     // Método para autenticar al usuario basado en username y password
     public UserDto authenticate(String username, String password) {
         User user = marketplace.authenticate(username, password);
-        return mapper.userToUserDto(user);
+        if (user != null) {
+            return mapper.userToUserDto(user);
+        }
+        return null; // Retorna null si la autenticación falla
     }
+
     // Método para obtener el rol del usuario autenticado
     public String getUserRole(UserDto userDto) {
-        User user = mapper.userDtoToUser(userDto);
-        return marketplace.getUserRole(user);
+        User user = mapper.userDtoToUserType(userDto);
+        return marketplace.getUserRole(userDto);
     }
 
 

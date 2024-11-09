@@ -15,11 +15,11 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="720.0" stylesheets="@Css/DatePicker.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.SellerViewController">
+<AnchorPane prefHeight="644.0" prefWidth="772.0" stylesheets="@Css/DatePicker.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.SellerViewController">
     <children>
-        <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="492.0" prefWidth="723.0">
+        <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="644.0" prefWidth="772.0">
             <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="197.0" prefWidth="739.0" style="-fx-background-color: d76ae8;">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="293.0" prefWidth="744.0" style="-fx-background-color: d76ae8;">
                     <children>
                         <Button fx:id="btnAddSeller" layoutX="212.0" layoutY="198.0" mnemonicParsing="false" onAction="#onAddSeller" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Add Seller">
                             <textFill>
@@ -144,7 +144,7 @@
                         <Separator layoutX="12.0" layoutY="54.0" prefHeight="11.0" prefWidth="697.0" />
                     </children>
                 </AnchorPane>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="211.0" prefWidth="739.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="336.0" prefWidth="749.0">
                     <TableView fx:id="tbSeller" layoutX="27.0" layoutY="9.0" prefHeight="223.0" prefWidth="649.0">
                         <columns>
                             <TableColumn fx:id="tcName" prefWidth="135.33331298828125" text="Name" />

@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface IMarketPlaceMapping {
     // ------------------------ Products -----------------------
-    List<ProductDto> getProductsDto(List<Product> listProducts);
+    List<ProductDto> getProductsDto(List<Product> products);
     ProductDto productToProductDto(Product product);
     Product productDtoToProduct(ProductDto productDto);
 
@@ -27,7 +27,7 @@ public interface IMarketPlaceMapping {
     // ------------------------ Users -----------------------
     List<UserDto> getUsersDto(List<User> listUsers);
     UserDto userToUserDto(User user);
-    User userDtoToUser(UserDto userDto);
+    User userDtoToUserType(UserDto userDto);
 
     User  toObjectUser(UserDto user);
 

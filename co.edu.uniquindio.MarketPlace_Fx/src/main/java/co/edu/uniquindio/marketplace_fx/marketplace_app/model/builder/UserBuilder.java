@@ -2,7 +2,7 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.model.builder;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
 
-public abstract class UserBuilder<T extends UserBuilder<T>> {
+public abstract class UserBuilder<U extends UserBuilder<U>> {
     protected String name;
     protected String lastName;
     protected String idNumber;
@@ -10,36 +10,36 @@ public abstract class UserBuilder<T extends UserBuilder<T>> {
     protected String username;
     protected String password;
 
-    public T name(String name) {
+    public U name(String name) {
         this.name = name;
         return self();
     }
 
-    public T lastName(String lastName) {
+    public U lastName(String lastName) {
         this.lastName = lastName;
         return self();
     }
 
-    public T idNumber(String idNumber) {
+    public U idNumber(String idNumber) {
         this.idNumber = idNumber;
         return self();
     }
 
-    public T address(String address) {
+    public U address(String address) {
         this.address = address;
         return self();
     }
 
-    public T username(String username) {
+    public U username(String username) {
         this.username = username;
         return self();
     }
 
-    public T password(String password) {
+    public U password(String password) {
         this.password = password;
         return self();
     }
 
-    protected abstract T self();
+    protected abstract U self();
     public abstract User build();
 }

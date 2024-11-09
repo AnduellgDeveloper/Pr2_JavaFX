@@ -3,66 +3,39 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 
 public class AdministratorViewController {
 
     @FXML
-    private Button btnAddSeller;
+    private Button btnExportToPdf;
 
     @FXML
-    private Button btnDeleteSeller;
+    private Button btnLogin;
 
     @FXML
-    private Button btnUpdateSeller;
+    private Button btnLogin2;
 
     @FXML
-    private TableView<?> tableSeller;
+    private Button btnLogin3;
 
     @FXML
-    private TableColumn<?, ?> tcAddress;
+    private Button btnLogin4;
 
     @FXML
-    private TableColumn<?, ?> tcIdNumber;
+    private DatePicker dpPublicationDate;
 
     @FXML
-    private TableColumn<?, ?> tcLastName;
+    private Label txtPublishedProducts;
 
     @FXML
-    private TableColumn<?, ?> tcName;
-
-    @FXML
-    private TextField txtAddress;
-
-    @FXML
-    private TextField txtIdNumber;
-
-    @FXML
-    private TextField txtLastName;
-
-    @FXML
-    private TextField txtName;
-
-    @FXML
-    private TextField txtPassword;
-
-    @FXML
-    private TextField txtUsername;
-
-    @FXML
-    void btnEliminarVendedor(ActionEvent event) {
+    void onExportToPDF(ActionEvent event) {
 
     }
 
     @FXML
-    void onActualizarVendedor(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onAgregarVendedor(ActionEvent event) {
+    void onLogin(ActionEvent event) {
 
     }
 

@@ -2,7 +2,6 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.LoginController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,12 +13,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.EventObject;
 
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.LoginConstants.*;
-import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.BODY_PRODUCTO_NO_AGREGADO;
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.HEADER;
-import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.TITULO_PRODUCTO_NO_AGREGADO;
 
 
 public class LoginViewController {
@@ -73,14 +69,14 @@ public class LoginViewController {
     private void navigateToSellerView(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Product-view.fxml"));
+                    .getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/MarketPlace-app.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
             stage.setTitle("Dunima MarketPlace - Vendedor");
             stage.setScene(scene);
             stage.show();
 
-            closeCurrentStage(event);
+//            closeCurrentStage(event);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,7 +93,7 @@ public class LoginViewController {
             stage.setScene(scene);
             stage.show();
 
-            closeCurrentStage(event);
+//            closeCurrentStage(event);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,9 +123,6 @@ public class LoginViewController {
             e.printStackTrace();
         }
     }
-
-
-
     // Método que muestra un mensaje en un cuadro de diálogo
     private void showMessage(String title, String message, String header, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);

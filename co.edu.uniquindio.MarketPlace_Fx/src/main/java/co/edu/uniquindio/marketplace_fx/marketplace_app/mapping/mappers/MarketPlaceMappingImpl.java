@@ -16,13 +16,13 @@ import java.util.List;
 public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     // ------------------------ Products -----------------------
     @Override
-    public List<ProductDto> getProductsDto(List<Product> listProducts) {
-        if (listProducts == null) {
+    public List<ProductDto> getProductsDto(List<Product> products) {
+        if (products == null) {
             return new ArrayList<>();
         }
 
-        List<ProductDto> listProductsDto = new ArrayList<>(listProducts.size());
-        for (Product product : listProducts) {
+        List<ProductDto> listProductsDto = new ArrayList<>(products.size());
+        for (Product product : products) {
             listProductsDto.add(productToProductDto(product));
         }
         return listProductsDto;
@@ -135,19 +135,57 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                 user.getPassword());
     }
 
+//    @Override
+//    public User userDtoToUser(UserDto userDto) {
+//        if (userDto == null) {
+//            return null;
+//        }
+//        return User.builder()
+//                .name(userDto.name())
+//                .lastName(userDto.lastName())
+//                .idNumber(userDto.idNumber())
+//                .address(userDto.address())
+//                .username(userDto.username())
+//                .password(userDto.password())
+//                .build();
+//    }
+
     @Override
-    public User userDtoToUser(UserDto userDto) {
+    public User userDtoToUserType(UserDto userDto) {
         if (userDto == null) {
             return null;
         }
-        return Seller.builder()
-                .name(userDto.name())
-                .lastName(userDto.lastName())
-                .idNumber(userDto.idNumber())
-                .address(userDto.address())
-                .username(userDto.username())
-                .password(userDto.password())
-                .build();
+        User user;
+        if (isAdministrator(userDto)) {
+            user = Administrator.builder()
+                    .name(userDto.name())
+                    .lastName(userDto.lastName())
+                    .idNumber(userDto.idNumber())
+                    .address(userDto.address())
+                    .username(userDto.username())
+                    .password(userDto.password())
+                    .build();
+        } else if (isSeller(userDto)) {
+            user = Seller.builder()
+                    .name(userDto.name())
+                    .lastName(userDto.lastName())
+                    .idNumber(userDto.idNumber())
+                    .address(userDto.address())
+                    .username(userDto.username())
+                    .password(userDto.password())
+                    .build();
+        } else {
+            user = User.builder()
+                    .name(userDto.name())
+                    .lastName(userDto.lastName())
+                    .idNumber(userDto.idNumber())
+                    .address(userDto.address())
+                    .username(userDto.username())
+                    .password(userDto.password())
+                    .build();
+        }
+
+        return user;
     }
 
     @Override
@@ -200,5 +238,12 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     @Override
     public Administrator toObjectAdministrator(AdministratorDto administrator) {
         return null;
+    }
+
+    private boolean isAdministrator(UserDto userDto) {
+        return userDto.idNumber().matches("^\\d{2}$");
+    }
+    private boolean isSeller(UserDto userDto) {
+        return userDto.idNumber().matches("^\\d{3,}$");
     }
 }

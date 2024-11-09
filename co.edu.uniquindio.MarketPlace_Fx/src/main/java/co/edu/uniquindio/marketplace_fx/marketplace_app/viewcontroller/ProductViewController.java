@@ -19,7 +19,8 @@ import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductCons
 
 public class ProductViewController {
     private ProductController productController;
-    private ObservableList<ProductDto> listProducts = FXCollections.observableArrayList();
+//    private ObservableList<ProductDto> listProducts = FXCollections.observableArrayList();
+    private ObservableList<ProductDto> products = FXCollections.observableArrayList();
     private ProductDto selectProduct;
     @FXML
     private Button btnAddProduct;
@@ -91,7 +92,7 @@ public class ProductViewController {
         initDataBinding();
         getProducts();
         tbProducts.getItems().clear();
-        tbProducts.setItems(listProducts);
+        tbProducts.setItems(products);
         listenerSelection();
     }
     // Método que agrupa los botones de radio para seleccionar el estado del producto
@@ -104,7 +105,7 @@ public class ProductViewController {
     }
     // Método que obtiene los productos del controlador y los añade a la lista
     private void getProducts() {
-        listProducts.addAll(productController.getProducts());
+        products.addAll(productController.getProducts());
     }
     // Método que inicializa el enlace de datos para las columnas de la tabla
     private void initDataBinding() {
@@ -163,7 +164,7 @@ public class ProductViewController {
                 showMessage(TITULO_PRODUCTO_DUPLICADO, BODY_PRODUCTO_DUPLICADO, HEADER, Alert.AlertType.WARNING);
             } else {
                 if (productController.addProduct(productDto)) {
-                    listProducts.add(productDto);
+                    products.add(productDto);
                     clearFields();
                     showMessage(TITULO_PRODUCTO_AGREGADO, BODY_PRODUCTO_AGREGADO, HEADER, Alert.AlertType.INFORMATION);
                 } else {
@@ -180,7 +181,7 @@ public class ProductViewController {
             ProductDto updatedProduct = createProductDto();
             if (updatedProduct != null && validDataProduct(updatedProduct)) {
                 productController.updateProduct(updatedProduct);
-                listProducts.set(listProducts.indexOf(selectProduct), updatedProduct);
+                products.set(products.indexOf(selectProduct), updatedProduct);
                 showProductInformation(updatedProduct);
                 showMessage(TITULO_PRODUCTO_ACTUALIZADO, BODY_PRODUCTO_ACTUALIZADO, HEADER, Alert.AlertType.INFORMATION);
             } else {
@@ -194,7 +195,7 @@ public class ProductViewController {
     private void removeProduct() {
         if (selectProduct != null) {
             productController.removeProduct(selectProduct);
-            listProducts.remove(selectProduct);
+            products.remove(selectProduct);
             clearFields();
             showMessage(TITULO_PRODUCTO_REMOVIDO, BODY_PRODUCTO_REMOVIDO, HEADER, Alert.AlertType.INFORMATION);
         } else {
@@ -243,7 +244,7 @@ public class ProductViewController {
     }
     // Método que verifica si el producto ya existe en la lista
     private boolean isProductDuplicate(ProductDto productDto) {
-        return listProducts.stream().anyMatch(p -> p.name().equalsIgnoreCase(productDto.name()));
+        return products.stream().anyMatch(p -> p.name().equalsIgnoreCase(productDto.name()));
     }
     // Método que muestra un mensaje en un cuadro de diálogo
     private void showMessage(String title, String message, String header, Alert.AlertType alertType) {

@@ -1,5 +1,7 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.model;
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.mappers.MarketPlaceMappingImpl;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.ILogin;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IProductCrud;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.ISellerCrud;
@@ -10,28 +12,21 @@ import java.util.List;
 
 public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
     private List<Product> listProducts = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
     private List<Seller> listSellers = new ArrayList<>();
     private List<User> listRegisterUser = new ArrayList<>();
     private List<User> listUsers = new ArrayList<>();
     private List<Administrator> listAdministrators = new ArrayList<>();
     private String name;
+    MarketPlaceMappingImpl mapper;
+
+    public Marketplace() {
+        this.mapper = new MarketPlaceMappingImpl();
+    }
 
     public List<User> getListRegisterUser() {
         return listRegisterUser;
     }
-
-    public void setListRegisterUser(List<User> listRegisterUser) {
-        this.listRegisterUser = listRegisterUser;
-    }
-
-    public void setListUsers(List<User> listUsers) {
-        this.listUsers = listUsers;
-    }
-
-    public void setListAdministrators(List<Administrator> listAdministrators) {
-        this.listAdministrators = listAdministrators;
-    }
-
     public User getUser() {
         return user;
     }
@@ -49,18 +44,15 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
         this.name = name;
     }
 
-    public void setListSellers(List<Seller> listSellers) {
-        this.listSellers = listSellers;
-    }
-
-    public Marketplace() {
-    }
     // -------------------- Getters --------------------
     public List<Seller> getListSellers() {
         return listSellers;
     }
-    public List<Product> getListProducts() {
-        return listProducts;
+//    public List<Product> getListProducts() {
+//        return listProducts;
+//    }
+    public List<Product> getProducts() {
+        return products;
     }
     public List<User> getListUsers() {
         return listUsers;
@@ -149,7 +141,7 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
     public boolean createProduct(Product newProduct){
         Product productFound = getProduct(newProduct.getName());
         if(productFound == null){
-            getListProducts().add(newProduct);
+            getProducts().add(newProduct);
             return true;
         }else{
             return  false;
@@ -158,7 +150,7 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
 
     // Método para buscar un producto por nombre
     public  Product getProduct(String name) {
-        for (Product product : getListProducts()) {
+        for (Product product : getProducts()) {
             if (product.getName().equalsIgnoreCase(name)) {
                 return product;
             }
@@ -166,27 +158,27 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
         return null;
     }
     // Método para establecer la lista de productos
-    public void setListProducts(List<Product> listProducts) {
-        this.listProducts = listProducts;
+    public void setListProducts(List<Product> products) {
+        this.products = products;
     }
 
 
     public void addProductToSeller(Seller seller, Product product) {
         if (listSellers.contains(seller)) {
+            seller.addProduct(product);
             addProduct(product);
-            listProducts.add(product);
         } else {
             System.out.println("El vendedor no está registrado en el marketplace.");
         }
     }
     public void addProduct(Product product) {
-        listProducts.add(product);
+        products.add(product);
     }
 
     // Método para eliminar un producto de la lista
     public void removeProduct(Product product) {
         if (product != null) {
-            listProducts.remove(product);
+            products.remove(product);
         }
     }
 
@@ -217,12 +209,32 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
         }
         return false;
     }
+    // Método para buscar un administrator por nombre
+    public Administrator getAdministrator(String name) {
+        for (Administrator administrator : getListAdministrators()) {
+            if (administrator.getName().equalsIgnoreCase(name)) {
+                return administrator;
+            }
+        }
+        return null;
+    }
 
-    //
+    // Crear administrators
+    public boolean createAdmnistrator(Administrator newAdministrator){
+        Administrator administratorFound = getAdministrator(newAdministrator.getName());
+        if(administratorFound == null){
+            getListAdministrators().add(newAdministrator);
+            return true;
+        }else{
+            return  false;
+        }
+    }
+
     @Override
     public User authenticate(String username, String password) {
         for (User user : listRegisterUser) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+                System.out.println(user);
                 return user;
             }
         }
@@ -230,13 +242,19 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
     }
 
     @Override
-    public String getUserRole(User user) {
+    public String getUserRole(UserDto userDto) {
+        User user = mapper.userDtoToUserType(userDto);
         if (user instanceof Seller) {
+            System.out.println("Vendedor detectado: " + user.getUsername());
             return "seller";
         } else if (user instanceof Administrator) {
+            System.out.println("Administrador detectado: " + user.getUsername());
             return "administrator";
         }
+        System.out.println("Usuario desconocido: " + user.getUsername());
         return "unknown";
     }
+
+
 
 }
