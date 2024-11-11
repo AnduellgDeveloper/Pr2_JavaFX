@@ -4,13 +4,14 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.mappers.MarketPlaceMappingImpl;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.ILogin;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IProductCrud;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IRegister;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.ISellerCrud;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
+public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister {
     private List<Product> listProducts = new ArrayList<>();
     private List<Product> products = new ArrayList<>();
     private List<Seller> listSellers = new ArrayList<>();
@@ -254,6 +255,21 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin {
         System.out.println("Usuario desconocido: " + user.getUsername());
         return "unknown";
     }
+
+    @Override
+    public boolean registerUser(User newUser) {
+        for (User user : listRegisterUser) {
+            if (user.getUsername().equals(newUser.getUsername())) {
+                System.out.println("El nombre de usuario ya está en uso: " + newUser.getUsername());
+                return false;
+            }
+        }
+        listRegisterUser.add(newUser);
+        System.out.println("Usuario registrado exitosamente: " + newUser.getUsername());
+        return true;
+    }
+
+
 
 
 

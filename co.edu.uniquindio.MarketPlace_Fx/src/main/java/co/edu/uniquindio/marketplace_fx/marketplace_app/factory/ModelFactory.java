@@ -99,6 +99,15 @@ public class ModelFactory implements IModelFactoryService {
         User user = mapper.userDtoToUserType(userDto);
         return marketplace.getUserRole(userDto);
     }
+    public boolean validateLogin(String username, String password) {
+        return marketplace.validateLogin(username, password);
+    }
+
+    public boolean registerUser(User newUser) {
+        return marketplace.registerUser(newUser);
+    }
+
+
 
 
 
