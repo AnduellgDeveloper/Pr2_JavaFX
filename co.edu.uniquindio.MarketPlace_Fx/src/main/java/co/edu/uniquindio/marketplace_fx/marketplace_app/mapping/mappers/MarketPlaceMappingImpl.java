@@ -240,10 +240,14 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
         return null;
     }
 
-    private boolean isAdministrator(UserDto userDto) {
-        return userDto.idNumber().matches("^\\d{2}$");
-    }
+//    private boolean isAdministrator(UserDto userDto) {
+//        return userDto.idNumber().matches("^\\d{2}$");
+//    }
     private boolean isSeller(UserDto userDto) {
         return userDto.idNumber().matches("^\\d{3,}$");
     }
+    public boolean isAdministrator(UserDto user) {
+        return user.idNumber() != null && user.idNumber().matches("^\\d{2,}$");
+    }
+
 }

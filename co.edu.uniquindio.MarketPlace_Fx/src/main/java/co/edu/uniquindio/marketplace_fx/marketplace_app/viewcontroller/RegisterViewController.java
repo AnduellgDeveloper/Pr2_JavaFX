@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.RegisterConstants.*;
+
 public class RegisterViewController {
     private RegisterController registerController;
 
@@ -55,9 +57,6 @@ public class RegisterViewController {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
-
-            Stage currentStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            currentStage.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -65,11 +64,16 @@ public class RegisterViewController {
 
     @FXML
     void onRegister(ActionEvent event) {
+        String name = txtName.getText();
+        String lastName = txtLastName.getText();
+        String idnumber = txtIdNumber.getText();
+        String address = txtAdress.getText();
         String username = txtUsername.getText();
         String password = txtPassword.getText();
 
-        if (username.isEmpty() || password.isEmpty()) {
-            showMessage("Campos Vacíos", "Por favor complete todos los campos", "", Alert.AlertType.ERROR);
+        if (username.isEmpty() || password.isEmpty()||name.isEmpty()
+                ||lastName.isEmpty()||idnumber.isEmpty()||address.isEmpty()) {
+            showMessage(TITULO_CAMPOS_VACIOS, BODY_CAMPOS_VACIOS, HEADER, Alert.AlertType.ERROR);
             return;
         }
 
@@ -77,9 +81,9 @@ public class RegisterViewController {
         if (registerController.registerUser(newUser)) {
             navigateToHubView(event);
 
-            showMessage("Registro Exitoso", "Usuario registrado correctamente", "", Alert.AlertType.INFORMATION);
+            showMessage(TITULO_USUARIO_REGISTRADO, BODY_USUARIO_REGISTRADO, HEADER, Alert.AlertType.INFORMATION);
         } else {
-            showMessage("Error de Registro", "El nombre de usuario ya está en uso", "", Alert.AlertType.ERROR);
+            showMessage(TITULO_ERROR_REGISTRO, BODY_ERROR_REGISTRO, HEADER, Alert.AlertType.ERROR);
         }
     }
 
@@ -90,21 +94,7 @@ public class RegisterViewController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    private void navigateToHub(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/WelcomeDunima-view.fxml"));
-            Scene scene = new Scene(loader.load());
-            Stage stage = new Stage();
-            stage.setTitle("Dunima MarketPlace - Hub");
-            stage.setScene(scene);
-            stage.show();
 
-            Stage currentStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            currentStage.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 
 

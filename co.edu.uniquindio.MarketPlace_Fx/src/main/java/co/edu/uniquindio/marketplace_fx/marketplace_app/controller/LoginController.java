@@ -19,20 +19,6 @@ public class LoginController {
         return modelFactory.getUserRole(userDto);
     }
 
-    public boolean registerUser(String username, String password, String name, String lastName, String idNumber, String address) {
-        User newUser = User.builder()
-                .username(username)
-                .password(password)
-                .name(name)
-                .lastName(lastName)
-                .idNumber(idNumber)
-                .address(address)
-                .build();
-        return modelFactory.registerUser(newUser);
-    }
 
-    public boolean login(String username, String password) {
-        return modelFactory.validateLogin(username, password);
-    }
 
 }
