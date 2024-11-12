@@ -9,10 +9,7 @@ public class RegisterController {
         modelFactory = ModelFactory.getInstance();
     }
 
-    // Método para registrar un nuevo usuario
-    public boolean registerUser(User newUser) {
-        return modelFactory.registerUser(newUser);
-    }
+
 
 
 }
