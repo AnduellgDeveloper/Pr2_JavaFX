@@ -44,7 +44,7 @@ public class RegisterViewController {
     }
 
     @FXML
-    void onRegisterr(ActionEvent event) {
+    void navigateToHubView(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/WelcomeDunima-view.fxml"));
@@ -75,6 +75,8 @@ public class RegisterViewController {
 
         User newUser = new User(username, password);
         if (registerController.registerUser(newUser)) {
+            navigateToHubView(event);
+
             showMessage("Registro Exitoso", "Usuario registrado correctamente", "", Alert.AlertType.INFORMATION);
         } else {
             showMessage("Error de Registro", "El nombre de usuario ya está en uso", "", Alert.AlertType.ERROR);
