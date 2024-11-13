@@ -12,8 +12,13 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.*;
 
@@ -149,11 +154,27 @@ public class ProductViewController {
     // Método que carga la imagen del producto en el ImageView
     private void loadImage(String imageName) {
         try {
-            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/co/edu/uniquindio/marketplace_fx/marketplace_app/images/Men/" + imageName)));
-            imgProduct.setImage(image);
+            String baseDir = "/co/edu/uniquindio/marketplace_fx/marketplace_app/images";
+
+
+            try (Stream<Path> paths = Files.walk(Paths.get(getClass().getResource(baseDir).toURI()))) {
+                for (Path path : (Iterable<Path>) paths::iterator) {
+                    if (Files.isRegularFile(path) && path.getFileName().toString().equals(imageName)) {
+                        String fullPath = path.toUri().toString();
+                        Image image = new Image(fullPath);
+                        imgProduct.setImage(image);
+                        return;
+                    }
+                }
+            }
+
+            // Si no se encuentra la imagen en ninguna subcarpeta
+            imgProduct.setImage(null);
+            showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN + " Imagen no encontrada", HEADER, Alert.AlertType.ERROR);
+
         } catch (Exception e) {
             imgProduct.setImage(null);
-            showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN+ e.getMessage(), HEADER, Alert.AlertType.ERROR);
+            showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN + e.getMessage(), HEADER, Alert.AlertType.ERROR);
         }
     }
     // Método que agrega un nuevo producto a la lista y a la base de datos

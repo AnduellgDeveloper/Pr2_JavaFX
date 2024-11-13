@@ -307,7 +307,7 @@ public class DataUtil {
                 .build();
         Product makeup2 = Product.builder()
                 .name("Lapiz Labios Kylie Cosmetics")
-                .image("LaízLabios.jpg")
+                .image("LapizLabios.jpg")
                 .category("Maquillaje")
                 .price(430)
                 .status("Published")
