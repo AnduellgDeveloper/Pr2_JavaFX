@@ -142,7 +142,7 @@ public class DataUtil {
                 .build();
         Product men6 = Product.builder()
                 .name("Chaqueta Impermeable ")
-                .image("ChaquetaAmarilla.jpg")
+                .image("chaquetaAmarilla.jpg")
                 .category("Ropa - Hombre")
                 .price(450)
                 .status("Published")
@@ -160,7 +160,7 @@ public class DataUtil {
                 .build();
         Product women2 = Product.builder()
                 .name("Jean Cargo")
-                .image("Jean Camuflado.jpg")
+                .image("JeanCamuflado.jpg")
                 .category("Ropa - Mujer")
                 .price(250)
                 .status("Published")
@@ -270,7 +270,7 @@ public class DataUtil {
                 .category("Ropa - Niño")
                 .price(130)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 6, 31))
+                .publicationDate(LocalDate.of(2024, 6, 20))
                 .build();
         Product boy4 = Product.builder()
                 .name("Buzo Marvel Niño")
@@ -308,39 +308,39 @@ public class DataUtil {
         Product makeup2 = Product.builder()
                 .name("Lapiz Labios Kylie Cosmetics")
                 .image("LaízLabios.jpg")
-                .category("Ropa - Niño")
+                .category("Maquillaje")
                 .price(430)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 6, 12))
+                .publicationDate(LocalDate.of(2024, 10, 2))
                 .build();
         Product makeup3 = Product.builder()
-                .name("Jean Niño")
-                .image("JeanNiño.jpg")
-                .category("Ropa - Niño")
+                .name("Base Dior Tono Claro")
+                .image("Base.jpg")
+                .category("Maquillaje")
                 .price(130)
                 .status("Published")
                 .publicationDate(LocalDate.of(2024, 3, 2))
                 .build();
         Product makeup4 = Product.builder()
-                .name("Jean Niño")
-                .image("JeanNiño.jpg")
-                .category("Ropa - Niño")
+                .name("Bronzer trendy")
+                .image("Bronzer.jpg")
+                .category("Maquillaje")
                 .price(130)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 3, 2))
+                .publicationDate(LocalDate.of(2024, 5, 2))
                 .build();
         Product makeup5 = Product.builder()
-                .name("Jean Niño")
-                .image("JeanNiño.jpg")
-                .category("Ropa - Niño")
+                .name("Iluminador Dior")
+                .image("IluminadorDior.jpg")
+                .category("Maquillaje")
                 .price(130)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 3, 2))
+                .publicationDate(LocalDate.of(2024, 10, 8))
                 .build();
         Product makeup6 = Product.builder()
-                .name("Jean Niño")
-                .image("JeanNiño.jpg")
-                .category("Ropa - Niño")
+                .name("Paleta Sombras Dior")
+                .image("PaletaSombras.jpg")
+                .category("Maquillaje")
                 .price(130)
                 .status("Published")
                 .publicationDate(LocalDate.of(2024, 3, 2))
@@ -372,6 +372,25 @@ public class DataUtil {
         marketplace.addProductToSeller(seller2,women4 );
         marketplace.addProductToSeller(seller2,women5);
         marketplace.addProductToSeller(seller2,women6 );
+        marketplace.addProductToSeller(seller3,girl1);
+        marketplace.addProductToSeller(seller3,girl2);
+        marketplace.addProductToSeller(seller3,girl3);
+        marketplace.addProductToSeller(seller3,girl4);
+        marketplace.addProductToSeller(seller3,girl5);
+        marketplace.addProductToSeller(seller3,girl6);
+        marketplace.addProductToSeller(seller4,boy1);
+        marketplace.addProductToSeller(seller4,boy2);
+        marketplace.addProductToSeller(seller4,boy3);
+        marketplace.addProductToSeller(seller4,boy4);
+        marketplace.addProductToSeller(seller4,boy5);
+        marketplace.addProductToSeller(seller4,boy6);
+        marketplace.addProductToSeller(seller4,makeup1);
+        marketplace.addProductToSeller(seller4,makeup2);
+        marketplace.addProductToSeller(seller4,makeup3);
+        marketplace.addProductToSeller(seller4,makeup4);
+        marketplace.addProductToSeller(seller4,makeup5);
+        marketplace.addProductToSeller(seller4,makeup6);
+
 
 
 
