@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister {
-    private List<Product> listProducts = new ArrayList<>();
     private List<Product> products = new ArrayList<>();
     private List<Seller> listSellers = new ArrayList<>();
     private List<User> listRegisterUser = new ArrayList<>();
@@ -166,7 +165,7 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
 
     public void addProductToSeller(Seller seller, Product product) {
         if (listSellers.contains(seller)) {
-            seller.addProduct(product);
+//            seller.addProduct(product);
             addProduct(product);
         } else {
             System.out.println("El vendedor no está registrado en el marketplace.");

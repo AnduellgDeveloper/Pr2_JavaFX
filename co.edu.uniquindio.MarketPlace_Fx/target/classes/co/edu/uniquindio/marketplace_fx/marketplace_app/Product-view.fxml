@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="497.0" prefWidth="742.0" stylesheets="@Css/DatePicker.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.ProductViewController">
+<AnchorPane prefHeight="497.0" prefWidth="742.0" stylesheets="@Css/DatePicker.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.ProductViewController">
     <children>
         <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="492.0" prefWidth="742.0">
             <items>
@@ -156,7 +156,7 @@
                             <TableColumn fx:id="tcPrice" prefWidth="61.0" text="Price" />
                             <TableColumn fx:id="tcStatus" prefWidth="77.0" text="Status" />
                             <TableColumn fx:id="tcPublicationDate" prefWidth="118.0" text="Publication Date" />
-                            <TableColumn fx:id="tcImagePath" prefWidth="135.0" text="Image Path" />
+                            <TableColumn fx:id="tcImagePath" prefWidth="135.0" text="Image " />
                         </columns>
                     </TableView>
                     <ImageView fx:id="imgProduct" fitHeight="183.0" fitWidth="140.0" layoutX="572.0" layoutY="14.0">
