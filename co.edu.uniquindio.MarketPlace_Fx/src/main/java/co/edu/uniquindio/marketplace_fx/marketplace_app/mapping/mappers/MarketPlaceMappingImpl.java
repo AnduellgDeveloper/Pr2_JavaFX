@@ -135,29 +135,15 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                 user.getPassword());
     }
 
-//    @Override
-//    public User userDtoToUser(UserDto userDto) {
-//        if (userDto == null) {
-//            return null;
-//        }
-//        return User.builder()
-//                .name(userDto.name())
-//                .lastName(userDto.lastName())
-//                .idNumber(userDto.idNumber())
-//                .address(userDto.address())
-//                .username(userDto.username())
-//                .password(userDto.password())
-//                .build();
-//    }
 
     @Override
     public User userDtoToUserType(UserDto userDto) {
         if (userDto == null) {
             return null;
         }
-        User user;
+
         if (isAdministrator(userDto)) {
-            user = Administrator.builder()
+            return Administrator.builder()
                     .name(userDto.name())
                     .lastName(userDto.lastName())
                     .idNumber(userDto.idNumber())
@@ -166,7 +152,7 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                     .password(userDto.password())
                     .build();
         } else if (isSeller(userDto)) {
-            user = Seller.builder()
+            return Seller.builder()
                     .name(userDto.name())
                     .lastName(userDto.lastName())
                     .idNumber(userDto.idNumber())
@@ -175,7 +161,7 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                     .password(userDto.password())
                     .build();
         } else {
-            user = User.builder()
+            return User.builder()
                     .name(userDto.name())
                     .lastName(userDto.lastName())
                     .idNumber(userDto.idNumber())
@@ -184,9 +170,17 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                     .password(userDto.password())
                     .build();
         }
-
-        return user;
     }
+
+    private boolean isSeller(UserDto userDto) {
+        return userDto.idNumber().matches("^\\d{3,}$") && !isAdministrator(userDto);
+    }
+
+    public boolean isAdministrator(UserDto userDto) {
+        return userDto.idNumber() != null && userDto.idNumber().matches("^\\d{2}$");
+    }
+
+
 
     @Override
     public User toObjectUser(UserDto user) {
@@ -240,14 +234,5 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
         return null;
     }
 
-//    private boolean isAdministrator(UserDto userDto) {
-//        return userDto.idNumber().matches("^\\d{2}$");
-//    }
-    private boolean isSeller(UserDto userDto) {
-        return userDto.idNumber().matches("^\\d{3,}$");
-    }
-    public boolean isAdministrator(UserDto user) {
-        return user.idNumber() != null && user.idNumber().matches("^\\d{2,}$");
-    }
 
 }

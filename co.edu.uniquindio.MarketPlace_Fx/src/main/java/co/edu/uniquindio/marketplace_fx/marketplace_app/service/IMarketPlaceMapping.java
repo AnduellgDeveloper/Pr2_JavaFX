@@ -29,6 +29,8 @@ public interface IMarketPlaceMapping {
     UserDto userToUserDto(User user);
     User userDtoToUserType(UserDto userDto);
 
+
+
     User  toObjectUser(UserDto user);
 
     // ------------------------ Administrator -----------------------

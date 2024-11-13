@@ -1,6 +1,7 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.RegisterController;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -77,8 +78,8 @@ public class RegisterViewController {
             return;
         }
 
-        User newUser = new User(username, password);
-        if (registerController.registerUser(newUser)) {
+        UserDto usernew = new UserDto(name,lastName,idnumber,address,username, password);
+        if (registerController.registerNewUser(usernew)) {
             navigateToHubView(event);
 
             showMessage(TITULO_USUARIO_REGISTRADO, BODY_USUARIO_REGISTRADO, HEADER, Alert.AlertType.INFORMATION);

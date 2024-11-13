@@ -256,19 +256,18 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
         return "unknown";
     }
 
-    @Override
-    public boolean registerUser(User newUser) {
-        for (User user : listRegisterUser) {
-            if (user.getUsername().equals(newUser.getUsername())) {
-                System.out.println("El nombre de usuario ya está en uso: " + newUser.getUsername());
-                return false;
+   //------------------------REGISTER----------------------------
+
+    public boolean registerUser(User user) {
+        // Check if the user already exists
+        for (User existingUser : listRegisterUser) {
+            if (existingUser.getUsername().equals(user.getUsername())) {
+                return false; // User already exists
             }
         }
-        listRegisterUser.add(newUser);
-        System.out.println("Usuario registrado exitosamente: " + newUser.getUsername());
+        listRegisterUser.add(user);
         return true;
     }
-
 
 
 
