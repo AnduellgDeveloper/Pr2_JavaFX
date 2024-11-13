@@ -345,6 +345,260 @@ public class DataUtil {
                 .status("Published")
                 .publicationDate(LocalDate.of(2024, 3, 2))
                 .build();
+        //_____-------------------------------Technology------------------------
+        Product tech1 = Product.builder()
+                .name("Televisor Samsung Pantalla Plana")
+                .image("Televisor1.jpg")
+                .category("Tecnologia")
+                .price(5000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 10, 2))
+                .build();
+        Product tech2 = Product.builder()
+                .name("Televisor OLED ")
+                .image("Televisor2.jpg")
+                .category("Maquillaje")
+                .price(130)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 3, 2))
+                .build();
+        Product tech3 = Product.builder()
+                .name("Computador Gamer")
+                .image("Computador.jpg")
+                .category("Tecnologia")
+                .price(4500)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 12, 3))
+                .build();
+        Product tech4 = Product.builder()
+                .name("Computador hp Intel Celeron")
+                .image("Computador2.jpg")
+                .category("Tecnologia")
+                .price(2300)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 4, 14))
+                .build();
+        Product tech5 = Product.builder()
+                .name("Laptob Mac Chip M3")
+                .image("Mac.jpg")
+                .category("Tecnologia")
+                .price(7800)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 2, 19))
+                .build();
+        Product tech6 = Product.builder()
+                .name("Torre y Teclado Dell")
+                .image("Dell.jpg")
+                .category("Tecnologia")
+                .price(5600)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 1, 23))
+                .build();
+
+//--------------------MOBILE DEVICE-------------------------------
+        Product mobile1 = Product.builder()
+                .name("Iphone 15 Pro Max Titanium")
+                .image("15ProMax.jpg")
+                .category("Smartphones")
+                .price(10000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 8, 21))
+                .build();
+        Product mobile2 = Product.builder()
+                .name("Iphone 15 Pro Max Azul")
+                .image("15ProMaxA.jpg")
+                .category("Smartphones")
+                .price(10000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 9, 15))
+                .build();
+        Product mobile3 = Product.builder()
+                .name("Samsung S24 Ultra")
+                .image("S24.jpg")
+                .category("Smartphones")
+                .price(6000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 1, 12))
+                .build();
+        Product mobile4 = Product.builder()
+                .name("Xiaomi 14 ")
+                .image("Xiaomi.jpg")
+                .category("Smartphones")
+                .price(4000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 9, 19))
+                .build();
+        Product mobile5 = Product.builder()
+                .name("Ipad Chip M4")
+                .image("Ipad.jpg")
+                .category("Smartphones")
+                .price(9000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 11, 14))
+                .build();
+        Product mobile6 = Product.builder()
+                .name("Lenovo Tab")
+                .image("Lenovo.jpg")
+                .category("Smartphones")
+                .price(2000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 9, 23))
+                .build();
+//----------------------MOTORCYCLE-----------------------------------
+
+        Product motorcycle1 = Product.builder()
+                .name("Nmax 2024")
+                .image("Nmax.jpg")
+                .category("Motocicletas")
+                .price(12000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 12, 23))
+                .build();
+        Product motorcycle2 = Product.builder()
+                .name("Mt09 2024")
+                .image("Mt09.jpg")
+                .category("Motocicletas")
+                .price(20000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 3, 4))
+                .build();
+        Product motorcycle3 = Product.builder()
+                .name("Cuatrimoto Raptor")
+                .image("4.jpg")
+                .category("Motocicletas")
+                .price(18000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 11, 10))
+                .build();
+        Product motorcycle4 = Product.builder()
+                .name("R1 Moto")
+                .image("R1.jpg")
+                .category("Motocicletas")
+                .price(19000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 5, 12))
+                .build();
+        Product motorcycle5 = Product.builder()
+                .name("Fz F1 150")
+                .image("Fz.jpg")
+                .category("Motocicletas")
+                .price(10000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 8, 20))
+                .build();
+        Product motorcycle6 = Product.builder()
+                .name("Yz Moto")
+                .image("Yz.jpg")
+                .category("Motocicletas")
+                .price(17000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 1, 6))
+                .build();
+//-----------------------CARS-----------------------------
+        Product car1 = Product.builder()
+                .name("CyberTruck Tesla")
+                .image("Cyber.jpg")
+                .category("Carros")
+                .price(1894000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 3, 1))
+                .build();
+        Product car2 = Product.builder()
+                .name("Toyota Camioneta")
+                .image("Toyota.jpg")
+                .category("Carros")
+                .price(56781200)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 7, 1))
+                .build();
+        Product car3 = Product.builder()
+                .name("Toyota Tuner")
+                .image("ToyotaT.jpg")
+                .category("Carros")
+                .price(2340000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 12, 7))
+                .build();
+        Product car4 = Product.builder()
+                .name("Exclusivo Carro Toreto")
+                .image("Toreto.jpg")
+                .category("Carros")
+                .price(90000000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 4, 23))
+                .build();
+        Product car5 = Product.builder()
+                .name("Fiat Camioneta")
+                .image("F.jpg")
+                .category("Carros")
+                .price(1230000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 12, 25))
+                .build();
+        Product car6 = Product.builder()
+                .name(" Mclaren ")
+                .image("Mc.jpg")
+                .category("Carros")
+                .price(8900000)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 7, 23))
+                .build();
+//-----------------------------HOME----------------------------------
+        Product home1 = Product.builder()
+                .name(" Organizador Morado ")
+                .image("Organizador.jpg")
+                .category("Hogar")
+                .price(120)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 8, 12))
+                .build();
+        Product home2 = Product.builder()
+                .name(" Toalla Para Pelo Panda ")
+                .image("Toalla.jpg")
+                .category("Hogar")
+                .price(150)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 2, 15))
+                .build();
+        Product home3 = Product.builder()
+                .name(" Toalla Stich ")
+                .image("Stich.jpg")
+                .category("Hogar")
+                .price(200)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 9, 12))
+                .build();
+        Product home4 = Product.builder()
+                .name(" Lampara Escritorio ")
+                .image("Lampara.jpg")
+                .category("Hogar")
+                .price(600)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 2, 13))
+                .build();
+        Product home5 = Product.builder()
+                .name(" Reloj Escritorio")
+                .image("Reloj.jpg")
+                .category("Hogar")
+                .price(100)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 12, 23))
+                .build();
+        Product home6 = Product.builder()
+                .name(" Cubiertos Navideños ")
+                .image("Cubiertos.jpg")
+                .category("Hogar")
+                .price(230)
+                .status("Published")
+                .publicationDate(LocalDate.of(2024, 9, 9))
+                .build();
+
+
+
+
+
+
+
 
 
 
@@ -359,37 +613,78 @@ public class DataUtil {
         marketplace.addSeller(seller8);
         marketplace.addSeller(seller9);
         marketplace.addSeller(seller10);
-
+//----------------MEN-----------------------------------------
         marketplace.addProductToSeller(seller1, men1);
         marketplace.addProductToSeller(seller1, men2);
         marketplace.addProductToSeller(seller1, men3);
         marketplace.addProductToSeller(seller1, men4);
         marketplace.addProductToSeller(seller1, men5);
         marketplace.addProductToSeller(seller1, men6);
+//---------------WOMEN----------------------------
         marketplace.addProductToSeller(seller2,women1 );
         marketplace.addProductToSeller(seller2,women2 );
         marketplace.addProductToSeller(seller2,women3 );
         marketplace.addProductToSeller(seller2,women4 );
         marketplace.addProductToSeller(seller2,women5);
         marketplace.addProductToSeller(seller2,women6 );
+//---------------GIRLS----------------------------------------
         marketplace.addProductToSeller(seller3,girl1);
         marketplace.addProductToSeller(seller3,girl2);
         marketplace.addProductToSeller(seller3,girl3);
         marketplace.addProductToSeller(seller3,girl4);
         marketplace.addProductToSeller(seller3,girl5);
         marketplace.addProductToSeller(seller3,girl6);
+//---------------BOYS--------------------------------------
         marketplace.addProductToSeller(seller4,boy1);
         marketplace.addProductToSeller(seller4,boy2);
         marketplace.addProductToSeller(seller4,boy3);
         marketplace.addProductToSeller(seller4,boy4);
         marketplace.addProductToSeller(seller4,boy5);
         marketplace.addProductToSeller(seller4,boy6);
-        marketplace.addProductToSeller(seller4,makeup1);
-        marketplace.addProductToSeller(seller4,makeup2);
-        marketplace.addProductToSeller(seller4,makeup3);
-        marketplace.addProductToSeller(seller4,makeup4);
-        marketplace.addProductToSeller(seller4,makeup5);
-        marketplace.addProductToSeller(seller4,makeup6);
+//--------------MAKEUP-----------------------------------------
+        marketplace.addProductToSeller(seller5,makeup1);
+        marketplace.addProductToSeller(seller5,makeup2);
+        marketplace.addProductToSeller(seller5,makeup3);
+        marketplace.addProductToSeller(seller5,makeup4);
+        marketplace.addProductToSeller(seller5,makeup5);
+        marketplace.addProductToSeller(seller5,makeup6);
+//---------------TECHNOLOGY----------------------------------------
+
+        marketplace.addProductToSeller(seller6,tech1);
+        marketplace.addProductToSeller(seller6,tech2);
+        marketplace.addProductToSeller(seller6,tech3);
+        marketplace.addProductToSeller(seller6,tech4);
+        marketplace.addProductToSeller(seller6,tech5);
+        marketplace.addProductToSeller(seller6,tech6);
+//---------------MOBILE DEVICE----------------------------------------
+        marketplace.addProductToSeller(seller7,mobile1);
+        marketplace.addProductToSeller(seller7,mobile2);
+        marketplace.addProductToSeller(seller7,mobile3);
+        marketplace.addProductToSeller(seller7,mobile4);
+        marketplace.addProductToSeller(seller7,mobile5);
+        marketplace.addProductToSeller(seller7,mobile6);
+//---------------MOTORCYCLE----------------------------------------
+
+        marketplace.addProductToSeller(seller8,motorcycle1);
+        marketplace.addProductToSeller(seller8,motorcycle2);
+        marketplace.addProductToSeller(seller8,motorcycle3);
+        marketplace.addProductToSeller(seller8,motorcycle4);
+        marketplace.addProductToSeller(seller8,motorcycle5);
+        marketplace.addProductToSeller(seller8,motorcycle6);
+//---------------CAR----------------------------------------
+        marketplace.addProductToSeller(seller9,car1);
+        marketplace.addProductToSeller(seller9,car2);
+        marketplace.addProductToSeller(seller9,car3);
+        marketplace.addProductToSeller(seller9,car4);
+        marketplace.addProductToSeller(seller9,car5);
+        marketplace.addProductToSeller(seller9,car6);
+//---------------HOME----------------------------------------
+        marketplace.addProductToSeller(seller10,home1);
+        marketplace.addProductToSeller(seller10,home2);
+        marketplace.addProductToSeller(seller10,home3);
+        marketplace.addProductToSeller(seller10,home4);
+        marketplace.addProductToSeller(seller10,home5);
+        marketplace.addProductToSeller(seller10,home6);
 
 
 
