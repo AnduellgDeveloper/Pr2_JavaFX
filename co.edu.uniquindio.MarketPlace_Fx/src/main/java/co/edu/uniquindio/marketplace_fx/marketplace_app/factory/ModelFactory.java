@@ -27,8 +27,9 @@ public class ModelFactory implements IModelFactoryService {
         return modelFactory;
     }
     private ModelFactory() {
-        mapper = new MarketPlaceMappingImpl();
         marketplace = DataUtil.initializeData();
+        mapper = new MarketPlaceMappingImpl();
+
     }
     // -------------------------- Getters --------------------------
 
@@ -45,8 +46,8 @@ public class ModelFactory implements IModelFactoryService {
     }
 
     // Obtener productos de un vendedor específico
-    public List<ProductDto> getProductsSeller(String idNumber) {
-        return mapper.productsToProductsDto(marketplace.getProductsSeller(idNumber));
+    public List<ProductDto> getProductsSeller(String username) {
+        return mapper.productsToProductsDto(marketplace.getProductsSeller(username));
     }
 
     //Obtener lista vendedores
@@ -59,6 +60,12 @@ public class ModelFactory implements IModelFactoryService {
         return mapper.getUsersDto(marketplace.getListUsers());
     }
     // -------------------------- Product --------------------------
+
+    public void addProductToSeller(String username, ProductDto productDto) {
+        Product product = mapper.productDtoToProduct(productDto);
+        marketplace.addProductToSeller(username, product);
+    }
+
 
     // Añadir un nuevo producto a la lista
     public boolean addProduct(ProductDto productDto) {
@@ -112,13 +119,5 @@ public class ModelFactory implements IModelFactoryService {
         User user = mapper.userDtoToUserType(userDto);
         return marketplace.registerUser(user);
     }
-
-
-
-
-
-
-
-
 
 }

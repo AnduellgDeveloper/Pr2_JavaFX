@@ -3,15 +3,26 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 
-
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="761.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22">
+<TabPane fx:id="tabPane"
+         maxHeight="-Infinity"
+         maxWidth="-Infinity"
+         minHeight="-Infinity"
+         minWidth="-Infinity"
+         prefHeight="643.0"
+         prefWidth="761.0"
+         tabClosingPolicy="UNAVAILABLE"
+         xmlns="http://javafx.com/javafx/22"
+         xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.MarketPlaceAppController">
   <tabs>
-    <Tab text="Untitled Tab 1">
+    <Tab text="Muro de publicaciones">
       <content>
         <fx:include source="PostWall-view.fxml" />
       </content>
     </Tab>
-    <Tab closable="false" text="Seller">
+    <Tab fx:id="tabProductView"
+         closable="false"
+         text="Productos vendedor">
       <content>
         <fx:include source="Product-view.fxml" />
       </content>

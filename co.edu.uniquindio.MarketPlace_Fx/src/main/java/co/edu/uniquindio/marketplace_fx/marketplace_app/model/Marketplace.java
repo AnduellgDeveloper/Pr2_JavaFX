@@ -9,10 +9,13 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.service.ISellerCrud;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister {
     private List<Product> products = new ArrayList<>();
+    private Map<String, List<Product>> sellerProductMap = new HashMap<>();
     private List<Seller> listSellers = new ArrayList<>();
     private List<User> listRegisterUser = new ArrayList<>();
     private List<User> listUsers = new ArrayList<>();
@@ -52,15 +55,30 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
         return products;
     }
 
-    public List<Product> getProductsSeller (String username){
-        List<Product> sellerProducts = new ArrayList<>();
-        for (Seller seller : listSellers){
-            if (seller.getUsername().equalsIgnoreCase(username)){
-                sellerProducts.addAll(seller.getProducts());
-                break;
-            }
+    // Método para obtener los productos de un vendedor específico
+    public List<Product> getProductsSeller(String username) {
+        List<Product> products = sellerProductMap.getOrDefault(username, new ArrayList<>());
+        if (products.isEmpty()) {
+            System.out.println("No se encontraron productos para el username: " + username);
         }
-        return sellerProducts;
+        return products;
+    }
+
+    public void addProductToSeller(String username, Product product) {
+        List<Product> products = sellerProductMap.computeIfAbsent(username, k -> new ArrayList<>());
+
+        if (products.stream().noneMatch(p -> p.getName().equalsIgnoreCase(product.getName()))) {
+            products.add(product);
+//            System.out.println("Producto agregado a " + username + ": " + product.getName());
+        } else {
+            System.out.println("Producto duplicado: " + product.getName());
+        }
+    }
+
+
+
+    public void addProduct(Product product) {
+        products.add(product);
     }
     public List<User> getListUsers() {
         return listUsers;
@@ -171,25 +189,6 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
     }
 
 
-    public void addProductToSeller(String username, Product product) {
-        for (Seller seller : listSellers) {
-            if (seller.getUsername().equalsIgnoreCase(username)) {
-                seller.getProducts().add(product);
-                break;
-            }
-        }
-    }
-    public List<Product> addProductToSellerAndGetProducts(String username, Product product) {
-        addProductToSeller(username, product);
-        return getProductsSeller(username);
-    }
-
-
-
-    public void addProduct(Product product) {
-        products.add(product);
-    }
-
     // Método para eliminar un producto de la lista
     public void removeProduct(Product product) {
         if (product != null) {
@@ -273,17 +272,20 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
    //------------------------REGISTER----------------------------
 
     public boolean registerUser(User user) {
-        // Check if the user already exists
         for (User existingUser : listRegisterUser) {
             if (existingUser.getUsername().equals(user.getUsername())) {
-                return false; // User already exists
+                return false;
             }
         }
         listRegisterUser.add(user);
         return true;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Marketplace{" +
+                "sellerProductMap=" + sellerProductMap +
+                '}';
+    }
 
 }

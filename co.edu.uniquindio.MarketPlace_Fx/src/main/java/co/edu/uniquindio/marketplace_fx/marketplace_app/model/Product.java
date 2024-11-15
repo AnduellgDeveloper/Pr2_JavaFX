@@ -38,4 +38,17 @@ public class Product {
     public int getPrice() {return price;}
     public void setPrice(int price) {this.price = price;}
     public LocalDate getPublicationDate(){return publicationDate;}
+
+    @Override
+    public String toString() {
+        return "Product " +
+                "\n\tName: " + name + '\'' +
+                ",\n\tImage: " + image + '\'' +
+                ",\n\tCategory: " + category + '\'' +
+                ",\n\tPrice: " + price +
+                ",\n\tStatus: " + status + '\'' +
+                ",\n\tPublication Date: " + publicationDate +
+                "\n";
+    }
+
 }

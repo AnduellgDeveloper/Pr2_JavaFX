@@ -3,6 +3,7 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.SellerController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -18,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.*;
@@ -88,11 +90,12 @@ public class ProductViewController {
     void onRemoveProduct(ActionEvent event) {
         removeProduct();
     }
-
-
     public void setUsername(String username) {
         this.username = username;
+        getProducts(); // Actualiza los productos al establecer el username
     }
+
+
     // Método de inicialización que se llama al cargar la vista
     @FXML
     void initialize() {
@@ -100,6 +103,11 @@ public class ProductViewController {
         sellerController = new SellerController();
         initView();
         toggleGroupRdBtns();
+        if (username != null) {
+            getProducts();
+        } else {
+            products.clear();
+        }
     }
     // Método que carga la vista inicial y los productos en la tabla
     private void initView() {
@@ -119,9 +127,20 @@ public class ProductViewController {
     }
     // Método que obtiene los productos del controlador y los añade a la lista
     private void getProducts() {
-        products.clear();
-        products.addAll(productController.getProducts(username));
+        if (username == null || username.isEmpty()) {
+            showMessage("Información", "Por favor, seleccione un usuario válido.", "Aviso", Alert.AlertType.INFORMATION);
+        } else {
+            products.clear();
+            List<ProductDto> userProducts = productController.getProducts(username);
+            if (userProducts.isEmpty()) {
+                showMessage("Información", "No hay productos disponibles para este usuario.", "Aviso", Alert.AlertType.INFORMATION);
+            } else {
+                products.addAll(userProducts);
+            }
+        }
+
     }
+
     // Método que inicializa el enlace de datos para las columnas de la tabla
     private void initDataBinding() {
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().name()));
@@ -190,7 +209,8 @@ public class ProductViewController {
             if (isProductDuplicate(productDto)) {
                 showMessage(TITULO_PRODUCTO_DUPLICADO, BODY_PRODUCTO_DUPLICADO, HEADER, Alert.AlertType.WARNING);
             } else {
-                if (productController.addProduct(productDto)) {
+                boolean isAdded = productController.addProduct(productDto);
+                if (isAdded) {
                     products.add(productDto);
                     clearFields();
                     showMessage(TITULO_PRODUCTO_AGREGADO, BODY_PRODUCTO_AGREGADO, HEADER, Alert.AlertType.INFORMATION);

@@ -3,6 +3,7 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.utils;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class DataUtil {
     public static Marketplace initializeData() {
@@ -693,7 +694,9 @@ public class DataUtil {
         marketplace.addProductToSeller("matisc",home5);
         marketplace.addProductToSeller("matisc",home6);
 
-
+        // Obtener y mostrar productos para los vendedores
+        List<Product> productosVendedor1 = marketplace.getProductsSeller("AnduellSeller");
+        System.out.println("Productos de vendedor1: " + productosVendedor1);
 
         return marketplace;
     }

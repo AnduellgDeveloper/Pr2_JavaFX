@@ -18,22 +18,19 @@ import java.io.IOException;
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.LoginConstants.*;
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.HEADER;
 
-
 public class LoginViewController {
     private LoginController loginController;
 
     @FXML
+    private ProductViewController productViewController;
+    @FXML
     private Button btnBackToHub;
-
     @FXML
     private Button btnLogin;
-
     @FXML
     private PasswordField txtPassword;
-
     @FXML
     private TextField txtUser;
-
     @FXML
     void initialize() {
         loginController = new LoginController();
@@ -66,41 +63,41 @@ public class LoginViewController {
         }
     }
 
-
     private void navigateToSellerView(ActionEvent event, String username) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/MarketPlace-app.fxml"));
             Parent root = loader.load();
 
-            // Configurar la escena y mostrarla en una nueva ventana
+            MarketPlaceAppController marketPlaceController = loader.getController();
+            marketPlaceController.setProductUsername(username);
+
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("Dunima MarketPlace - Vendedor");
             stage.setScene(scene);
             stage.show();
 
-            // closeCurrentStage(event);
+            closeCurrentStage(event);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        showMessage(TITULO_INTERFAZ_VENDEDOR, BODY_BIENVENIDO_VENDEDOR, HEADER, Alert.AlertType.INFORMATION);
     }
+
 
     private void navigateToAdminView(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Administrator-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Administrator-view.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
             stage.setTitle("Dunima MarketPlace - Administrador");
             stage.setScene(scene);
             stage.show();
 
-//            closeCurrentStage(event);
+            closeCurrentStage(event);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         showMessage(TITULO_INTERFAZ_ADMINISTRADOR, BODY_BIENVENIDO_ADMINISTRADOR, HEADER, Alert.AlertType.INFORMATION);
     }
 
@@ -109,25 +106,23 @@ public class LoginViewController {
         currentStage.close();
     }
 
-
     @FXML
     void onBackToHub(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/WelcomeDunima-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/WelcomeDunima-view.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
             stage.setTitle("Dunima MarketPlace - Hub");
             stage.setScene(scene);
             stage.show();
 
-            Stage currentStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-            currentStage.close();
+            closeCurrentStage(event);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    // Método que muestra un mensaje en un cuadro de diálogo
+
+    // Method to display a message in a dialog
     private void showMessage(String title, String message, String header, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
