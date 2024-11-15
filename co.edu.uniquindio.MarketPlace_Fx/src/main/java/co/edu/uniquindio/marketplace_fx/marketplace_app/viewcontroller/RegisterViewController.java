@@ -21,6 +21,8 @@ public class RegisterViewController {
 
     @FXML
     private Button btnRegister;
+    @FXML
+    private Button btnBackToHub;
 
     @FXML
     private TextField txtAdress;
@@ -49,7 +51,7 @@ public class RegisterViewController {
     void navigateToHubView(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/WelcomeDunima-view.fxml"));
+                    .getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Login-view.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
             stage.setTitle("Dunima MarketPlace - Hub");
@@ -85,6 +87,24 @@ public class RegisterViewController {
             showMessage(TITULO_ERROR_REGISTRO, BODY_ERROR_REGISTRO, HEADER, Alert.AlertType.ERROR);
         }
     }
+    @FXML
+    void onBackToHub(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass()
+                    .getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/WelcomeDunima-view.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Dunima MarketPlace - Hub");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
     private void showMessage(String title, String message, String header, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);

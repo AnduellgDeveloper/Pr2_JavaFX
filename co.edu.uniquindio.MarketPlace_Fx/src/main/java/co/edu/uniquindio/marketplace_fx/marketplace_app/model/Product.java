@@ -2,9 +2,6 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.model;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.builder.ProductBuilder;
 
 import java.time.LocalDate;
-
-
-
 public class Product {
     private String name;
     private String image;
@@ -20,7 +17,6 @@ public class Product {
         this.price = price;
         this.status = status;
         this.publicationDate = publicationDate;
-
     }
     public static ProductBuilder builder(){
         return new ProductBuilder();
@@ -38,17 +34,4 @@ public class Product {
     public int getPrice() {return price;}
     public void setPrice(int price) {this.price = price;}
     public LocalDate getPublicationDate(){return publicationDate;}
-
-    @Override
-    public String toString() {
-        return "Product " +
-                "\n\tName: " + name + '\'' +
-                ",\n\tImage: " + image + '\'' +
-                ",\n\tCategory: " + category + '\'' +
-                ",\n\tPrice: " + price +
-                ",\n\tStatus: " + status + '\'' +
-                ",\n\tPublication Date: " + publicationDate +
-                "\n";
-    }
-
 }

@@ -693,11 +693,6 @@ public class DataUtil {
         marketplace.addProductToSeller("matisc",home4);
         marketplace.addProductToSeller("matisc",home5);
         marketplace.addProductToSeller("matisc",home6);
-
-        // Obtener y mostrar productos para los vendedores
-        List<Product> productosVendedor1 = marketplace.getProductsSeller("AnduellSeller");
-        System.out.println("Productos de vendedor1: " + productosVendedor1);
-
         return marketplace;
     }
 }

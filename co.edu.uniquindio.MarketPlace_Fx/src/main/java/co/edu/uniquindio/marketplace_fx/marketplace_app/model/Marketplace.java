@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister {
-    private List<Product> products = new ArrayList<>();
-    private Map<String, List<Product>> sellerProductMap = new HashMap<>();
-    private List<Seller> listSellers = new ArrayList<>();
-    private List<User> listRegisterUser = new ArrayList<>();
-    private List<User> listUsers = new ArrayList<>();
-    private List<Administrator> listAdministrators = new ArrayList<>();
+    private final List<Product> products = new ArrayList<>();
+    private final Map<String, List<Product>> sellerProductMap = new HashMap<>();
+    private final List<Seller> listSellers = new ArrayList<>();
+    private final List<User> listRegisterUser = new ArrayList<>();
+    private final List<User> listUsers = new ArrayList<>();
+    private final List<Administrator> listAdministrators = new ArrayList<>();
     private String name;
     MarketPlaceMappingImpl mapper;
 
@@ -59,19 +59,18 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
     public List<Product> getProductsSeller(String username) {
         List<Product> products = sellerProductMap.getOrDefault(username, new ArrayList<>());
         if (products.isEmpty()) {
-            System.out.println("No se encontraron productos para el username: " + username);
+            System.out.printf("No se encontraron productos para el username: %s", username);
         }
         return products;
     }
 
     public void addProductToSeller(String username, Product product) {
-        List<Product> products = sellerProductMap.computeIfAbsent(username, k -> new ArrayList<>());
+        List<Product> products = sellerProductMap.computeIfAbsent(username, _ -> new ArrayList<>());
 
         if (products.stream().noneMatch(p -> p.getName().equalsIgnoreCase(product.getName()))) {
             products.add(product);
-//            System.out.println("Producto agregado a " + username + ": " + product.getName());
         } else {
-            System.out.println("Producto duplicado: " + product.getName());
+            System.out.printf("Producto duplicado: %s%n ", product.getName());
         }
     }
 
@@ -86,10 +85,6 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
     public List<Administrator> getListAdministrators() {
         return listAdministrators;
     }
-    public List<User> listRegisterUser() {
-        return listRegisterUser;
-    }
-
     //seller builder
     private Seller getBuildSeller(String name,
                                   String lastName,
@@ -183,20 +178,12 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
         }
         return null;
     }
-    // Método para establecer la lista de productos
-    public void setListProducts(List<Product> products) {
-        this.products = products;
-    }
-
-
     // Método para eliminar un producto de la lista
     public void removeProduct(Product product) {
         if (product != null) {
             products.remove(product);
         }
     }
-
-
     // Método para actualizar un producto existente
     public void updateProduct(Product updatedProduct) {
         if (updatedProduct != null) {
@@ -232,18 +219,6 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
         }
         return null;
     }
-
-    // Crear administrators
-    public boolean createAdmnistrator(Administrator newAdministrator){
-        Administrator administratorFound = getAdministrator(newAdministrator.getName());
-        if(administratorFound == null){
-            getListAdministrators().add(newAdministrator);
-            return true;
-        }else{
-            return  false;
-        }
-    }
-
     @Override
     public User authenticate(String username, String password) {
         for (User user : listRegisterUser) {
@@ -259,13 +234,13 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
     public String getUserRole(UserDto userDto) {
         User user = mapper.userDtoToUserType(userDto);
         if (user instanceof Seller) {
-            System.out.println("Vendedor detectado: " + user.getUsername());
+            System.out.printf("Vendedor detectado: %s" ,user.getUsername());
             return "seller";
         } else if (user instanceof Administrator) {
-            System.out.println("Administrador detectado: " + user.getUsername());
+            System.out.printf("Administrador detectado: %s", user.getUsername());
             return "administrator";
         }
-        System.out.println("Usuario desconocido: " + user.getUsername());
+        System.out.printf("Usuario desconocido: %s", user.getUsername());
         return "unknown";
     }
 
@@ -280,12 +255,4 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
         listRegisterUser.add(user);
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Marketplace{" +
-                "sellerProductMap=" + sellerProductMap +
-                '}';
-    }
-
 }

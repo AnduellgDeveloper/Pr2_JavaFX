@@ -13,7 +13,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: d76ae8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.RegisterViewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: d76ae8;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.RegisterViewController">
     <VBox layoutX="111.0" layoutY="-4.0" prefHeight="145.0" prefWidth="500.0" style="-fx-background-color: #FFFFFF;" AnchorPane.rightAnchor="-1.0" />
     <Pane layoutX="42.0" layoutY="148.0" prefHeight="304.0" prefWidth="200.0">
         <TextField fx:id="txtName" layoutY="22.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="200.0" promptText="First Name" style="-fx-background-radius: 50;">
@@ -70,4 +70,20 @@
          <Font name="Arial Black" size="18.0" />
       </font>
     </Button>
+   <Button fx:id="btnBackToHub" layoutX="312.0" layoutY="429.0" mnemonicParsing="false" onAction="#onBackToHub" prefHeight="47.0" prefWidth="152.0" style="-fx-background-radius: 50;     -fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.5, 0, 2);" stylesheets="@Css/ButtonStyle.css" text="Back to Hub">
+      <effect>
+         <Blend />
+      </effect>
+      <textFill>
+         <RadialGradient centerX="0.45375722543352603" centerY="0.5246305418719212" focusDistance="0.17721518987341778" radius="0.6455696202531646">
+            <stops>
+               <Stop color="#740183" />
+               <Stop color="#140217" offset="1.0" />
+            </stops>
+         </RadialGradient>
+      </textFill>
+      <font>
+         <Font name="Arial Black" size="15.0" />
+      </font>
+   </Button>
 </AnchorPane>
