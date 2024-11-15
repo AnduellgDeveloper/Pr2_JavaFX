@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="df05d910-8721-4e3a-a401-3cec853ae222" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/17.0.6/javafx-fxml-17.0.6-win.jar!/javafx/fxml/FXMLLoader.class" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2mj7BglWDx9yLjNBhGJeHpB290r" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MarketPlaceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev__class&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/nicol/Downloads/patronDecorrator,Duvan palomares,nicol marin&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Java&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="df05d910-8721-4e3a-a401-3cec853ae222" name="Changes" comment="" />
+      <created>1727577997909</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727577997909</updated>
+      <workItem from="1727577999062" duration="257000" />
+      <workItem from="1727578929394" duration="1511000" />
+      <workItem from="1727888650077" duration="81000" />
+      <workItem from="1727972099860" duration="10000" />
+      <workItem from="1727996986429" duration="206000" />
+      <workItem from="1727999640332" duration="3380000" />
+      <workItem from="1728004075533" duration="251000" />
+      <workItem from="1728004339821" duration="1312000" />
+      <workItem from="1728015950954" duration="1837000" />
+      <workItem from="1728059342521" duration="3608000" />
+      <workItem from="1728100256559" duration="883000" />
+      <workItem from="1728354672757" duration="832000" />
+      <workItem from="1728399317580" duration="10665000" />
+      <workItem from="1728666608642" duration="11000" />
+      <workItem from="1728666638945" duration="613000" />
+      <workItem from="1728676588713" duration="16000" />
+      <workItem from="1729316474288" duration="19000" />
+      <workItem from="1729316530431" duration="2000" />
+      <workItem from="1729656849484" duration="880000" />
+      <workItem from="1730245103944" duration="9370000" />
+      <workItem from="1730385254164" duration="2079000" />
+      <workItem from="1730392500886" duration="18000" />
+      <workItem from="1730417566731" duration="2471000" />
+      <workItem from="1730686426046" duration="3627000" />
+      <workItem from="1730817140669" duration="62000" />
+      <workItem from="1730817689619" duration="827000" />
+      <workItem from="1730819484217" duration="230000" />
+      <workItem from="1730819738711" duration="5560000" />
+      <workItem from="1730830563987" duration="2310000" />
+      <workItem from="1730849611333" duration="362000" />
+      <workItem from="1730850173323" duration="4138000" />
+      <workItem from="1730858176122" duration="951000" />
+      <workItem from="1730895781557" duration="397000" />
+      <workItem from="1730896236038" duration="2664000" />
+      <workItem from="1730917064224" duration="786000" />
+      <workItem from="1730991493365" duration="250000" />
+      <workItem from="1731134708703" duration="253000" />
+      <workItem from="1731134994135" duration="292000" />
+      <workItem from="1731356999320" duration="16000" />
+      <workItem from="1731358441421" duration="5235000" />
+      <workItem from="1731424084683" duration="1935000" />
+      <workItem from="1731426442044" duration="2329000" />
+      <workItem from="1731446253668" duration="10791000" />
+      <workItem from="1731461444209" duration="1268000" />
+      <workItem from="1731472423666" duration="5694000" />
+      <workItem from="1731520991931" duration="753000" />
+      <workItem from="1731596207539" duration="22000" />
+      <workItem from="1731597583234" duration="24000" />
+      <workItem from="1731601289705" duration="12000" />
+      <workItem from="1731689307987" duration="4587000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/22/javafx-graphics-22-win.jar!/javafx/scene/image/WritableImage.class</url>
+          <line>19</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/mapping/dto/SellerDto.java</url>
+          <line>10</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/mapping/mappers/MarketPlaceMappingImpl.java</url>
+          <line>140</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/mapping/mappers/MarketPlaceMappingImpl.java</url>
+          <line>147</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/viewcontroller/ProductViewController.java</url>
+          <line>209</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/viewcontroller/ProductViewController.java</url>
+          <line>215</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/viewcontroller/ProductViewController.java</url>
+          <line>219</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/viewcontroller/ProductViewController.java</url>
+          <line>218</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/viewcontroller/ProductViewController.java</url>
+          <line>224</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/viewcontroller/ProductViewController.java</url>
+          <line>230</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/viewcontroller/ProductViewController.java</url>
+          <line>233</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/viewcontroller/ProductViewController.java</url>
+          <line>237</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/viewcontroller/ProductViewController.java</url>
+          <line>240</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/viewcontroller/ProductViewController.java</url>
+          <line>245</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/controller/ProductController.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/controller/ProductController.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/mapping/mappers/MarketPlaceMappingImpl.java</url>
+          <line>139</line>
+          <properties class="co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.mappers.MarketPlaceMappingImpl">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/model/Marketplace.java</url>
+          <line>244</line>
+          <properties class="co.edu.uniquindio.marketplace_fx.marketplace_app.model.Marketplace">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/model/Marketplace.java</url>
+          <line>259</line>
+          <properties class="co.edu.uniquindio.marketplace_fx.marketplace_app.model.Marketplace">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/factory/ModelFactory.java</url>
+          <line>103</line>
+          <properties class="co.edu.uniquindio.marketplace_fx.marketplace_app.factory.ModelFactory">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/controller/RegisterController.java</url>
+          <line>12</line>
+          <properties class="co.edu.uniquindio.marketplace_fx.marketplace_app.controller.RegisterController" method="registerNewUser">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/factory/ModelFactory.java</url>
+          <line>97</line>
+          <properties class="co.edu.uniquindio.marketplace_fx.marketplace_app.factory.ModelFactory">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/factory/ModelFactory.java</url>
+          <line>88</line>
+          <properties class="co.edu.uniquindio.marketplace_fx.marketplace_app.factory.ModelFactory">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/mapping/mappers/MarketPlaceMappingImpl.java</url>
+          <line>178</line>
+          <properties class="co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.mappers.MarketPlaceMappingImpl">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/mapping/mappers/MarketPlaceMappingImpl.java</url>
+          <line>174</line>
+          <properties class="co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.mappers.MarketPlaceMappingImpl">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/model/Marketplace.java</url>
+          <line>233</line>
+          <properties class="co.edu.uniquindio.marketplace_fx.marketplace_app.model.Marketplace">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/viewcontroller/ProductViewController.java</url>
+          <line>206</line>
+          <properties class="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.ProductViewController" method="addProduct">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/controller/ProductController.java</url>
+          <line>19</line>
+          <properties class="co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController" method="setUser">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/controller/ProductController.java</url>
+          <line>27</line>
+          <properties class="co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController" method="addProduct">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/co.edu.uniquindio.MarketPlace_Fx/src/main/java/co/edu/uniquindio/marketplace_fx/marketplace_app/controller/ProductController.java</url>
+          <line>12</line>
+          <properties field="user" class="co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController" />
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
