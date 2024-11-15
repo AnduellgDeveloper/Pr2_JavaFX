@@ -22,8 +22,6 @@ public class Product {
         this.publicationDate = publicationDate;
 
     }
-
-
     public static ProductBuilder builder(){
         return new ProductBuilder();
     }
@@ -40,6 +38,4 @@ public class Product {
     public int getPrice() {return price;}
     public void setPrice(int price) {this.price = price;}
     public LocalDate getPublicationDate(){return publicationDate;}
-
-
 }

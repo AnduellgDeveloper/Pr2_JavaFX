@@ -33,7 +33,7 @@ public class DataUtil {
                 .password("nnnhdui213")
                 .build();
         Seller seller3 = Seller.builder()
-                .name("Ana Maria")
+                .name("Ana Pepa")
                 .lastName("Gomez")
                 .idNumber("8901134")
                 .address("Armenia-Quindio")
@@ -78,7 +78,7 @@ public class DataUtil {
                 .idNumber("89012378")
                 .address("Pereira-Risaralda")
                 .username("BilCardona")
-                .password("abigailc")
+                .password("1234")
                 .build();
         Seller seller9 = Seller.builder()
                 .name("Ana")
@@ -593,102 +593,19 @@ public class DataUtil {
                 .publicationDate(LocalDate.of(2024, 9, 9))
                 .build();
 
+        //----------------------------------------- Usuarios Registrados -----------------------------------------
+        marketplace.getListRegisterUser().add(admin1);
 
-
-
-
-
-
-
-
-
-
-        marketplace.addSeller(seller1);
-        marketplace.addSeller(seller2);
-        marketplace.addSeller(seller3);
-        marketplace.addSeller(seller4);
-        marketplace.addSeller(seller5);
-        marketplace.addSeller(seller6);
-        marketplace.addSeller(seller7);
-        marketplace.addSeller(seller8);
-        marketplace.addSeller(seller9);
-        marketplace.addSeller(seller10);
-//----------------MEN-----------------------------------------
-        marketplace.addProductToSeller(seller1, men1);
-        marketplace.addProductToSeller(seller1, men2);
-        marketplace.addProductToSeller(seller1, men3);
-        marketplace.addProductToSeller(seller1, men4);
-        marketplace.addProductToSeller(seller1, men5);
-        marketplace.addProductToSeller(seller1, men6);
-//---------------WOMEN----------------------------
-        marketplace.addProductToSeller(seller2,women1 );
-        marketplace.addProductToSeller(seller2,women2 );
-        marketplace.addProductToSeller(seller2,women3 );
-        marketplace.addProductToSeller(seller2,women4 );
-        marketplace.addProductToSeller(seller2,women5);
-        marketplace.addProductToSeller(seller2,women6 );
-//---------------GIRLS----------------------------------------
-        marketplace.addProductToSeller(seller3,girl1);
-        marketplace.addProductToSeller(seller3,girl2);
-        marketplace.addProductToSeller(seller3,girl3);
-        marketplace.addProductToSeller(seller3,girl4);
-        marketplace.addProductToSeller(seller3,girl5);
-        marketplace.addProductToSeller(seller3,girl6);
-//---------------BOYS--------------------------------------
-        marketplace.addProductToSeller(seller4,boy1);
-        marketplace.addProductToSeller(seller4,boy2);
-        marketplace.addProductToSeller(seller4,boy3);
-        marketplace.addProductToSeller(seller4,boy4);
-        marketplace.addProductToSeller(seller4,boy5);
-        marketplace.addProductToSeller(seller4,boy6);
-//--------------MAKEUP-----------------------------------------
-        marketplace.addProductToSeller(seller5,makeup1);
-        marketplace.addProductToSeller(seller5,makeup2);
-        marketplace.addProductToSeller(seller5,makeup3);
-        marketplace.addProductToSeller(seller5,makeup4);
-        marketplace.addProductToSeller(seller5,makeup5);
-        marketplace.addProductToSeller(seller5,makeup6);
-//---------------TECHNOLOGY----------------------------------------
-
-        marketplace.addProductToSeller(seller6,tech1);
-        marketplace.addProductToSeller(seller6,tech2);
-        marketplace.addProductToSeller(seller6,tech3);
-        marketplace.addProductToSeller(seller6,tech4);
-        marketplace.addProductToSeller(seller6,tech5);
-        marketplace.addProductToSeller(seller6,tech6);
-//---------------MOBILE DEVICE----------------------------------------
-        marketplace.addProductToSeller(seller7,mobile1);
-        marketplace.addProductToSeller(seller7,mobile2);
-        marketplace.addProductToSeller(seller7,mobile3);
-        marketplace.addProductToSeller(seller7,mobile4);
-        marketplace.addProductToSeller(seller7,mobile5);
-        marketplace.addProductToSeller(seller7,mobile6);
-//---------------MOTORCYCLE----------------------------------------
-
-        marketplace.addProductToSeller(seller8,motorcycle1);
-        marketplace.addProductToSeller(seller8,motorcycle2);
-        marketplace.addProductToSeller(seller8,motorcycle3);
-        marketplace.addProductToSeller(seller8,motorcycle4);
-        marketplace.addProductToSeller(seller8,motorcycle5);
-        marketplace.addProductToSeller(seller8,motorcycle6);
-//---------------CAR----------------------------------------
-        marketplace.addProductToSeller(seller9,car1);
-        marketplace.addProductToSeller(seller9,car2);
-        marketplace.addProductToSeller(seller9,car3);
-        marketplace.addProductToSeller(seller9,car4);
-        marketplace.addProductToSeller(seller9,car5);
-        marketplace.addProductToSeller(seller9,car6);
-//---------------HOME----------------------------------------
-        marketplace.addProductToSeller(seller10,home1);
-        marketplace.addProductToSeller(seller10,home2);
-        marketplace.addProductToSeller(seller10,home3);
-        marketplace.addProductToSeller(seller10,home4);
-        marketplace.addProductToSeller(seller10,home5);
-        marketplace.addProductToSeller(seller10,home6);
-
-
-
-
+        marketplace.getListRegisterUser().add(seller1);
+        marketplace.getListRegisterUser().add(seller2);
+        marketplace.getListRegisterUser().add(seller3);
+        marketplace.getListRegisterUser().add(seller4);
+        marketplace.getListRegisterUser().add(seller5);
+        marketplace.getListRegisterUser().add(seller6);
+        marketplace.getListRegisterUser().add(seller7);
+        marketplace.getListRegisterUser().add(seller8);
+        marketplace.getListRegisterUser().add(seller9);
+        marketplace.getListRegisterUser().add(seller10);
 
         marketplace.getListAdministrators().add(admin1);
 
@@ -702,20 +619,81 @@ public class DataUtil {
         marketplace.getListSellers().add(seller8);
         marketplace.getListSellers().add(seller9);
         marketplace.getListSellers().add(seller10);
+//----------------------------------------- MEN -----------------------------------------
+        marketplace.addProductToSeller("AnduellSeller", men1);
+        marketplace.addProductToSeller("AnduellSeller", men2);
+        marketplace.addProductToSeller("AnduellSeller", men3);
+        marketplace.addProductToSeller("AnduellSeller", men4);
+        marketplace.addProductToSeller("AnduellSeller", men5);
+        marketplace.addProductToSeller("AnduellSeller", men6);
 
-        // Usuarios Registrados
-        marketplace.getListRegisterUser().add(admin1);
+//----------------------------------------- WOMEN -----------------------------------------
+        marketplace.addProductToSeller("andresf989",women1 );
+        marketplace.addProductToSeller("andresf989",women2 );
+        marketplace.addProductToSeller("andresf989",women3 );
+        marketplace.addProductToSeller("andresf989",women4 );
+        marketplace.addProductToSeller("andresf989",women5);
+        marketplace.addProductToSeller("andresf989",women6 );
+//----------------------------------------- GIRLS -----------------------------------------
+        marketplace.addProductToSeller("cjknijdi78",girl1);
+        marketplace.addProductToSeller("cjknijdi78",girl2);
+        marketplace.addProductToSeller("cjknijdi78",girl3);
+        marketplace.addProductToSeller("cjknijdi78",girl4);
+        marketplace.addProductToSeller("cjknijdi78",girl5);
+        marketplace.addProductToSeller("cjknijdi78",girl6);
+//----------------------------------------- BOYS -----------------------------------------
+        marketplace.addProductToSeller("fer228",boy1);
+        marketplace.addProductToSeller("fer228",boy2);
+        marketplace.addProductToSeller("fer228",boy3);
+        marketplace.addProductToSeller("fer228",boy4);
+        marketplace.addProductToSeller("fer228",boy5);
+        marketplace.addProductToSeller("fer228",boy6);
+//----------------------------------------- MAKEUP -----------------------------------------
+        marketplace.addProductToSeller("jarinos",makeup1);
+        marketplace.addProductToSeller("jarinos",makeup2);
+        marketplace.addProductToSeller("jarinos",makeup3);
+        marketplace.addProductToSeller("jarinos",makeup4);
+        marketplace.addProductToSeller("jarinos",makeup5);
+        marketplace.addProductToSeller("jarinos",makeup6);
+//----------------------------------------- TECHNOLOGY -----------------------------------------
 
-        marketplace.getListRegisterUser().add(seller1);
-        marketplace.getListRegisterUser().add(seller2);
-        marketplace.getListRegisterUser().add(seller3);
-        marketplace.getListRegisterUser().add(seller4);
-        marketplace.getListRegisterUser().add(seller5);
-        marketplace.getListRegisterUser().add(seller6);
-        marketplace.getListRegisterUser().add(seller7);
-        marketplace.getListRegisterUser().add(seller8);
-        marketplace.getListRegisterUser().add(seller9);
-        marketplace.getListRegisterUser().add(seller10);
+        marketplace.addProductToSeller("obsof",tech1);
+        marketplace.addProductToSeller("obsof",tech2);
+        marketplace.addProductToSeller("obsof",tech3);
+        marketplace.addProductToSeller("obsof",tech4);
+        marketplace.addProductToSeller("obsof",tech5);
+        marketplace.addProductToSeller("obsof",tech6);
+//----------------------------------------- MOBILE DEVICE -----------------------------------------
+        marketplace.addProductToSeller("anital",mobile1);
+        marketplace.addProductToSeller("anital",mobile2);
+        marketplace.addProductToSeller("anital",mobile3);
+        marketplace.addProductToSeller("anital",mobile4);
+        marketplace.addProductToSeller("anital",mobile5);
+        marketplace.addProductToSeller("anital",mobile6);
+//----------------------------------------- MOTORCYCLE -----------------------------------------
+
+        marketplace.addProductToSeller("BilCardona",motorcycle1);
+        marketplace.addProductToSeller("BilCardona",motorcycle2);
+        marketplace.addProductToSeller("BilCardona",motorcycle3);
+        marketplace.addProductToSeller("BilCardona",motorcycle4);
+        marketplace.addProductToSeller("BilCardona",motorcycle5);
+        marketplace.addProductToSeller("BilCardona",motorcycle6);
+//----------------------------------------- CAR -----------------------------------------
+        marketplace.addProductToSeller("DuqueAna",car1);
+        marketplace.addProductToSeller("DuqueAna",car2);
+        marketplace.addProductToSeller("DuqueAna",car3);
+        marketplace.addProductToSeller("DuqueAna",car4);
+        marketplace.addProductToSeller("DuqueAna",car5);
+        marketplace.addProductToSeller("DuqueAna",car6);
+//----------------------------------------- HOME -----------------------------------------
+        marketplace.addProductToSeller("matisc",home1);
+        marketplace.addProductToSeller("matisc",home2);
+        marketplace.addProductToSeller("matisc",home3);
+        marketplace.addProductToSeller("matisc",home4);
+        marketplace.addProductToSeller("matisc",home5);
+        marketplace.addProductToSeller("matisc",home6);
+
+
 
         return marketplace;
     }

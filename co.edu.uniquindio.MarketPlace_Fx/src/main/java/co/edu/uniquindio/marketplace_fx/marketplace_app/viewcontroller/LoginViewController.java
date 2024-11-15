@@ -5,6 +5,7 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -52,7 +53,7 @@ public class LoginViewController {
             String role = loginController.getUserRole(userDto);
             switch (role) {
                 case "seller":
-                    navigateToSellerView(event);
+                    navigateToSellerView(event, username);
                     break;
                 case "administrator":
                     navigateToAdminView(event);
@@ -66,20 +67,23 @@ public class LoginViewController {
     }
 
 
-    private void navigateToSellerView(ActionEvent event) {
+    private void navigateToSellerView(ActionEvent event, String username) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass()
-                    .getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/MarketPlace-app.fxml"));
-            Scene scene = new Scene(loader.load());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/MarketPlace-app.fxml"));
+            Parent root = loader.load();
+
+            // Configurar la escena y mostrarla en una nueva ventana
+            Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("Dunima MarketPlace - Vendedor");
             stage.setScene(scene);
             stage.show();
 
-//            closeCurrentStage(event);
+            // closeCurrentStage(event);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         showMessage(TITULO_INTERFAZ_VENDEDOR, BODY_BIENVENIDO_VENDEDOR, HEADER, Alert.AlertType.INFORMATION);
     }
 

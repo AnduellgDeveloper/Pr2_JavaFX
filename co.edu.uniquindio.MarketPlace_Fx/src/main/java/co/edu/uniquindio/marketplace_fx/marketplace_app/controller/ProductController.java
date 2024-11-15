@@ -14,6 +14,9 @@ public class ProductController {
     public List<ProductDto> getProducts() {
         return modelFactory.getProducts();
     }
+    public List<ProductDto> getProducts(String username) {
+        return modelFactory.getProductsSeller(username);
+    }
 
 
     // Añadir un nuevo producto a la lista

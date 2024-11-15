@@ -48,11 +48,19 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
     public List<Seller> getListSellers() {
         return listSellers;
     }
-//    public List<Product> getListProducts() {
-//        return listProducts;
-//    }
     public List<Product> getProducts() {
         return products;
+    }
+
+    public List<Product> getProductsSeller (String username){
+        List<Product> sellerProducts = new ArrayList<>();
+        for (Seller seller : listSellers){
+            if (seller.getUsername().equalsIgnoreCase(username)){
+                sellerProducts.addAll(seller.getProducts());
+                break;
+            }
+        }
+        return sellerProducts;
     }
     public List<User> getListUsers() {
         return listUsers;
@@ -163,14 +171,21 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
     }
 
 
-    public void addProductToSeller(Seller seller, Product product) {
-        if (listSellers.contains(seller)) {
-//            seller.addProduct(product);
-            addProduct(product);
-        } else {
-            System.out.println("El vendedor no está registrado en el marketplace.");
+    public void addProductToSeller(String username, Product product) {
+        for (Seller seller : listSellers) {
+            if (seller.getUsername().equalsIgnoreCase(username)) {
+                seller.getProducts().add(product);
+                break;
+            }
         }
     }
+    public List<Product> addProductToSellerAndGetProducts(String username, Product product) {
+        addProductToSeller(username, product);
+        return getProductsSeller(username);
+    }
+
+
+
     public void addProduct(Product product) {
         products.add(product);
     }

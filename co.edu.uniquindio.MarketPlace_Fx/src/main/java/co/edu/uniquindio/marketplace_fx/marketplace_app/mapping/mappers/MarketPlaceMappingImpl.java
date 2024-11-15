@@ -12,6 +12,7 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IMarketPlaceMapp
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     // ------------------------ Products -----------------------
@@ -56,6 +57,43 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                 .publicationDate(productDto.publicationDate())
                 .build();
     }
+    @Override
+    public List<ProductDto> productsToProductsDto(List<Product> products) {
+        if (products == null) {
+            return null;
+        }
+
+        return products.stream()
+                .map(product -> new ProductDto(
+                        product.getName(),
+                        product.getImage(),
+                        product.getCategory(),
+                        product.getPrice(),
+                        product.getStatus(),
+                        product.getPublicationDate()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Product> productsDtoToProducts(List<ProductDto> productDtos) {
+        if (productDtos == null) {
+            return null;
+        }
+
+        return productDtos.stream()
+                .map(productDto -> Product.builder()
+                        .name(productDto.name())
+                        .image(productDto.image())
+                        .category(productDto.category())
+                        .price(productDto.price())
+                        .status(productDto.status())
+                        .publicationDate(productDto.publicationDate())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
+
+
     @Override
     public Product toObjectProduct(ProductDto product) {
         return null;

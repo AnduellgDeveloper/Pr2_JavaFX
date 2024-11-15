@@ -11,6 +11,7 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IModelFactorySer
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IProductCrud;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.utils.DataUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModelFactory implements IModelFactoryService {
@@ -37,11 +38,17 @@ public class ModelFactory implements IModelFactoryService {
         return mapper.getAdministratorsDto(marketplace.getListAdministrators());
     }
 
-    // Obtener la lista de productos
+    // Obtener todos los productos
     @Override
     public List<ProductDto> getProducts() {
-        return mapper.getProductsDto(marketplace.getProducts());
+        return mapper.productsToProductsDto(marketplace.getProducts());
     }
+
+    // Obtener productos de un vendedor específico
+    public List<ProductDto> getProductsSeller(String idNumber) {
+        return mapper.productsToProductsDto(marketplace.getProductsSeller(idNumber));
+    }
+
     //Obtener lista vendedores
     public List<SellerDto> getSellers() {
         return mapper.getSellersDto(marketplace.getListSellers());
@@ -91,7 +98,7 @@ public class ModelFactory implements IModelFactoryService {
         if (user != null) {
             return mapper.userToUserDto(user);
         }
-        return null; // Retorna null si la autenticación falla
+        return null;
     }
 
     // Método para obtener el rol del usuario autenticado

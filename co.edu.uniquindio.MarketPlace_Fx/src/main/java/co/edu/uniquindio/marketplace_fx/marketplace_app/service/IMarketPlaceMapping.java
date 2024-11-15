@@ -16,6 +16,8 @@ public interface IMarketPlaceMapping {
     List<ProductDto> getProductsDto(List<Product> products);
     ProductDto productToProductDto(Product product);
     Product productDtoToProduct(ProductDto productDto);
+    List<ProductDto> productsToProductsDto(List<Product> products);
+    List<Product> productsDtoToProducts(List<ProductDto> productDtos);
 
     Product toObjectProduct(ProductDto product);
     // ------------------------ Sellers ------------------------
@@ -28,8 +30,6 @@ public interface IMarketPlaceMapping {
     List<UserDto> getUsersDto(List<User> listUsers);
     UserDto userToUserDto(User user);
     User userDtoToUserType(UserDto userDto);
-
-
 
     User  toObjectUser(UserDto user);
 

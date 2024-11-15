@@ -3,6 +3,9 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.SellerController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.SellerDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Seller;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -18,80 +21,89 @@ import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.SellerConst
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.SellerConstants.TITULO_INCOMPLETO;
 
 public class SellerViewController {
+    private User user;
+    private Product product;
+    private Seller seller;
+    private String username;
     private SellerController sellerController;
-    private ObservableList<SellerDto>listSellers = FXCollections.observableArrayList();
+    private ObservableList<SellerDto> listSellers = FXCollections.observableArrayList();
+    private ObservableList<ProductDto> products = FXCollections.observableArrayList();
+
     private SellerDto selectSeller;
 
-        @FXML
-        private ResourceBundle resources;
+    @FXML
+    private ResourceBundle resources;
 
-        @FXML
-        private Button btnAddSeller;
+    @FXML
+    private Button btnAddSeller;
 
-        @FXML
-        private Button btnClearFields;
+    @FXML
+    private Button btnClearFields;
 
-        @FXML
-        private Button btnRemoveSeller;
+    @FXML
+    private Button btnRemoveSeller;
 
-        @FXML
-        private Button btnUpdateSeller;
+    @FXML
+    private Button btnUpdateSeller;
 
-        @FXML
-        private TableView<SellerDto> tbSeller;
+    @FXML
+    private TableView<SellerDto> tbSeller;
 
-        @FXML
-        private TableColumn<SellerDto,String> tcAddress;
+    @FXML
+    private TableColumn<SellerDto, String> tcAddress;
 
-        @FXML
-        private TableColumn<SellerDto,String> tcIdNumber;
+    @FXML
+    private TableColumn<SellerDto, String> tcIdNumber;
 
-        @FXML
-        private TableColumn<SellerDto,String> tcLastName;
+    @FXML
+    private TableColumn<SellerDto, String> tcLastName;
 
-        @FXML
-        private TableColumn<SellerDto,String> tcName;
+    @FXML
+    private TableColumn<SellerDto, String> tcName;
 
-        @FXML
-        private TableColumn<SellerDto,String> tcPassword;
+    @FXML
+    private TableColumn<SellerDto, String> tcPassword;
 
-        @FXML
-        private TableColumn<SellerDto,String> tcUserName;
+    @FXML
+    private TableColumn<SellerDto, String> tcUserName;
 
-        @FXML
-        private TextField txtAddress;
+    @FXML
+    private TextField txtAddress;
 
-        @FXML
-        private TextField txtLastName;
+    @FXML
+    private TextField txtLastName;
 
-        @FXML
-        private TextField txtName;
+    @FXML
+    private TextField txtName;
 
-        @FXML
-        private TextField txtPassword;
+    @FXML
+    private TextField txtPassword;
 
-        @FXML
-        private TextField txtUserName;
+    @FXML
+    private TextField txtUserName;
 
-        @FXML
-        private TextField txtidNumber;
+    @FXML
+    private TextField txtidNumber;
 
-        @FXML
-        void onAddSeller(ActionEvent event) {
-            addSeller();
-        }
-        @FXML
-        void onClearFields(ActionEvent event) {
-            clearFields();
-        }
-        @FXML
-        void onRemoveSeller(ActionEvent event) {
-            removeSeller();
-        }
-        @FXML
-        void onUpdateSeller(ActionEvent event) {
-            updateSeller();
-        }
+    @FXML
+    void onAddSeller(ActionEvent event) {
+        addSeller();
+    }
+
+    @FXML
+    void onClearFields(ActionEvent event) {
+        clearFields();
+    }
+
+    @FXML
+    void onRemoveSeller(ActionEvent event) {
+        removeSeller();
+    }
+
+    @FXML
+    void onUpdateSeller(ActionEvent event) {
+        updateSeller();
+    }
 
     private void clearFields() {
         txtName.clear();
@@ -101,20 +113,29 @@ public class SellerViewController {
         txtUserName.clear();
         txtPassword.clear();
     }
+    public void setUsername(String username) {
+        this.username = username;
+    }
     @FXML
-    void initialize(){
+    void initialize() {
         sellerController = new SellerController();
+        listSellers.addAll(sellerController.getSellers(this.username));
+        products.addAll(sellerController.getProducts(this.username));
         initView();
     }
     private void initView() {
         initDataBinding();
         getSellers();
+        getProducts();
         tbSeller.getItems().clear();
         tbSeller.setItems(listSellers);
         listenerSelection();
     }
     private void getSellers() {
-            listSellers.addAll(sellerController.getSellers());
+            listSellers.addAll(sellerController.getSellers(username));
+    }
+    private void getProducts() {
+        products.addAll(sellerController.getProducts(username));
     }
     private void listenerSelection() {
             tbSeller.getSelectionModel().selectedItemProperty().addListener((obs,oldSelection,newSelection) -> {
@@ -202,22 +223,25 @@ public class SellerViewController {
         } else {
             showMessage(TITULO_VENDEDOR_NO_REMOVIDO, BODY_VENDEDOR_NO_REMOVIDO, HEADER, Alert.AlertType.WARNING);
     }
-}
-// Método que valida los datos del vendedor antes de añadirlo o actualizarlo
-private boolean validDataSeller(SellerDto sellerDto) {
-    return sellerDto.name() != null && !sellerDto.name().isEmpty() &&
-            sellerDto.lastName() != null && !sellerDto.lastName().isEmpty() &&
-            sellerDto.idNumber()  != null && ! sellerDto.idNumber().isEmpty() &&
-            sellerDto.address() != null && ! sellerDto.address().isEmpty() &&
-            sellerDto.username() != null &&! sellerDto.username().isEmpty() &&
-            sellerDto.password() != null && ! sellerDto.password().isEmpty();
     }
+    // Método que valida los datos del vendedor antes de añadirlo o actualizarlo
+    private boolean validDataSeller(SellerDto sellerDto) {
+        return sellerDto.name() != null && !sellerDto.name().isEmpty() &&
+                sellerDto.lastName() != null && !sellerDto.lastName().isEmpty() &&
+                sellerDto.idNumber()  != null && ! sellerDto.idNumber().isEmpty() &&
+                sellerDto.address() != null && ! sellerDto.address().isEmpty() &&
+                sellerDto.username() != null &&! sellerDto.username().isEmpty() &&
+                sellerDto.password() != null && ! sellerDto.password().isEmpty();
+        }
     // Método que verifica si el producto ya existe en la lista
     private boolean isSellerDuplicate(SellerDto sellerDto) {
         return listSellers.stream().anyMatch(p -> p.name().equalsIgnoreCase(sellerDto.name()));
     }
     // Método que muestra un mensaje en un cuadro de diálogo
-    private void showMessage(String title, String message, String header, Alert.AlertType alertType) {
+    private void showMessage(String title,
+                             String message,
+                             String header,
+                             Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(header);

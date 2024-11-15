@@ -2,7 +2,6 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.RegisterController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,7 +51,6 @@ public class RegisterViewController {
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/WelcomeDunima-view.fxml"));
             Scene scene = new Scene(loader.load());
-
             Stage stage = new Stage();
             stage.setTitle("Dunima MarketPlace - Hub");
             stage.setScene(scene);
@@ -95,8 +93,4 @@ public class RegisterViewController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-
-
-
 }

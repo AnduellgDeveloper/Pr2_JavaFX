@@ -1,6 +1,7 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.SellerController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,14 +18,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.stream.Stream;
 
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.*;
 
 public class ProductViewController {
+    private String username;
+    private SellerController sellerController;
     private ProductController productController;
-//    private ObservableList<ProductDto> listProducts = FXCollections.observableArrayList();
     private ObservableList<ProductDto> products = FXCollections.observableArrayList();
     private ProductDto selectProduct;
     @FXML
@@ -65,6 +66,8 @@ public class ProductViewController {
     private TextField txtPrice;
     @FXML
     private ImageView imgProduct;
+
+
     // Método de acción para limpiar los campos de texto
     @FXML
     void onClearFields(ActionEvent event) {
@@ -85,10 +88,16 @@ public class ProductViewController {
     void onRemoveProduct(ActionEvent event) {
         removeProduct();
     }
+
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
     // Método de inicialización que se llama al cargar la vista
     @FXML
     void initialize() {
         productController = new ProductController();
+        sellerController = new SellerController();
         initView();
         toggleGroupRdBtns();
     }
@@ -110,7 +119,8 @@ public class ProductViewController {
     }
     // Método que obtiene los productos del controlador y los añade a la lista
     private void getProducts() {
-        products.addAll(productController.getProducts());
+        products.clear();
+        products.addAll(productController.getProducts(username));
     }
     // Método que inicializa el enlace de datos para las columnas de la tabla
     private void initDataBinding() {
@@ -155,8 +165,6 @@ public class ProductViewController {
     private void loadImage(String imageName) {
         try {
             String baseDir = "/co/edu/uniquindio/marketplace_fx/marketplace_app/images";
-
-
             try (Stream<Path> paths = Files.walk(Paths.get(getClass().getResource(baseDir).toURI()))) {
                 for (Path path : (Iterable<Path>) paths::iterator) {
                     if (Files.isRegularFile(path) && path.getFileName().toString().equals(imageName)) {
@@ -167,8 +175,6 @@ public class ProductViewController {
                     }
                 }
             }
-
-            // Si no se encuentra la imagen en ninguna subcarpeta
             imgProduct.setImage(null);
             showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN + " Imagen no encontrada", HEADER, Alert.AlertType.ERROR);
 
