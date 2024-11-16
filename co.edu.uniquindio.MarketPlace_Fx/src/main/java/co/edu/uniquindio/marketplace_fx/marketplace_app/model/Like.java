@@ -5,10 +5,13 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.model.builder.LikeBuilde
 public class Like {
     public Product product;
     private int likes;
+//    private Seller seller;
+
 
     public Like(Product product, int likes) {
         this.product = product;
         likes = 0;
+//        this.seller=seller;
     }
 
     public int getLikes() {
