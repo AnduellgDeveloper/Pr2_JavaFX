@@ -19,8 +19,10 @@ public class SellerController {
     public List<ProductDto> getProducts(String username) {
         return modelFactory.getProductsSeller(username);
     }
-
-    // Añadir un nuevo vendedor a la lista
+    public String getSellerName(String username) {
+        return username;
+    }
+        // Añadir un nuevo vendedor a la lista
     public boolean addSeller(SellerDto seller) {
         modelFactory.addSeller(seller);
         return true;

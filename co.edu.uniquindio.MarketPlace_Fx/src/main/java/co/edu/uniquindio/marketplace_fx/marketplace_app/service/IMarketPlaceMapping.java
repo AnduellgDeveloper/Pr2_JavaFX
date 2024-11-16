@@ -1,13 +1,7 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.service;
 
-import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.AdministratorDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.SellerDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Administrator;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Seller;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.*;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.*;
 
 import java.util.List;
 
@@ -31,14 +25,16 @@ public interface IMarketPlaceMapping {
     UserDto userToUserDto(User user);
     User userDtoToUserType(UserDto userDto);
 
-    User  toObjectUser(UserDto user);
-
     // ------------------------ Administrator -----------------------
     List<AdministratorDto> getAdministratorsDto(List<Administrator> listAdministrators);
     AdministratorDto administratorToAdministratorDto(Administrator administrator);
-    Administrator administratorDtoToAdministrator(AdministratorDto administratorDto);
-
-    Administrator  toObjectAdministrator(AdministratorDto administrator);
-
+    // ------------------------ Like ------------------------
+    List<LikeDto> getLikesDto(List<Like> likes);
+    LikeDto likeToLikeDto(Like like);
+    Like likeDtoToLike(LikeDto likeDto);
+    List<LikeDto> likesToLikesDto(List<Like> likes);
+    List<Like> likesDtoToLikes(List<LikeDto> likeDtos);
+    Like toObjectLike(LikeDto like);
+    // ------------------------ Comment ------------------------
 
 }

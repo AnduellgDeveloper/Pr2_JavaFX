@@ -77,7 +77,7 @@ public class LoginViewController {
             stage.setScene(scene);
             stage.show();
 
-            closeCurrentStage(event);
+//            closeCurrentStage(event);
         } catch (IOException e) {
             e.printStackTrace();
         }

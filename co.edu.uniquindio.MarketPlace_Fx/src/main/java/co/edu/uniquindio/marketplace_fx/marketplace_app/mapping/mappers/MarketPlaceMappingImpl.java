@@ -1,13 +1,7 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.mappers;
 
-import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.AdministratorDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.SellerDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Administrator;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Seller;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.*;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.*;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IMarketPlaceMapping;
 
 import java.util.ArrayList;
@@ -218,13 +212,7 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
         return userDto.idNumber() != null && userDto.idNumber().matches("^\\d{2}$");
     }
 
-
-
-    @Override
-    public User toObjectUser(UserDto user) {
-        return null;
-    }
-    // ------------------------ Administrators -----------------------
+    // --------------------------------- Administrators ---------------------------------
 
     @Override
     public List<AdministratorDto> getAdministratorsDto(List<Administrator> listAdministrators) {
@@ -251,26 +239,42 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                 administrator.getUsername(),
                 administrator.getPassword());
     }
-
+    // --------------------------------- Likes ---------------------------------
     @Override
-    public Administrator administratorDtoToAdministrator(AdministratorDto administratorDto) {
-        if (administratorDto == null) {
-            return null;
+    public List<LikeDto> getLikesDto(List<Like> likes) {
+        if (likes == null) {
+            return new ArrayList<>();
         }
-        return Administrator.builder()
-                .name(administratorDto.name())
-                .lastName(administratorDto.lastName())
-                .idNumber(administratorDto.idNumber())
-                .address(administratorDto.address())
-                .username(administratorDto.username())
-                .password(administratorDto.password())
-                .build();
+        List<LikeDto> listLikesDto = new ArrayList<>(likes.size());
+        for (Like like : likes) {
+            listLikesDto.add(likeToLikeDto(like));
+        }
+        return listLikesDto;
     }
-
     @Override
-    public Administrator toObjectAdministrator(AdministratorDto administrator) {
+    public LikeDto likeToLikeDto(Like like) {
         return null;
     }
 
+    @Override
+    public Like likeDtoToLike(LikeDto likeDto) {
+        return null;
+    }
+
+    @Override
+    public List<LikeDto> likesToLikesDto(List<Like> likes) {
+        return List.of();
+    }
+
+    @Override
+    public List<Like> likesDtoToLikes(List<LikeDto> likeDtos) {
+        return List.of();
+    }
+
+    @Override
+    public Like toObjectLike(LikeDto like) {
+        return null;
+    }
+    // --------------------------------- Comments ---------------------------------
 
 }

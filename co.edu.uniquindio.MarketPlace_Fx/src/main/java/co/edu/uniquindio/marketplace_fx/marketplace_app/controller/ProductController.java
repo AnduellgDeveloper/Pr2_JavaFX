@@ -31,14 +31,14 @@ public class ProductController {
     // Notificar a todos los observadores cuando se agrega un like
     private void notifyLikeAdded(ProductDto product) {
         for (IObserver observer : observers) {
-            observer.LikeAdd(product);
+            observer.likeAdd(product);
         }
     }
 
     // Notificar a todos los observadores cuando se agrega un comentario
     private void notifyCommentAdded(ProductDto product) {
         for (IObserver observer : observers) {
-            observer.CommentAdd(product);
+            observer.commentAdd(product);
         }
     }
 

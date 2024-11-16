@@ -14,7 +14,7 @@ public class DataUtil {
                 .lastName("Principal")
                 .idNumber("01")
                 .address("Central Office")
-                .username("AnduellAdmin")
+                .username("admin")
                 .password("123")
                 .build();
         Seller seller1 = Seller.builder()
@@ -22,7 +22,7 @@ public class DataUtil {
                 .lastName("Palomares Cerquera")
                 .idNumber("1077722000")
                 .address("El prado")
-                .username("AnduellSeller")
+                .username("a")
                 .password("123")
                 .build();
         Seller seller2 = Seller.builder()
@@ -71,7 +71,7 @@ public class DataUtil {
                 .idNumber("12345678")
                 .address("Berlin-Armenia")
                 .username("anital")
-                .password("156789")
+                .password("123")
                 .build();
         Seller seller8 = Seller.builder()
                 .name("Abigail")
@@ -621,12 +621,12 @@ public class DataUtil {
         marketplace.getListSellers().add(seller9);
         marketplace.getListSellers().add(seller10);
 //----------------------------------------- MEN -----------------------------------------
-        marketplace.addProductToSeller("AnduellSeller", men1);
-        marketplace.addProductToSeller("AnduellSeller", men2);
-        marketplace.addProductToSeller("AnduellSeller", men3);
-        marketplace.addProductToSeller("AnduellSeller", men4);
-        marketplace.addProductToSeller("AnduellSeller", men5);
-        marketplace.addProductToSeller("AnduellSeller", men6);
+        marketplace.addProductToSeller("a", men1);
+        marketplace.addProductToSeller("a", men2);
+        marketplace.addProductToSeller("a", men3);
+        marketplace.addProductToSeller("a", men4);
+        marketplace.addProductToSeller("a", men5);
+        marketplace.addProductToSeller("a", men6);
 
 //----------------------------------------- WOMEN -----------------------------------------
         marketplace.addProductToSeller("andresf989",women1 );

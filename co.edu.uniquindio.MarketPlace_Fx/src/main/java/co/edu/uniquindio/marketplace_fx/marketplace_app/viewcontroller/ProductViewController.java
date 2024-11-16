@@ -3,7 +3,7 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.SellerController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IObserverProduct;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -19,6 +19,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -30,6 +31,8 @@ public class ProductViewController {
     private ProductController productController;
     private ObservableList<ProductDto> products = FXCollections.observableArrayList();
     private ProductDto selectProduct;
+    private List<IObserverProduct> observerProducts = new ArrayList<>();
+
     @FXML
     private Button btnAddProduct, btnClearFields, btnUpdateProduct;
     @FXML
@@ -172,6 +175,22 @@ public class ProductViewController {
             showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN + e.getMessage(), HEADER, Alert.AlertType.ERROR);
         }
     }
+    // Método para agregar observers
+    public void addProductChangeListener(IObserverProduct observerProduct) {
+        observerProducts.add(observerProduct);
+    }
+
+    // Método para remover observers
+    public void removeProductChangeListener(IObserverProduct observerProduct) {
+        observerProducts.remove(observerProduct);
+    }
+
+    // Método para notificar a todos los observers
+    private void notifyProductChange() {
+        for (IObserverProduct observerProduct : observerProducts) {
+            observerProduct.onProductsChanged(products);
+        }
+    }
     // Método que agrega un nuevo producto a la lista y a la base de datos
     private void addProduct() {
         ProductDto productDto = createProductDto();
@@ -183,6 +202,7 @@ public class ProductViewController {
                 if (isAdded) {
                     products.add(productDto);
                     clearFields();
+                    notifyProductChange();
                     showMessage(TITULO_PRODUCTO_AGREGADO, BODY_PRODUCTO_AGREGADO, HEADER, Alert.AlertType.INFORMATION);
                 } else {
                     showMessage(TITULO_PRODUCTO_NO_AGREGADO, BODY_PRODUCTO_NO_AGREGADO, HEADER, Alert.AlertType.ERROR);
@@ -200,6 +220,7 @@ public class ProductViewController {
                 productController.updateProduct(updatedProduct);
                 products.set(products.indexOf(selectProduct), updatedProduct);
                 showProductInformation(updatedProduct);
+                notifyProductChange();
                 showMessage(TITULO_PRODUCTO_ACTUALIZADO, BODY_PRODUCTO_ACTUALIZADO, HEADER, Alert.AlertType.INFORMATION);
             } else {
                 showMessage(TITULO_INCOMPLETO, BODY_INCOMPLETO, HEADER, Alert.AlertType.WARNING);
@@ -214,6 +235,7 @@ public class ProductViewController {
             productController.removeProduct(selectProduct);
             products.remove(selectProduct);
             clearFields();
+            notifyProductChange();
             showMessage(TITULO_PRODUCTO_REMOVIDO, BODY_PRODUCTO_REMOVIDO, HEADER, Alert.AlertType.INFORMATION);
         } else {
             showMessage(TITULO_PRODUCTO_NO_REMOVIDO, BODY_PRODUCTO_NO_REMOVIDO, HEADER, Alert.AlertType.WARNING);
