@@ -9,14 +9,12 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane prefHeight="882.0" prefWidth="1526.0" style="-fx-background-color: #ecb0f7;"
-            stylesheets="@Css/StyleImage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.PostWallViewController">
+<ScrollPane prefHeight="882.0" prefWidth="1526.0" style="-fx-background-color: #ecb0f7;" stylesheets="@Css/StyleImage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.PostWallViewController">
    <content>
       <AnchorPane prefHeight="887.0" prefWidth="2116.0" style="-fx-background-color: #ecb0f7;">
          <children>
@@ -37,37 +35,6 @@
                   <Image url="@images/LupaNegra.png" />
                </image>
             </ImageView>
-         </children>
-      </Pane>
-
-            <ImageView fx:id="imgDunimaLogo" fitHeight="25.0" fitWidth="29.0" layoutX="721.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/Lupa.png" />
-         </image>
-      </ImageView>
-      <Pane layoutX="189.0" layoutY="54.0" prefHeight="206.0" prefWidth="560.0" style="-fx-background-color: black;">
-         <children>
-            <HBox fx:id="imageContainer" layoutX="7.0" layoutY="6.0" prefHeight="195.0" prefWidth="548.0">
-               <children>
-                  <ImageView fx:id="imgSeller1_1" fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@images/Men/ChaquetaAzul.png" />
-                     </image>
-                  </ImageView>
-                  <Pane prefHeight="177.0" prefWidth="25.0" style="-fx-background-color: black;" />
-                  <ImageView fx:id="imgSeller1_2" fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@images/Men/ChaquetaAzul.png" />
-                     </image>
-                  </ImageView>
-                  <Pane prefHeight="227.0" prefWidth="25.0" style="-fx-background-color: black;" />
-                  <ImageView fx:id="imgSeller1_3" fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@images/Men/ChaquetaAzul.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
          </children>
       </Pane>
       <Button fx:id="btnLike4" layoutX="202.0" layoutY="554.0" mnemonicParsing="false" onAction="#onBtnLike4" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="4">
@@ -208,31 +175,6 @@
             </ImageView>
          </graphic>
       </Button>
-      <Pane layoutX="189.0" layoutY="332.0" prefHeight="206.0" prefWidth="560.0" style="-fx-background-color: black;">
-         <children>
-            <HBox fx:id="imageContainer2" layoutX="7.0" layoutY="6.0" prefHeight="195.0" prefWidth="548.0">
-               <children>
-                  <ImageView fx:id="imgSeller2_1" fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@images/Men/ChaquetaAzul.png" />
-                     </image>
-                  </ImageView>
-                  <Pane prefHeight="177.0" prefWidth="25.0" style="-fx-background-color: black;" />
-                  <ImageView fx:id="imgSeller2_2" fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@images/Men/ChaquetaAzul.png" />
-                     </image>
-                  </ImageView>
-                  <Pane prefHeight="227.0" prefWidth="25.0" style="-fx-background-color: black;" />
-                  <ImageView fx:id="imgSeller2_3" fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@images/Men/ChaquetaAzul.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-         </children>
-      </Pane>
       <Button fx:id="btnlike1" layoutX="189.0" layoutY="275.0" mnemonicParsing="false" onAction="#onBtnLike1" prefHeight="34.0" prefWidth="95.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="1">
          <effect>
             <Blend />
@@ -371,6 +313,36 @@
             </ImageView>
          </graphic>
       </Button>
+      <ImageView fx:id="imgSeller2_1" fitHeight="196.0" fitWidth="165.0" layoutX="202.0" layoutY="332.0" pickOnBounds="true">
+         <image>
+            <Image url="@images/Men/ChaquetaAzul.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgSeller2_2" fitHeight="196.0" fitWidth="165.0" layoutX="387.0" layoutY="332.0" pickOnBounds="true">
+         <image>
+            <Image url="@images/Men/ChaquetaAzul.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgSeller2_3" fitHeight="196.0" fitWidth="165.0" layoutX="571.0" layoutY="332.0" pickOnBounds="true">
+         <image>
+            <Image url="@images/Men/ChaquetaAzul.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgSeller1_3" fitHeight="196.0" fitWidth="165.0" layoutX="571.0" layoutY="57.0" pickOnBounds="true">
+         <image>
+            <Image url="@images/Men/ChaquetaAzul.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgSeller1_2" fitHeight="196.0" fitWidth="165.0" layoutX="387.0" layoutY="57.0" pickOnBounds="true">
+         <image>
+            <Image url="@images/Men/ChaquetaAzul.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgSeller1_1" fitHeight="196.0" fitWidth="165.0" layoutX="202.0" layoutY="57.0" pickOnBounds="true">
+         <image>
+            <Image url="@images/Men/ChaquetaAzul.png" />
+         </image>
+      </ImageView>
       </children>
       </AnchorPane>
    </content>

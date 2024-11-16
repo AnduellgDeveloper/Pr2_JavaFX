@@ -21,6 +21,7 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
     private final List<User> listUsers = new ArrayList<>();
     private final List<Administrator> listAdministrators = new ArrayList<>();
     private String name;
+    private String username;
     MarketPlaceMappingImpl mapper;
 
     public Marketplace() {
@@ -55,6 +56,18 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
         return products;
     }
 
+    public List<Product> addProductToSeller(String username, Product product) {
+        List<Product> products = sellerProductMap.computeIfAbsent(username, _ -> new ArrayList<>());
+
+        if (products.stream().noneMatch(p -> p.getName().equalsIgnoreCase(product.getName()))) {
+            products.add(product);
+            return products;
+        } else {
+            System.out.printf("Producto duplicado: %s%n ", product.getName());
+        }
+        return new ArrayList<>();
+    }
+
     // Método para obtener los productos de un vendedor específico
     public List<Product> getProductsSeller(String username) {
         List<Product> products = sellerProductMap.getOrDefault(username, new ArrayList<>());
@@ -63,19 +76,6 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
         }
         return products;
     }
-
-    public void addProductToSeller(String username, Product product) {
-        List<Product> products = sellerProductMap.computeIfAbsent(username, _ -> new ArrayList<>());
-
-        if (products.stream().noneMatch(p -> p.getName().equalsIgnoreCase(product.getName()))) {
-            products.add(product);
-        } else {
-            System.out.printf("Producto duplicado: %s%n ", product.getName());
-        }
-    }
-
-
-
     public void addProduct(Product product) {
         products.add(product);
     }

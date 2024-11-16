@@ -11,14 +11,19 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Objects;
+
+import java.util.stream.Stream;
+import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.PostWallConstants.*;
 
 public class PostWallViewController {
     private String username;
 
-    private SellerController sellerController;
-
+    private final ProductController productController = new ProductController();
+    private final SellerController sellerController = new SellerController();
     // ------------------------------------ Image View ------------------------------------
     @FXML
     private ImageView imgSeller1_1, imgSeller1_2, imgSeller1_3;
@@ -27,20 +32,35 @@ public class PostWallViewController {
 
     // ------------------------------------ Buttons ------------------------------------
     @FXML
-    private HBox imageContainer;
-    @FXML
-    private HBox imageContainer2;
-    @FXML
     private Pane Slider;
     public void setUsername(String username) {
         this.username = username;
+        productController.getProducts(username);
     }
     @FXML
     public void initialize() {
-        setUsername(username);
-        ProductController productController = new ProductController();
+//        setUsername(username);
         List<ProductDto> sellerProducts = productController.getProducts(username);
         populateWall(sellerProducts);
+    }
+
+    // Método que busca y carga la imagen desde las carpetas
+    private Image loadImageFromDirectories(String imageName) {
+        try {
+            String baseDir = "/co/edu/uniquindio/marketplace_fx/marketplace_app/images";
+            try (Stream<Path> paths = Files.walk(Paths.get(getClass().getResource(baseDir).toURI()))) {
+                for (Path path : (Iterable<Path>) paths::iterator) {
+                    if (Files.isRegularFile(path) && path.getFileName().toString().equals(imageName)) {
+                        String fullPath = path.toUri().toString();
+                        return new Image(fullPath);
+                    }
+                }
+            }
+            showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN + "Imagen no encontrada: " + imageName, HEADER, Alert.AlertType.ERROR);
+        } catch (Exception e) {
+            showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN + e.getMessage(), HEADER, Alert.AlertType.ERROR);
+        }
+        return null;
     }
 
     // Método que obtiene los productos y los añade a la interfaz
@@ -54,9 +74,12 @@ public class PostWallViewController {
                 if (i < sellerProducts.size()) {
                     ProductDto product = sellerProducts.get(i);
                     String imagePath = product.image();
-                    Image image = new Image(Objects.requireNonNull(getClass()
-                            .getResourceAsStream("/co/edu/uniquindio/marketplace_fx/marketplace_app/images/" + imagePath)));
-                    imageViews[i].setImage(image);
+                    Image image = loadImageFromDirectories(imagePath);
+                    if (image != null) {
+                        imageViews[i].setImage(image);
+                    } else {
+                        imageViews[i].setImage(null);
+                    }
                 } else {
                     imageViews[i].setImage(null);
                 }
