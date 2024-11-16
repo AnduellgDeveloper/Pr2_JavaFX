@@ -253,28 +253,98 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     }
     @Override
     public LikeDto likeToLikeDto(Like like) {
-        return null;
+        if (like == null) {
+            return null;
+        }
+        return new LikeDto(
+                like.product,
+                like.getLikes());
+
     }
 
     @Override
     public Like likeDtoToLike(LikeDto likeDto) {
-        return null;
+        if (likeDto == null) {
+            return null;
+        }
+        return Like.builder()
+                .likes(likeDto.likes())
+                .product(likeDto.product())
+                .build();
     }
 
     @Override
     public List<LikeDto> likesToLikesDto(List<Like> likes) {
-        return List.of();
+        if (likes == null) {
+            return null;
+        }
+
+        return likes.stream()
+                .map(like -> new LikeDto(
+                        like.getProduct(),
+                        like.getLikes()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Like> likesDtoToLikes(List<LikeDto> likeDtos) {
-        return List.of();
+        if (likeDtos == null) {
+            return null;
+        }
+
+        return likeDtos.stream()
+                .map(likeDto ->   Like.builder()
+                        .likes(likeDto.likes())
+                        .product(likeDto.product())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     @Override
     public Like toObjectLike(LikeDto like) {
         return null;
     }
+
+
+
+
+
     // --------------------------------- Comments ---------------------------------
+    @Override
+    public List<CommentDto> getCommentsDto(List<Comment> comments) {
+        if (comments == null) {
+            return new ArrayList<>();
+        }
+        List<   CommentDto> listCommentsDto = new ArrayList<>(comments.size());
+        for (Comment comment : comments) {
+            listCommentsDto.add(commentToCommentDto(comment));
+        }
+        return listCommentsDto;    }
+
+    @Override
+    public CommentDto commentToCommentDto(Comment comment) {
+        return null;
+    }
+
+    @Override
+    public Comment commentDtoToComment(Comment comment) {
+        return null;
+    }
+
+    @Override
+    public List<Comment> commentsTocommentsDto(List<Comment> comments) {
+        return List.of();
+    }
+
+    @Override
+    public List<Comment> commentsDtoToComments(List<CommentDto> commentDtos) {
+        return List.of();
+    }
+
+    @Override
+    public Like toObjectComment(CommentDto comment) {
+        return null;
+    }
+
 
 }
