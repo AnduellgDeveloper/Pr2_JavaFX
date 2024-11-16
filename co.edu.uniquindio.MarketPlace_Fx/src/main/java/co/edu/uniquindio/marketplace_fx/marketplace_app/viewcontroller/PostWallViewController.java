@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
+import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Files;
@@ -51,37 +52,50 @@ public class PostWallViewController {
     private Image loadImageFromDirectories(String imageName) {
         try {
             String baseDir = "/co/edu/uniquindio/marketplace_fx/marketplace_app/images";
-            URL resource = getClass().getResource(baseDir + "/" + imageName);
-            if (resource == null) {
-                System.err.println("Imagen no encontrada en el classpath: " + baseDir + "/" + imageName);
+            URL baseResource = getClass().getResource(baseDir);
+
+            if (baseResource == null) {
+                System.err.println("Directorio base de imágenes no encontrado: " + baseDir);
+                showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN + "Directorio no encontrado: " + baseDir, HEADER, Alert.AlertType.ERROR);
+                return null;
+            }
+            File baseDirectory = new File(baseResource.toURI());
+            if (!baseDirectory.exists() || !baseDirectory.isDirectory()) {
+                System.err.println("El directorio base no es válido o no existe: " + baseDirectory.getAbsolutePath());
+                showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN + "Directorio inválido: " + baseDirectory.getAbsolutePath(), HEADER, Alert.AlertType.ERROR);
+                return null;
+            }
+            File imageFile = findImageInDirectory(baseDirectory, imageName);
+            if (imageFile == null) {
+                System.err.println("Imagen no encontrada: " + imageName);
                 showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN + "Imagen no encontrada: " + imageName, HEADER, Alert.AlertType.ERROR);
                 return null;
             }
-            String fullPath = resource.toExternalForm();
-            System.out.println("Cargando imagen desde: " + fullPath);
+            String fullPath = imageFile.toURI().toString();
             return new Image(fullPath);
+
         } catch (Exception e) {
             e.printStackTrace();
             showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN + e.getMessage(), HEADER, Alert.AlertType.ERROR);
+            return null;
+        }
+    }
+
+    // Método auxiliar para buscar recursivamente la imagen en un directorio
+    private File findImageInDirectory(File directory, String imageName) {
+        for (File file : directory.listFiles()) {
+            if (file.isDirectory()) {
+                File found = findImageInDirectory(file, imageName);
+                if (found != null) {
+                    return found;
+                }
+            } else if (file.getName().equalsIgnoreCase(imageName)) {
+                return file;
+            }
         }
         return null;
     }
 
-//    private Image loadImageFromResources(String imageName) {
-//        String resourcePath = "/co/edu/uniquindio/marketplace_fx/marketplace_app/images/" + imageName;
-//        try {
-//            InputStream imageStream = getClass().getResourceAsStream(resourcePath);
-//            if (imageStream != null) {
-//                return new Image(imageStream);
-//            } else {
-//                System.err.println("Imagen no encontrada en el classpath: " + resourcePath);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            System.err.println("Error al cargar la imagen: " + imageName);
-//        }
-//        return null; // Fallback: Podrías devolver una imagen por defecto aquí si prefieres.
-//    }
     private void populateWall(List<ProductDto> sellerProducts) {
         try {
             ImageView[] imageViews = {
@@ -107,57 +121,6 @@ public class PostWallViewController {
             System.err.println("Error al poblar el muro de productos: " + e.getMessage());
         }
     }
-
-
-//    // Método que busca y carga la imagen desde los recursos
-//    private Image loadImageFromDirectories(String imageName) {
-//        try {
-//            // Ruta relativa dentro de src/main/resources
-//            String resourcePath = "co/edu/uniquindio/marketplace_fx/marketplace_app/images/" + imageName;
-//            InputStream imageStream = getClass().getClassLoader().getResourceAsStream(resourcePath);
-//            if (imageStream != null) {
-//                return new Image(imageStream);
-//            } else {
-//                // Log de error en caso de no encontrar la imagen
-//                System.err.println("Imagen no encontrada: " + resourcePath);
-//                showMessage("Error de Imagen", "No se encontró la imagen: " + resourcePath, "Error", Alert.AlertType.ERROR);
-//            }
-//        } catch (Exception e) {
-//            System.err.println("Error cargando imagen: " + e.getMessage());
-//            showMessage("Error de Imagen", "Error cargando imagen: " + e.getMessage(), "Error", Alert.AlertType.ERROR);
-//        }
-//        return null;
-//    }
-//
-//    // Método que obtiene los productos y los añade a la interfaz
-//    private void populateWall(List<ProductDto> sellerProducts) {
-//        try {
-//            ImageView[] imageViews = {
-//                    imgSeller1_1, imgSeller1_2, imgSeller1_3,
-//                    imgSeller2_1, imgSeller2_2, imgSeller2_3
-//            };
-//            for (int i = 0; i < imageViews.length; i++) {
-//                if (i < sellerProducts.size()) {
-//                    ProductDto product = sellerProducts.get(i);
-//                    String imagePath = product.image(); // Obtiene el nombre de la imagen desde el DTO
-//                    Image image = loadImageFromDirectories(imagePath); // Carga la imagen
-//                    if (image != null) {
-//                        imageViews[i].setImage(image);
-//                    } else {
-//                        imageViews[i].setImage(null); // Limpia el ImageView si la imagen no se pudo cargar
-//                    }
-//                } else {
-//                    imageViews[i].setImage(null); // Limpia el ImageView si no hay más productos
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            showMessage("Error", "Ocurrió un error al cargar el muro de productos: " + e.getMessage(), "Error", Alert.AlertType.ERROR);
-//        }
-//    }
-//
-//
-//
     // Método que muestra un mensaje en un cuadro de diálogo
     private void showMessage(String title, String message, String header, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
@@ -203,6 +166,5 @@ public class PostWallViewController {
     }
     @FXML
     void onComment4(ActionEvent event) {
-
     }
 }

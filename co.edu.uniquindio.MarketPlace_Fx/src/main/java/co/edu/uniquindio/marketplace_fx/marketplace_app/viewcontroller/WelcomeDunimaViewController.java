@@ -37,14 +37,12 @@ public class WelcomeDunimaViewController {
             e.printStackTrace();
         }
     }
-
     @FXML
     void onGoToRegister(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass()
                     .getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Register-view.fxml"));
             Scene scene = new Scene(loader.load());
-
             Stage newStage = new Stage();
             newStage.setTitle("Dunima MarketPlace - Register");
             newStage.setScene(scene);

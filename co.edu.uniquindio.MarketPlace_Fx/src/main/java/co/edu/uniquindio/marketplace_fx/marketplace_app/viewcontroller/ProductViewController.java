@@ -31,17 +31,9 @@ public class ProductViewController {
     private ObservableList<ProductDto> products = FXCollections.observableArrayList();
     private ProductDto selectProduct;
     @FXML
-    private Button btnAddProduct;
+    private Button btnAddProduct, btnClearFields, btnUpdateProduct;
     @FXML
-    private Button btnClearFields;
-    @FXML
-    private Button btnUpdateProduct;
-    @FXML
-    private RadioButton rdBtnCancelled;
-    @FXML
-    private RadioButton rdBtnPublished;
-    @FXML
-    private RadioButton rdBtnSold;
+    private RadioButton rdBtnCancelled, rdBtnPublished, rdBtnSold;
     @FXML
     private TableView<ProductDto> tbProducts;
     @FXML
@@ -59,13 +51,7 @@ public class ProductViewController {
     @FXML
     private DatePicker dpPublicationDate;
     @FXML
-    private TextField txtCategory;
-    @FXML
-    private TextField txtImage;
-    @FXML
-    private TextField txtName;
-    @FXML
-    private TextField txtPrice;
+    private TextField txtCategory, txtImage, txtName, txtPrice;
     @FXML
     private ImageView imgProduct;
 
@@ -125,7 +111,6 @@ public class ProductViewController {
         products.addAll(userProducts);
 
     }
-
     // Método que inicializa el enlace de datos para las columnas de la tabla
     private void initDataBinding() {
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().name()));

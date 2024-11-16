@@ -71,9 +71,6 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
     // Método para obtener los productos de un vendedor específico
     public List<Product> getProductsSeller(String username) {
         List<Product> products = sellerProductMap.getOrDefault(username, new ArrayList<>());
-        if (products.isEmpty()) {
-            System.out.printf("No se encontraron productos para el username: %s", username);
-        }
         return products;
     }
     public void addProduct(Product product) {
