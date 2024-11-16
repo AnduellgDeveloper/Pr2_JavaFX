@@ -25,4 +25,5 @@ public class ProductController {
         modelFactory.addProduct(productDto);
         return true;
     }
+
 }

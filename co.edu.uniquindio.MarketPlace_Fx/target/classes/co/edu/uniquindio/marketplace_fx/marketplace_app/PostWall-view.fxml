@@ -15,13 +15,14 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane prefHeight="882.0" prefWidth="1526.0" style="-fx-background-color: #ecb0f7;" stylesheets="@Css/StyleImage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.PostWallViewController">
+<ScrollPane prefHeight="882.0" prefWidth="1526.0" style="-fx-background-color: #ecb0f7;"
+            stylesheets="@Css/StyleImage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.PostWallViewController">
    <content>
       <AnchorPane prefHeight="887.0" prefWidth="2116.0" style="-fx-background-color: #ecb0f7;">
-      <children>
+         <children>
       <Button layoutX="212.0" layoutY="298.0" minHeight="0.0" minWidth="0.0" prefHeight="34.0" prefWidth="37.0" style="-fx-background-color: #ecb0f7; -fx-background-radius: 50;" />
 
-      <Pane prefHeight="882.0" prefWidth="185.0" style="-fx-background-color: d76ae8;">
+      <Pane fx:id="Slider" prefHeight="882.0" prefWidth="185.0" style="-fx-background-color: d76ae8;">
          <children>
             <TextField layoutX="4.0" layoutY="85.0" prefHeight="25.0" prefWidth="153.0" />
             <ListView layoutX="1.0" layoutY="118.0" prefHeight="318.0" prefWidth="185.0" />
@@ -39,7 +40,7 @@
          </children>
       </Pane>
 
-            <ImageView fitHeight="25.0" fitWidth="29.0" layoutX="721.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgDunimaLogo" fitHeight="25.0" fitWidth="29.0" layoutX="721.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Lupa.png" />
          </image>
@@ -48,19 +49,19 @@
          <children>
             <HBox fx:id="imageContainer" layoutX="7.0" layoutY="6.0" prefHeight="195.0" prefWidth="548.0">
                <children>
-                  <ImageView fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
+                  <ImageView fx:id="imgSeller1_1" fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
                      <image>
                         <Image url="@images/Men/ChaquetaAzul.png" />
                      </image>
                   </ImageView>
                   <Pane prefHeight="177.0" prefWidth="25.0" style="-fx-background-color: black;" />
-                  <ImageView fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
+                  <ImageView fx:id="imgSeller1_2" fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
                      <image>
                         <Image url="@images/Men/ChaquetaAzul.png" />
                      </image>
                   </ImageView>
                   <Pane prefHeight="227.0" prefWidth="25.0" style="-fx-background-color: black;" />
-                  <ImageView fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
+                  <ImageView fx:id="imgSeller1_3" fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
                      <image>
                         <Image url="@images/Men/ChaquetaAzul.png" />
                      </image>
@@ -69,7 +70,7 @@
             </HBox>
          </children>
       </Pane>
-      <Button fx:id="btnLike4" layoutX="189.0" layoutY="538.0" mnemonicParsing="false" onAction="#onBtnLike4" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="4">
+      <Button fx:id="btnLike4" layoutX="202.0" layoutY="554.0" mnemonicParsing="false" onAction="#onBtnLike4" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="4">
          <effect>
             <Blend />
          </effect>
@@ -92,7 +93,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnLogin131" layoutX="272.0" layoutY="262.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="102.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="1">
+      <Button fx:id="btnComment1" layoutX="266.0" layoutY="275.0" mnemonicParsing="false" onAction="#onBtnComment1" prefHeight="47.0" prefWidth="102.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="1">
          <effect>
             <Blend />
          </effect>
@@ -115,7 +116,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnLogin1" layoutX="374.0" layoutY="262.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="2">
+      <Button fx:id="btnLike2" layoutX="374.0" layoutY="275.0" mnemonicParsing="false" onAction="#onBtnLike2" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="2">
          <effect>
             <Blend />
          </effect>
@@ -138,7 +139,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnLogin1311" layoutX="469.0" layoutY="262.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="102.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="2">
+      <Button fx:id="btnComment2" layoutX="469.0" layoutY="275.0" mnemonicParsing="false" onAction="#onBtnComment2" prefHeight="47.0" prefWidth="102.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="2">
          <effect>
             <Blend />
          </effect>
@@ -161,7 +162,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnLogin13111" layoutX="660.0" layoutY="262.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="102.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="3">
+      <Button fx:id="btnComment3" layoutX="660.0" layoutY="275.0" mnemonicParsing="false" onAction="#onBtnComment3" prefHeight="47.0" prefWidth="102.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="3">
          <effect>
             <Blend />
          </effect>
@@ -184,7 +185,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnLogin5" layoutX="571.0" layoutY="262.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="3">
+      <Button fx:id="btnlike3" layoutX="571.0" layoutY="275.0" mnemonicParsing="false" onAction="#onBtnLike3" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="3">
          <effect>
             <Blend />
          </effect>
@@ -211,19 +212,19 @@
          <children>
             <HBox fx:id="imageContainer2" layoutX="7.0" layoutY="6.0" prefHeight="195.0" prefWidth="548.0">
                <children>
-                  <ImageView fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
+                  <ImageView fx:id="imgSeller2_1" fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
                      <image>
                         <Image url="@images/Men/ChaquetaAzul.png" />
                      </image>
                   </ImageView>
                   <Pane prefHeight="177.0" prefWidth="25.0" style="-fx-background-color: black;" />
-                  <ImageView fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
+                  <ImageView fx:id="imgSeller2_2" fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
                      <image>
                         <Image url="@images/Men/ChaquetaAzul.png" />
                      </image>
                   </ImageView>
                   <Pane prefHeight="227.0" prefWidth="25.0" style="-fx-background-color: black;" />
-                  <ImageView fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
+                  <ImageView fx:id="imgSeller2_3" fitHeight="196.0" fitWidth="165.0" pickOnBounds="true">
                      <image>
                         <Image url="@images/Men/ChaquetaAzul.png" />
                      </image>
@@ -232,7 +233,7 @@
             </HBox>
          </children>
       </Pane>
-      <Button fx:id="btnlike5" layoutX="189.0" layoutY="262.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="95.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="1">
+      <Button fx:id="btnlike1" layoutX="189.0" layoutY="275.0" mnemonicParsing="false" onAction="#onBtnLike1" prefHeight="34.0" prefWidth="95.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="1">
          <effect>
             <Blend />
          </effect>
@@ -255,7 +256,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnComment4" layoutX="266.0" layoutY="538.0" mnemonicParsing="false" onAction="#onComment4" prefHeight="47.0" prefWidth="102.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="4">
+      <Button fx:id="btnComment4" layoutX="284.0" layoutY="554.0" mnemonicParsing="false" onAction="#onComment4" prefHeight="47.0" prefWidth="102.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="4">
          <effect>
             <Blend />   
          </effect>
@@ -278,7 +279,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnLike3" layoutX="389.0" layoutY="538.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="5">
+      <Button fx:id="btnLike5" layoutX="386.0" layoutY="554.0" mnemonicParsing="false" onAction="#btnLike5" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="5">
          <effect>
             <Blend />
          </effect>
@@ -301,7 +302,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnlike2" layoutX="469.0" layoutY="538.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="102.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="5">
+      <Button fx:id="btnComment5" layoutX="469.0" layoutY="554.0" mnemonicParsing="false" onAction="#onBtnComment5" prefHeight="47.0" prefWidth="102.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="5">
          <effect>
             <Blend />
          </effect>
@@ -324,7 +325,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnLike" layoutX="660.0" layoutY="538.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="102.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="6">
+      <Button fx:id="btnComment6" layoutX="660.0" layoutY="554.0" mnemonicParsing="false" onAction="#onBtnComment6" prefHeight="47.0" prefWidth="102.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="6">
          <effect>
             <Blend />
          </effect>
@@ -347,7 +348,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="btnLogin11" layoutX="571.0" layoutY="538.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="6">
+      <Button fx:id="btnLike6" layoutX="571.0" layoutY="554.0" mnemonicParsing="false" onAction="#onBtnLike6" prefHeight="47.0" prefWidth="95.0" style="-fx-background-radius: 50; -fx-text-fill: white;" stylesheets="@Css/ButtonStylePostWall.css" text="6">
          <effect>
             <Blend />
          </effect>

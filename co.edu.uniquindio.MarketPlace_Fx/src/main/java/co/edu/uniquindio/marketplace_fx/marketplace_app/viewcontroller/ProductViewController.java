@@ -69,7 +69,6 @@ public class ProductViewController {
     @FXML
     private ImageView imgProduct;
 
-
     // Método de acción para limpiar los campos de texto
     @FXML
     void onClearFields(ActionEvent event) {
@@ -90,11 +89,6 @@ public class ProductViewController {
     void onRemoveProduct(ActionEvent event) {
         removeProduct();
     }
-    public void setUsername(String username) {
-        this.username = username;
-        getProducts(); // Actualiza los productos al establecer el username
-    }
-
 
     // Método de inicialización que se llama al cargar la vista
     @FXML
@@ -103,16 +97,15 @@ public class ProductViewController {
         sellerController = new SellerController();
         initView();
         toggleGroupRdBtns();
-        if (username != null) {
-            getProducts();
-        } else {
-            products.clear();
-        }
+        setUsername(username);
+    }
+    public void setUsername(String username) {
+        this.username = username;
+        getProducts();
     }
     // Método que carga la vista inicial y los productos en la tabla
     private void initView() {
         initDataBinding();
-        getProducts();
         tbProducts.getItems().clear();
         tbProducts.setItems(products);
         listenerSelection();
@@ -127,17 +120,9 @@ public class ProductViewController {
     }
     // Método que obtiene los productos del controlador y los añade a la lista
     private void getProducts() {
-        if (username == null || username.isEmpty()) {
-            showMessage("Información", "Por favor, seleccione un usuario válido.", "Aviso", Alert.AlertType.INFORMATION);
-        } else {
-            products.clear();
-            List<ProductDto> userProducts = productController.getProducts(username);
-            if (userProducts.isEmpty()) {
-                showMessage("Información", "No hay productos disponibles para este usuario.", "Aviso", Alert.AlertType.INFORMATION);
-            } else {
-                products.addAll(userProducts);
-            }
-        }
+        products.clear();
+        List<ProductDto> userProducts = productController.getProducts(username);
+        products.addAll(userProducts);
 
     }
 
@@ -195,7 +180,7 @@ public class ProductViewController {
                 }
             }
             imgProduct.setImage(null);
-            showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN + " Imagen no encontrada", HEADER, Alert.AlertType.ERROR);
+            showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN  + "Imagen no encontrada", HEADER, Alert.AlertType.ERROR);
 
         } catch (Exception e) {
             imgProduct.setImage(null);

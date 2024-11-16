@@ -10,4 +10,6 @@ module co.edu.uniquindio.marketplace_fx.marketplace_app {
     exports co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
     opens co.edu.uniquindio.marketplace_fx.marketplace_app.controller;
     exports co.edu.uniquindio.marketplace_fx.marketplace_app.controller;
+    opens co.edu.uniquindio.marketplace_fx.marketplace_app.mediator;
+    exports co.edu.uniquindio.marketplace_fx.marketplace_app.mediator;
 }
