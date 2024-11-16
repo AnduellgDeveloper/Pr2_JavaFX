@@ -1,0 +1,67 @@
+/* Estilo general del DatePicker con bordes redondeados */
+.date-picker {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20px; /* Ajustar el radio para redondear */
+    -fx-border-radius: 20px;     /* También redondear el borde */
+    -fx-border-width: 2px;
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+}
+
+/* Estilo cuando el DatePicker está en foco */
+.date-picker:focused {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+    -fx-border-color: #2980b9;
+    -fx-border-width: 2px;
+}
+
+/* Estilo del calendario emergente */
+.date-picker-popup {
+    -fx-background-color: #f5f5f5;
+    -fx-background-radius: 15px; /* Borde redondeado del popup */
+    -fx-border-radius: 15px;
+    -fx-text-fill: #333;
+    -fx-padding: 10px;
+}
+
+/* Modificar los días seleccionados */
+.date-picker .day-cell:selected {
+    -fx-background-color: #3498db;
+    -fx-background-radius: 15px; /* Redondear las celdas seleccionadas */
+    -fx-text-fill: white;
+}
+
+/* Estilo de las celdas de los días en el calendario */
+.date-picker .day-cell {
+    -fx-background-radius: 15px; /* Redondear cada celda */
+}
+
+/* Estilo para los días que no son del mes actual */
+.date-picker .day-cell:empty {
+    -fx-text-fill: lightgray;
+}
+
+/* Redondear los bordes del campo de texto de entrada del DatePicker */
+.text-field {
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+}
+
+/* Estilo del botón de selección de fecha (icono del calendario) */
+.date-picker-button {
+    -fx-background-color: transparent; /* Hacer el fondo del botón transparente */
+    -fx-background-radius: 70%; /* Esquinas redondeadas (círculo) */
+    -fx-border-color: #3498db; /* Color del borde */
+    -fx-border-width: 2px;     /* Ancho del borde */
+    -fx-border-radius: 60%;    /* Esquinas completamente redondeadas */
+    -fx-pref-width: 30px;       /* Tamaño preferido del botón */
+    -fx-pref-height: 30px;      /* Tamaño preferido del botón */
+}
+
+/* Modificar el estado cuando el botón es presionado */
+.date-picker-button:pressed {
+    -fx-background-color: #2980b9; /* Color al presionar */
+    -fx-border-color: #1f6fa0;    /* Color del borde al presionar */
+}

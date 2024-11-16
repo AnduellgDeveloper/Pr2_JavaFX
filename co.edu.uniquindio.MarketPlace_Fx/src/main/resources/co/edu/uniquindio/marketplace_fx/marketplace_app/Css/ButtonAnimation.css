@@ -1,0 +1,37 @@
+.button {
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-transition: 0.3s ease-in-out;
+}
+
+.button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+}
+
+.button:pressed {
+    -fx-translate-y: 2px;
+}
+
+.button:hover {
+    -fx-translate-y: -5px; /* Efecto de elevación */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 2);
+}
+
+.button:hover {
+    -fx-border-width: 2px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-cursor: hand;
+}
+/* Al hacer clic */
+.button:pressed {
+    -fx-translate-y: 2px;
+}
