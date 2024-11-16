@@ -1,5 +1,7 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.model;
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.builder.CommentBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,5 +29,7 @@ public class Comment {
     public void addComment(String comment) {
         this.comments.add(comment);
     }
+
+    public static CommentBuilder builder(){return new CommentBuilder();}
 
 }

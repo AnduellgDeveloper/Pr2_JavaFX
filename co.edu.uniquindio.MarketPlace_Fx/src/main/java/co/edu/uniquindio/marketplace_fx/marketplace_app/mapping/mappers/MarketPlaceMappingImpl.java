@@ -323,22 +323,50 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
 
     @Override
     public CommentDto commentToCommentDto(Comment comment) {
-        return null;
+        if (comment == null) {
+            return null;
+        }
+        return new CommentDto(
+                comment.getProduct(),
+                comment.getComments());
     }
 
     @Override
-    public Comment commentDtoToComment(Comment comment) {
-        return null;
+    public Comment commentDtoToComment(CommentDto commentDto) {
+        if (commentDto == null) {
+            return null;
+        }
+        return Comment.builder()
+                .comments(commentDto.comments())
+                .product(commentDto.product())
+                .build();
     }
 
     @Override
-    public List<Comment> commentsTocommentsDto(List<Comment> comments) {
-        return List.of();
+    public List<CommentDto> commentsTocommentsDto(List<Comment> comments) {
+        if (comments == null) {
+            return null;
+        }
+
+        return comments.stream()
+                .map(comment -> new CommentDto(
+                        comment.getProduct(),
+                        comment.getComments()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<Comment> commentsDtoToComments(List<CommentDto> commentDtos) {
-        return List.of();
+        if (commentDtos == null) {
+            return null;
+        }
+
+        return commentDtos.stream()
+                .map(commentDto  ->   Comment.builder()
+                        .comments(commentDto.comments() )
+                        .product(commentDto.product())
+                        .build())
+                .collect(Collectors.toList());
     }
 
     @Override

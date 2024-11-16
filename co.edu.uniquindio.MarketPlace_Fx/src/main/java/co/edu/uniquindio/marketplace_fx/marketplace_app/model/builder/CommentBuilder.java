@@ -1,5 +1,6 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.model.builder;
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Comment;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
 
 import java.util.List;
@@ -16,4 +17,5 @@ public class CommentBuilder {
         this.comments=comments;
         return this;
     }
+    public Comment build(){return new Comment(product,comments);}
 }

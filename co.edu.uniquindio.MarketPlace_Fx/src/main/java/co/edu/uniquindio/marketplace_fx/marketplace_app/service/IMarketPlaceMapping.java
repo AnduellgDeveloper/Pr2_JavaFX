@@ -38,10 +38,10 @@ public interface IMarketPlaceMapping {
     // ------------------------ Comment ------------------------
     List<CommentDto> getCommentsDto(List<Comment> comments);
     CommentDto commentToCommentDto(Comment comment);
-    Comment commentDtoToComment(Comment comment);
-    List<Comment> commentsTocommentsDto(List<Comment> comments);
+    Comment commentDtoToComment(CommentDto commentDto);
+    List<CommentDto> commentsTocommentsDto(List<Comment> comments);
     List<Comment> commentsDtoToComments(List<CommentDto> commentDtos);
-    Like toObjectComment(CommentDto comment);
+    Like toObjectComment(CommentDto commentDto);
 
 
 }
