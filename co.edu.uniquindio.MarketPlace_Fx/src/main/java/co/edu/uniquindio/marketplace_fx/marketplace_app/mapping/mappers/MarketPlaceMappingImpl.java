@@ -257,8 +257,9 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
             return null;
         }
         return new LikeDto(
-                like.product,
-                like.getLikes());
+                like.getProduct(),
+                like.getLikes(),
+                like.getSeller());
 
     }
 
@@ -270,6 +271,7 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
         return Like.builder()
                 .likes(likeDto.likes())
                 .product(likeDto.product())
+                .seller(likeDto.seller())
                 .build();
     }
 
@@ -282,7 +284,8 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
         return likes.stream()
                 .map(like -> new LikeDto(
                         like.getProduct(),
-                        like.getLikes()))
+                        like.getLikes(),
+                        like.getSeller()))
                 .collect(Collectors.toList());
     }
 
@@ -296,6 +299,7 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                 .map(likeDto ->   Like.builder()
                         .likes(likeDto.likes())
                         .product(likeDto.product())
+                        .seller(likeDto.seller())
                         .build())
                 .collect(Collectors.toList());
     }
