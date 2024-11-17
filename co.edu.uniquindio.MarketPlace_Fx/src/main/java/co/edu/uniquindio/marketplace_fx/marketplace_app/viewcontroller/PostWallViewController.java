@@ -3,16 +3,20 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.SellerController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.facade.Background;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.facade.ButtonTheme;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.facade.Theme;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IObserverProduct;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_components.IComponentFactory;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.ComponentFactory;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.PostWallManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 import java.io.File;
 import java.net.URL;
@@ -28,10 +32,20 @@ public class PostWallViewController implements IObserverProduct {
     private final IComponentFactory componentFactory;
     private PostWallManager postWallManager;
     private Map<String, List<String>> productComments = new HashMap<>();
+    private Theme tema;
 
 
     @FXML
+    private Pane Slider;
+    @FXML
     private GridPane postWallContainer;
+    @FXML
+    private Button btnTema;
+    @FXML
+    private Label label;
+
+    @FXML
+    private AnchorPane fondo;
 
     public PostWallViewController() {
         this.componentFactory = new ComponentFactory();
@@ -39,8 +53,10 @@ public class PostWallViewController implements IObserverProduct {
 
     @FXML
     public void initialize() {
+        this.tema = new Theme();
         postWallManager = new PostWallManager(componentFactory);
         postWallContainer.getChildren().add(postWallManager.getPostWall());
+
 
         if (username != null) {
             List<ProductDto> sellerProducts = productController.getProducts(username);
@@ -57,6 +73,12 @@ public class PostWallViewController implements IObserverProduct {
         List<ProductDto> sellerProducts = productController.getProducts(username);
         populateWall(sellerProducts);
     }
+
+
+
+
+
+
 
     @Override
     public void onProductsChanged(List<ProductDto> updatedProducts) {
@@ -165,11 +187,45 @@ public class PostWallViewController implements IObserverProduct {
         }
         return null;
     }
+
     private void showMessage(String title, String message, String header, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    @FXML
+    void onTema(ActionEvent event) {
+        themeMode();
+    }
+    private void themeMode (){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Seleccionar Tema");
+        alert.setHeaderText("Elige un modo:");
+        alert.setContentText("Selecciona entre Modo Claro o Modo Oscuro:");
+
+        ButtonType lightMode = new ButtonType("Modo Claro");
+        ButtonType darkMode = new ButtonType("Modo Oscuro");
+        ButtonType cancel = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(lightMode, darkMode, cancel);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == lightMode) {
+                aplylightMode();
+            } else if (response == darkMode) {
+                aplyDarkMode();
+            } else {
+                System.out.println("Selección de tema cancelada.");
+            }
+        });
+    }
+    private void aplylightMode() {
+        tema.modLight(label, fondo, Slider, btnTema,postWallContainer);
+    }
+
+    private void aplyDarkMode() {
+        tema.modDark(label, fondo, Slider, btnTema,postWallContainer);
     }
 }
