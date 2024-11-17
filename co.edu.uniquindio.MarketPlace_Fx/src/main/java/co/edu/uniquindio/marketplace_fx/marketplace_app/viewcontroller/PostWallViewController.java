@@ -10,10 +10,9 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractF
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
+
 import java.io.File;
-import java.io.PushbackReader;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
@@ -28,7 +27,7 @@ public class PostWallViewController implements IObserverProduct {
     private PostWallManager postWallManager;
 
     @FXML
-    private HBox mainContainer;
+    private GridPane postWallContainer;
 
     public PostWallViewController() {
         this.componentFactory = new ComponentFactory();
@@ -37,7 +36,7 @@ public class PostWallViewController implements IObserverProduct {
     @FXML
     public void initialize() {
         postWallManager = new PostWallManager(componentFactory);
-        mainContainer.getChildren().add(postWallManager.getPostWall());
+        postWallContainer.getChildren().add(postWallManager.getPostWall());
 
         if (username != null) {
             List<ProductDto> sellerProducts = productController.getProducts(username);
@@ -46,7 +45,7 @@ public class PostWallViewController implements IObserverProduct {
         IComponentFactory factory = new ComponentFactory();
         postWallManager = new PostWallManager(factory);
 
-        mainContainer.getChildren().add(postWallManager.getPostWall());
+        postWallContainer.getChildren().add(postWallManager.getPostWall());
     }
 
     public void setUsername(String username) {

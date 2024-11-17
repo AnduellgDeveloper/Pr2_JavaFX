@@ -18,8 +18,16 @@
     -fx-padding: 10px 20px;
     -fx-transition: 0.2s ease-in-out;
 }
-
+.button-comment{
+    -fx-background-image: url("/co/edu/uniquindio/marketplace_fx/marketplace_app/images/Comentario.png");
+    -fx-background-size: cover;
+}
+.button-like {
+    -fx-background-image: url("/co/edu/uniquindio/marketplace_fx/marketplace_app/images/LikeNegro.png");
+    -fx-background-size: cover;
+}
 .button:hover {
     -fx-translate-y: -5px; /* Efecto de elevación */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 2);
+
 }

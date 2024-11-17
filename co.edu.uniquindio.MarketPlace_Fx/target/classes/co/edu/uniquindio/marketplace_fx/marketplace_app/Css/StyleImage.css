@@ -1,6 +1,5 @@
 .image-view {
     /* Fondo y radio del fondo para redondear la imagen */
-    -fx-background-color: white;
     -fx-background-radius: 50%; /* Bordes redondeados */
 
     /* Borde */
@@ -10,6 +9,7 @@
 
     /* Sombra */
     -fx-effect: dropshadow(gaussian, rgb(174, 16, 210), 10, 0.5, 0, 0);
+
 }
 
 

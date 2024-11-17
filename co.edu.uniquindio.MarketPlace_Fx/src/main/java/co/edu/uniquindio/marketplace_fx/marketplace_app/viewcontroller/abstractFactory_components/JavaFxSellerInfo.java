@@ -11,6 +11,9 @@ public class JavaFxSellerInfo implements ISellerInfo {
         sellerNameField = new TextField();
         sellerNameField.getStyleClass().add("seller-name");
         sellerNameField.setEditable(false);
+        sellerNameField.setMaxHeight(20);
+        sellerNameField.setMaxWidth(80);
+        sellerNameField.setStyle("-fx-background-color: #ecb0f7;");
     }
     @Override
     public void setSellerName(String name) {

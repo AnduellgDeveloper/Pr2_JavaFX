@@ -13,7 +13,7 @@ public class JavaFxProductView implements IProductView {
         productImageView = new ImageView();
         productImageView.setFitWidth(200);
         productImageView.setFitHeight(200);
-        productImageView.setPreserveRatio(true);
+        productImageView.setPreserveRatio(false);
     }
     @Override
     public void setProductImage(String imageUrl) {
