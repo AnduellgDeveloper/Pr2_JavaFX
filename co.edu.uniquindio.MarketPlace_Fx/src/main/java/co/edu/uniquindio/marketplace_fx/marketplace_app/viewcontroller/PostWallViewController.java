@@ -10,7 +10,6 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_observer
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory.IComponentFactory;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.ComponentFactory;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.PostWallManager;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.observer.ProductManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +26,7 @@ import java.util.*;
 
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.PostWallConstants.*;
 
-public class PostWallViewController implements Observer {
+public class PostWallViewController {
     private final IComponentFactory componentFactory;
     private PostWallManager postWallManager;
     private Theme tema;
@@ -35,10 +34,6 @@ public class PostWallViewController implements Observer {
     private final ProductController productController = new ProductController();
     private Map<String, List<String>> productComments = new HashMap<>();
     private Map<String, List<String>> productLikes = new HashMap<>();
-    private ObservableList<Product> observableProductList;
-    private final ProductManager productManager = ProductManager.getInstance(productController);
-
-
     @FXML
     private AnchorPane fondo;
     @FXML
@@ -54,20 +49,16 @@ public class PostWallViewController implements Observer {
 
     public PostWallViewController() {
         this.componentFactory = new ComponentFactory();
-        this.observableProductList = FXCollections.observableArrayList();
         this.postWallManager = new PostWallManager(new ComponentFactory());
-
     }
 
     @FXML
     public void initialize() {
-        productManager.addObserver(this);
         this.tema = new Theme();
         postWallManager = new PostWallManager(componentFactory);
         postWallContainer.getChildren().add(postWallManager.getPostWall());
 
         List<ProductDto> sellerProducts = productController.getProducts(username);
-        updateWall();
         populateWall(sellerProducts);
 
         IComponentFactory factory = new ComponentFactory();
@@ -76,14 +67,8 @@ public class PostWallViewController implements Observer {
         postWallContainer.getChildren().add(postWallManager.getPostWall());
 
     }
-    private void updateWall() {
-        List<ProductDto> products = productManager.getProductList();
-        populateWall(products);
-    }
-
     public void setUsername(String username) {
         this.username = username;
-        updateWall();
         List<ProductDto> sellerProducts = productController.getProducts(username);
         populateWall(sellerProducts);
     }
@@ -243,16 +228,5 @@ public class PostWallViewController implements Observer {
 
     private void aplyDarkMode() {
         tema.modDark(label, fondo, Slider, btnTema, postWallContainer);
-    }
-
-
-    @Override
-    public void update() {
-        if (username != null) {
-            updateWall();
-            List<ProductDto> sellerProducts = productController.getProducts(username);
-            populateWall(sellerProducts);
-        }
-
     }
 }

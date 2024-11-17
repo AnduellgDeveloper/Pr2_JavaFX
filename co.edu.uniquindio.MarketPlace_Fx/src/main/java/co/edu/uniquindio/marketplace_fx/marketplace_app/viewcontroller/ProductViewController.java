@@ -3,7 +3,6 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.SellerController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.observer.ProductManager;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -32,7 +31,6 @@ public class ProductViewController {
     private ProductController productController;
     private ObservableList<ProductDto> products = FXCollections.observableArrayList();
     private ProductDto selectProduct;
-    private final ProductManager productManager = ProductManager.getInstance(productController);
 
     public static synchronized ProductViewController getInstance() {
         if (instance == null) {
@@ -191,7 +189,6 @@ public class ProductViewController {
                 if (isAdded) {
                     products.add(productDto);
                     clearFields();
-                    productManager.addProduct(productDto);
                     showMessage(TITULO_PRODUCTO_AGREGADO, BODY_PRODUCTO_AGREGADO, HEADER, Alert.AlertType.INFORMATION);
                 } else {
                     showMessage(TITULO_PRODUCTO_NO_AGREGADO, BODY_PRODUCTO_NO_AGREGADO, HEADER, Alert.AlertType.ERROR);
@@ -209,7 +206,6 @@ public class ProductViewController {
                 productController.updateProduct(updatedProduct);
                 products.set(products.indexOf(selectProduct), updatedProduct);
                 showProductInformation(updatedProduct);
-                productManager.updateProduct(selectProduct);
                 showMessage(TITULO_PRODUCTO_ACTUALIZADO, BODY_PRODUCTO_ACTUALIZADO, HEADER, Alert.AlertType.INFORMATION);
             } else {
                 showMessage(TITULO_INCOMPLETO, BODY_INCOMPLETO, HEADER, Alert.AlertType.WARNING);
@@ -224,7 +220,6 @@ public class ProductViewController {
             productController.removeProduct(selectProduct);
             products.remove(selectProduct);
             clearFields();
-            productManager.deleteProduct(selectProduct);
             showMessage(TITULO_PRODUCTO_REMOVIDO, BODY_PRODUCTO_REMOVIDO, HEADER, Alert.AlertType.INFORMATION);
         } else {
             showMessage(TITULO_PRODUCTO_NO_REMOVIDO, BODY_PRODUCTO_NO_REMOVIDO, HEADER, Alert.AlertType.WARNING);
