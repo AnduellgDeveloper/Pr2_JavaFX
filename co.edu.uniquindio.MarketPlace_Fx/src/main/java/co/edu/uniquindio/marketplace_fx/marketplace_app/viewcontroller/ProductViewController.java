@@ -86,6 +86,13 @@ public class ProductViewController {
     void initialize() {
         productController = new ProductController();
         sellerController = new SellerController();
+        tcName.prefWidthProperty().bind(tbProducts.widthProperty().multiply(0.15));
+        tcCategory.prefWidthProperty().bind(tbProducts.widthProperty().multiply(0.15));
+        tcPrice.prefWidthProperty().bind(tbProducts.widthProperty().multiply(0.1));
+        tcStatus.prefWidthProperty().bind(tbProducts.widthProperty().multiply(0.15));
+        tcPublicationDate.prefWidthProperty().bind(tbProducts.widthProperty().multiply(0.2));
+        tcImagePath.prefWidthProperty().bind(tbProducts.widthProperty().multiply(0.25));
+
         initView();
         toggleGroupRdBtns();
         setUsername(username);
