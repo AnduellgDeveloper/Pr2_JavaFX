@@ -32,17 +32,17 @@ public class PostWallManager {
 
 
     }
-    public void createPost(String sellerName, String imageUrl,Runnable onLike, Runnable onComment) {
+    public void createPost(String productName, String imageUrl, Runnable onLike, Runnable onComment) {
         IPostContainer postContainer = factory.createPostContainer();
-        ISellerInfo sellerInfo = factory.createSellerInfo();
+        IProductInfo productInfo = factory.createProductInfo();
         IProductView productDisplay = factory.createProductDisplay();
         IFeedBackPanel interactionPanel = factory.createInteractionPanel();
 
-        sellerInfo.setSellerName(sellerName);
+        productInfo.setProductName(productName);
         productDisplay.setProductImage(imageUrl);
 
-        interactionPanel.setLikeAction(_ -> onLike());
-        interactionPanel.setCommentAction(_ -> onComment());
+        interactionPanel.setLikeAction(_ -> onLike.run());
+        interactionPanel.setCommentAction(_ -> onComment.run());
 
         VBox post = (VBox) postContainer.getContainer();
         post.setPrefWidth(200);
@@ -54,7 +54,7 @@ public class PostWallManager {
 
         post.setAlignment(Pos.CENTER);
         post.getChildren().addAll(
-                sellerInfo.getSellerInfoNode(),
+                productInfo.getProductInfoNode(),
                 productDisplay.getProductViewNode(),
                 interactionPanel.getInteractionNode()
         );
@@ -71,12 +71,7 @@ public class PostWallManager {
         currentRow = 0;
         currentColumn = 0;
     }
-    private void onLike() {
-        System.out.println("Like clicked!");
-    }
-    private void onComment() {
-        System.out.println("Comment clicked!");
-    }
+
     public Node getPostWall() {
         return postWallContainer;
     }

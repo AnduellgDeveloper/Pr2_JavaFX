@@ -2,7 +2,7 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_compone
 
 public interface IComponentFactory {
     IPostContainer createPostContainer();
-    ISellerInfo createSellerInfo();
+    IProductInfo createProductInfo();
     IProductView createProductDisplay();
     IFeedBackPanel createInteractionPanel();
 }

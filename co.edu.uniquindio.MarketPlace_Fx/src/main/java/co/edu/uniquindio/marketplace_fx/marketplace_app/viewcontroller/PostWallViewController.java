@@ -9,13 +9,15 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractF
 import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.PostWallManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 
 import java.io.File;
 import java.net.URL;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.PostWallConstants.*;
 
 public class PostWallViewController implements IObserverProduct {
@@ -25,6 +27,8 @@ public class PostWallViewController implements IObserverProduct {
     private ProductViewController productViewController;
     private final IComponentFactory componentFactory;
     private PostWallManager postWallManager;
+    private Map<String, List<String>> productComments = new HashMap<>();
+
 
     @FXML
     private GridPane postWallContainer;
@@ -67,7 +71,7 @@ public class PostWallViewController implements IObserverProduct {
                 Image image = loadImageFromDirectories(imagePath);
                 if (image != null) {
                     postWallManager.createPost(
-                            username,
+                            product.name(),
                             image.getUrl(),
                             () -> onLike(product),
                             () -> onComment(product)
@@ -81,12 +85,40 @@ public class PostWallViewController implements IObserverProduct {
     }
 
     private void onLike(ProductDto product) {
-        System.out.println("Like en producto: " + product.name());
+        showMessage(TITULO_LIKE, BODY_LIKE_PRODUCTO + product.name() , HEADER_LIKE, Alert.AlertType.INFORMATION);
+    }
+    // Alert Type personalizado para que el usuario pueda escribir el comentario
+    private void onComment(ProductDto product) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Comentario");
+        alert.setHeaderText("Agregar comentario para el producto: " + product.name());
+        alert.setContentText("Escribe tu comentario abajo:");
+
+        TextArea commentField = new TextArea();
+        commentField.setPromptText("Escribe tu comentario aquí...");
+        commentField.setWrapText(true);
+
+        alert.getDialogPane().setContent(commentField);
+
+        ButtonType submitButton = new ButtonType("Enviar");
+        ButtonType cancelButton = new ButtonType("Cancelar");
+        alert.getButtonTypes().setAll(submitButton, cancelButton);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == submitButton) {
+                String comment = commentField.getText().trim();
+                if (!comment.isEmpty()) {
+                    productComments.computeIfAbsent(product.name(), k -> new ArrayList<>()).add(comment);
+                    System.out.printf("\nComentario enviado a %s: %s", product.name(), comment);
+                } else {
+                    System.out.println("No se escribió ningún comentario.");
+                }
+            } else {
+                System.out.println("El comentario fue cancelado.");
+            }
+        });
     }
 
-    private void onComment(ProductDto product) {
-        System.out.println("Comentario en producto: " + product.name());
-    }
 
     private Image loadImageFromDirectories(String imageName) {
         try {
