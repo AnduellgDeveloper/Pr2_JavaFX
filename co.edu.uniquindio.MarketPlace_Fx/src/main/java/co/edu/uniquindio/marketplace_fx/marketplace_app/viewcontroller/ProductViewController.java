@@ -3,7 +3,7 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.SellerController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IObserverProduct;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.observer.ProductManager;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -26,12 +26,22 @@ import java.util.stream.Stream;
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.*;
 
 public class ProductViewController {
+    public static ProductViewController instance;
     private String username;
     private SellerController sellerController;
     private ProductController productController;
     private ObservableList<ProductDto> products = FXCollections.observableArrayList();
     private ProductDto selectProduct;
-    private List<IObserverProduct> observerProducts = new ArrayList<>();
+    private final ProductManager productManager = ProductManager.getInstance(productController);
+
+    public static synchronized ProductViewController getInstance() {
+        if (instance == null) {
+            instance = new ProductViewController();
+        }
+        return instance;
+    }
+    public ProductViewController() {
+    }
 
     @FXML
     private Button btnAddProduct, btnClearFields, btnUpdateProduct;
@@ -40,13 +50,7 @@ public class ProductViewController {
     @FXML
     private TableView<ProductDto> tbProducts;
     @FXML
-    private TableColumn<ProductDto, String> tcCategory;
-    @FXML
-    private TableColumn<ProductDto, String> tcStatus;
-    @FXML
-    private TableColumn<ProductDto, String> tcImagePath;
-    @FXML
-    private TableColumn<ProductDto, String> tcName;
+    private TableColumn<ProductDto, String> tcCategory, tcStatus, tcImagePath, tcName;
     @FXML
     private TableColumn<ProductDto, Integer> tcPrice;
     @FXML
@@ -175,22 +179,7 @@ public class ProductViewController {
             showMessage(TITULO_ERRROR_IMAGEN, BODY_ERRROR_IMAGEN + e.getMessage(), HEADER, Alert.AlertType.ERROR);
         }
     }
-    // Método para agregar observers
-    public void addProductChangeListener(IObserverProduct observerProduct) {
-        observerProducts.add(observerProduct);
-    }
 
-    // Método para remover observers
-    public void removeProductChangeListener(IObserverProduct observerProduct) {
-        observerProducts.remove(observerProduct);
-    }
-
-    // Método para notificar a todos los observers
-    private void notifyProductChange() {
-        for (IObserverProduct observerProduct : observerProducts) {
-            observerProduct.onProductsChanged(products);
-        }
-    }
     // Método que agrega un nuevo producto a la lista y a la base de datos
     private void addProduct() {
         ProductDto productDto = createProductDto();
@@ -202,7 +191,7 @@ public class ProductViewController {
                 if (isAdded) {
                     products.add(productDto);
                     clearFields();
-                    notifyProductChange();
+                    productManager.addProduct(productDto);
                     showMessage(TITULO_PRODUCTO_AGREGADO, BODY_PRODUCTO_AGREGADO, HEADER, Alert.AlertType.INFORMATION);
                 } else {
                     showMessage(TITULO_PRODUCTO_NO_AGREGADO, BODY_PRODUCTO_NO_AGREGADO, HEADER, Alert.AlertType.ERROR);
@@ -220,7 +209,7 @@ public class ProductViewController {
                 productController.updateProduct(updatedProduct);
                 products.set(products.indexOf(selectProduct), updatedProduct);
                 showProductInformation(updatedProduct);
-                notifyProductChange();
+                productManager.updateProduct(selectProduct);
                 showMessage(TITULO_PRODUCTO_ACTUALIZADO, BODY_PRODUCTO_ACTUALIZADO, HEADER, Alert.AlertType.INFORMATION);
             } else {
                 showMessage(TITULO_INCOMPLETO, BODY_INCOMPLETO, HEADER, Alert.AlertType.WARNING);
@@ -235,7 +224,7 @@ public class ProductViewController {
             productController.removeProduct(selectProduct);
             products.remove(selectProduct);
             clearFields();
-            notifyProductChange();
+            productManager.deleteProduct(selectProduct);
             showMessage(TITULO_PRODUCTO_REMOVIDO, BODY_PRODUCTO_REMOVIDO, HEADER, Alert.AlertType.INFORMATION);
         } else {
             showMessage(TITULO_PRODUCTO_NO_REMOVIDO, BODY_PRODUCTO_NO_REMOVIDO, HEADER, Alert.AlertType.WARNING);

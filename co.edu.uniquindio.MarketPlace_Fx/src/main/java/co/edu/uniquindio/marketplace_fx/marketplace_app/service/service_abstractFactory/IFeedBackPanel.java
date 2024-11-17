@@ -1,4 +1,4 @@
-package co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_components;
+package co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

@@ -1,6 +1,6 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components;
 
-import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_components.IProductView;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory.IProductView;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

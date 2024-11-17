@@ -1,13 +1,18 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.SellerController;
+
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.facade.Theme;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IObserverProduct;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_components.IComponentFactory;
+
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_observer.Observer;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory.IComponentFactory;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.ComponentFactory;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.PostWallManager;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.observer.ProductManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -22,16 +27,18 @@ import java.util.*;
 
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.PostWallConstants.*;
 
-public class PostWallViewController implements IObserverProduct {
-    private String username;
-    private final ProductController productController = new ProductController();
-    private final SellerController sellerController = new SellerController();
-    private ProductViewController productViewController;
+public class PostWallViewController implements Observer {
     private final IComponentFactory componentFactory;
     private PostWallManager postWallManager;
+    private Theme tema;
+    private String username;
+    private final ProductController productController = new ProductController();
     private Map<String, List<String>> productComments = new HashMap<>();
     private Map<String, List<String>> productLikes = new HashMap<>();
-    private Theme tema;
+    private ObservableList<Product> observableProductList;
+    private final ProductManager productManager = ProductManager.getInstance(productController);
+
+
     @FXML
     private AnchorPane fondo;
     @FXML
@@ -42,42 +49,43 @@ public class PostWallViewController implements IObserverProduct {
     private Button btnTema;
     @FXML
     private Label label;
-
     @FXML
-    private ListView<String> listComments;
-
-    @FXML
-    private ListView<String> listLikes;
+    private ListView<String> listComments, listLikes;
 
     public PostWallViewController() {
         this.componentFactory = new ComponentFactory();
+        this.observableProductList = FXCollections.observableArrayList();
+        this.postWallManager = new PostWallManager(new ComponentFactory());
+
     }
 
     @FXML
     public void initialize() {
+        productManager.addObserver(this);
         this.tema = new Theme();
         postWallManager = new PostWallManager(componentFactory);
         postWallContainer.getChildren().add(postWallManager.getPostWall());
 
-        if (username != null) {
-            List<ProductDto> sellerProducts = productController.getProducts(username);
-            populateWall(sellerProducts);
-        }
+        List<ProductDto> sellerProducts = productController.getProducts(username);
+        updateWall();
+        populateWall(sellerProducts);
+
         IComponentFactory factory = new ComponentFactory();
         postWallManager = new PostWallManager(factory);
 
         postWallContainer.getChildren().add(postWallManager.getPostWall());
+
+    }
+    private void updateWall() {
+        List<ProductDto> products = productManager.getProductList();
+        populateWall(products);
     }
 
     public void setUsername(String username) {
         this.username = username;
+        updateWall();
         List<ProductDto> sellerProducts = productController.getProducts(username);
         populateWall(sellerProducts);
-    }
-
-    @Override
-    public void onProductsChanged(List<ProductDto> updatedProducts) {
-        populateWall(updatedProducts);
     }
 
     private void populateWall(List<ProductDto> sellerProducts) {
@@ -102,7 +110,7 @@ public class PostWallViewController implements IObserverProduct {
     }
 
     private void onLike(ProductDto product) {
-        showMessage(TITULO_LIKE, BODY_LIKE_PRODUCTO + product.name() , HEADER_LIKE, Alert.AlertType.INFORMATION);
+        showMessage(TITULO_LIKE, BODY_LIKE_PRODUCTO + product.name(), HEADER_LIKE, Alert.AlertType.INFORMATION);
         String likeMessage = "Producto: " + product.name() + " -> ¡Le gusta a alguien!";
         productLikes.computeIfAbsent(product.name(), k -> new ArrayList<>()).add(likeMessage);
 
@@ -110,6 +118,7 @@ public class PostWallViewController implements IObserverProduct {
 
 
     }
+
     // Alert Type personalizado para que el usuario pueda escribir el comentario
     private void onComment(ProductDto product) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -191,6 +200,7 @@ public class PostWallViewController implements IObserverProduct {
         }
         return null;
     }
+
     private void showMessage(String title, String message, String header, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -198,11 +208,13 @@ public class PostWallViewController implements IObserverProduct {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     @FXML
-    void onTema(ActionEvent event) {
+    void onThem(ActionEvent event) {
         themeMode();
     }
-    private void themeMode (){
+
+    private void themeMode() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Seleccionar Tema");
         alert.setHeaderText("Elige un modo:");
@@ -224,11 +236,23 @@ public class PostWallViewController implements IObserverProduct {
             }
         });
     }
+
     private void aplylightMode() {
-        tema.modLight(label, fondo, Slider, btnTema,postWallContainer);
+        tema.modLight(label, fondo, Slider, btnTema, postWallContainer);
     }
 
     private void aplyDarkMode() {
-        tema.modDark(label, fondo, Slider, btnTema,postWallContainer);
+        tema.modDark(label, fondo, Slider, btnTema, postWallContainer);
+    }
+
+
+    @Override
+    public void update() {
+        if (username != null) {
+            updateWall();
+            List<ProductDto> sellerProducts = productController.getProducts(username);
+            populateWall(sellerProducts);
+        }
+
     }
 }

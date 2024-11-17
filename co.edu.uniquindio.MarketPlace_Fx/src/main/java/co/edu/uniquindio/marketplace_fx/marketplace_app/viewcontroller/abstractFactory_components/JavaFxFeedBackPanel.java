@@ -1,6 +1,6 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components;
 
-import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_components.IFeedBackPanel;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory.IFeedBackPanel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;

@@ -1,6 +1,6 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components;
 
-import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_components.IProductInfo;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory.IProductInfo;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 

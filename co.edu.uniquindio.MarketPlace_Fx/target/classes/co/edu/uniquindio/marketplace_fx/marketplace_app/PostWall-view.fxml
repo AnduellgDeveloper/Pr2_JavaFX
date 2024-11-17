@@ -46,7 +46,7 @@
          </children>
       </Pane>
             <GridPane fx:id="postWallContainer" layoutX="214.0" layoutY="78.0" prefHeight="92.0" prefWidth="130.0" />
-             <Button fx:id="btnTema" layoutX="194.0" layoutY="16.0" mnemonicParsing="false" onAction="#onTema" prefHeight="41.0" prefWidth="47.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" styleClass="styl" stylesheets="@Css/ButtonStyle.css">
+             <Button fx:id="btnTema" layoutX="194.0" layoutY="16.0" mnemonicParsing="false" onAction="#onThem" prefHeight="41.0" prefWidth="47.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" styleClass="styl" stylesheets="@Css/ButtonStyle.css">
                  <graphic>
                      <ImageView fitHeight="32.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                          <image>

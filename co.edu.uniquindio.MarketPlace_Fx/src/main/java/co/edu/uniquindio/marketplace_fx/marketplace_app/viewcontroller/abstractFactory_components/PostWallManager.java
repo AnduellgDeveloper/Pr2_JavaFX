@@ -1,6 +1,7 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components;
 
-import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_components.*;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory.*;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
