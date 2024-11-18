@@ -2,10 +2,9 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.controller;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.factory.ModelFactory;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IProductService;
 
 import java.util.List;
-public class ProductController implements IProductService {
+public class ProductController {
     ModelFactory modelFactory;
 
 

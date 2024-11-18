@@ -3,8 +3,6 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.SellerController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.decorator.ValidationDecorator;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IProductService;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -33,7 +31,6 @@ public class ProductViewController {
     private ProductController productController;
     private ObservableList<ProductDto> products = FXCollections.observableArrayList();
     private ProductDto selectProduct;
-    private IProductService productService;
 
     public static synchronized ProductViewController getInstance() {
         if (instance == null) {
@@ -42,8 +39,6 @@ public class ProductViewController {
         return instance;
     }
     public ProductViewController() {
-        IProductService baseService = new ProductController();
-        this.productService = new ValidationDecorator(baseService);
     }
 
     @FXML
@@ -192,49 +187,44 @@ public class ProductViewController {
 
     // Método que agrega un nuevo producto a la lista y a la base de datos
     private void addProduct() {
-        try {
-            ProductDto productDto = createProductDto();
-            if (productDto != null && validDataProduct(productDto)) {
-                if (isProductDuplicate(productDto)) {
-                    showMessage(TITULO_PRODUCTO_DUPLICADO, BODY_PRODUCTO_DUPLICADO, HEADER, Alert.AlertType.WARNING);
-                } else {
-                    boolean isAdded = productService.addProduct(productDto);
-                    if (isAdded) {
-                        products.add(productDto);
-                        clearFields();
-                        showMessage(TITULO_PRODUCTO_AGREGADO, BODY_PRODUCTO_AGREGADO, HEADER, Alert.AlertType.INFORMATION);
-                    } else {
-                        showMessage(TITULO_PRODUCTO_NO_AGREGADO, BODY_PRODUCTO_NO_AGREGADO, HEADER, Alert.AlertType.ERROR);
-                    }
-                }
+        ProductDto productDto = createProductDto();
+        if (productDto != null && validDataProduct(productDto)) {
+            if (isProductDuplicate(productDto)) {
+                showMessage(TITULO_PRODUCTO_DUPLICADO, BODY_PRODUCTO_DUPLICADO, HEADER, Alert.AlertType.WARNING);
             } else {
-                showMessage(TITULO_INCOMPLETO, BODY_INCOMPLETO, HEADER, Alert.AlertType.WARNING);
+                boolean isAdded = productController.addProduct(productDto);
+                if (isAdded) {
+                    products.add(productDto);
+                    clearFields();
+                    showMessage(TITULO_PRODUCTO_AGREGADO, BODY_PRODUCTO_AGREGADO, HEADER, Alert.AlertType.INFORMATION);
+                } else {
+                    showMessage(TITULO_PRODUCTO_NO_AGREGADO, BODY_PRODUCTO_NO_AGREGADO, HEADER, Alert.AlertType.ERROR);
+                }
             }
-        } catch (IllegalArgumentException e) {
-            showMessage("Error de Validación", e.getMessage(), HEADER, Alert.AlertType.ERROR);
+        } else {
+            showMessage(TITULO_INCOMPLETO, BODY_INCOMPLETO, HEADER, Alert.AlertType.WARNING);
         }
     }
-
+    // Método que actualiza el producto seleccionado en la lista y en la base de datos
     private void updateProduct() {
         if (selectProduct != null) {
-            try {
-                ProductDto updatedProduct = createProductDto();
-                if (updatedProduct != null && validDataProduct(updatedProduct)) {
-                    productService.updateProduct(updatedProduct);
-                    products.set(products.indexOf(selectProduct), updatedProduct);
-                    showProductInformation(updatedProduct);
-                    showMessage(TITULO_PRODUCTO_ACTUALIZADO, BODY_PRODUCTO_ACTUALIZADO, HEADER, Alert.AlertType.INFORMATION);
-                }
-            } catch (IllegalArgumentException e) {
-                showMessage("Error de Validación", e.getMessage(), HEADER, Alert.AlertType.ERROR);
+            ProductDto updatedProduct = createProductDto();
+            if (updatedProduct != null && validDataProduct(updatedProduct)) {
+                productController.updateProduct(updatedProduct);
+                products.set(products.indexOf(selectProduct), updatedProduct);
+                showProductInformation(updatedProduct);
+                showMessage(TITULO_PRODUCTO_ACTUALIZADO, BODY_PRODUCTO_ACTUALIZADO, HEADER, Alert.AlertType.INFORMATION);
+            } else {
+                showMessage(TITULO_INCOMPLETO, BODY_INCOMPLETO, HEADER, Alert.AlertType.WARNING);
             }
         } else {
             showMessage(TITULO_PRODUCTO_NO_SELECCIONADO, BODY_PRODUCTO_NO_SELECCIONADO, HEADER, Alert.AlertType.WARNING);
         }
     }
+    // Método que elimina el producto seleccionado de la lista y de la base de datos
     private void removeProduct() {
         if (selectProduct != null) {
-            productService.removeProduct(selectProduct);
+            productController.removeProduct(selectProduct);
             products.remove(selectProduct);
             clearFields();
             showMessage(TITULO_PRODUCTO_REMOVIDO, BODY_PRODUCTO_REMOVIDO, HEADER, Alert.AlertType.INFORMATION);
@@ -277,18 +267,11 @@ public class ProductViewController {
     }
     // Método que valida los datos del producto antes de añadirlo o actualizarlo
     private boolean validDataProduct(ProductDto productDto) {
-        if (productDto.name() == null || productDto.name().isBlank()) {
-            throw new IllegalArgumentException("El nombre del producto no puede estar vacío.");
-        }
-        if (productDto.price() <= 0) {
-            throw new IllegalArgumentException("El precio debe ser mayor a 0.");
-        }
-        if (productDto.publicationDate() == null) {
-            throw new IllegalArgumentException("La fecha de publicación no puede estar vacía.");
-        }
-        return true; // Si pasa todas las validaciones, devuelve true
+        return productDto.name() != null && !productDto.name().isEmpty() &&
+                productDto.category() != null && !productDto.category().isEmpty() &&
+                productDto.price() > 0 &&
+                productDto.publicationDate() != null;
     }
-
     // Método que verifica si el producto ya existe en la lista
     private boolean isProductDuplicate(ProductDto productDto) {
         return products.stream().anyMatch(p -> p.name().equalsIgnoreCase(productDto.name()));
