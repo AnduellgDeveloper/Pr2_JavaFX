@@ -7,8 +7,6 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -26,19 +24,14 @@
     </Tab>
       <Tab text="Mensajes">
         <content>
-          <AnchorPane fx:id="tabMessages" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+          <AnchorPane fx:id="tabMessages" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@Css/anchor.css">
                <children>
-                  <ImageView fitHeight="643.0" fitWidth="962.0" layoutX="-78.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/degrade.png" />
-                     </image>
-                  </ImageView>
                   <TextArea fx:id="sharedNotesArea" layoutX="214.0" layoutY="124.0" prefHeight="164.0" prefWidth="374.0" promptText="Escribe notas que se compartirán con otras sesiones" stylesheets="@Css/TextA.css" />
                   <Label alignment="CENTER" layoutX="78.0" layoutY="26.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="43.0" prefWidth="137.0" stylesheets="@Css/Label.css" text="Mensajes ">
                      <font>
                         <Font name="Arial Black" size="14.0" />
                      </font></Label>
-                  <ListView fx:id="activeUsersListView" layoutY="178.0" prefHeight="437.0" prefWidth="108.0" style="-fx-background-color: #ECB0F7FF;" stylesheets="@Css/list.css" />
+                  <ListView fx:id="activeUsersListView" layoutY="178.0" prefHeight="437.0" prefWidth="139.0" style="-fx-background-color: #ECB0F7FF;" stylesheets="@Css/list.css" />
                    <Button layoutX="421.0" layoutY="307.0" onAction="#testNotification" text="Probar Notificación">
                      <stylesheets>
                         <URL value="@Css/ButtonDifferent.css" />
