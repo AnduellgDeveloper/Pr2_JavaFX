@@ -80,10 +80,9 @@ public class SellerViewController {
     private TextField txtPassword;
 
     @FXML
-    private TextField txtUserName;
+    private TextField txtUserName,txtidNumber;
 
-    @FXML
-    private TextField txtidNumber;
+
 
     @FXML
     void onAddSeller(ActionEvent event) {
