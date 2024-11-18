@@ -1,4 +1,6 @@
-package co.edu.uniquindio.marketplace_fx.marketplace_app.model;
+package co.edu.uniquindio.marketplace_fx.marketplace_app.model.session;
+
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -7,18 +9,21 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Session {
     private final String sessionId;
-    private final User user;
+    private String username;
     private final LocalDateTime loginTime;
     private Map<String, Object> sessionData;
-    private boolean isActive;
 
-    public Session(User user) {
+
+    public Session(String username) {
         this.sessionId = UUID.randomUUID().toString();
-        this.user = user;
+        this.username = username;
         this.loginTime = LocalDateTime.now();
         this.sessionData = new ConcurrentHashMap<>();
-        this.isActive = true;
     }
+
+
+    public String getSessionId() { return sessionId; }
+    public String getUsername() { return username; }
 
     public void setSessionData(String key, Object value) {
         sessionData.put(key, value);
@@ -26,25 +31,10 @@ public class Session {
     public Object getSessionData(String key) {
         return sessionData.get(key);
     }
-    public boolean isActive() {
-        return true;
-    }
-    public String getSessionId() {
-        return sessionId;
-    }
-    public User getUser() {
-        return user;
-    }
     public LocalDateTime getLoginTime() {
         return loginTime;
     }
-    public Map<String, Object> getSessionData() {
-        return sessionData;
-    }
-    public void setSessionData(Map<String, Object> sessionData) {
-        this.sessionData = sessionData;
-    }
     public void setActive(boolean active) {
-        isActive = active;
+        active = true;
     }
 }

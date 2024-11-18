@@ -1,6 +1,6 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Session;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.SessionManager;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.Session;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.SessionManager;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
 
 import java.io.IOException;
 
@@ -20,6 +21,8 @@ public class MarketPlaceAppController {
 
     @FXML
     private TabPane tabPane;
+    @FXML
+    private TextArea sharedNotesArea;
 
     @FXML
     private Tab tabProductView;
@@ -58,31 +61,21 @@ public class MarketPlaceAppController {
             showMessage(username,"Username recibido en MarketPlaceAppController: " + username,"Notificacion", Alert.AlertType.INFORMATION);
         }
     }
-
     // Método que muestra un mensaje en un cuadro de diálogo
     private void showMessage(String title, String message, String header, Alert.AlertType alertType) {
-
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
-
-    public void initializeWithSession(Session session) {
+    public void initSession(Session session) {
         this.currentSession = session;
-//        setupNotificationListener();
-        updateUI();
-    }
+        tabProductView.setText("Productos de" + session.getUsername());
 
-    private void updateUI() {
-    }
-
-//    private void setupNotificationListener() {
-//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-//            List<String> notifications = sessionManager.getSharedData().getNotifications();
-//        }));
-//        timeline.setCycleCount(Timeline.INDEFINITE);
-//        timeline.play();
-//    }
-    @FXML
-    private void shareDataWithOtherSessions() {
-        // Ejemplo de compartir datos
-        sessionManager.shareData("message", "Hola desde sesión " + currentSession.getSessionId());
+        String sharedNotes = (String) sessionManager.getSharedData().get("sharedNotes");
+        if (sharedNotes != null) {
+            sharedNotesArea.setText(sharedNotes);
+        }
     }
 }

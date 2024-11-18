@@ -2,8 +2,8 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.LoginController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Session;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.SessionManager;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.Session;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.SessionManager;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,18 +25,16 @@ import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductCons
 public class LoginViewController {
     private LoginController loginController;
     private SessionManager sessionManager = SessionManager.getInstance();
-    private User user;
 
     @FXML
     private ProductViewController productViewController;
     @FXML
-    private Button btnBackToHub;
-    @FXML
-    private Button btnLogin;
+    private Button btnBackToHub, btnLogin;
     @FXML
     private PasswordField txtPassword;
     @FXML
     private TextField txtUser;
+
     @FXML
     void initialize() {
         loginController = new LoginController();
@@ -47,16 +45,14 @@ public class LoginViewController {
         String username = txtUser.getText();
         String password = txtPassword.getText();
 
-        Session session = sessionManager.createSession(user);
-        session.setSessionData("Ultimo inicio de sesion", LocalDateTime.now());
-        sessionManager.shareData("Usuarios activos", sessionManager.getActiveSessions().size());
-
         if (username.isEmpty() || password.isEmpty()) {
             showMessage(TITULO_CAMPOS_VACIOS, BODY_CAMPOS_VACIOS, HEADER, Alert.AlertType.ERROR);
             return;
         }
         UserDto userDto = loginController.authenticateUser(username, password);
         if (userDto != null) {
+            Session session = sessionManager.createSession(username);
+            session.setSessionData("Ultimo inicio de sesion", LocalDateTime.now());
             String role = loginController.getUserRole(userDto);
             switch (role) {
                 case "seller":
@@ -80,17 +76,14 @@ public class LoginViewController {
 
             MarketPlaceAppController marketPlaceController = loader.getController();
             marketPlaceController.setProductUsername(username);
-            marketPlaceController.initializeWithSession(session);
+            marketPlaceController.initSession(session);
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.setTitle("Dunima MarketPlace - Vendedor" + "- Sesión:" + session.getSessionId());
+            stage.setTitle("Dunima MarketPlace - Vendedor"+
+                    "- Sesión de " + session.getUsername()+
+                    "- ID:" + session.getSessionId());
             stage.setScene(scene);
-
-
-            stage.setOnCloseRequest(_ -> {
-                sessionManager.closeSession(session.getSessionId());
-            });
             stage.show();
 
 //           closeCurrentStage(event);
@@ -105,20 +98,17 @@ public class LoginViewController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Administrator-view.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
-            stage.setTitle("Dunima MarketPlace - Administrador" + "- Sesion:" +session.getSessionId());
+            stage.setTitle("Dunima MarketPlace - Administrador"+
+                    "- Sesión de " + session.getUsername()+
+                    "- ID:" + session.getSessionId());
             stage.setScene(scene);
-
-            stage.setOnCloseRequest(_ -> {
-                sessionManager.closeSession(session.getSessionId());
-            });
             stage.show();
-
+            showMessage(TITULO_INTERFAZ_ADMINISTRADOR, BODY_BIENVENIDO_ADMINISTRADOR, HEADER, Alert.AlertType.INFORMATION);
             closeCurrentStage(event);
         } catch (IOException e) {
             e.printStackTrace();
-        }
 
-        showMessage(TITULO_INTERFAZ_ADMINISTRADOR, BODY_BIENVENIDO_ADMINISTRADOR, HEADER, Alert.AlertType.INFORMATION);
+        }
     }
 
     private void closeCurrentStage(ActionEvent event) {
