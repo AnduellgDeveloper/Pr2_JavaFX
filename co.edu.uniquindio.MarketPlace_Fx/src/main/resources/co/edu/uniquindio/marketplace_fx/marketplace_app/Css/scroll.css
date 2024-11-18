@@ -1,0 +1,34 @@
+.scroll-pane {
+    -fx-background: #2e003e; /* Fondo general oscuro morado */
+    -fx-border-color: #500075; /* Borde morado oscuro */
+    -fx-border-width: 2px;
+}
+
+.scroll-pane .viewport {
+    -fx-background: #1a0026; /* Fondo interno más oscuro */
+}
+
+.scroll-bar {
+    -fx-background-color: transparent; /* Fondo transparente para barras */
+}
+
+.scroll-bar:vertical {
+    -fx-pref-width: 12px;
+}
+
+.scroll-bar:horizontal {
+    -fx-pref-height: 12px;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #8000a0; /* Color morado para el pulgar (thumb) */
+    -fx-background-radius: 6px;
+}
+
+.scroll-bar .thumb:hover {
+    -fx-background-color: #a300d6; /* Color más brillante al pasar el mouse */
+}
+
+.scroll-bar .track {
+    -fx-background-color: #390053; /* Fondo oscuro para el track */
+}
