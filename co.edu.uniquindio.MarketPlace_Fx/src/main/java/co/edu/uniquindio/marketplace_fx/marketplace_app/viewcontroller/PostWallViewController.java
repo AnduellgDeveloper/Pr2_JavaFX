@@ -57,7 +57,11 @@ public class PostWallViewController implements Observer {
             List<ProductDto> sellerProducts = productController.getProducts(username);
             populateWall(sellerProducts);
         }
+
+        listComments.getItems().clear();
+        listLikes.getItems().clear();
     }
+
 
     // Metodo para setterar el username y actualizar el muro
     public void setUsername(String username) {
@@ -100,12 +104,25 @@ public class PostWallViewController implements Observer {
     }
 
     // Handle liking a product
+    // Handle liking a product
     public void onLike(ProductDto product) {
-        showMessage("Like", "¡Le gusta el producto: " + product.name(), "Información", Alert.AlertType.INFORMATION);
-        String likeMessage = "Producto: " + product.name() + " -> ¡Le gusta a alguien!";
-        productLikes.computeIfAbsent(product.name(), k -> new ArrayList<>()).add(likeMessage);
+        if (username == null || username.isEmpty()) {
+            showMessage("Error", "Debe estar identificado para dar 'me gusta'.", "Error", Alert.AlertType.ERROR);
+            return;
+        }
+
+        String likeMessage = "Usuario: " + username + " -> Producto: " + product.name();
+
+        // Agregar el mensaje al mapa de likes
+        productLikes.computeIfAbsent(product.name(), k -> new ArrayList<>()).add(username);
+
+        // Actualizar la vista de la lista de likes
         listLikes.getItems().add(likeMessage);
+
+        // Mostrar notificación
+        showMessage("Like", "¡Le diste me gusta al producto: " + product.name() + "!", "Información", Alert.AlertType.INFORMATION);
     }
+
 
     // Handle commenting on a product
     public void onComment(ProductDto product) {
