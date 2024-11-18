@@ -7,7 +7,6 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IProductCrud;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IRegister;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.ISellerCrud;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,6 +21,7 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
     private final List<User> listRegisterUser = new ArrayList<>();
     private final List<User> listUsers = new ArrayList<>();
     private final List<Administrator> listAdministrators = new ArrayList<>();
+    private List<Seller> sellerFriends = new ArrayList<>();
     private String name;
     private String username;
     MarketPlaceMappingImpl mapper;
@@ -64,7 +64,9 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
         }
         return new ArrayList<>();
     }
-
+    public List<Seller> getSellerFriends() {
+        return sellerFriends;
+    }
     // Método para obtener los productos de un vendedor específico
     public List<Product> getProductsSeller(String username) {
         List<Product> products = sellerProductMap.getOrDefault(username, new ArrayList<>());
@@ -137,6 +139,18 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
                 existingSeller.setPassword(updatedSeller.getPassword());
             }
         }
+    }
+    public boolean addFriend(Seller seller, String username) {
+        if (seller != null && !sellerFriends.contains(seller)) {
+            sellerFriends.add(seller);
+            return true;
+        }
+        return false;
+    }
+
+
+    public void removeFriend(Seller friend) {
+        sellerFriends.remove(friend);
     }
     private Product getBuildProduct(String name,
                                     String image,

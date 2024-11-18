@@ -1,3 +1,4 @@
+
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.Session;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.SessionManager;

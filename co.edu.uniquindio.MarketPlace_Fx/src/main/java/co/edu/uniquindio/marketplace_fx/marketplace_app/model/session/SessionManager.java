@@ -12,6 +12,7 @@ public class SessionManager {
     private SharedData sharedData;
     private Consumer<Session> onSessionCreatedCallback;
     private Consumer<Session> onSessionClosedCallback;
+    private Session currentSession;
 
     private SessionManager() {
         activeSessions = new ConcurrentHashMap<>();
@@ -27,6 +28,7 @@ public class SessionManager {
         }
         return instance;
     }
+
     public void setOnSessionCreatedCallback(Consumer<Session> callback) {
         this.onSessionCreatedCallback = callback;
     }
@@ -53,6 +55,10 @@ public class SessionManager {
             }
         }
     }
+    public Session getCurrentSession() {
+        return currentSession;
+    }
+
 
     // Obtener datos compartidos
     public SharedData getSharedData() {

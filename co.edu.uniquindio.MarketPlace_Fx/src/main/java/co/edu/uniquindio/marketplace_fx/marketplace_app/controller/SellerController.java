@@ -4,6 +4,7 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.factory.ModelFactory;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.SellerDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Seller;
 
 import java.util.List;
 

@@ -8,7 +8,7 @@ import java.util.List;
 public class Seller extends User {
 
     private List<Product> products;
-    private List<Seller> sellers = new ArrayList<>();
+    private List<Seller> sellerFriends;
 
     public Seller(String name,
                   String lastName,
@@ -18,19 +18,24 @@ public class Seller extends User {
                   String password) {
         super(name, lastName, idNumber, address, username, password);
         this.products = new ArrayList<>();
-        this.sellers = new ArrayList<>();
+        this.sellerFriends = new ArrayList<>();
     }
 
     public List<Product> getProducts() {
         return products;
     }
+    public List<Seller> getSellerFriends() {
+        return sellerFriends;
+    }
     public static SellerBuilder builder(){
         return new SellerBuilder();
     }
+
+
     public void setProducts(List<Product> products) {
         this.products = products;
     }
-    public void setSellers(List<Seller> sellers) {
-        this.sellers = sellers;
+    public void setSellerFriends(List<Seller> sellerFriends) {
+        this.sellerFriends = sellerFriends;
     }
 }

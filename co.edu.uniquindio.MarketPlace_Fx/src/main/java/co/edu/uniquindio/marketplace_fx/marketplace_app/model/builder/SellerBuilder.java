@@ -22,7 +22,7 @@ public class SellerBuilder  extends UserBuilder<SellerBuilder> {
     public Seller build() {
         Seller seller = new Seller(name, lastName, idNumber, address, username, password);
         seller.setProducts(products);
-        seller.setSellers(sellers);
+        seller.setSellerFriends(sellers);
         return seller;
     }
     @Override

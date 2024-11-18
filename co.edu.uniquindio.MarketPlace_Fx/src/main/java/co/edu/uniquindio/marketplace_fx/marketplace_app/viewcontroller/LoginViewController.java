@@ -78,11 +78,16 @@ public class LoginViewController {
             marketPlaceController.setProductUsername(username);
             marketPlaceController.initSession(session);
 
+
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("Dunima MarketPlace - Vendedor"+
                     "- Sesión de " + session.getUsername()+
                     "- ID:" + session.getSessionId());
+            stage.setOnCloseRequest(eventClose -> {
+                System.out.println("La ventana del vendedor se está cerrando...");
+                sessionManager.closeSession(session.getSessionId());
+            });
             stage.setScene(scene);
             stage.show();
 
@@ -91,6 +96,7 @@ public class LoginViewController {
             e.printStackTrace();
         }
     }
+
 
 
     private void navigateToAdminView(ActionEvent event, Session session) {

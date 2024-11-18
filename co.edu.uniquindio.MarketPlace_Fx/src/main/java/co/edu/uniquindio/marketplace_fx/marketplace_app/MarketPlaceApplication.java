@@ -19,7 +19,6 @@ public class MarketPlaceApplication extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
-
     }
 
     public static void main() {
