@@ -21,10 +21,10 @@ public class JavaFxFeedBackPanel implements IFeedBackPanel {
     private List<String> commentList;
     private int likeCount = 0;
     private int commentCount = 0;
-    private String currentUser = "User"; // Nombre del usuario que da like (esto puede variar dependiendo de tu lógica)
+    private String currentUser = "User";
 
     public JavaFxFeedBackPanel() {
-        likesList = new ArrayList<>(); // Inicializamos la lista de likes
+        likesList = new ArrayList<>();
         commentList = new ArrayList<>();
         interactionBox = new HBox(10);
 
@@ -39,9 +39,6 @@ public class JavaFxFeedBackPanel implements IFeedBackPanel {
 
         commentImageView.setFitHeight(20);
         commentImageView.setFitWidth(30);
-
-
-
 
         likeButton.setGraphic(likeImageView);
         commentButton.setGraphic(commentImageView);
@@ -61,10 +58,9 @@ public class JavaFxFeedBackPanel implements IFeedBackPanel {
     @Override
     public void setLikeAction(EventHandler<ActionEvent> action) {
         likeButton.setOnAction(event -> {
-            // Si el usuario no ha dado like antes, lo añadimos
-            if (!likesList.contains(currentUser)) {
 
-                likeCount++; // Incrementar contador de likes
+            if (!likesList.contains(currentUser)) {
+                likeCount++;
             }
             updateButtonLikeText();
             action.handle(event);
@@ -74,10 +70,9 @@ public class JavaFxFeedBackPanel implements IFeedBackPanel {
     @Override
     public void setCommentAction(EventHandler<ActionEvent> action) {
         commentButton.setOnAction(event -> {
-            // Si el usuario no ha dado like antes, lo añadimos
             if (!commentList.contains(currentUser)) {
 
-                commentCount++; // Incrementar contador de likes
+                commentCount++;
             }
             updateButtonCommentText();
             action.handle(event);
@@ -88,13 +83,11 @@ public class JavaFxFeedBackPanel implements IFeedBackPanel {
     public Node getInteractionNode() {
         return interactionBox;
     }
-    // Método para actualizar el texto del botón de likes
-
-
-    // Método para actualizar el texto del botón de likes
+    // Método para actualizar el texto contador del botón de likes
     private void updateButtonCommentText() {
         commentButton.setText(""+commentCount);
     }
+    // Método para actualizar el texto contador del botón de comentarios
     private void updateButtonLikeText () {
         likeButton.setText("" + likeCount);
     }

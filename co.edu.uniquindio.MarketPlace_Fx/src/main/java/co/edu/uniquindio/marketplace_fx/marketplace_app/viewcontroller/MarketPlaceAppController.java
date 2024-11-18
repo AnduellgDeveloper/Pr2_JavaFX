@@ -62,7 +62,6 @@ public class MarketPlaceAppController {
             e.printStackTrace();
         }
         setupNotifications();
-
     }
 
     public void setProductUsername(String username) {
@@ -120,8 +119,6 @@ public class MarketPlaceAppController {
             for (String notification : notifications) {
                 showNotification(notification);
             }
-
-            // Limpiar notificaciones después de mostrarlas
             notifications.clear();
             sessionManager.getSharedData().put("notifications", notifications);
         }));
@@ -129,11 +126,11 @@ public class MarketPlaceAppController {
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
-
+    // Obtener zona de spawn
     private Stage getStage() {
         return (Stage) tabMessages.getScene().getWindow();
     }
-
+    // Ver notificacion (Nueva más minimalista)
     private void showNotification(String message) {
         Platform.runLater(() -> {
             Tooltip tooltip = new Tooltip(message);

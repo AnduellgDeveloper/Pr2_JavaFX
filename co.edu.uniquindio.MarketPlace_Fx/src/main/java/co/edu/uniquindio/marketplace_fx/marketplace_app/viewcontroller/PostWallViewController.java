@@ -33,6 +33,9 @@ public class PostWallViewController implements Observer {
     private Map<String, List<String>> productComments = new HashMap<>();
     private Map<String, List<String>> productLikes = new HashMap<>();
 
+    public PostWallViewController() {
+    }
+
     @FXML
     private AnchorPane fondo;
     @FXML
@@ -47,8 +50,14 @@ public class PostWallViewController implements Observer {
     private Label label;
     @FXML
     private ListView<String> listComments, listLikes;
-    public PostWallViewController() {
+
+
+    // Llama el metodo de cambiar el tema
+    @FXML
+    void onThem(ActionEvent event) {
+        themeMode();
     }
+
     @FXML
     public void initialize() {
         this.tema = new Theme();
@@ -64,7 +73,6 @@ public class PostWallViewController implements Observer {
         listComments.getItems().clear();
         listLikes.getItems().clear();
     }
-
 
     // Metodo para setterar el username y actualizar el muro
     public void setUsername(String username) {
@@ -113,28 +121,14 @@ public class PostWallViewController implements Observer {
             return;
         }
         productLikes.computeIfAbsent(product.name(), k -> new ArrayList<>()).add(username);
-
-
         updateLikesList(product);
     }
-
-    private void updateLikesList(ProductDto product) {
-        List<String> likes = productLikes.get(product.name());
-        listLikes.getItems().clear();  // Limpiar la lista antes de agregar nuevos likes
-
-        // Mostrar todos los likes dados, incluso los duplicados
-        for (String user : likes) {
-            listLikes.getItems().add(user + " le dio me gusta al producto: " + product.name());
-        }
-    }
-
-
+    // Accion al dar click en el boton de comentario
     public void onComment(ProductDto product) {
         if (username == null || username.isEmpty()) {
             showMessage("Error", "Debe estar identificado para comentar.", "Error", Alert.AlertType.ERROR);
             return;
         }
-
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Comentario");
         alert.setHeaderText("Agregar comentario para el producto: " + product.name());
@@ -153,8 +147,8 @@ public class PostWallViewController implements Observer {
         alert.showAndWait().ifPresent(response -> {
             if (response == submitButton) {
                 String comment = commentField.getText().trim();
+
                 if (!comment.isEmpty()) {
-                    // Almacenar comentario con el nombre del usuario
                     String commentText = comment + " - " + username;
                     productComments.computeIfAbsent(product.name(), k -> new ArrayList<>()).add(commentText);
                     updateCommentsList(product);
@@ -164,18 +158,23 @@ public class PostWallViewController implements Observer {
             }
         });
     }
-
-    private void updateCommentsList(ProductDto product) {
-        List<String> comments = productComments.get(product.name());
-        listComments.getItems().clear();  // Limpiar la lista antes de agregar nuevos comentarios
-
-        // Mostrar todos los comentarios con el usuario que lo hizo
-        for (String comment : comments) {
-            listComments.getItems().add("Comentario en producto " + product.name() + ": " + comment);
+    // Actualizar lista de likes
+    private void updateLikesList(ProductDto product) {
+        List<String> likes = productLikes.get(product.name());
+        listLikes.getItems().clear();
+        for (String user : likes) {
+            listLikes.getItems().add(user + " le dio me gusta a " + product.name());
         }
     }
-
-    // Load image from directories
+    // Actualiza la lista de comentarios
+    private void updateCommentsList(ProductDto product) {
+        List<String> comments = productComments.get(product.name());
+        listComments.getItems().clear();
+        for (String comment : comments) {
+            listComments.getItems().add("Comentario a " + product.name() + ": " + comment);
+        }
+    }
+    // Carga la iamgen desde un directorio (itera buscando igualdad con el nombre de la imagen)
     private Image loadImageFromDirectories(String imageName) {
         try {
             String baseDir = "/co/edu/uniquindio/marketplace_fx/marketplace_app/images";
@@ -202,7 +201,7 @@ public class PostWallViewController implements Observer {
         }
     }
 
-    // Recursive method to find image in directory
+    // Busca la imagen en el directorio asignado
     private File findImageInDirectory(File directory, String imageName) {
         for (File file : Objects.requireNonNull(directory.listFiles())) {
             if (file.isDirectory()) {
@@ -216,8 +215,7 @@ public class PostWallViewController implements Observer {
         }
         return null;
     }
-
-    // Show message dialog
+    // Ver mensaje
     private void showMessage(String title, String message, String header, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -225,14 +223,7 @@ public class PostWallViewController implements Observer {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-    // Change the theme mode (Light/Dark)
-    @FXML
-    void onThem(ActionEvent event) {
-        themeMode();
-    }
-
-    // Select light or dark theme
+    // Interfaz de mensaje para elegir el tema (oscuro o claro)
     private void themeMode() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Seleccionar Tema");
@@ -255,20 +246,15 @@ public class PostWallViewController implements Observer {
             }
         });
     }
-
-    // Apply light mode styles
+    // Aplicar el modo claro
     private void applyLightMode() {
         tema.modLight(label, fondo, Slider, btnTema, postWallContainer);
     }
-
-    // Apply dark mode styles
+    // Aplicar el modo oscuro
     private void applyDarkMode() {
         tema.modDark(label, fondo, Slider, btnTema, postWallContainer);
     }
-
-    // Error logging helper
     private void logError(Exception e) {
-        // Here you can implement a proper logging framework
         System.err.println("Error: " + e.getMessage());
         e.printStackTrace();
     }

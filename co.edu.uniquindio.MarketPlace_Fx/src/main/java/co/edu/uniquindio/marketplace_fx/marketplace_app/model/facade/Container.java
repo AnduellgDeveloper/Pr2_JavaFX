@@ -4,8 +4,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
 public class Container {
-
-
     public void modeDark(GridPane gridPane){
         gridPane.setStyle("-fx-background-color: #460949");
     }

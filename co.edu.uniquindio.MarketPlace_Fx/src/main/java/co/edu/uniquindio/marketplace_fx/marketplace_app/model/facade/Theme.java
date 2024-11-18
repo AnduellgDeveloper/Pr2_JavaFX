@@ -22,7 +22,7 @@ public class Theme {
     }
 
     public void modLight(Label label, AnchorPane anchorPane, Pane pane, Button button,GridPane gridPane) {
-        label.setText("Modo Dia Activado");
+        label.setText("Modo Claro");
         background.modeLight(anchorPane);
         slider.modeLigth(pane);
         buttonTheme.modeLight(button);
@@ -30,7 +30,7 @@ public class Theme {
     }
 
     public void modDark(Label label, AnchorPane anchorPane, Pane pane, Button button,GridPane gridPane) {
-        label.setText("Modo Oscuro Activado");
+        label.setText("Modo Oscuro");
         background.modeDark(anchorPane);
         slider.modeDark(pane);
         buttonTheme.modeDark(button);

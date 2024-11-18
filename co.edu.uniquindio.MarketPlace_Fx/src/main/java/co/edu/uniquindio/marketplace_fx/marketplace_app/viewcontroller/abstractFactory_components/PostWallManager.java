@@ -34,26 +34,24 @@ public class PostWallManager implements Observer {
     public void update() {
         updateProducts(productViewController.getProductList());
     }
-
-
+    // Crea el GridPane contenedor de los productos
     public PostWallManager(IComponentFactory factory) {
         this.factory = factory;
-
         this.postWallContainer = new GridPane();
         this.postWallContainer.setHgap(20);
         this.postWallContainer.setVgap(20);
         this.postWallContainer.setPadding(new Insets(20));
         this.postWallContainer.setAlignment(Pos.TOP_LEFT);
-
         this.postWallContainer.setPrefSize(800, 600);
         this.postWallContainer.setMinSize(400, 400);
-
         postWallContainer.setPadding(new Insets(20, 0, 0, 50));
         this.postWallContainer.getStyleClass().add("grid-pane");
-
-
     }
-    public void createPost(String productName, LocalDateTime productDate, String imageUrl, Runnable onLike, Runnable onComment) {
+    public void createPost(String productName,
+                           LocalDateTime productDate,
+                           String imageUrl,
+                           Runnable onLike,
+                           Runnable onComment) {
         IPostContainer postContainer = factory.createPostContainer();
         IProductDateTime productDateTime = factory.createProductDateTime();
         IProductName product = factory.createProductName();
@@ -64,7 +62,6 @@ public class PostWallManager implements Observer {
         product.setProductName(productName);
         productDisplay.setProductImage(imageUrl);
 
-        // Incrementar likes y ejecutar acción personalizada
         interactionPanel.setLikeAction(_ -> {
             onLike.run();
         });
