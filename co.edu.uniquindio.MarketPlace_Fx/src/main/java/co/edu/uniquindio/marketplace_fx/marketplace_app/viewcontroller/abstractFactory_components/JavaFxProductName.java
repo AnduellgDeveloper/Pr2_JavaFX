@@ -1,14 +1,15 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components;
 
-import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory.IProductInfo;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory.IProductName;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 
-public class JavaFxProductInfo implements IProductInfo {
+public class JavaFxProductName implements IProductName {
     private TextField productNameField;
 
-    public JavaFxProductInfo() {
+    public JavaFxProductName() {
         productNameField = new TextField();
+
         productNameField.getStyleClass().add("seller-name");
         productNameField.setEditable(false);
         productNameField.setMaxHeight(20);
@@ -19,6 +20,7 @@ public class JavaFxProductInfo implements IProductInfo {
     public void setProductName(String name) {
         productNameField.setText(name);
     }
+
     @Override
     public Node getProductInfoNode() {
         return productNameField;

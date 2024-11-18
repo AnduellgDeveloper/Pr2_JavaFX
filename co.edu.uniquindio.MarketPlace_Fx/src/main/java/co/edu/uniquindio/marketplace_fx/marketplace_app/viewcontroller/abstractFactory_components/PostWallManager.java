@@ -1,19 +1,39 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components;
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory.*;
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_observer.Observer;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.PostWallViewController;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.ProductViewController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-public class PostWallManager {
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PostWallManager implements Observer {
+    private PostWallViewController postWallViewController;
+    private ProductViewController productViewController;
     private IComponentFactory factory;
     private GridPane postWallContainer;
     private int currentRow = 0;
     private int currentColumn = 0;
     private final int maxColumns = 6;
+    private List<ProductDto> products = new ArrayList<>();
+
+    public void updateProducts(List<ProductDto> newProducts) {
+        products.clear();
+        products.addAll(newProducts);
+    }
+    @Override
+    public void update() {
+        updateProducts(productViewController.getProductList());
+    }
 
 
     public PostWallManager(IComponentFactory factory) {
@@ -33,13 +53,16 @@ public class PostWallManager {
 
 
     }
-    public void createPost(String productName, String imageUrl, Runnable onLike, Runnable onComment) {
+    public void createPost(String productName, LocalDateTime productDate, String imageUrl, Runnable onLike, Runnable onComment) {
         IPostContainer postContainer = factory.createPostContainer();
-        IProductInfo productInfo = factory.createProductInfo();
+        IProductDateTime productDateTime = factory.createProductDateTime();
+        IProductName product = factory.createProductName();
         IProductView productDisplay = factory.createProductDisplay();
         IFeedBackPanel interactionPanel = factory.createInteractionPanel();
 
-        productInfo.setProductName(productName);
+
+        productDateTime.setProductDateTime(productDate);
+        product.setProductName(productName);
         productDisplay.setProductImage(imageUrl);
 
         interactionPanel.setLikeAction(_ -> onLike.run());
@@ -55,12 +78,13 @@ public class PostWallManager {
 
         post.setAlignment(Pos.CENTER);
         post.getChildren().addAll(
-                productInfo.getProductInfoNode(),
+                productDateTime.getProductDateTimeNode(),
+                product.getProductInfoNode(),
                 productDisplay.getProductViewNode(),
                 interactionPanel.getInteractionNode()
         );
-        postWallContainer.add(post, currentColumn, currentRow);
 
+        postWallContainer.add(post, currentColumn, currentRow);
         currentColumn++;
         if (currentColumn >= maxColumns) {
             currentColumn = 0;

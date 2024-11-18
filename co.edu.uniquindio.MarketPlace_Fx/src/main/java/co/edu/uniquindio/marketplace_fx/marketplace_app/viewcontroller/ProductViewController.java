@@ -3,6 +3,8 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.SellerController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_observer.Observable;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_observer.Observer;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -18,19 +20,22 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.*;
 
-public class ProductViewController {
+public class ProductViewController implements Observer {
     public static ProductViewController instance;
     private String username;
     private SellerController sellerController;
     private ProductController productController;
     private ObservableList<ProductDto> products = FXCollections.observableArrayList();
     private ProductDto selectProduct;
+    private List<Observer> observers = new ArrayList<>();
+
 
     public static synchronized ProductViewController getInstance() {
         if (instance == null) {
@@ -40,6 +45,10 @@ public class ProductViewController {
     }
     public ProductViewController() {
     }
+    public void setProductController(ProductController productController) {
+        this.productController = productController;
+    }
+
 
     @FXML
     private Button btnAddProduct, btnClearFields, btnUpdateProduct;
@@ -52,7 +61,7 @@ public class ProductViewController {
     @FXML
     private TableColumn<ProductDto, Integer> tcPrice;
     @FXML
-    private TableColumn<ProductDto, LocalDate> tcPublicationDate;
+    private TableColumn<ProductDto, LocalDateTime> tcPublicationDate;
     @FXML
     private DatePicker dpPublicationDate;
     @FXML
@@ -117,12 +126,19 @@ public class ProductViewController {
         rdBtnPublished.setSelected(true);
     }
     // Método que obtiene los productos del controlador y los añade a la lista
-    private void getProducts() {
+    public void getProducts() {
         products.clear();
         List<ProductDto> userProducts = productController.getProducts(username);
         products.addAll(userProducts);
 
     }
+    public List<ProductDto> getProductList() {
+        products.clear();
+        List<ProductDto> userProducts = productController.getProducts(username);
+        products.addAll(userProducts);
+        return userProducts;
+    }
+
     // Método que inicializa el enlace de datos para las columnas de la tabla
     private void initDataBinding() {
         tcName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().name()));
@@ -133,7 +149,7 @@ public class ProductViewController {
         tcPublicationDate.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().publicationDate()));
         tcPublicationDate.setCellFactory(_ -> new TableCell<>() {
             @Override
-            protected void updateItem(LocalDate item, boolean empty) {
+            protected void updateItem(LocalDateTime item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
@@ -157,7 +173,7 @@ public class ProductViewController {
             txtCategory.setText(selectProduct.category());
             txtImage.setText(selectProduct.image());
             txtPrice.setText(String.valueOf(selectProduct.price()));
-            dpPublicationDate.setValue(selectProduct.publicationDate());
+            dpPublicationDate.setValue(LocalDate.from(selectProduct.publicationDate()));
 
             loadImage(selectProduct.image());
         }
@@ -238,7 +254,7 @@ public class ProductViewController {
         String category = txtCategory.getText();
         String image = txtImage.getText();
         String status = "";
-        LocalDate publicationDate = dpPublicationDate.getValue();
+        LocalDateTime publicationDate = dpPublicationDate.getValue().atStartOfDay();
         if (rdBtnPublished.isSelected()) {
             status = "Published";
         } else if (rdBtnSold.isSelected()) {
@@ -262,7 +278,6 @@ public class ProductViewController {
             showMessage(TITULO_ERROR_FECHA, BODY_FECHA_INVALIDA, HEADER, Alert.AlertType.ERROR);
             return null;
         }
-
         return new ProductDto(name, image, category, price, status, publicationDate);
     }
     // Método que valida los datos del producto antes de añadirlo o actualizarlo
@@ -293,4 +308,38 @@ public class ProductViewController {
         dpPublicationDate.setValue(null);
         imgProduct.setImage(null);
     }
+
+    @Override
+    public void update() {
+        List<ProductDto> updatedProducts = productController.getProducts(username);
+        displayProducts(updatedProducts);
+        System.out.println("ProductViewController: Productos actualizados.");
+
+    }
+    // Este método es para mostrar los productos en la interfaz gráfica
+    private void displayProducts(List<ProductDto> updatedProducts) {
+        // Aquí debes colocar el código necesario para actualizar la vista con los nuevos productos.
+        // Ejemplo: actualizar una lista de productos en la UI.
+        for (ProductDto product : updatedProducts) {
+            // Aquí podrías agregar la lógica para agregar productos a un ListView, GridPane, etc.
+            System.out.println("Producto actualizado: " + product.name());
+        }
+    }
+    // Método que permite agregar observadores
+    public void addObserver(Observer observer) {
+        observers.add(observer); // Agrega un observador a la lista
+    }
+
+    // Método que elimina observadores
+    public void removeObserver(Observer observer) {
+        observers.remove(observer); // Elimina un observador de la lista
+    }
+
+    // Método que notifica a todos los observadores
+    public void notifyObservers() {
+        for (Observer observer : observers) {
+            observer.update(); // Llama al método update de cada observador
+        }
+    }
+
 }

@@ -2,15 +2,17 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.model;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.builder.ProductBuilder;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class Product {
     private String name;
     private String image;
     private String category;
     private int price;
     private String status;
-    private LocalDate publicationDate;
+    private LocalDateTime publicationDate;
 
-    public Product(String name, String image, String category, int price, String status, LocalDate publicationDate) {
+    public Product(String name, String image, String category, int price, String status, LocalDateTime publicationDate) {
         this.name = name;
         this.image = image;
         this.category = category;
@@ -24,7 +26,7 @@ public class Product {
 // ----------------------------- Getters and Setters -----------------------------
     public String getStatus() {return status;}
     public void setStatus(String estatus) {this.status = estatus;}
-    public void setPublicationDate(LocalDate publicationDate) {this.publicationDate = publicationDate;}
+    public void setPublicationDate(LocalDateTime publicationDate) {this.publicationDate = publicationDate;}
     public String getName() {return name;}
     public void setName(String name) {this.name = name;}
     public String getImage() {return image;}
@@ -33,6 +35,6 @@ public class Product {
     public void setCategory(String category) {this.category = category;}
     public int getPrice() {return price;}
     public void setPrice(int price) {this.price = price;}
-    public LocalDate getPublicationDate(){return publicationDate;}
+    public LocalDateTime getPublicationDate(){return publicationDate;}
 
 }

@@ -2,6 +2,7 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.model.builder;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ProductBuilder {
     private String name;
@@ -9,7 +10,7 @@ public class ProductBuilder {
     private String category;
     private int price;
     private String status;
-    private LocalDate publicationDate;
+    private LocalDateTime publicationDate;
 
     public ProductBuilder name(String name) {
         this.name = name;
@@ -31,7 +32,7 @@ public class ProductBuilder {
         this.status = status;
         return this;
     }
-    public ProductBuilder publicationDate(LocalDate publicationDate) {
+    public ProductBuilder publicationDate(LocalDateTime publicationDate) {
         this.publicationDate = publicationDate;
         return this;
     }

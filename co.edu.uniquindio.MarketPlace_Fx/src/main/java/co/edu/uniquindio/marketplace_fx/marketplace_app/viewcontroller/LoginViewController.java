@@ -2,6 +2,9 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.LoginController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Session;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.SessionManager;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,12 +17,15 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.LoginConstants.*;
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.HEADER;
 
 public class LoginViewController {
     private LoginController loginController;
+    private SessionManager sessionManager = SessionManager.getInstance();
+    private User user;
 
     @FXML
     private ProductViewController productViewController;
@@ -41,6 +47,10 @@ public class LoginViewController {
         String username = txtUser.getText();
         String password = txtPassword.getText();
 
+        Session session = sessionManager.createSession(user);
+        session.setSessionData("Ultimo inicio de sesion", LocalDateTime.now());
+        sessionManager.shareData("Usuarios activos", sessionManager.getActiveSessions().size());
+
         if (username.isEmpty() || password.isEmpty()) {
             showMessage(TITULO_CAMPOS_VACIOS, BODY_CAMPOS_VACIOS, HEADER, Alert.AlertType.ERROR);
             return;
@@ -50,10 +60,10 @@ public class LoginViewController {
             String role = loginController.getUserRole(userDto);
             switch (role) {
                 case "seller":
-                    navigateToSellerView(event, username);
+                    navigateToSellerView(event, username, session);
                     break;
                 case "administrator":
-                    navigateToAdminView(event);
+                    navigateToAdminView(event, session);
                     break;
                 default:
                     showMessage(TITULO_ROL_DESCONOCIDO, BODY_ROL_DESCONOCIDO, HEADER, Alert.AlertType.ERROR);
@@ -63,17 +73,18 @@ public class LoginViewController {
         }
     }
 
-    private void navigateToSellerView(ActionEvent event, String username) {
+    private void navigateToSellerView(ActionEvent event, String username, Session session) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/MarketPlace-app.fxml"));
             Parent root = loader.load();
 
             MarketPlaceAppController marketPlaceController = loader.getController();
             marketPlaceController.setProductUsername(username);
+            marketPlaceController.initializeWithSession(session);
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.setTitle("Dunima MarketPlace - Vendedor");
+            stage.setTitle("Dunima MarketPlace - Vendedor" + "Sesión:" + session.getSessionId());
             stage.setScene(scene);
             stage.show();
 
@@ -84,7 +95,7 @@ public class LoginViewController {
     }
 
 
-    private void navigateToAdminView(ActionEvent event) {
+    private void navigateToAdminView(ActionEvent event, Session session) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Administrator-view.fxml"));
             Scene scene = new Scene(loader.load());

@@ -8,12 +8,14 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IRegister;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.ISellerCrud;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister {
+    private User user;
     private final List<Product> products = new ArrayList<>();
     private final Map<String, List<Product>> sellerProductMap = new HashMap<>();
     private final List<Seller> listSellers = new ArrayList<>();
@@ -27,23 +29,18 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
     public Marketplace() {
         this.mapper = new MarketPlaceMappingImpl();
     }
-
     public List<User> getListRegisterUser() {
         return listRegisterUser;
     }
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
-
-    private User user;
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -146,7 +143,7 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
                                     String category,
                                     int price,
                                     String status,
-                                    LocalDate publicationDate) {
+                                    LocalDateTime publicationDate) {
         return Product.builder()
                 .name(name)
                 .image(image)

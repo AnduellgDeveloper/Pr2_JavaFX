@@ -11,6 +11,38 @@
     -fx-effect: dropshadow(gaussian, rgb(174, 16, 210), 10, 0.5, 0, 0);
 
 }
+/* Estilo general para la tabla */
+.table-view {
+    -fx-background-color: white; /* Fondo blanco */
+    -fx-border-color: transparent; /* Sin bordes */
+    -fx-border-radius: 15px; /* Bordes redondeados */
+    -fx-background-radius: 15px; /* Fondo redondeado */
+    -fx-padding: 10px; /* Espaciado interno */
+}
+/* Estilo para las filas */
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent; /* Sin bordes */
+}
 
+.table-row-cell:filled:selected,
+.table-row-cell:focused {
+    -fx-background-color: rgba(233, 129, 248, 0.82); /* Fondo morado claro al seleccionar */
+    -fx-text-fill: #000000; /* Texto morado */
+}
+
+/* Estilo para las celdas */
+.table-cell {
+    -fx-border-color: transparent;
+}
+
+/* Estilo para la cabecera */
+.column-header {
+    -fx-background-color: #d76ae8;
+    -fx-text-fill: white; /* Texto blanco */
+    -fx-font-weight: bold; /* Texto en negrita */
+    -fx-border-color: transparent; /* Sin bordes */
+    -fx-background-radius: 10px 10px 0 0; /* Fondo redondeado superior */
+}
 
 

@@ -1,14 +1,17 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.utils;
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.*;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory.IComponentFactory;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.PostWallViewController;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.ProductViewController;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.ComponentFactory;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class DataUtil {
     public static Marketplace initializeData() {
         Marketplace marketplace = new Marketplace();
-
         Administrator admin1 = Administrator.builder()
                 .name("Admin")
                 .lastName("Principal")
@@ -86,8 +89,8 @@ public class DataUtil {
                 .lastName("Duque")
                 .idNumber("2367891")
                 .address("Supia-Caldas")
-                .username("DuqueAna")
-                .password("25214ana")
+                .username("Ana")
+                .password("123")
                 .build();
         Seller seller10 = Seller.builder()
                 .name("Mathias")
@@ -104,7 +107,7 @@ public class DataUtil {
                 .category("Ropa - Hombre")
                 .price(1500)
                 .status("Published")
-                .publicationDate(LocalDate.of(2023, 10, 2))
+                .publicationDate(LocalDate.of(2023, 10, 2).atStartOfDay())
                 .build();
 
         Product men2 = Product.builder()
@@ -113,7 +116,7 @@ public class DataUtil {
                 .category("Ropa - Hombre")
                 .price(500)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 9, 15))
+                .publicationDate(LocalDate.of(2024, 9, 15).atStartOfDay())
                 .build();
 
         Product men3 = Product.builder()
@@ -122,7 +125,7 @@ public class DataUtil {
                 .category("Ropa - Hombre")
                 .price(1200)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 8, 22))
+                .publicationDate(LocalDate.of(2024, 8, 22).atStartOfDay())
                 .build();
 
         Product men4 = Product.builder()
@@ -131,7 +134,7 @@ public class DataUtil {
                 .category("Ropa - Hombre")
                 .price(800)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 9, 5))
+                .publicationDate(LocalDate.of(2024, 9, 5).atStartOfDay())
                 .build();
         Product men5 = Product.builder()
                 .name("Camiseta Negra Oversize")
@@ -139,7 +142,7 @@ public class DataUtil {
                 .category("Ropa - Hombre")
                 .price(1000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 1, 9))
+                .publicationDate(LocalDate.of(2024, 1, 9).atStartOfDay())
                 .build();
         Product men6 = Product.builder()
                 .name("Chaqueta Impermeable ")
@@ -147,7 +150,7 @@ public class DataUtil {
                 .category("Ropa - Hombre")
                 .price(450)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 4, 6))
+                .publicationDate(LocalDate.of(2024, 4, 6).atStartOfDay())
                 .build();
 
 //----------------WOMEN--------------------------------------------------
@@ -157,7 +160,7 @@ public class DataUtil {
                 .category("Ropa - Mujer")
                 .price(300)
                 .status("Published")
-                .publicationDate(LocalDate.of(2023, 6, 12))
+                .publicationDate(LocalDate.of(2023, 6, 12).atStartOfDay())
                 .build();
         Product women2 = Product.builder()
                 .name("Jean Cargo")
@@ -165,7 +168,7 @@ public class DataUtil {
                 .category("Ropa - Mujer")
                 .price(250)
                 .status("Published")
-                .publicationDate(LocalDate.of(2023, 6, 30))
+                .publicationDate(LocalDate.of(2023, 6, 30).atStartOfDay())
                 .build();
         Product women3 = Product.builder()
                 .name("Pantalon Bota Campana")
@@ -173,7 +176,7 @@ public class DataUtil {
                 .category("Ropa - Mujer")
                 .price(450)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 10, 25))
+                .publicationDate(LocalDate.of(2024, 10, 25).atStartOfDay())
                 .build();
         Product women4 = Product.builder()
                 .name("Pantalon tendencia estilo Periodico")
@@ -181,7 +184,7 @@ public class DataUtil {
                 .category("Ropa - Mujer")
                 .price(150)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 4, 2))
+                .publicationDate(LocalDate.of(2024, 4, 2).atStartOfDay())
                 .build();
         Product women5 = Product.builder()
                 .name("Jean Cargo Azul Oscuro")
@@ -189,7 +192,7 @@ public class DataUtil {
                 .category("Ropa - Mujer")
                 .price(200)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 11, 1))
+                .publicationDate(LocalDate.of(2024, 11, 1).atStartOfDay())
                 .build();
         Product women6 = Product.builder()
                 .name("Jean Cargo Azul Claro")
@@ -197,7 +200,7 @@ public class DataUtil {
                 .category("Ropa - Mujer")
                 .price(220)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 7, 21))
+                .publicationDate(LocalDate.of(2024, 7, 21).atStartOfDay())
                 .build();
         //---------------------------GIRLS------------------
         Product girl1 = Product.builder()
@@ -206,7 +209,7 @@ public class DataUtil {
                 .category("Ropa - Niña")
                 .price(350)
                 .status("Published")
-                .publicationDate(LocalDate.of(2023, 6, 20))
+                .publicationDate(LocalDate.of(2023, 6, 20).atStartOfDay())
                 .build();
         Product girl2 = Product.builder()
                 .name("Blusa Blanca Niña")
@@ -214,7 +217,7 @@ public class DataUtil {
                 .category("Ropa - Niña")
                 .price(100)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 11, 12))
+                .publicationDate(LocalDate.of(2024, 11, 12).atStartOfDay())
                 .build();
         Product girl3 = Product.builder()
                 .name("Blusa Niña Moño")
@@ -222,7 +225,7 @@ public class DataUtil {
                 .category("Ropa - Niña")
                 .price(110)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 7, 25))
+                .publicationDate(LocalDate.of(2024, 7, 25).atStartOfDay())
                 .build();
         Product girl4 = Product.builder()
                 .name("Blusa Niña Estampada")
@@ -230,7 +233,7 @@ public class DataUtil {
                 .category("Ropa - Niña")
                 .price(200)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 8, 25))
+                .publicationDate(LocalDate.of(2024, 8, 25).atStartOfDay())
                 .build();
         Product girl5 = Product.builder()
                 .name("Camisa Cafe Niña")
@@ -238,7 +241,7 @@ public class DataUtil {
                 .category("Ropa - Niña")
                 .price(123)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 6, 25))
+                .publicationDate(LocalDate.of(2024, 6, 25).atStartOfDay())
                 .build();
         Product girl6 = Product.builder()
                 .name("Vestido Niña Rosa")
@@ -246,7 +249,7 @@ public class DataUtil {
                 .category("Ropa - Mujer")
                 .price(500)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 1, 25))
+                .publicationDate(LocalDate.of(2024, 1, 25).atStartOfDay())
                 .build();
         //----------------BOYS---------------------------
         Product boy1 = Product.builder()
@@ -255,7 +258,7 @@ public class DataUtil {
                 .category("Ropa - Niñp")
                 .price(120)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 2, 2))
+                .publicationDate(LocalDate.of(2024, 2, 2).atStartOfDay())
                 .build();
         Product boy2 = Product.builder()
                 .name("Camiseta Niño Nasa")
@@ -263,7 +266,7 @@ public class DataUtil {
                 .category("Ropa - Niño")
                 .price(128)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 4, 12))
+                .publicationDate(LocalDate.of(2024, 4, 12).atStartOfDay())
                 .build();
         Product boy3 = Product.builder()
                 .name("Camiseta Niño Dinosaurio")
@@ -271,7 +274,7 @@ public class DataUtil {
                 .category("Ropa - Niño")
                 .price(130)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 6, 20))
+                .publicationDate(LocalDate.of(2024, 6, 20).atStartOfDay())
                 .build();
         Product boy4 = Product.builder()
                 .name("Buzo Marvel Niño")
@@ -279,7 +282,7 @@ public class DataUtil {
                 .category("Ropa - Niño")
                 .price(300)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 9, 9))
+                .publicationDate(LocalDate.of(2024, 9, 9).atStartOfDay())
                 .build();
         Product boy5 = Product.builder()
                 .name("Conjunto Dinosaurio Niño")
@@ -287,7 +290,7 @@ public class DataUtil {
                 .category("Ropa - Niño")
                 .price(500)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 1, 25))
+                .publicationDate(LocalDate.of(2024, 1, 25).atStartOfDay())
                 .build();
         Product boy6 = Product.builder()
                 .name("Jean Niño")
@@ -295,7 +298,7 @@ public class DataUtil {
                 .category("Ropa - Niño")
                 .price(130)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 3, 2))
+                .publicationDate(LocalDate.of(2024, 3, 2).atStartOfDay())
                 .build();
         //---------------Makeup---------------------------------------------
         Product makeup1 = Product.builder()
@@ -304,7 +307,7 @@ public class DataUtil {
                 .category("Maquillaje")
                 .price(100)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 4, 2))
+                .publicationDate(LocalDate.of(2024, 4, 2).atStartOfDay())
                 .build();
         Product makeup2 = Product.builder()
                 .name("Lapiz Labios Kylie Cosmetics")
@@ -312,7 +315,7 @@ public class DataUtil {
                 .category("Maquillaje")
                 .price(430)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 10, 2))
+                .publicationDate(LocalDate.of(2024, 10, 2).atStartOfDay())
                 .build();
         Product makeup3 = Product.builder()
                 .name("Base Dior Tono Claro")
@@ -320,7 +323,7 @@ public class DataUtil {
                 .category("Maquillaje")
                 .price(130)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 3, 2))
+                .publicationDate(LocalDate.of(2024, 3, 2).atStartOfDay())
                 .build();
         Product makeup4 = Product.builder()
                 .name("Bronzer trendy")
@@ -328,7 +331,7 @@ public class DataUtil {
                 .category("Maquillaje")
                 .price(130)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 5, 2))
+                .publicationDate(LocalDate.of(2024, 5, 2).atStartOfDay())
                 .build();
         Product makeup5 = Product.builder()
                 .name("Iluminador Dior")
@@ -336,7 +339,7 @@ public class DataUtil {
                 .category("Maquillaje")
                 .price(130)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 10, 8))
+                .publicationDate(LocalDate.of(2024, 10, 8).atStartOfDay())
                 .build();
         Product makeup6 = Product.builder()
                 .name("Paleta Sombras Dior")
@@ -344,7 +347,7 @@ public class DataUtil {
                 .category("Maquillaje")
                 .price(130)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 3, 2))
+                .publicationDate(LocalDate.of(2024, 3, 2).atStartOfDay())
                 .build();
         //_____-------------------------------Technology------------------------
         Product tech1 = Product.builder()
@@ -353,7 +356,7 @@ public class DataUtil {
                 .category("Tecnologia")
                 .price(5000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 10, 2))
+                .publicationDate(LocalDate.of(2024, 10, 2).atStartOfDay())
                 .build();
         Product tech2 = Product.builder()
                 .name("Televisor OLED ")
@@ -361,7 +364,7 @@ public class DataUtil {
                 .category("Maquillaje")
                 .price(130)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 3, 2))
+                .publicationDate(LocalDate.of(2024, 3, 2).atStartOfDay())
                 .build();
         Product tech3 = Product.builder()
                 .name("Computador Gamer")
@@ -369,7 +372,7 @@ public class DataUtil {
                 .category("Tecnologia")
                 .price(4500)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 12, 3))
+                .publicationDate(LocalDate.of(2024, 12, 3).atStartOfDay())
                 .build();
         Product tech4 = Product.builder()
                 .name("Computador hp Intel Celeron")
@@ -377,7 +380,7 @@ public class DataUtil {
                 .category("Tecnologia")
                 .price(2300)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 4, 14))
+                .publicationDate(LocalDate.of(2024, 4, 14).atStartOfDay())
                 .build();
         Product tech5 = Product.builder()
                 .name("Laptob Mac Chip M3")
@@ -385,7 +388,7 @@ public class DataUtil {
                 .category("Tecnologia")
                 .price(7800)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 2, 19))
+                .publicationDate(LocalDate.of(2024, 2, 19).atStartOfDay())
                 .build();
         Product tech6 = Product.builder()
                 .name("Torre y Teclado Dell")
@@ -393,7 +396,7 @@ public class DataUtil {
                 .category("Tecnologia")
                 .price(5600)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 1, 23))
+                .publicationDate(LocalDate.of(2024, 1, 23).atStartOfDay())
                 .build();
 
 //--------------------MOBILE DEVICE-------------------------------
@@ -403,7 +406,7 @@ public class DataUtil {
                 .category("Smartphones")
                 .price(10000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 8, 21))
+                .publicationDate(LocalDate.of(2024, 8, 21).atStartOfDay())
                 .build();
         Product mobile2 = Product.builder()
                 .name("Iphone 15 Pro Max Azul")
@@ -411,7 +414,7 @@ public class DataUtil {
                 .category("Smartphones")
                 .price(10000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 9, 15))
+                .publicationDate(LocalDate.of(2024, 9, 15).atStartOfDay())
                 .build();
         Product mobile3 = Product.builder()
                 .name("Samsung S24 Ultra")
@@ -419,7 +422,7 @@ public class DataUtil {
                 .category("Smartphones")
                 .price(6000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 1, 12))
+                .publicationDate(LocalDate.of(2024, 1, 12).atStartOfDay())
                 .build();
         Product mobile4 = Product.builder()
                 .name("Xiaomi 14 ")
@@ -427,7 +430,7 @@ public class DataUtil {
                 .category("Smartphones")
                 .price(4000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 9, 19))
+                .publicationDate(LocalDate.of(2024, 9, 19).atStartOfDay())
                 .build();
         Product mobile5 = Product.builder()
                 .name("Ipad Chip M4")
@@ -435,7 +438,7 @@ public class DataUtil {
                 .category("Smartphones")
                 .price(9000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 11, 14))
+                .publicationDate(LocalDate.of(2024, 11, 14).atStartOfDay())
                 .build();
         Product mobile6 = Product.builder()
                 .name("Lenovo Tab")
@@ -443,7 +446,7 @@ public class DataUtil {
                 .category("Smartphones")
                 .price(2000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 9, 23))
+                .publicationDate(LocalDate.of(2024, 9, 23).atStartOfDay())
                 .build();
 //----------------------MOTORCYCLE-----------------------------------
 
@@ -453,7 +456,7 @@ public class DataUtil {
                 .category("Motocicletas")
                 .price(12000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 12, 23))
+                .publicationDate(LocalDate.of(2024, 12, 23).atStartOfDay())
                 .build();
         Product motorcycle2 = Product.builder()
                 .name("Mt09 2024")
@@ -461,7 +464,7 @@ public class DataUtil {
                 .category("Motocicletas")
                 .price(20000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 3, 4))
+                .publicationDate(LocalDate.of(2024, 3, 4).atStartOfDay())
                 .build();
         Product motorcycle3 = Product.builder()
                 .name("Cuatrimoto Raptor")
@@ -469,7 +472,7 @@ public class DataUtil {
                 .category("Motocicletas")
                 .price(18000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 11, 10))
+                .publicationDate(LocalDate.of(2024, 11, 10).atStartOfDay())
                 .build();
         Product motorcycle4 = Product.builder()
                 .name("R1 Moto")
@@ -477,7 +480,7 @@ public class DataUtil {
                 .category("Motocicletas")
                 .price(19000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 5, 12))
+                .publicationDate(LocalDate.of(2024, 5, 12).atStartOfDay())
                 .build();
         Product motorcycle5 = Product.builder()
                 .name("Fz F1 150")
@@ -485,7 +488,7 @@ public class DataUtil {
                 .category("Motocicletas")
                 .price(10000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 8, 20))
+                .publicationDate(LocalDate.of(2024, 8, 20).atStartOfDay())
                 .build();
         Product motorcycle6 = Product.builder()
                 .name("Yz Moto")
@@ -493,7 +496,7 @@ public class DataUtil {
                 .category("Motocicletas")
                 .price(17000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 1, 6))
+                .publicationDate(LocalDate.of(2024, 1, 6).atStartOfDay())
                 .build();
 //-----------------------CARS-----------------------------
         Product car1 = Product.builder()
@@ -502,7 +505,7 @@ public class DataUtil {
                 .category("Carros")
                 .price(1894000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 3, 1))
+                .publicationDate(LocalDate.of(2024, 3, 1).atStartOfDay())
                 .build();
         Product car2 = Product.builder()
                 .name("Toyota Camioneta")
@@ -510,7 +513,7 @@ public class DataUtil {
                 .category("Carros")
                 .price(56781200)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 7, 1))
+                .publicationDate(LocalDate.of(2024, 7, 1).atStartOfDay())
                 .build();
         Product car3 = Product.builder()
                 .name("Toyota Tuner")
@@ -518,7 +521,7 @@ public class DataUtil {
                 .category("Carros")
                 .price(2340000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 12, 7))
+                .publicationDate(LocalDate.of(2024, 12, 7).atStartOfDay())
                 .build();
         Product car4 = Product.builder()
                 .name("Exclusivo Carro Toreto")
@@ -526,7 +529,7 @@ public class DataUtil {
                 .category("Carros")
                 .price(90000000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 4, 23))
+                .publicationDate(LocalDate.of(2024, 4, 23).atStartOfDay())
                 .build();
         Product car5 = Product.builder()
                 .name("Fiat Camioneta")
@@ -534,7 +537,7 @@ public class DataUtil {
                 .category("Carros")
                 .price(1230000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 12, 25))
+                .publicationDate(LocalDate.of(2024, 12, 25).atStartOfDay())
                 .build();
         Product car6 = Product.builder()
                 .name(" Mclaren ")
@@ -542,7 +545,7 @@ public class DataUtil {
                 .category("Carros")
                 .price(8900000)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 7, 23))
+                .publicationDate(LocalDate.of(2024, 7, 23).atStartOfDay())
                 .build();
 //-----------------------------HOME----------------------------------
         Product home1 = Product.builder()
@@ -551,7 +554,7 @@ public class DataUtil {
                 .category("Hogar")
                 .price(120)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 8, 12))
+                .publicationDate(LocalDate.of(2024, 8, 12).atStartOfDay())
                 .build();
         Product home2 = Product.builder()
                 .name(" Toalla Para Pelo Panda ")
@@ -559,7 +562,7 @@ public class DataUtil {
                 .category("Hogar")
                 .price(150)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 2, 15))
+                .publicationDate(LocalDate.of(2024, 2, 15).atStartOfDay())
                 .build();
         Product home3 = Product.builder()
                 .name(" Toalla Stich ")
@@ -567,7 +570,7 @@ public class DataUtil {
                 .category("Hogar")
                 .price(200)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 9, 12))
+                .publicationDate(LocalDate.of(2024, 9, 12).atStartOfDay())
                 .build();
         Product home4 = Product.builder()
                 .name(" Lampara Escritorio ")
@@ -575,7 +578,7 @@ public class DataUtil {
                 .category("Hogar")
                 .price(600)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 2, 13))
+                .publicationDate(LocalDate.of(2024, 2, 13).atStartOfDay())
                 .build();
         Product home5 = Product.builder()
                 .name(" Reloj Escritorio")
@@ -583,7 +586,7 @@ public class DataUtil {
                 .category("Hogar")
                 .price(100)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 12, 23))
+                .publicationDate(LocalDate.of(2024, 12, 23).atStartOfDay())
                 .build();
         Product home6 = Product.builder()
                 .name(" Cubiertos Navideños ")
@@ -591,7 +594,7 @@ public class DataUtil {
                 .category("Hogar")
                 .price(230)
                 .status("Published")
-                .publicationDate(LocalDate.of(2024, 9, 9))
+                .publicationDate(LocalDate.of(2024, 9, 9).atStartOfDay())
                 .build();
 
         //----------------------------------------- Usuarios Registrados -----------------------------------------
@@ -680,12 +683,12 @@ public class DataUtil {
         marketplace.addProductToSeller("BilCardona",motorcycle5);
         marketplace.addProductToSeller("BilCardona",motorcycle6);
 //----------------------------------------- CAR -----------------------------------------
-        marketplace.addProductToSeller("DuqueAna",car1);
-        marketplace.addProductToSeller("DuqueAna",car2);
-        marketplace.addProductToSeller("DuqueAna",car3);
-        marketplace.addProductToSeller("DuqueAna",car4);
-        marketplace.addProductToSeller("DuqueAna",car5);
-        marketplace.addProductToSeller("DuqueAna",car6);
+        marketplace.addProductToSeller("Ana",car1);
+        marketplace.addProductToSeller("Ana",car2);
+        marketplace.addProductToSeller("Ana",car3);
+        marketplace.addProductToSeller("Ana",car4);
+        marketplace.addProductToSeller("Ana",car5);
+        marketplace.addProductToSeller("Ana",car6);
 //----------------------------------------- HOME -----------------------------------------
         marketplace.addProductToSeller("matisc",home1);
         marketplace.addProductToSeller("matisc",home2);

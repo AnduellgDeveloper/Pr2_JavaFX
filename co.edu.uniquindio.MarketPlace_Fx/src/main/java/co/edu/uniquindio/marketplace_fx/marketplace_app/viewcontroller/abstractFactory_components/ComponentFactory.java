@@ -8,8 +8,8 @@ public class ComponentFactory implements IComponentFactory {
         return new JavaFxPostContainer();
     }
     @Override
-    public IProductInfo createProductInfo() {
-        return new JavaFxProductInfo();
+    public IProductName createProductName() {
+        return new JavaFxProductName();
     }
     @Override
     public IProductView createProductDisplay() {
@@ -18,5 +18,9 @@ public class ComponentFactory implements IComponentFactory {
     @Override
     public IFeedBackPanel createInteractionPanel() {
         return new JavaFxFeedBackPanel();
+    }
+    @Override
+    public IProductDateTime createProductDateTime() {
+        return new JavaFxProductDateTime();
     }
 }

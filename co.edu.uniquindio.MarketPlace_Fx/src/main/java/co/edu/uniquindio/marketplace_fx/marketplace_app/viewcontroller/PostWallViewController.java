@@ -3,15 +3,12 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Product;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.facade.Theme;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_observer.Observer;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory.IComponentFactory;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.ComponentFactory;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.PostWallManager;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -26,14 +23,15 @@ import java.util.*;
 
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.PostWallConstants.*;
 
-public class PostWallViewController {
-    private final IComponentFactory componentFactory;
-    private PostWallManager postWallManager;
+public class PostWallViewController implements Observer {
+    private final IComponentFactory componentFactory = new ComponentFactory();
+    private PostWallManager postWallManager = new PostWallManager(componentFactory);
     private Theme tema;
     private String username;
     private final ProductController productController = new ProductController();
     private Map<String, List<String>> productComments = new HashMap<>();
     private Map<String, List<String>> productLikes = new HashMap<>();
+
     @FXML
     private AnchorPane fondo;
     @FXML
@@ -46,42 +44,49 @@ public class PostWallViewController {
     private Label label;
     @FXML
     private ListView<String> listComments, listLikes;
-
     public PostWallViewController() {
-        this.componentFactory = new ComponentFactory();
-        this.postWallManager = new PostWallManager(new ComponentFactory());
     }
-
     @FXML
     public void initialize() {
         this.tema = new Theme();
-        postWallManager = new PostWallManager(componentFactory);
         postWallContainer.getChildren().add(postWallManager.getPostWall());
 
-        List<ProductDto> sellerProducts = productController.getProducts(username);
-        populateWall(sellerProducts);
+        productController.addObserver(this);
 
-        IComponentFactory factory = new ComponentFactory();
-        postWallManager = new PostWallManager(factory);
-
-        postWallContainer.getChildren().add(postWallManager.getPostWall());
-
+        if (username != null) {
+            List<ProductDto> sellerProducts = productController.getProducts(username);
+            populateWall(sellerProducts);
+        }
     }
+
+    // Metodo para setterar el username y actualizar el muro
     public void setUsername(String username) {
         this.username = username;
         List<ProductDto> sellerProducts = productController.getProducts(username);
         populateWall(sellerProducts);
     }
 
+    @Override
+    public void update() {
+        List<ProductDto> updatedProducts = productController.getProducts(username);
+        populateWall(updatedProducts);
+    }
+
+
+    // Crear los elementos de el muro de publicaciones (se crean en orden segun la fecha
     private void populateWall(List<ProductDto> sellerProducts) {
         try {
             postWallManager.clearPosts();
-            for (ProductDto product : sellerProducts) {
+            List<ProductDto> sortedProducts = new ArrayList<>(sellerProducts);
+            sortedProducts.sort((p1, p2) -> p2.publicationDate().compareTo(p1.publicationDate()));
+
+            for (ProductDto product : sortedProducts) {
                 String imagePath = product.image();
                 Image image = loadImageFromDirectories(imagePath);
                 if (image != null) {
                     postWallManager.createPost(
                             product.name(),
+                            product.publicationDate(),
                             image.getUrl(),
                             () -> onLike(product),
                             () -> onComment(product)
@@ -89,23 +94,21 @@ public class PostWallViewController {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            showMessage(TITULO_ERROR_IMAGEN, BODY_ERROR_POBLAR_MURO + e.getMessage(), HEADER, Alert.AlertType.ERROR);
+            logError(e);
+            showMessage("Error", "Error al poblar el muro: " + e.getMessage(), "Error", Alert.AlertType.ERROR);
         }
     }
 
-    private void onLike(ProductDto product) {
-        showMessage(TITULO_LIKE, BODY_LIKE_PRODUCTO + product.name(), HEADER_LIKE, Alert.AlertType.INFORMATION);
+    // Handle liking a product
+    public void onLike(ProductDto product) {
+        showMessage("Like", "¡Le gusta el producto: " + product.name(), "Información", Alert.AlertType.INFORMATION);
         String likeMessage = "Producto: " + product.name() + " -> ¡Le gusta a alguien!";
         productLikes.computeIfAbsent(product.name(), k -> new ArrayList<>()).add(likeMessage);
-
         listLikes.getItems().add(likeMessage);
-
-
     }
 
-    // Alert Type personalizado para que el usuario pueda escribir el comentario
-    private void onComment(ProductDto product) {
+    // Handle commenting on a product
+    public void onComment(ProductDto product) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Comentario");
         alert.setHeaderText("Agregar comentario para el producto: " + product.name());
@@ -126,52 +129,43 @@ public class PostWallViewController {
                 String comment = commentField.getText().trim();
                 if (!comment.isEmpty()) {
                     productComments.computeIfAbsent(product.name(), k -> new ArrayList<>()).add(comment);
-
                     listComments.getItems().add("Producto: " + product.name() + " -> " + comment);
-
                     System.out.printf("\nComentario enviado a %s: %s", product.name(), comment);
-                } else {
-                    System.out.println("No se escribió ningún comentario.");
                 }
             } else {
-                System.out.println("El comentario fue cancelado.");
+                System.out.println("Comentario cancelado.");
             }
         });
     }
 
-
+    // Load image from directories
     private Image loadImageFromDirectories(String imageName) {
         try {
             String baseDir = "/co/edu/uniquindio/marketplace_fx/marketplace_app/images";
             URL baseResource = getClass().getResource(baseDir);
-
             if (baseResource == null) {
-                showMessage(TITULO_ERROR_IMAGEN,
-                        String.format("%s Directorio no encontrado: %s", BODY_ERROR_IMAGEN, baseDir), HEADER, Alert.AlertType.ERROR);
+                showMessage("Error Imagen", "Directorio no encontrado: " + baseDir, "Error", Alert.AlertType.ERROR);
                 return null;
             }
             File baseDirectory = new File(baseResource.toURI());
             if (!baseDirectory.exists() || !baseDirectory.isDirectory()) {
-                showMessage(TITULO_ERROR_IMAGEN,
-                        String.format("%s Directorio inválido: %s", BODY_ERROR_IMAGEN, baseDirectory.getAbsolutePath()), HEADER, Alert.AlertType.ERROR);
+                showMessage("Error Imagen", "Directorio inválido: " + baseDirectory.getAbsolutePath(), "Error", Alert.AlertType.ERROR);
                 return null;
             }
-
             File imageFile = findImageInDirectory(baseDirectory, imageName);
             if (imageFile == null) {
-                showMessage(TITULO_ERROR_IMAGEN,
-                        String.format("%s Imagen no encontrada: %s", BODY_ERROR_IMAGEN, imageName), HEADER, Alert.AlertType.ERROR);
+                showMessage("Error Imagen", "Imagen no encontrada: " + imageName, "Error", Alert.AlertType.ERROR);
                 return null;
             }
-
             return new Image(imageFile.toURI().toString());
         } catch (Exception e) {
-            e.printStackTrace();
-            showMessage(TITULO_ERROR_IMAGEN, BODY_ERROR_IMAGEN + e.getMessage(), HEADER, Alert.AlertType.ERROR);
+            logError(e);
+            showMessage("Error Imagen", "Error al cargar la imagen: " + e.getMessage(), "Error", Alert.AlertType.ERROR);
             return null;
         }
     }
 
+    // Recursive method to find image in directory
     private File findImageInDirectory(File directory, String imageName) {
         for (File file : Objects.requireNonNull(directory.listFiles())) {
             if (file.isDirectory()) {
@@ -186,6 +180,7 @@ public class PostWallViewController {
         return null;
     }
 
+    // Show message dialog
     private void showMessage(String title, String message, String header, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -194,11 +189,13 @@ public class PostWallViewController {
         alert.showAndWait();
     }
 
+    // Change the theme mode (Light/Dark)
     @FXML
     void onThem(ActionEvent event) {
         themeMode();
     }
 
+    // Select light or dark theme
     private void themeMode() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Seleccionar Tema");
@@ -213,20 +210,29 @@ public class PostWallViewController {
 
         alert.showAndWait().ifPresent(response -> {
             if (response == lightMode) {
-                aplylightMode();
+                applyLightMode();
             } else if (response == darkMode) {
-                aplyDarkMode();
+                applyDarkMode();
             } else {
                 System.out.println("Selección de tema cancelada.");
             }
         });
     }
 
-    private void aplylightMode() {
+    // Apply light mode styles
+    private void applyLightMode() {
         tema.modLight(label, fondo, Slider, btnTema, postWallContainer);
     }
 
-    private void aplyDarkMode() {
+    // Apply dark mode styles
+    private void applyDarkMode() {
         tema.modDark(label, fondo, Slider, btnTema, postWallContainer);
+    }
+
+    // Error logging helper
+    private void logError(Exception e) {
+        // Here you can implement a proper logging framework
+        System.err.println("Error: " + e.getMessage());
+        e.printStackTrace();
     }
 }
