@@ -113,7 +113,6 @@ public class PostWallViewController implements Observer {
             showMessage("Error", "Error al poblar el muro: " + e.getMessage(), "Error", Alert.AlertType.ERROR);
         }
     }
-
     // Handle liking a product
     public void onLike(ProductDto product) {
         if (username == null || username.isEmpty()) {
