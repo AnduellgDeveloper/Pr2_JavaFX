@@ -1,5 +1,6 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.model;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -42,6 +43,23 @@ public class SharedData {
 
     public List<String> getNotifications() {
         return new ArrayList<>(notifications);
+    }
+    public void saveToFile() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream("shared_data.ser"))) {
+            oos.writeObject(sharedObjects);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadFromFile() {
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream("shared_data.ser"))) {
+            sharedObjects = (Map<String, Object>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }

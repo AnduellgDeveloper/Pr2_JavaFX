@@ -6,12 +6,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class SessionManager {
     private static SessionManager instance;
     private Map<String, Session> activeSessions;
     private SharedData sharedData;
     private final ExecutorService notificationExecutor;
+
 
     private SessionManager() {
         activeSessions = new ConcurrentHashMap<>();

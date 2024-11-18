@@ -84,11 +84,16 @@ public class LoginViewController {
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.setTitle("Dunima MarketPlace - Vendedor" + "Sesión:" + session.getSessionId());
+            stage.setTitle("Dunima MarketPlace - Vendedor" + "- Sesión:" + session.getSessionId());
             stage.setScene(scene);
+
+
+            stage.setOnCloseRequest(_ -> {
+                sessionManager.closeSession(session.getSessionId());
+            });
             stage.show();
 
-//            closeCurrentStage(event);
+//           closeCurrentStage(event);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -100,8 +105,12 @@ public class LoginViewController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Administrator-view.fxml"));
             Scene scene = new Scene(loader.load());
             Stage stage = new Stage();
-            stage.setTitle("Dunima MarketPlace - Administrador");
+            stage.setTitle("Dunima MarketPlace - Administrador" + "- Sesion:" +session.getSessionId());
             stage.setScene(scene);
+
+            stage.setOnCloseRequest(_ -> {
+                sessionManager.closeSession(session.getSessionId());
+            });
             stage.show();
 
             closeCurrentStage(event);

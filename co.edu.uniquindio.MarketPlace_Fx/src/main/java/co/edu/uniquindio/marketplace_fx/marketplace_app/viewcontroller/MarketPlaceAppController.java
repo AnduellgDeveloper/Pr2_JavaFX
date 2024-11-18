@@ -1,5 +1,7 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Session;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.SessionManager;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -13,6 +15,8 @@ public class MarketPlaceAppController {
     private MarketPlaceAppController marketPlaceAppController;
     private ProductViewController productViewController;
     private PostWallViewController postWallViewController;
+    private SessionManager sessionManager = SessionManager.getInstance();
+    private Session currentSession;
 
     @FXML
     private TabPane tabPane;
@@ -54,15 +58,31 @@ public class MarketPlaceAppController {
             showMessage(username,"Username recibido en MarketPlaceAppController: " + username,"Notificacion", Alert.AlertType.INFORMATION);
         }
     }
+
     // Método que muestra un mensaje en un cuadro de diálogo
     private void showMessage(String title, String message, String header, Alert.AlertType alertType) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(message);
-        alert.showAndWait();
+
     }
 
     public void initializeWithSession(Session session) {
+        this.currentSession = session;
+//        setupNotificationListener();
+        updateUI();
+    }
+
+    private void updateUI() {
+    }
+
+//    private void setupNotificationListener() {
+//        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+//            List<String> notifications = sessionManager.getSharedData().getNotifications();
+//        }));
+//        timeline.setCycleCount(Timeline.INDEFINITE);
+//        timeline.play();
+//    }
+    @FXML
+    private void shareDataWithOtherSessions() {
+        // Ejemplo de compartir datos
+        sessionManager.shareData("message", "Hola desde sesión " + currentSession.getSessionId());
     }
 }

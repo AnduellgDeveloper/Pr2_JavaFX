@@ -2,13 +2,14 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.controller;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.factory.ModelFactory;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_decorator.IProductService;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_observer.Observable;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_observer.Observer;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.PostWallViewController;
 
 import java.util.ArrayList;
 import java.util.List;
-public class ProductController implements Observable, Observer {
+public class ProductController implements Observable, Observer, IProductService {
     ModelFactory modelFactory;
     private final List<Observer> observers;
     private List<ProductDto> products = new ArrayList<>();
@@ -55,8 +56,6 @@ public class ProductController implements Observable, Observer {
         notifyObservers();
         return true;
     }
-
-
     @Override
     public void update() {
         // Aquí actualizarías lo que necesites, por ejemplo, recargar los productos.
