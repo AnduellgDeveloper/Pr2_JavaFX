@@ -1,0 +1,5 @@
+/* archivo Css/Background.css */
+/* archivo: Css/Background.css */
+.anchor-pane-gradient {
+    -fx-background: linear-gradient(from 0% 0% to 100% 100%, #8a2be2, #9370db, #dda0dd);
+}

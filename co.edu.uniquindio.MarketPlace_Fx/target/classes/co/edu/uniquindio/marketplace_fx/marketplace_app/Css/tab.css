@@ -1,0 +1,65 @@
+.tab-pane {
+    -fx-background-color: #e08ce7; /* Fondo oscuro */
+    -fx-border-color: #e08ce7; /* Borde oscuro */
+    -fx-border-width: 1px; /* Grosor del borde más delgado */
+    -fx-border-radius: 6px; /* Bordes más redondeados */
+    -fx-padding: 5px; /* Espaciado interno reducido */
+
+}
+
+.tab-header-area {
+    -fx-background-color: #e08ce7; /* Fondo de la cabecera más oscuro */
+    -fx-border-color: #ba83d2; /* Borde oscuro */
+    -fx-border-radius: 6px 6px 0 0; /* Bordes redondeados en la parte superior */
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.1), 6, 0.5, 0, 2); /* Sombra suave futurista */
+}
+
+.tab {
+    -fx-background-color: #ba83d2; /* Fondo oscuro para las pestañas */
+    -fx-text-fill: #e1e1e1; /* Texto claro */
+    -fx-font-size: 12px; /* Tamaño de fuente más pequeño */
+    -fx-font-family: "Roboto", sans-serif; /* Fuente moderna */
+    -fx-font-weight: bold; /* Negrita */
+    -fx-padding: 4px 8px; /* Espaciado interno de las pestañas más reducido */
+    -fx-border-radius: 6px; /* Bordes redondeados más sutiles */
+    -fx-border-color: transparent; /* Sin borde visible */
+    -fx-effect: dropshadow(gaussian, rgb(224, 140, 231), 6, 0.5, 0, 3); /* Sombra más sutil */
+    -fx-transition: all 0.3s ease-in-out; /* Transición suave */
+}
+
+.tab:hover {
+    -fx-background-color: #ba83d2; /* Fondo más claro al pasar el mouse */
+    -fx-effect: dropshadow(gaussian, rgb(204, 47, 190), 6, 0.5, 0, 3); /* Sombra más fuerte al pasar */
+}
+
+.tab:selected {
+    -fx-background-color: #ff63b2 !important; /* Cambia el fondo cuando se selecciona (color personalizado) */
+    -fx-text-fill: #ffffff !important; /* Color de texto blanco al seleccionar */
+    -fx-border-color: transparent !important; /* Sin borde visible al seleccionar */
+    -fx-effect: dropshadow(gaussian, rgb(204, 47, 190), 8, 0.6, 0, 4) !important; /* Sombra sutil */
+}
+
+.tab:selected:focused {
+    -fx-background-color: #ff63b2 !important; /* Asegura que el fondo se mantenga sin el color azul */
+    -fx-border-color: transparent !important; /* Elimina el borde azul del estado seleccionado */
+    -fx-effect: none !important;
+    -fx-outline: none;
+}
+.tab:focused {
+    -fx-border-color: transparent; /* Sin borde visible */
+    -fx-effect: none; /* Sin efectos */
+    -fx-outline: none;
+}
+
+.tab .tab-label {
+    -fx-padding: 3px 8px; /* Espaciado dentro de la etiqueta reducido */
+    -fx-font-size: 14px; /* Tamaño de fuente más pequeño */
+}
+
+.tab .tab-content {
+    -fx-background-color: #e08ce7; /* Fondo oscuro para el contenido de la pestaña */
+    -fx-border-radius: 0 0 6px 6px; /* Bordes redondeados en la parte inferior */
+    -fx-padding: 10px; /* Espaciado interno más pequeño */
+    -fx-effect: dropshadow(gaussian, rgb(204, 47, 190), 10, 0.6, 0, 4); /* Sombra sutil */
+}
+

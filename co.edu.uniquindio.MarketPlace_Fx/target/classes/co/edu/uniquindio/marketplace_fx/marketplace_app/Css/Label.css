@@ -1,25 +1,21 @@
-/* Estilo para el Label */
 .label {
-    font-family: 'Lato', sans-serif; /* Fuente moderna y elegante */
-    font-size: 18px; /* Tamaño de fuente adecuado */
-    font-weight: bold; /* Negrita para destacar el texto */
-    color: #333; /* Color gris oscuro para el texto */
-    padding: 10px 15px; /* Espaciado alrededor del texto */
-    background-color: #cc2fbe; /* Fondo claro */
-    border-radius: 25px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgb(224, 140, 231); /* Sombra sutil para profundidad */
-    transition: all 0.3s ease; /* Transición suave para interacciones */
-    display: inline-block; /* Ajuste al tamaño del texto */
+    -fx-background-color: linear-gradient(to right, #ff63b2, #ba83d2); /* Fondo con degradado */
+    -fx-text-fill: #ffffff; /* Texto blanco */
+    -fx-font-size: 16px; /* Tamaño de fuente */
+    -fx-font-family: "Roboto", sans-serif; /* Fuente moderna */
+    -fx-font-weight: bold; /* Negrita */
+    -fx-padding: 10px 20px; /* Espaciado interno */
+    -fx-border-radius: 10px; /* Bordes redondeados */
+    -fx-background-radius: 10px; /* Bordes del fondo redondeados */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); /* Sombra */
+    -fx-alignment: center; /* Alineación del texto al centro */
+    -fx-border-color: rgba(255, 255, 255, 0.5); /* Borde semitransparente */
+    -fx-border-width: 2px; /* Grosor del borde */
+    -fx-transition: all 0.3s ease-in-out; /* Transición suave para efectos */
 }
 
 .label:hover {
-    background-color: #cc2fbe; /* Fondo ligeramente más oscuro al pasar el mouse */
-    box-shadow: 0 8px 16px rgb(224, 140, 231); /* Sombra más intensa en hover */
-    transform: translateY(-2px); /* Efecto de elevar el label al pasar el mouse */
-}
-
-.label:active {
-    background-color: #930a9a; /* Fondo aún más oscuro al hacer clic */
-    box-shadow: 0 4px 8px rgb(224, 140, 231); /* Regresar la sombra a la normalidad */
-    transform: translateY(1px); /* Efecto de presionar el label */
+    -fx-background-color: linear-gradient(to right, #ff63b2, #e08ce7); /* Cambia el fondo al pasar el mouse */
+    -fx-text-fill: #ffe6f3; /* Color de texto más claro */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.6, 0, 4); /* Sombra más fuerte */
 }

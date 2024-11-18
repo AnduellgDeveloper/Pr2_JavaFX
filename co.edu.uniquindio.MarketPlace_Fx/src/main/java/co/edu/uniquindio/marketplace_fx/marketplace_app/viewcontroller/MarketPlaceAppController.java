@@ -38,6 +38,8 @@ public class MarketPlaceAppController {
     private Tab tabPostWall;
     @FXML
     private AnchorPane tabMessages;
+    @FXML
+    private AnchorPane nodo;
     public void setProductUsername(String username) {
         System.out.println("productViewController: " + (productViewController != null));
         System.out.println("postWallViewController: " + (postWallViewController != null));
@@ -56,13 +58,11 @@ public class MarketPlaceAppController {
 
         updateActiveUsersList();
         Platform.runLater(() -> {
-            if (tabPane.getScene() != null && tabPane.getScene().getWindow() != null) {
+            if (tabPane.getScene() != null) {
                 Stage stage = (Stage) tabPane.getScene().getWindow();
-                stage.setOnCloseRequest(_ -> {
-                    System.out.println("Cerrando la ventana...");
-                });
+                stage.setOnCloseRequest(_ -> System.out.println("Cerrando la ventana..."));
             } else {
-                System.out.println("tabMessages no está listo aún.");
+                System.out.println("tabPane no está listo aún.");
             }
         });
 
