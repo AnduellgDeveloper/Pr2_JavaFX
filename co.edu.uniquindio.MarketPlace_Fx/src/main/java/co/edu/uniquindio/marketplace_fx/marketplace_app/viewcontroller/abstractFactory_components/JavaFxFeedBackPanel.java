@@ -10,13 +10,20 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class JavaFxFeedBackPanel implements IFeedBackPanel {
     private HBox interactionBox;
     private Button likeButton;
     private Button commentButton;
+    private List<String> likesList; // Lista para almacenar los likes
     private int likeCount = 0; // Contador de likes
+    private String currentUser = "User"; // Nombre del usuario que da like (esto puede variar dependiendo de tu lógica)
 
     public JavaFxFeedBackPanel() {
+        likesList = new ArrayList<>(); // Inicializamos la lista de likes
+
         interactionBox = new HBox(10);
 
         likeButton = new Button();
@@ -43,16 +50,20 @@ public class JavaFxFeedBackPanel implements IFeedBackPanel {
         likeButton.getStylesheets().add(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Css/ButtonStylePostWall.css").toExternalForm());
         commentButton.getStylesheets().add(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Css/ButtonStylePostWall.css").toExternalForm());
 
-        // Inicializa el texto del botón de like
+
         updateLikeButtonText();
     }
 
     @Override
     public void setLikeAction(EventHandler<ActionEvent> action) {
         likeButton.setOnAction(event -> {
-            likeCount++; // Incrementa el contador de likes
-            updateLikeButtonText(); // Actualiza el texto del botón
-            action.handle(event); // Llama al manejador de acción externo
+            // Si el usuario no ha dado like antes, lo añadimos
+            if (!likesList.contains(currentUser)) {
+
+                likeCount++; // Incrementar contador de likes
+            }
+            updateLikeButtonText();
+            action.handle(event);
         });
     }
 
@@ -70,5 +81,16 @@ public class JavaFxFeedBackPanel implements IFeedBackPanel {
     private void updateLikeButtonText() {
         likeButton.setText("Likes: " + likeCount);
     }
+
+    // Método para obtener la lista de likes
+    public List<String> getLikesList() {
+        return likesList;
+    }
+
+    // Método para actualizar el usuario actual que da like
+    public void setCurrentUser(String user) {
+        this.currentUser = user;
+    }
 }
+
 

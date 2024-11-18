@@ -8,6 +8,7 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.model.facade.Theme;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_observer.Observer;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory.IComponentFactory;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.ComponentFactory;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.JavaFxFeedBackPanel;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.PostWallManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,6 +35,8 @@ public class PostWallViewController implements Observer {
 
     @FXML
     private AnchorPane fondo;
+    @FXML
+    private JavaFxFeedBackPanel feedBackPanel;
     @FXML
     private Pane Slider;
     @FXML
@@ -104,23 +107,25 @@ public class PostWallViewController implements Observer {
     }
 
     // Handle liking a product
-    // Handle liking a product
     public void onLike(ProductDto product) {
         if (username == null || username.isEmpty()) {
             showMessage("Error", "Debe estar identificado para dar 'me gusta'.", "Error", Alert.AlertType.ERROR);
             return;
         }
-
-        String likeMessage = "Usuario: " + username + " -> Producto: " + product.name();
-
-        // Agregar el mensaje al mapa de likes
         productLikes.computeIfAbsent(product.name(), k -> new ArrayList<>()).add(username);
 
-        // Actualizar la vista de la lista de likes
-        listLikes.getItems().add(likeMessage);
 
-        // Mostrar notificación
-        showMessage("Like", "¡Le diste me gusta al producto: " + product.name() + "!", "Información", Alert.AlertType.INFORMATION);
+        updateLikesList(product);
+    }
+
+    private void updateLikesList(ProductDto product) {
+        List<String> likes = productLikes.get(product.name());
+        listLikes.getItems().clear();  // Limpiar la lista antes de agregar nuevos likes
+
+        // Mostrar todos los likes dados, incluso los duplicados
+        for (String user : likes) {
+            listLikes.getItems().add(user + " le dio me gusta al producto: " + product.name());
+        }
     }
 
 
