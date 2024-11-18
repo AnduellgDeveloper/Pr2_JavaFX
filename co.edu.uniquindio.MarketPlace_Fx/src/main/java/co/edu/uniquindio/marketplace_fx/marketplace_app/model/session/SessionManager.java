@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Consumer;
 
 public class SessionManager {
     private static SessionManager instance;
     private Map<String, Session> activeSessions;
     private SharedData sharedData;
+    private Consumer<Session> onSessionCreatedCallback;
+    private Consumer<Session> onSessionClosedCallback;
 
     private SessionManager() {
         activeSessions = new ConcurrentHashMap<>();
@@ -24,17 +27,30 @@ public class SessionManager {
         }
         return instance;
     }
-    // Crear una nueva sesión
+    public void setOnSessionCreatedCallback(Consumer<Session> callback) {
+        this.onSessionCreatedCallback = callback;
+    }
+
+    public void setOnSessionClosedCallback(Consumer<Session> callback) {
+        this.onSessionClosedCallback = callback;
+    }
+
     public Session createSession(String username) {
         Session session = new Session(username);
         activeSessions.put(session.getSessionId(), session);
+        if (onSessionCreatedCallback != null) {
+            onSessionCreatedCallback.accept(session);
+        }
         return session;
     }
-    // Cerrar una sesión específica
+
     public void closeSession(String sessionId) {
         Session session = activeSessions.remove(sessionId);
         if (session != null) {
             session.setActive(false);
+            if (onSessionClosedCallback != null) {
+                onSessionClosedCallback.accept(session);
+            }
         }
     }
 
