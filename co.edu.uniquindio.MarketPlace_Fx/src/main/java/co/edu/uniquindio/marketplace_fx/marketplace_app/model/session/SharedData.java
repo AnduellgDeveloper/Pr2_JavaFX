@@ -13,6 +13,10 @@ public class SharedData {
         sharedObjects = new ConcurrentHashMap<>();
         notifications = Collections.synchronizedList(new ArrayList<>());
     }
+    // Obtener un valor con un valor predeterminado
+    public Object getOrDefault(String key, Object defaultValue) {
+        return sharedObjects.getOrDefault(key, defaultValue);
+    }
     public void put(String key, Object value) {
         sharedObjects.put(key, value);
     }

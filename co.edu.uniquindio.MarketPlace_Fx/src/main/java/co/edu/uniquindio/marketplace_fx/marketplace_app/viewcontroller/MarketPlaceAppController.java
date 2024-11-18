@@ -2,13 +2,25 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.Session;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.SessionManager;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MarketPlaceAppController {
     private MarketPlaceAppController marketPlaceAppController;
@@ -26,7 +38,8 @@ public class MarketPlaceAppController {
     private Tab tabProductView;
     @FXML
     private Tab tabPostWall;
-
+    @FXML
+    private AnchorPane tabMessages;
     @FXML
     public void initialize() {
         FXMLLoader loaderProduct = new FXMLLoader(getClass()
@@ -48,6 +61,7 @@ public class MarketPlaceAppController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        setupNotifications();
 
     }
 
@@ -68,7 +82,7 @@ public class MarketPlaceAppController {
     }
     public void initSession(Session session) {
         this.currentSession = session;
-        tabProductView.setText("Productos de" + session.getUsername());
+        tabProductView.setText("Productos de " + session.getUsername());
 
         String sharedNotes = (String) sessionManager.getSharedData().get("sharedNotes");
         if (sharedNotes != null) {
@@ -86,5 +100,66 @@ public class MarketPlaceAppController {
                     activeUsersListView.getItems().add(session.getUsername())
             );
         });
+    }
+    @FXML
+    private void testNotification() {
+        showNotification("¡Notificación de prueba!");
+    }
+    @FXML
+    private void debugSharedFile() {
+        String sharedFile = (String) sessionManager.getSharedData().get("sharedFile");
+        System.out.println("Archivo compartido: " + sharedFile);
+    }
+
+
+    private void setupNotifications() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            List<String> notifications = (List<String>) sessionManager.getSharedData()
+                    .getOrDefault("notifications", new ArrayList<String>());
+
+            for (String notification : notifications) {
+                showNotification(notification);
+            }
+
+            // Limpiar notificaciones después de mostrarlas
+            notifications.clear();
+            sessionManager.getSharedData().put("notifications", notifications);
+        }));
+
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    private Stage getStage() {
+        return (Stage) tabMessages.getScene().getWindow();
+    }
+
+    private void showNotification(String message) {
+        Platform.runLater(() -> {
+            Tooltip tooltip = new Tooltip(message);
+            tooltip.show(getStage());
+
+            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            delay.setOnFinished(e -> tooltip.hide());
+            delay.play();
+        });
+    }
+    @FXML
+    private void shareFile() {
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file != null) {
+            sessionManager.getSharedData().put("sharedFile", file.getName());
+            notifyFileshare();
+        }
+    }
+
+    private void notifyFileshare() {
+        String notification = currentSession.getUsername() + " ha compartido un archivo";
+        List<String> notifications = (List<String>) sessionManager.getSharedData()
+                .getOrDefault("notifications", new ArrayList<String>());
+        notifications.add(notification);
+        sessionManager.getSharedData().put("notifications", notifications);
     }
 }
