@@ -34,7 +34,7 @@
                   <ListView fx:id="activeUsersListView" layoutY="178.0" prefHeight="437.0" prefWidth="139.0" style="-fx-background-color: #ECB0F7FF;" stylesheets="@Css/list.css" />
                    <Button layoutX="421.0" layoutY="307.0" onAction="#testNotification" text="Probar Notificación">
                      <stylesheets>
-                        <URL value="@Css/ButtonDifferent.css" />
+                        
                         <URL value="@Css/ButtonStyle.css" />
                      </stylesheets></Button>
                    <Button layoutX="422.0" layoutY="357.0" onAction="#shareFile" stylesheets="@Css/ButtonStyle.css" text="Compartir Archivo" />
