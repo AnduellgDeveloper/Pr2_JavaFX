@@ -2,13 +2,11 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.Session;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.SessionManager;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 
@@ -18,12 +16,12 @@ public class MarketPlaceAppController {
     private PostWallViewController postWallViewController;
     private SessionManager sessionManager = SessionManager.getInstance();
     private Session currentSession;
-
+    @FXML
+    private ListView<String> activeUsersListView;
     @FXML
     private TabPane tabPane;
     @FXML
     private TextArea sharedNotesArea;
-
     @FXML
     private Tab tabProductView;
     @FXML
@@ -53,7 +51,6 @@ public class MarketPlaceAppController {
 
     }
 
-
     public void setProductUsername(String username) {
         if (productViewController != null && postWallViewController != null) {
             productViewController.setUsername(username);
@@ -77,5 +74,17 @@ public class MarketPlaceAppController {
         if (sharedNotes != null) {
             sharedNotesArea.setText(sharedNotes);
         }
+        sharedNotesArea.textProperty().addListener((obs, oldText, newText) -> {
+            sessionManager.getSharedData().put("sharedNotes", newText);
+        });
+        updateActiveUsersList();
+    }
+    private void updateActiveUsersList() {
+        Platform.runLater(() -> {
+            activeUsersListView.getItems().clear();
+            sessionManager.getActiveSessions().forEach(session ->
+                    activeUsersListView.getItems().add(session.getUsername())
+            );
+        });
     }
 }

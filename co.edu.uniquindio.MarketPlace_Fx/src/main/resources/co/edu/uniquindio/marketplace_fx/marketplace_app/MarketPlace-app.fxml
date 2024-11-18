@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="761.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.MarketPlaceAppController">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="775.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.MarketPlaceAppController">
   <tabs>
     <Tab fx:id="tabPostWall" text="Muro de publicaciones">
       <content>
@@ -15,5 +19,16 @@
         <fx:include source="Product-view.fxml" />
       </content>
     </Tab>
+      <Tab text="Mensajes">
+        <content>
+          <AnchorPane fx:id="tabMessages" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextArea fx:id="sharedNotesArea" promptText="Escribe notas que se compartirán con otras sesiones" layoutX="52.0" layoutY="193.0" prefHeight="164.0" prefWidth="374.0"/>
+                  <Label layoutX="77.0" layoutY="127.0" text="Mensajes entre vistas " />
+                  <ListView fx:id="activeUsersListView" layoutY="1.0" prefHeight="48.0" prefWidth="775.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
   </tabs>
 </TabPane>
