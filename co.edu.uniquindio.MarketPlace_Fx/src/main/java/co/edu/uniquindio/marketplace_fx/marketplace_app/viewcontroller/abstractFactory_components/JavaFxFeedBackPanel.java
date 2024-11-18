@@ -14,6 +14,7 @@ public class JavaFxFeedBackPanel implements IFeedBackPanel {
     private HBox interactionBox;
     private Button likeButton;
     private Button commentButton;
+    private int likeCount = 0; // Contador de likes
 
     public JavaFxFeedBackPanel() {
         interactionBox = new HBox(10);
@@ -41,11 +42,18 @@ public class JavaFxFeedBackPanel implements IFeedBackPanel {
 
         likeButton.getStylesheets().add(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Css/ButtonStylePostWall.css").toExternalForm());
         commentButton.getStylesheets().add(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Css/ButtonStylePostWall.css").toExternalForm());
+
+        // Inicializa el texto del botón de like
+        updateLikeButtonText();
     }
 
     @Override
     public void setLikeAction(EventHandler<ActionEvent> action) {
-        likeButton.setOnAction(action);
+        likeButton.setOnAction(event -> {
+            likeCount++; // Incrementa el contador de likes
+            updateLikeButtonText(); // Actualiza el texto del botón
+            action.handle(event); // Llama al manejador de acción externo
+        });
     }
 
     @Override
@@ -57,4 +65,10 @@ public class JavaFxFeedBackPanel implements IFeedBackPanel {
     public Node getInteractionNode() {
         return interactionBox;
     }
+
+    // Método para actualizar el texto del botón de likes
+    private void updateLikeButtonText() {
+        likeButton.setText("Likes: " + likeCount);
+    }
 }
+

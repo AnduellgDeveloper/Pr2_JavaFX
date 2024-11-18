@@ -60,12 +60,15 @@ public class PostWallManager implements Observer {
         IProductView productDisplay = factory.createProductDisplay();
         IFeedBackPanel interactionPanel = factory.createInteractionPanel();
 
-
         productDateTime.setProductDateTime(productDate);
         product.setProductName(productName);
         productDisplay.setProductImage(imageUrl);
 
-        interactionPanel.setLikeAction(_ -> onLike.run());
+        // Incrementar likes y ejecutar acción personalizada
+        interactionPanel.setLikeAction(_ -> {
+            onLike.run();
+        });
+
         interactionPanel.setCommentAction(_ -> onComment.run());
 
         VBox post = (VBox) postContainer.getContainer();
@@ -74,7 +77,6 @@ public class PostWallManager implements Observer {
         post.setMinWidth(200);
         post.setSpacing(10);
         post.setStyle("-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);");
-
 
         post.setAlignment(Pos.CENTER);
         post.getChildren().addAll(
@@ -91,6 +93,7 @@ public class PostWallManager implements Observer {
             currentRow++;
         }
     }
+
     public void clearPosts() {
         postWallContainer.getChildren().clear();
         currentRow = 0;

@@ -131,7 +131,8 @@ public class SellerViewController {
         listenerSelection();
     }
     private void getSellers() {
-            listSellers.addAll(sellerController.getSellers(username));
+        listSellers.clear();
+        listSellers.addAll(sellerController.getSellers(username));
     }
     private void getProducts() {
         products.addAll(sellerController.getProducts(username));
@@ -247,7 +248,5 @@ public class SellerViewController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    public void puto(){
 
-    }
 }
