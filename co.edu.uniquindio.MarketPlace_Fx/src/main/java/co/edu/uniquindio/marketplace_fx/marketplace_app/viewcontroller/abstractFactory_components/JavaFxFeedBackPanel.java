@@ -17,13 +17,15 @@ public class JavaFxFeedBackPanel implements IFeedBackPanel {
     private HBox interactionBox;
     private Button likeButton;
     private Button commentButton;
-    private List<String> likesList; // Lista para almacenar los likes
-    private int likeCount = 0; // Contador de likes
+    private List<String> likesList;
+    private List<String> commentList;
+    private int likeCount = 0;
+    private int commentCount = 0;
     private String currentUser = "User"; // Nombre del usuario que da like (esto puede variar dependiendo de tu lógica)
 
     public JavaFxFeedBackPanel() {
         likesList = new ArrayList<>(); // Inicializamos la lista de likes
-
+        commentList = new ArrayList<>();
         interactionBox = new HBox(10);
 
         likeButton = new Button();
@@ -36,7 +38,10 @@ public class JavaFxFeedBackPanel implements IFeedBackPanel {
         likeImageView.setFitWidth(20);
 
         commentImageView.setFitHeight(20);
-        commentImageView.setFitWidth(20);
+        commentImageView.setFitWidth(30);
+
+
+
 
         likeButton.setGraphic(likeImageView);
         commentButton.setGraphic(commentImageView);
@@ -49,9 +54,8 @@ public class JavaFxFeedBackPanel implements IFeedBackPanel {
 
         likeButton.getStylesheets().add(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Css/ButtonStylePostWall.css").toExternalForm());
         commentButton.getStylesheets().add(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Css/ButtonStylePostWall.css").toExternalForm());
-
-
-        updateLikeButtonText();
+        updateButtonCommentText();
+        updateButtonLikeText();
     }
 
     @Override
@@ -62,34 +66,54 @@ public class JavaFxFeedBackPanel implements IFeedBackPanel {
 
                 likeCount++; // Incrementar contador de likes
             }
-            updateLikeButtonText();
+            updateButtonLikeText();
             action.handle(event);
         });
     }
 
     @Override
     public void setCommentAction(EventHandler<ActionEvent> action) {
-        commentButton.setOnAction(action);
+        commentButton.setOnAction(event -> {
+            // Si el usuario no ha dado like antes, lo añadimos
+            if (!commentList.contains(currentUser)) {
+
+                commentCount++; // Incrementar contador de likes
+            }
+            updateButtonCommentText();
+            action.handle(event);
+        });
     }
 
     @Override
     public Node getInteractionNode() {
         return interactionBox;
     }
+    // Método para actualizar el texto del botón de likes
+
 
     // Método para actualizar el texto del botón de likes
-    private void updateLikeButtonText() {
-        likeButton.setText("Likes: " + likeCount);
+    private void updateButtonCommentText() {
+        commentButton.setText(""+commentCount);
     }
-
+    private void updateButtonLikeText () {
+        likeButton.setText("" + likeCount);
+    }
     // Método para obtener la lista de likes
     public List<String> getLikesList() {
         return likesList;
+    }
+    public List<String> getCommentsList() {
+        return commentList;
     }
 
     // Método para actualizar el usuario actual que da like
     public void setCurrentUser(String user) {
         this.currentUser = user;
+    }
+    public void addComment(String comment) {
+        commentList.add(comment);
+        commentCount++;
+        updateButtonCommentText();
     }
 }
 

@@ -129,8 +129,12 @@ public class PostWallViewController implements Observer {
     }
 
 
-    // Handle commenting on a product
     public void onComment(ProductDto product) {
+        if (username == null || username.isEmpty()) {
+            showMessage("Error", "Debe estar identificado para comentar.", "Error", Alert.AlertType.ERROR);
+            return;
+        }
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Comentario");
         alert.setHeaderText("Agregar comentario para el producto: " + product.name());
@@ -150,14 +154,25 @@ public class PostWallViewController implements Observer {
             if (response == submitButton) {
                 String comment = commentField.getText().trim();
                 if (!comment.isEmpty()) {
-                    productComments.computeIfAbsent(product.name(), k -> new ArrayList<>()).add(comment);
-                    listComments.getItems().add("Producto: " + product.name() + " -> " + comment);
-                    System.out.printf("\nComentario enviado a %s: %s", product.name(), comment);
+                    // Almacenar comentario con el nombre del usuario
+                    String commentText = comment + " - " + username;
+                    productComments.computeIfAbsent(product.name(), k -> new ArrayList<>()).add(commentText);
+                    updateCommentsList(product);
                 }
             } else {
                 System.out.println("Comentario cancelado.");
             }
         });
+    }
+
+    private void updateCommentsList(ProductDto product) {
+        List<String> comments = productComments.get(product.name());
+        listComments.getItems().clear();  // Limpiar la lista antes de agregar nuevos comentarios
+
+        // Mostrar todos los comentarios con el usuario que lo hizo
+        for (String comment : comments) {
+            listComments.getItems().add("Comentario en producto " + product.name() + ": " + comment);
+        }
     }
 
     // Load image from directories
