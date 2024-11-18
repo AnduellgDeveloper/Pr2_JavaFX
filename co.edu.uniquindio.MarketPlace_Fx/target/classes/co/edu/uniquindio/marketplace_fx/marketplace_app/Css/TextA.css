@@ -1,0 +1,19 @@
+.text-area {
+    -fx-background-color: #ffffff; /* Fondo blanco */
+    -fx-border-color: #cccccc; /* Color del borde */
+    -fx-border-radius: 5px; /* Bordes redondeados */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 15, 0.7, 0, 5); /* Sombra oscura */
+    -fx-padding: 10px; /* Espaciado interno */
+    -fx-font-size: 14px; /* Tamaño de fuente */
+    -fx-font-family: "Arial"; /* Fuente */
+    -fx-text-fill: #333333; /* Color del texto */
+}
+
+.text-area:hover {
+    -fx-border-color: #aaaaaa; /* Cambiar el color del borde al pasar el mouse */
+}
+
+.text-area:focused {
+    -fx-border-color: #7b68ee; /* Borde azul al enfocarse */
+    -fx-effect: dropshadow(gaussian, rgba(123, 104, 238, 0.5), 15, 0.7, 0, 5); /* Sombra azul suave */
+}

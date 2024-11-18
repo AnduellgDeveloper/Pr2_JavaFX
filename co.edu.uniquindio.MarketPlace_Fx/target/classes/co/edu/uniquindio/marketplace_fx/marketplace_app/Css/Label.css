@@ -1,0 +1,25 @@
+/* Estilo para el Label */
+.label {
+    font-family: 'Lato', sans-serif; /* Fuente moderna y elegante */
+    font-size: 18px; /* Tamaño de fuente adecuado */
+    font-weight: bold; /* Negrita para destacar el texto */
+    color: #333; /* Color gris oscuro para el texto */
+    padding: 10px 15px; /* Espaciado alrededor del texto */
+    background-color: #cc2fbe; /* Fondo claro */
+    border-radius: 25px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgb(224, 140, 231); /* Sombra sutil para profundidad */
+    transition: all 0.3s ease; /* Transición suave para interacciones */
+    display: inline-block; /* Ajuste al tamaño del texto */
+}
+
+.label:hover {
+    background-color: #cc2fbe; /* Fondo ligeramente más oscuro al pasar el mouse */
+    box-shadow: 0 8px 16px rgb(224, 140, 231); /* Sombra más intensa en hover */
+    transform: translateY(-2px); /* Efecto de elevar el label al pasar el mouse */
+}
+
+.label:active {
+    background-color: #930a9a; /* Fondo aún más oscuro al hacer clic */
+    box-shadow: 0 4px 8px rgb(224, 140, 231); /* Regresar la sombra a la normalidad */
+    transform: translateY(1px); /* Efecto de presionar el label */
+}
