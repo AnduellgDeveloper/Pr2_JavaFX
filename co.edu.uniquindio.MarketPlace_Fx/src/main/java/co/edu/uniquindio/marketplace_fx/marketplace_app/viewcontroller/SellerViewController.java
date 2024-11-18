@@ -248,4 +248,7 @@ public class SellerViewController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+    public void puto(){
+
+    }
 }
