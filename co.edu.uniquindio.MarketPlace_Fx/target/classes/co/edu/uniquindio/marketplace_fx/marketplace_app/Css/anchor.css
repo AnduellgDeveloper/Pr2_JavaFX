@@ -1,5 +1,30 @@
-/* archivo Css/Background.css */
-/* archivo: Css/Background.css */
-.anchor-pane-gradient {
-    -fx-background: linear-gradient(from 0% 0% to 100% 100%, #8a2be2, #9370db, #dda0dd);
+.anchor-pane {
+    -fx-background-color: linear-gradient(to bottom, #3a005f, #1a0026); /* Fondo degradado de morado oscuro */
+    -fx-border-color: #5e007a; /* Borde morado */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px; /* Bordes redondeados */
+    -fx-padding: 15px; /* Espaciado interno */
+}
+
+/* Estilo para los textos dentro del AnchorPane */
+.text {
+    -fx-fill: lavender; /* Color de texto claro */
+    -fx-font-size: 16px; /* Tamaño de letra */
+    -fx-font-weight: bold; /* Negrita */
+}
+
+/* Botones o elementos interactivos dentro del AnchorPane */
+.button {
+    -fx-background-color: #8000a0; /* Fondo del botón */
+    -fx-text-fill: white; /* Texto blanco */
+    -fx-border-radius: 5px; /* Bordes redondeados */
+    -fx-background-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #a300d6; /* Color al pasar el mouse */
+}
+
+.button:pressed {
+    -fx-background-color: #59006b; /* Color al hacer clic */
 }
