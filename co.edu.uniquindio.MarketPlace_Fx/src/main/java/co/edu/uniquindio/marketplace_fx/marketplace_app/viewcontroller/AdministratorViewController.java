@@ -2,41 +2,66 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.StackedBarChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 
 public class AdministratorViewController {
 
     @FXML
-    private Button btnExportToPdf;
+    private DatePicker LocalData;
 
     @FXML
-    private Button btnLogin;
+    private Button btnCantSeller;
 
     @FXML
-    private Button btnLogin2;
+    private Button btnConsultProductSeller;
 
     @FXML
-    private Button btnLogin3;
+    private Button btnConsultProductosTime;
 
     @FXML
-    private Button btnLogin4;
+    private Button btnLikesMax;
 
     @FXML
-    private DatePicker dpPublicationDate;
+    private RadioButton rdbCantSeller;
 
     @FXML
-    private Label txtPublishedProducts;
+    private RadioButton rdbMaxLike;
 
     @FXML
-    void onExportToPDF(ActionEvent event) {
+    private RadioButton rdbProductPubli;
+
+    @FXML
+    private RadioButton rdbProductsSeller;
+
+    @FXML
+    private StackedBarChart<?, ?> staticts;
+
+    @FXML
+    private TextField txtIdNumber;
+
+    @FXML
+    void onCantSeller(ActionEvent event) {
 
     }
 
     @FXML
-    void onLogin(ActionEvent event) {
+    void onConsultProductSeller(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onConsultProductosTime(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onLikesMax(ActionEvent event) {
 
     }
 
 }
+
