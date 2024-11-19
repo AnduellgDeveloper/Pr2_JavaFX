@@ -1,11 +1,6 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.utils;
 
-import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.*;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory.IComponentFactory;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.PostWallViewController;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.ProductViewController;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.ComponentFactory;
 
 import java.time.LocalDate;
 
@@ -696,6 +691,18 @@ public class DataUtil {
         marketplace.addProductToSeller("matisc",home4);
         marketplace.addProductToSeller("matisc",home5);
         marketplace.addProductToSeller("matisc",home6);
+
+        marketplace.addFriendToSeller("a",seller1);
+        marketplace.addFriendToSeller("a",seller2);
+        marketplace.addFriendToSeller("a",seller3);
+        marketplace.addFriendToSeller("a",seller4);
+        marketplace.addFriendToSeller("a",seller5);
+        marketplace.addFriendToSeller("a",seller6);
+        seller1.addFriend(seller2);
+        seller1.addFriend(seller3);
+        seller1.addFriend(seller4);
+        seller1.addFriend(seller5);
+        seller1.addFriend(seller6);
         return marketplace;
     }
 }

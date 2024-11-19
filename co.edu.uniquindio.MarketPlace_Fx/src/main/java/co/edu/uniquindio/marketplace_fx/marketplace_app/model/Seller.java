@@ -1,9 +1,11 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.model;
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.builder.SellerBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Seller extends User {
 
@@ -38,4 +40,32 @@ public class Seller extends User {
     public void setSellerFriends(List<Seller> sellerFriends) {
         this.sellerFriends = sellerFriends;
     }
+
+
+    public void addFriend(Seller friend) {
+        if (!sellerFriends.contains(friend) && !friend.equals(this)) {
+            sellerFriends.add(friend);
+        }
+    }
+
+    public void removeFriend(Seller friend) {
+        sellerFriends.remove(friend);
+    }
+
+    public boolean isFriendWith(Seller seller) {
+        return sellerFriends.contains(seller);
+    }
+
+
+    public void addProduct(Product product) {
+        if (!products.contains(product)) {
+            products.add(product);
+        }
+    }
+
+    public void removeProduct(Product product) {
+        products.remove(product);
+    }
+
+
 }

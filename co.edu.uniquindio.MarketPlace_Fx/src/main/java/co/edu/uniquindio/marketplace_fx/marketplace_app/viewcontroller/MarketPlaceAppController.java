@@ -63,7 +63,7 @@ public class MarketPlaceAppController {
                 Stage stage = (Stage) tabPane.getScene().getWindow();
                 stage.setOnCloseRequest(_ -> System.out.println("Cerrando la ventana..."));
             } else {
-                System.out.println("tabPane no está listo aún.");
+                System.out.println("\n");
             }
         });
 

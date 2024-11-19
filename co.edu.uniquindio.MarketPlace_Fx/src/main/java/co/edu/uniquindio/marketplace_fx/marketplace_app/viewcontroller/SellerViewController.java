@@ -13,6 +13,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.*;
@@ -203,12 +206,13 @@ public class SellerViewController {
         String address  = txtAddress.getText();
         String username = txtUserName.getText();
         String password = txtPassword.getText();
+        List<Seller> friends = new ArrayList<>();
         if ( Name.isEmpty()|| lastName.isEmpty()||idNumber.isEmpty()||
         address.isEmpty()||username.isEmpty()||password.isEmpty()) {
 
         } else {
             showMessage(TITULO_VENDEDOR_AGREGADO,BODY_VENDEDOR_AGREGADO, HEADER, Alert.AlertType.ERROR);
-            return new SellerDto(Name,lastName,idNumber,address,username,password);
+            return new SellerDto(Name,lastName,idNumber,address,username,password,friends);
         }
 
         return null;

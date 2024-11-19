@@ -17,6 +17,7 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
     private User user;
     private final List<Product> products = new ArrayList<>();
     private final Map<String, List<Product>> sellerProductMap = new HashMap<>();
+    private final Map<String, List<Seller>> sellerFriendsMap = new HashMap<>();
     private final List<Seller> listSellers = new ArrayList<>();
     private final List<User> listRegisterUser = new ArrayList<>();
     private final List<User> listUsers = new ArrayList<>();
@@ -66,6 +67,26 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
     }
     public List<Seller> getSellerFriends() {
         return sellerFriends;
+    }
+    public void addFriend(Seller friend) {
+        if (!sellerFriends.contains(friend) && !friend.equals(this)) {
+            sellerFriends.add(friend);
+        }
+    }
+    public List<Seller> addFriendToSeller(String username, Seller seller) {
+        List<Seller> friends = sellerFriendsMap.computeIfAbsent(username, _ -> new ArrayList<>());
+        if (friends.stream().noneMatch(p -> p.getUsername().equalsIgnoreCase(seller.getUsername()))) {
+            friends.add(seller);
+            return friends;
+        } else {
+            System.out.printf("Amigo duplicado: %s%n ", seller.getUsername());
+        }
+        return new ArrayList<>();
+    }
+    // Método para obtener los productos de un vendedor específico
+    public List<Seller> getFriendsSeller(String username) {
+        List<Seller> friends = sellerFriendsMap.getOrDefault(username, new ArrayList<>());
+        return friends;
     }
     // Método para obtener los productos de un vendedor específico
     public List<Product> getProductsSeller(String username) {
@@ -242,13 +263,13 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
     public String getUserRole(UserDto userDto) {
         User user = mapper.userDtoToUserType(userDto);
         if (user instanceof Seller) {
-            System.out.printf("Vendedor detectado: %s" ,user.getUsername());
+            System.out.printf("Vendedor detectado: %s\n" ,user.getUsername());
             return "seller";
         } else if (user instanceof Administrator) {
-            System.out.printf("Administrador detectado: %s", user.getUsername());
+            System.out.printf("Administrador detectado: %s\n", user.getUsername());
             return "administrator";
         }
-        System.out.printf("Usuario desconocido: %s", user.getUsername());
+        System.out.printf("Usuario desconocido: %s\n", user.getUsername());
         return "unknown";
     }
 

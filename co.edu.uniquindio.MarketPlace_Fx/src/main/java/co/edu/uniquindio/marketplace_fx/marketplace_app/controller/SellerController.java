@@ -17,6 +17,15 @@ public class SellerController {
     public List<SellerDto> getSellers(String username) {
         return modelFactory.getSellers();
     }
+    public List<SellerDto> getListSellers() {
+        return modelFactory.getSellers();
+    }
+    public List<SellerDto> getSellerFriends() {
+        return modelFactory.getSellers();
+    }
+    public List<SellerDto> getFriends(String username) {
+        return modelFactory.getFriendsSeller(username);
+    }
     public List<ProductDto> getProducts(String username) {
         return modelFactory.getProductsSeller(username);
     }

@@ -49,7 +49,10 @@ public class ModelFactory implements IModelFactoryService {
     public List<ProductDto> getProductsSeller(String username) {
         return mapper.productsToProductsDto(marketplace.getProductsSeller(username));
     }
-
+    // Obtener productos de un vendedor específico
+    public List<SellerDto> getFriendsSeller(String username) {
+        return mapper.sellersToSellersDto(marketplace.getFriendsSeller(username));
+    }
     //Obtener lista vendedores
     public List<SellerDto> getSellers() {
         return mapper.getSellersDto(marketplace.getListSellers());

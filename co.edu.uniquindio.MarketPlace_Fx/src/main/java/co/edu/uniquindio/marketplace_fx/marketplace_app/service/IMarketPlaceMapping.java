@@ -18,6 +18,7 @@ public interface IMarketPlaceMapping {
     List<SellerDto> getSellersDto(List<Seller> listSellers);
     SellerDto sellertToSellerDto(Seller seller);
     Seller sellerDtoToSeller(SellerDto sellerDto);
+    List<SellerDto> sellersToSellersDto(List<Seller> sellers);
 
     Seller  toObjectSeller(SellerDto seller);
     // ------------------------ Users -----------------------

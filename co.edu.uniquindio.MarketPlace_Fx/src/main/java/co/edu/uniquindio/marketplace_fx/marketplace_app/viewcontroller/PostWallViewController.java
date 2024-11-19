@@ -2,7 +2,12 @@ package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductController;
 
+import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.SellerController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.SellerDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Marketplace;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Seller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.facade.Theme;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_observer.Observer;
@@ -25,17 +30,23 @@ import java.util.*;
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.PostWallConstants.*;
 
 public class PostWallViewController implements Observer {
+    private Marketplace marketplace = new Marketplace();
+    private SellerController sellerController = new SellerController();
     private final IComponentFactory componentFactory = new ComponentFactory();
     private PostWallManager postWallManager = new PostWallManager(componentFactory);
     private Theme tema;
     private String username;
+    private Seller currentSeller;
     private final ProductController productController = new ProductController();
     private Map<String, List<String>> productComments = new HashMap<>();
     private Map<String, List<String>> productLikes = new HashMap<>();
 
     public PostWallViewController() {
     }
-
+    @FXML
+    private ListView<String> friendsList;
+    @FXML
+    private Button btnAddFriend;
     @FXML
     private AnchorPane fondo;
     @FXML
@@ -62,14 +73,15 @@ public class PostWallViewController implements Observer {
     public void initialize() {
         this.tema = new Theme();
         postWallContainer.getChildren().add(postWallManager.getPostWall());
-
+        setupFriendsList();
         productController.addObserver(this);
+        btnAddFriend.setOnAction(event -> showAddFriendDialog());
 
         if (username != null) {
-            List<ProductDto> sellerProducts = productController.getProducts(username);
-            populateWall(sellerProducts);
+            updateCurrentSeller();
+            List<ProductDto> allProducts = getAllVisibleProducts();
+            populateWall(allProducts, username);
         }
-
         listComments.getItems().clear();
         listLikes.getItems().clear();
     }
@@ -77,30 +89,32 @@ public class PostWallViewController implements Observer {
     // Metodo para setterar el username y actualizar el muro
     public void setUsername(String username) {
         this.username = username;
-        List<ProductDto> sellerProducts = productController.getProducts(username);
-        populateWall(sellerProducts);
+        List<ProductDto> allProducts = getAllVisibleProducts();
+        populateWall(allProducts, username);
     }
 
     @Override
     public void update() {
-        List<ProductDto> updatedProducts = productController.getProducts(username);
-        populateWall(updatedProducts);
+//        List<ProductDto> updatedProducts = productController.getProducts(username);
+        List<ProductDto> products = getAllVisibleProducts();
+        updateCurrentSeller();
+        populateWall(products,username);
     }
 
-
-    // Crear los elementos de el muro de publicaciones (se crean en orden segun la fecha
-    private void populateWall(List<ProductDto> sellerProducts) {
+    // Modificar populateWall para mostrar el nombre del vendedor
+    private void populateWall(List<ProductDto> products, String username) {
         try {
             postWallManager.clearPosts();
-            List<ProductDto> sortedProducts = new ArrayList<>(sellerProducts);
+            List<ProductDto> sortedProducts = new ArrayList<>(products);
             sortedProducts.sort((p1, p2) -> p2.publicationDate().compareTo(p1.publicationDate()));
 
             for (ProductDto product : sortedProducts) {
                 String imagePath = product.image();
                 Image image = loadImageFromDirectories(imagePath);
                 if (image != null) {
+                    String postTitle = product.name() + " Vendedor: " + sellerController.getSellerName(username) ;
                     postWallManager.createPost(
-                            product.name(),
+                            postTitle,
                             product.publicationDate(),
                             image.getUrl(),
                             () -> onLike(product),
@@ -113,7 +127,25 @@ public class PostWallViewController implements Observer {
             showMessage("Error", "Error al poblar el muro: " + e.getMessage(), "Error", Alert.AlertType.ERROR);
         }
     }
-    // Handle liking a product
+
+    // Obtener todos los productos visibles
+    private List<ProductDto> getAllVisibleProducts() {
+        List<ProductDto> allProducts = new ArrayList<>();
+
+        SellerDto currentSeller = sellerController.getListSellers().stream()
+                .filter(seller -> seller.username().equals(username))
+                .findFirst()
+                .orElse(null);
+
+        if (currentSeller != null) {
+            allProducts.addAll(productController.getProducts(username));
+            for (Seller friend : currentSeller.friends()) {
+                allProducts.addAll(productController.getProducts(friend.getUsername()));
+            }
+        }
+        return allProducts;
+    }
+    // Accion al dar like a un producto
     public void onLike(ProductDto product) {
         if (username == null || username.isEmpty()) {
             showMessage("Error", "Debe estar identificado para dar 'me gusta'.", "Error", Alert.AlertType.ERROR);
@@ -160,7 +192,6 @@ public class PostWallViewController implements Observer {
     // Actualizar lista de likes
     private void updateLikesList(ProductDto product) {
         List<String> likes = productLikes.get(product.name());
-        listLikes.getItems().clear();
         for (String user : likes) {
             listLikes.getItems().add(user + " le dio me gusta a " + product.name());
         }
@@ -168,7 +199,6 @@ public class PostWallViewController implements Observer {
     // Actualiza la lista de comentarios
     private void updateCommentsList(ProductDto product) {
         List<String> comments = productComments.get(product.name());
-        listComments.getItems().clear();
         for (String comment : comments) {
             listComments.getItems().add("Comentario a " + product.name() + ": " + comment);
         }
@@ -256,5 +286,115 @@ public class PostWallViewController implements Observer {
     private void logError(Exception e) {
         System.err.println("Error: " + e.getMessage());
         e.printStackTrace();
+    }
+    private void setupFriendsList() {
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem removeItem = new MenuItem("Eliminar amigo");
+        removeItem.setOnAction(event -> removeFriend());
+        contextMenu.getItems().add(removeItem);
+
+        friendsList.setContextMenu(contextMenu);
+
+        // Doble clic para ver productos del amigo
+        friendsList.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                String selectedFriend = friendsList.getSelectionModel().getSelectedItem();
+                if (selectedFriend != null) {
+                    showFriendProducts(selectedFriend);
+                }
+            }
+        });
+    }
+
+    private void updateCurrentSeller() {
+        currentSeller = marketplace.getListSellers().stream()
+                .filter(seller -> seller.getUsername().equals(username))
+                .findFirst()
+                .orElse(null);
+
+        updateFriendsList();
+    }
+
+    private void updateFriendsList() {
+        friendsList.getItems().clear();
+        if (marketplace != null) {
+            marketplace.getSellerFriends().forEach(friend ->
+                    friendsList.getItems().add(friend.getUsername())
+            );
+        }
+    }
+
+    private void showAddFriendDialog() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Agregar Amigo");
+        dialog.setHeaderText("Agregar nuevo amigo");
+        dialog.setContentText("Username del vendedor:");
+
+        dialog.showAndWait().ifPresent(username -> {
+            try {
+                addFriend(username);
+            } catch (Exception e) {
+                showMessage("Error", e.getMessage(), "Error al agregar amigo", Alert.AlertType.ERROR);
+            }
+        });
+    }
+
+    private void addFriend(String friendUsername) {
+        if (marketplace == null) {
+            throw new IllegalStateException("No hay un vendedor actual");
+        }
+
+        if (friendUsername.equals(currentSeller.getUsername())) {
+            throw new IllegalArgumentException("No puedes agregarte a ti mismo como amigo");
+        }
+
+        Seller friendSeller = marketplace.getListSellers().stream()
+                .filter(seller -> seller.getUsername().equals(friendUsername))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Vendedor no encontrado"));
+
+        if (marketplace.getSellerFriends().contains(friendSeller)) {
+            throw new IllegalArgumentException("Este vendedor ya es tu amigo");
+        }
+        marketplace.getSellerFriends().add(friendSeller);
+        updateFriendsList();
+        showMessage("Éxito", "Amigo agregado correctamente", "Nuevo amigo", Alert.AlertType.INFORMATION);
+
+        // Actualizar el muro para mostrar los productos del nuevo amigo
+        List<ProductDto> allProducts = getAllVisibleProducts();
+        populateWall(allProducts, username);
+    }
+
+    private void removeFriend() {
+        String selectedFriend = friendsList.getSelectionModel().getSelectedItem();
+        if (selectedFriend == null) {
+            return;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Eliminar Amigo");
+        alert.setHeaderText("¿Estás seguro de que quieres eliminar a " + selectedFriend + " de tu lista de amigos?");
+        alert.setContentText("Esta acción no se puede deshacer.");
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                Seller friendToRemove = marketplace.getSellerFriends().stream()
+                        .filter(friend -> friend.getUsername().equals(selectedFriend))
+                        .findFirst()
+                        .orElse(null);
+
+                if (friendToRemove != null) {
+                    marketplace.getSellerFriends().remove(friendToRemove);
+                    updateFriendsList();
+                    List<ProductDto> allProducts = getAllVisibleProducts();
+                    populateWall(allProducts, username);
+                    showMessage("Éxito", "Amigo eliminado correctamente", "Eliminar amigo", Alert.AlertType.INFORMATION);
+                }
+            }
+        });
+    }
+    private void showFriendProducts(String friendUsername) {
+        List<ProductDto> friendProducts = productController.getProducts(friendUsername);
+        populateWall(friendProducts, username);
     }
 }

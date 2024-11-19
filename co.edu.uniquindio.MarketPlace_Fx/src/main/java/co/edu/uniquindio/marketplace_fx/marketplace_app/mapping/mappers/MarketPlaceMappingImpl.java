@@ -69,6 +69,25 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
     }
 
     @Override
+    public List<SellerDto> sellersToSellersDto(List<Seller> sellers) {
+        if (sellers == null) {
+            return null;
+        }
+
+        return sellers.stream()
+                .map(seller -> new SellerDto(
+                        seller.getName(),
+                        seller.getLastName(),
+                        seller.getIdNumber(),
+                        seller.getAddress(),
+                        seller.getUsername(),
+                        seller.getPassword(),
+                        seller.getSellerFriends()
+                        ))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Product> productsDtoToProducts(List<ProductDto> productDtos) {
         if (productDtos == null) {
             return null;
@@ -117,7 +136,8 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                 seller.getIdNumber(),
                 seller.getAddress(),
                 seller.getUsername(),
-                seller.getPassword());
+                seller.getPassword(),
+                seller.getSellerFriends());
     }
     @Override
     public Seller sellerDtoToSeller(SellerDto sellerDto) {
@@ -133,6 +153,8 @@ public class MarketPlaceMappingImpl implements IMarketPlaceMapping {
                 .password(sellerDto.password())
                 .build();
     }
+
+
 
     @Override
     public Seller toObjectSeller(SellerDto seller) {
