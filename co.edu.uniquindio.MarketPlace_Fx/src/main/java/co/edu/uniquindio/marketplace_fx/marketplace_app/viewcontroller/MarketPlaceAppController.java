@@ -38,13 +38,11 @@ public class MarketPlaceAppController {
     @FXML
     private Tab tabProductView;
     @FXML
-    private AnchorPane tabMessagess;
-    @FXML
     private Tab tabPostWall;
     @FXML
-    private AnchorPane tabMessages;
+    private Tab tabMessagess;
     @FXML
-    private AnchorPane nodo;
+    private AnchorPane NodoMessages;
     public void setProductUsername(String username) {
         System.out.println("productViewController: " + (productViewController != null));
         System.out.println("postWallViewController: " + (postWallViewController != null));

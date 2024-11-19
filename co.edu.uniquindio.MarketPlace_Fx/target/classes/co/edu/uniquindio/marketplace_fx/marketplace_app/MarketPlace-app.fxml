@@ -24,7 +24,7 @@
     </Tab>
       <Tab fx:id="tabMessagess" text="Mensajes">
         <content>
-          <AnchorPane fx:id="tabMessages" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@Css/anchor.css">
+          <AnchorPane fx:id="NodoMessages" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@Css/anchor.css">
                <children>
                   <TextArea fx:id="sharedNotesArea" layoutX="214.0" layoutY="124.0" prefHeight="164.0" prefWidth="374.0" promptText="Escribe notas que se compartirán con otras sesiones" stylesheets="@Css/TextA.css" />
                   <Label alignment="CENTER" layoutX="78.0" layoutY="26.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="43.0" prefWidth="137.0" stylesheets="@Css/Label.css" text="Mensajes ">

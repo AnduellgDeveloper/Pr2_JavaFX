@@ -8,10 +8,8 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IRegister;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.ISellerCrud;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister {
     private User user;
@@ -53,18 +51,41 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
     public List<Product> getProducts() {
         return products;
     }
-
+    public void printSellerProductMap() {
+        sellerProductMap.forEach((username, products) -> {
+            System.out.printf("Vendedor: %s, Productos: %s%n", username,
+                    products.stream().map(Product::getName).collect(Collectors.joining(", ")));
+        });
+    }
     public List<Product> addProductToSeller(String username, Product product) {
-        List<Product> products = sellerProductMap.computeIfAbsent(username, _ -> new ArrayList<>());
+        String cleanedProductName = product.getName().trim();
+        product.setName(cleanedProductName);
 
-        if (products.stream().noneMatch(p -> p.getName().equalsIgnoreCase(product.getName()))) {
+        List<Product> products = sellerProductMap.computeIfAbsent(username, _ -> new ArrayList<>());
+        if (products.stream().noneMatch(p -> p.getName().equalsIgnoreCase(cleanedProductName))) {
             products.add(product);
+            System.out.printf("Producto agregado: %s para el vendedor: %s%n", cleanedProductName, username);
             return products;
         } else {
-            System.out.printf("Producto duplicado: %s%n ", product.getName());
+            System.out.printf("Producto duplicado: %s para el vendedor: %s%n", cleanedProductName, username);
         }
-        return new ArrayList<>();
+        return products;
     }
+    public String getSellerForProduct(String productName) {
+        String cleanedProductName = productName.trim();
+        for (Map.Entry<String, List<Product>> entry : sellerProductMap.entrySet()) {
+            for (Product product : entry.getValue()) {
+                if (product.getName().trim().equalsIgnoreCase(cleanedProductName)) {
+                    System.out.printf("Vendedor encontrado: %s para el producto: %s%n", entry.getKey(), cleanedProductName);
+                    return entry.getKey();
+                }
+            }
+        }
+        return "Desconocido";
+    }
+
+
+
     public List<Seller> getSellerFriends() {
         return sellerFriends;
     }
@@ -135,6 +156,11 @@ public class Marketplace implements ISellerCrud, IProductCrud, ILogin, IRegister
         }
         return null;
     }
+    private final Map<String, List<Product>> sellerProducts = new HashMap<>();
+
+
+
+
     // Método para agregar un vendedpr a la lista
     public void addSeller(Seller seller) {
         if (seller != null) {

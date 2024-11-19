@@ -715,6 +715,7 @@ public class DataUtil {
         seller1.addFriend(seller4);
         seller1.addFriend(seller5);
         seller1.addFriend(seller6);
+        marketplace.printSellerProductMap();
         return marketplace;
     }
 }

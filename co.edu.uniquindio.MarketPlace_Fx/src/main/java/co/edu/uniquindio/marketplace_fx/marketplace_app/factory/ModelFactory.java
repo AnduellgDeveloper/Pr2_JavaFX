@@ -8,10 +8,8 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.mappers.MarketPl
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.*;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IMarketPlaceMapping;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IModelFactoryService;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.service.IProductCrud;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.utils.DataUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ModelFactory implements IModelFactoryService {
@@ -37,6 +35,11 @@ public class ModelFactory implements IModelFactoryService {
     @Override
     public List<AdministratorDto> getAdministrators() {
         return mapper.getAdministratorsDto(marketplace.getListAdministrators());
+    }
+
+    @Override
+    public SellerDto getSellerName(String username) {
+        return mapper.sellertToSellerDto(marketplace.getSeller(username));
     }
 
     // Obtener todos los productos

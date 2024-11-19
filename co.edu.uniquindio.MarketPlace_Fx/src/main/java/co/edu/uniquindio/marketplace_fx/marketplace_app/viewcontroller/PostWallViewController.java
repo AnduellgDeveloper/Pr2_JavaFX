@@ -102,7 +102,6 @@ public class PostWallViewController implements Observer {
         populateWall(products,username);
     }
 
-    // Modificar populateWall para mostrar el nombre del vendedor
     private void populateWall(List<ProductDto> products, String username) {
         try {
             postWallManager.clearPosts();
@@ -113,7 +112,7 @@ public class PostWallViewController implements Observer {
                 String imagePath = product.image();
                 Image image = loadImageFromDirectories(imagePath);
                 if (image != null) {
-                    String postTitle = product.name() + " Vendedor: " + sellerController.getSellerName(username) ;
+                    String postTitle = product.name();
                     postWallManager.createPost(
                             postTitle,
                             product.publicationDate(),
@@ -128,6 +127,7 @@ public class PostWallViewController implements Observer {
             showMessage("Error", "Error al poblar el muro: " + e.getMessage(), "Error", Alert.AlertType.ERROR);
         }
     }
+
 
     // Obtener todos los productos visibles
     private List<ProductDto> getAllVisibleProducts() {
@@ -296,7 +296,6 @@ public class PostWallViewController implements Observer {
 
         friendsList.setContextMenu(contextMenu);
 
-        // Doble clic para ver productos del amigo
         friendsList.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 String selectedFriend = friendsList.getSelectionModel().getSelectedItem();
@@ -361,7 +360,6 @@ public class PostWallViewController implements Observer {
         updateFriendsList();
         showMessage("Éxito", "Amigo agregado correctamente", "Nuevo amigo", Alert.AlertType.INFORMATION);
 
-        // Actualizar el muro para mostrar los productos del nuevo amigo
         List<ProductDto> allProducts = getAllVisibleProducts();
         populateWall(allProducts, username);
     }

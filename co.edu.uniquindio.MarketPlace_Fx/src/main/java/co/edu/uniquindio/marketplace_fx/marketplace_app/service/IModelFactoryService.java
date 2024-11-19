@@ -5,13 +5,17 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.Administrato
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.SellerDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Seller;
 
 import java.util.List;
 
 public interface IModelFactoryService {
+    SellerDto getSellerName(String username);
+
     List<ProductDto> getProducts();
 //    boolean addProduct(ProductDto productDto);
     List<SellerDto> getSellers();
     List<UserDto> getUsers();
     List<AdministratorDto> getAdministrators();
+
 }
