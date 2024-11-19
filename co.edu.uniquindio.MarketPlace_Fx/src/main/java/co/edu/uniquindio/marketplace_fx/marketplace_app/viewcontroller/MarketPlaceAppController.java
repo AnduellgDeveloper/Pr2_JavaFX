@@ -132,22 +132,29 @@ public class MarketPlaceAppController {
         System.out.println("Archivo compartido: " + sharedFile);
     }
 
-
-    private void setupNotifications() {
+     private void setupNotifications() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-            List<String> notifications = (List<String>) sessionManager.getSharedData()
-                    .getOrDefault("notifications", new ArrayList<String>());
-
+            Object rawNotifications = sessionManager.getSharedData().get("notifications");
+            List<String> notifications;
+            if (rawNotifications instanceof List<?>) {
+                notifications = (List<String>) rawNotifications;
+            } else {
+                notifications = new ArrayList<>();
+            }
             for (String notification : notifications) {
                 showNotification(notification);
             }
-            notifications.clear();
+            if (rawNotifications instanceof List<?>) {
+                notifications.clear();
+            }
             sessionManager.getSharedData().put("notifications", notifications);
         }));
 
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
     }
+
+
     // Obtener zona de spawn
     private Stage getStage() {
         return (Stage) tabPane.getScene().getWindow();
@@ -176,11 +183,18 @@ public class MarketPlaceAppController {
 
     private void notifyFileshare() {
         String notification = currentSession.getUsername() + " ha compartido un archivo";
-        List<String> notifications = (List<String>) sessionManager.getSharedData()
-                .getOrDefault("notifications", new ArrayList<String>());
+        Object rawNotifications = sessionManager.getSharedData().get("notifications");
+        List<String> notifications;
+
+        if (rawNotifications instanceof List<?>) {
+            notifications = (List<String>) rawNotifications;
+        } else {
+            notifications = new ArrayList<>();
+        }
         notifications.add(notification);
         sessionManager.getSharedData().put("notifications", notifications);
     }
+
     private void onSessionCreated(Session session) {
         Platform.runLater(() -> {
             activeUsersListView.getItems().add(session.getUsername());

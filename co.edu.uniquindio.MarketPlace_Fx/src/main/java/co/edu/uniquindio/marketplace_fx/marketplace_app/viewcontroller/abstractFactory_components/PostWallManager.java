@@ -23,7 +23,7 @@ public class PostWallManager implements Observer {
     private GridPane postWallContainer;
     private int currentRow = 0;
     private int currentColumn = 0;
-    private final int maxColumns = 6;
+    private final int maxColumns = 8;
     private List<ProductDto> products = new ArrayList<>();
 
     public void updateProducts(List<ProductDto> newProducts) {
@@ -62,10 +62,7 @@ public class PostWallManager implements Observer {
         product.setProductName(productName);
         productDisplay.setProductImage(imageUrl);
 
-        interactionPanel.setLikeAction(_ -> {
-            onLike.run();
-        });
-
+        interactionPanel.setLikeAction(_ -> {onLike.run();});
         interactionPanel.setCommentAction(_ -> onComment.run());
 
         VBox post = (VBox) postContainer.getContainer();

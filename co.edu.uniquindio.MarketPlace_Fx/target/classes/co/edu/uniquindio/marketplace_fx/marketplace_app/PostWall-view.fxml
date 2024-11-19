@@ -11,12 +11,12 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane prefHeight="882.0" prefWidth="1526.0" style="-fx-background-color: #ecb0f7;" stylesheets="@Css/StyleImage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.PostWallViewController">
+<ScrollPane prefHeight="900.0" prefWidth="1526.0" style="-fx-background-color: #ecb0f7;" stylesheets="@Css/StyleImage.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.PostWallViewController">
    <content>
-      <AnchorPane fx:id="fondo" prefHeight="887.0" prefWidth="2116.0" style="-fx-background-color: #ecb0f7;">
+      <AnchorPane fx:id="fondo" prefHeight="1530.0" prefWidth="2116.0" style="-fx-background-color: #ecb0f7;">
          <children>
 
-            <Pane fx:id="Slider" prefHeight="882.0" prefWidth="230.0" style="-fx-background-color: d76ae8;">
+            <Pane fx:id="Slider" prefHeight="1500.0" prefWidth="230.0" style="-fx-background-color: d76ae8;">
          <children>
             <ImageView fitHeight="87.0" fitWidth="95.0" layoutX="58.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -28,7 +28,7 @@
                         <Font name="Arial Black" size="18.0" />
                      </font>
                   </Label>
-                  <ListView fx:id="listComments" layoutY="559.0" prefHeight="296.0" prefWidth="225.0" stylesheets="@Css/list.css" />
+                  <ListView fx:id="listComments" layoutY="559.0" prefHeight="500.0" prefWidth="225.0" stylesheets="@Css/list.css" />
                   <Label layoutX="15.0" layoutY="278.0" prefHeight="40.0" prefWidth="103.0" text="Likes">
                      <font>
                         <Font name="Arial Black" size="18.0" />
@@ -50,8 +50,8 @@
                   </Button>
          </children>
       </Pane>
-            <GridPane fx:id="postWallContainer" layoutX="242.0" layoutY="149.0" prefHeight="92.0" prefWidth="130.0" />
-             <Button fx:id="btnTema" layoutX="242.0" layoutY="47.0" mnemonicParsing="false" onAction="#onThem" prefHeight="47.0" prefWidth="62.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" styleClass="styl" stylesheets="@Css/ButtonStyle.css">
+            <GridPane fx:id="postWallContainer" layoutX="259.0" layoutY="87.0" prefHeight="92.0" prefWidth="130.0" />
+             <Button fx:id="btnTema" layoutX="242.0" layoutY="14.0" mnemonicParsing="false" onAction="#onThem" prefHeight="47.0" prefWidth="62.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" styleClass="styl" stylesheets="@Css/ButtonStyle.css">
                <graphic>
                      <ImageView fitHeight="51.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                          <image>
@@ -60,7 +60,7 @@
                      </ImageView>
                </graphic>
              </Button>
-             <Label fx:id="label" layoutX="242.0" layoutY="14.0" prefHeight="27.0" prefWidth="238.0" text="Tema" textFill="WHITE">
+             <Label fx:id="label" layoutX="355.0" layoutY="14.0" prefHeight="27.0" prefWidth="238.0" text="Tema" textFill="WHITE">
                  <font>
                      <Font name="Arial Black" size="18.0" />
                  </font></Label>
