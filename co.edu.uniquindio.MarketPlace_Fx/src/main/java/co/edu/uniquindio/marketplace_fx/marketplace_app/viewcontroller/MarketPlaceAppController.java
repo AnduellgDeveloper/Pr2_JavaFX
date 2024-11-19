@@ -1,5 +1,6 @@
 
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.model.facade.Theme;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.Session;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.SessionManager;
 
@@ -27,6 +28,7 @@ public class MarketPlaceAppController {
     private PostWallViewController postWallViewController;
     private SessionManager sessionManager = SessionManager.getInstance();
     private Session currentSession;
+    private Theme theme;
     @FXML
     private ListView<String> activeUsersListView;
     @FXML
@@ -35,6 +37,8 @@ public class MarketPlaceAppController {
     private TextArea sharedNotesArea;
     @FXML
     private Tab tabProductView;
+    @FXML
+    private AnchorPane tabMessagess;
     @FXML
     private Tab tabPostWall;
     @FXML

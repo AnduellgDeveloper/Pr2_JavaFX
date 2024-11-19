@@ -15,6 +15,15 @@ public class DataUtil {
                 .username("admin")
                 .password("123")
                 .build();
+        Administrator admin2 = Administrator.builder()
+                .name("AdminNicol")
+                .lastName("Principal 1")
+                .idNumber("01")
+                .address("Central Office")
+                .username("adminNicol")
+                .password("123")
+                .build();
+
         Seller seller1 = Seller.builder()
                 .name("Duvan Felipe")
                 .lastName("Palomares Cerquera")
@@ -594,6 +603,7 @@ public class DataUtil {
 
         //----------------------------------------- Usuarios Registrados -----------------------------------------
         marketplace.getListRegisterUser().add(admin1);
+        marketplace.getListRegisterUser().add(admin2);
 
         marketplace.getListRegisterUser().add(seller1);
         marketplace.getListRegisterUser().add(seller2);
@@ -607,6 +617,8 @@ public class DataUtil {
         marketplace.getListRegisterUser().add(seller10);
 
         marketplace.getListAdministrators().add(admin1);
+        marketplace.getListAdministrators().add(admin2);
+
 
         marketplace.getListSellers().add(seller1);
         marketplace.getListSellers().add(seller2);

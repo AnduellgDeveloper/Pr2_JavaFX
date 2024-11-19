@@ -6,15 +6,17 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.AdministratorViewController">
     <children>
-        <TabPane layoutY="-1.0" prefHeight="602.0" prefWidth="772.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane layoutY="-1.0" prefHeight="602.0" prefWidth="772.0" stylesheets="@Css/tab.css" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab closable="false" text="Statistics">
                     <content>
@@ -23,7 +25,7 @@
                         <ScrollBar layoutY="558.0" prefHeight="6.0" prefWidth="803.0" />
                         <ScrollBar layoutX="750.0" orientation="VERTICAL" prefHeight="559.0" prefWidth="15.0" />
                         <Separator layoutX="7.0" layoutY="314.0" prefHeight="5.0" prefWidth="772.0" />
-                        <StackedBarChart layoutX="62.0" layoutY="328.0" prefHeight="217.0" prefWidth="310.0">
+                        <StackedBarChart fx:id="staticts" layoutX="62.0" layoutY="328.0" prefHeight="217.0" prefWidth="310.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
                           </xAxis>
@@ -31,9 +33,20 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </StackedBarChart>
-                        <DatePicker layoutX="62.0" layoutY="31.0" />
-                        <Button layoutX="104.0" layoutY="82.0" mnemonicParsing="false" text="Consultar" />
-                        <Label layoutX="102.0" layoutY="6.0" text="Prodcutos publicados " />
+                        <DatePicker fx:id="LocalData" layoutX="62.0" layoutY="31.0" onAction="#onLocalData" />
+                        <Label layoutX="78.0" layoutY="5.0" text="Productos publicados " />
+                        <Label layoutX="58.0" layoutY="142.0" text="Cantidad de contactos por vendedor" />
+                        <TextField fx:id="txtIdNumber" layoutX="352.0" layoutY="31.0" />
+                        <Label layoutX="309.0" layoutY="35.0" text="Cedula" />
+                        <Button fx:id="btnExport" layoutX="453.0" layoutY="372.0" mnemonicParsing="false" onAction="#onExport" stylesheets="@Css/ButtonStyle.css" text="Exportar" />
+                        <Label layoutX="327.0" layoutY="5.0" text="Productos publicados cada vendedor " />
+                        <Label layoutX="365.0" layoutY="142.0" text="Productos con mas like" />
+                        <RadioButton fx:id="rdbMaxLike" layoutX="462.0" layoutY="253.0" mnemonicParsing="false" onAction="#onMaxLike" text="Añadir al reporte" />
+                        <RadioButton fx:id="rdbProductPubli" layoutX="22.0" layoutY="67.0" mnemonicParsing="false" onAction="#onProducPubli" text="Añadir al reporte" />
+                        <RadioButton fx:id="rdbProductsSeller" layoutX="527.0" layoutY="35.0" mnemonicParsing="false" onAction="#onProductsSeller" text="Añadir al reporte" />
+                        <RadioButton fx:id="rdbCantSeller" layoutX="22.0" layoutY="271.0" mnemonicParsing="false" onAction="#onCantSeller" text="Añadir al reporte" />
+                        <Label layoutX="31.0" layoutY="192.0" text="Cedula" />
+                        <TextField fx:id="txtIdNumber1" layoutX="93.0" layoutY="188.0" />
                      </children></AnchorPane>
                     </content>
                 </Tab>

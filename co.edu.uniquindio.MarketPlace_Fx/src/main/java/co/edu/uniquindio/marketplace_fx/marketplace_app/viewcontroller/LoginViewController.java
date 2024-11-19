@@ -23,6 +23,7 @@ import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.LoginConsta
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.HEADER;
 
 public class LoginViewController {
+    AdministratorViewController adminController;
     private LoginController loginController;
     private SessionManager sessionManager = SessionManager.getInstance();
 
@@ -74,9 +75,12 @@ public class LoginViewController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/MarketPlace-app.fxml"));
             Parent root = loader.load();
 
+
             MarketPlaceAppController marketPlaceController = loader.getController();
             marketPlaceController.setProductUsername(username);
             marketPlaceController.initSession(session);
+
+
 
 
             Scene scene = new Scene(root);
@@ -107,6 +111,9 @@ public class LoginViewController {
             stage.setTitle("Dunima MarketPlace - Administrador"+
                     "- Sesión de " + session.getUsername()+
                     "- ID:" + session.getSessionId());
+            AdministratorViewController adminController = loader.getController();
+            adminController.setUsername(session.getUsername());
+
             stage.setScene(scene);
             stage.show();
             showMessage(TITULO_INTERFAZ_ADMINISTRADOR, BODY_BIENVENIDO_ADMINISTRADOR, HEADER, Alert.AlertType.INFORMATION);

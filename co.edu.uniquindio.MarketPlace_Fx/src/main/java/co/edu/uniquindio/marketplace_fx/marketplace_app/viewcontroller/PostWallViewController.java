@@ -40,6 +40,7 @@ public class PostWallViewController implements Observer {
     private final ProductController productController = new ProductController();
     private Map<String, List<String>> productComments = new HashMap<>();
     private Map<String, List<String>> productLikes = new HashMap<>();
+    private MarketPlaceAppController market;
 
     public PostWallViewController() {
     }
