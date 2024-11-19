@@ -4,7 +4,7 @@
     -fx-font-size: 16px; /* Tamaño de fuente */
     -fx-font-family: "Roboto", sans-serif; /* Fuente moderna */
     -fx-font-weight: bold; /* Negrita */
-    -fx-padding: 10px 20px; /* Espaciado interno */
+    -fx-padding: 10px 20px; /* Espaciado interno */s
     -fx-border-radius: 10px; /* Bordes redondeados */
     -fx-background-radius: 10px; /* Bordes del fondo redondeados */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 8, 0.5, 0, 2); /* Sombra */
@@ -12,6 +12,11 @@
     -fx-border-color: rgba(255, 255, 255, 0.5); /* Borde semitransparente */
     -fx-border-width: 2px; /* Grosor del borde */
     -fx-transition: all 0.3s ease-in-out; /* Transición suave para efectos */
+}
+/* Estilo del Separator */
+.separator {
+    -fx-background-color: transparent; /* Fondo transparente */
+    -fx-border-color: transparent; /* Sin bordes */
 }
 
 .label:hover {

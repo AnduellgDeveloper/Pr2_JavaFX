@@ -38,33 +38,21 @@ public class AdministratorViewController {
     public void setUsername(String username) {
         this.username = username;
     }
+
     @FXML
-    private TextArea reportArea;
-
-    ;
-
+    private TextField txtTopLikeProducts;
+    @FXML
+    private TextField txtUsernameAllProductPublicated;
+    @FXML
+    private TextField txtUsernameContacts;
     @FXML
     private DatePicker startDatePicker;
-
-
     @FXML
-    private TextField txtSeller;
-
+    private DatePicker endDatePicker;
     @FXML
     private Button btnExport;
-
     @FXML
-    private RadioButton rdbCantSeller;
-
-    @FXML
-    private RadioButton rdbMaxLike;
-
-    @FXML
-    private RadioButton rdbProductPubli;
-
-    @FXML
-    private RadioButton rdbProductsSeller;
-
+    private RadioButton rdbCantSeller, rdbMaxLike, rdbProductPubli, rdbProductsSeller;
     @FXML
     private StackedBarChart<?, ?> staticts;
 
@@ -81,55 +69,51 @@ public class AdministratorViewController {
             return;
         }
 
-        // Obtener la fecha actual
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String currentDate = dateFormat.format(new Date());
-
-        // Iniciar contenido base del reporte
-        reportContent.setLength(0); // Resetear el contenido previo
+        reportContent.setLength(0);
         reportContent.append("Reporte Dunima Marketplace\n\n")
                 .append("Fecha: ").append(currentDate).append("\n")
                 .append("Reporte realizado por: ").append(username).append("\n\n");
 
-        // Agregar información según las opciones seleccionadas
         if (rdbProductPubli.isSelected()) {
             generateProductsByDateReport();
         }
-
         if (rdbProductsSeller.isSelected()) {
             generateProductsBySellerReport();
         }
-
         if (rdbCantSeller.isSelected()) {
             generateContactsBySellerReport();
         }
-
         if (rdbMaxLike.isSelected()) {
 //            generateTopLikedProductsReport();
         }
-
-        // Guardar el reporte
         saveReportToFile(event);
     }
 
     private void generateProductsByDateReport() {
         LocalDate startDate = startDatePicker.getValue();
-
-        if (startDate == null ) {
-            reportContent.append("Por favor, seleccione un rango de fechas válido.\n");
+        LocalDate endDate = endDatePicker.getValue();
+        String usernameReport = txtUsernameAllProductPublicated.getText();
+        if (startDate == null || endDate == null) {
+            reportContent.append("Reporte inválido: Por favor, seleccione un rango de fechas válido.\n");
+            return;
+        }
+        if (startDate.isAfter(endDate)) {
+            reportContent.append("Reporte inválido: La fecha de inicio no puede ser posterior a la fecha de fin.\n");
             return;
         }
 
         ProductController productController = new ProductController();
-        List<ProductDto> productsInRange = productController.getProducts(username).stream()
+        List<ProductDto> productsInRange = productController.getProducts(usernameReport).stream()
                 .filter(product -> {
                     LocalDate publicationDate = product.publicationDate().toLocalDate();
-                    return (publicationDate.isEqual(startDate) || publicationDate.isAfter(startDate)) &&
-                            "Published".equals(product.status());
+                    boolean isInRange = !publicationDate.isBefore(startDate) && !publicationDate.isAfter(endDate);
+                    return isInRange && "Published".equals(product.status());
                 })
-                .collect(Collectors.toList());
-
-        reportContent.append("Reporte de productos publicados entre ").append(startDate).append("\n\n");
+                .toList();
+        reportContent.append("Reporte de productos publicados entre ")
+                .append(startDate).append(" y ").append(endDate).append("\n\n");
 
         if (productsInRange.isEmpty()) {
             reportContent.append("No se encontraron productos publicados en este rango de fechas.\n");
@@ -138,13 +122,15 @@ public class AdministratorViewController {
             for (ProductDto product : productsInRange) {
                 reportContent.append("Nombre: ").append(product.name()).append("\n")
                         .append("Categoría: ").append(product.category()).append("\n")
-                        .append("Precio: ").append(product.price()).append("\n\n");
+                        .append("Precio: ").append(product.price()).append("\n\n")
+                        .append("Fecha: ").append(product.publicationDate()).append("\n\n");
             }
         }
     }
 
+
     private void generateProductsBySellerReport() {
-        String seller = txtSeller.getText();
+        String seller = txtUsernameAllProductPublicated.getText();
 
         if (seller == null || seller.trim().isEmpty()) {
             reportContent.append("Por favor, ingrese el nombre del vendedor.\n");
@@ -182,17 +168,6 @@ public class AdministratorViewController {
             });
         }
     }
-
-//    private void updateLikesList(ProductDto product) {
-//        listLikes.getItems().clear(); // Limpia la lista antes de actualizar
-//        List<String> likes = productLikes.get(product.name());
-//        if (likes != null) {
-//            for (String user : likes) {
-//                listLikes.getItems().add(user + " le dio me gusta a " + product.name());
-//            }
-//        }
-//    }
-
 
     private void saveReportToFile(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();

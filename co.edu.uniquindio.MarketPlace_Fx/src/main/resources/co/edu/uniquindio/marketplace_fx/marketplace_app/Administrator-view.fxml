@@ -7,24 +7,22 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.AdministratorViewController">
+<AnchorPane style="-fx-background-color: White;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.AdministratorViewController">
     <children>
         <TabPane layoutY="-1.0" prefHeight="602.0" prefWidth="772.0" stylesheets="@Css/tab.css" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab closable="false" text="Statistics">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="558.0" prefWidth="686.0" style="-fx-background-color: #EEB9F5FF;">
+                        <AnchorPane style="-fx-background-color: #EEB9F5FF;">
                      <children>
-                        <ScrollBar layoutY="558.0" prefHeight="6.0" prefWidth="803.0" />
-                        <ScrollBar layoutX="750.0" orientation="VERTICAL" prefHeight="559.0" prefWidth="15.0" />
-                        <Separator layoutX="7.0" layoutY="314.0" prefHeight="5.0" prefWidth="772.0" />
+                        <Separator layoutX="-14.0" layoutY="320.0" prefHeight="17.0" prefWidth="772.0" stylesheets="@Css/Label.css" />
                         <StackedBarChart fx:id="staticts" layoutX="62.0" layoutY="328.0" prefHeight="217.0" prefWidth="310.0">
                           <xAxis>
                             <CategoryAxis side="BOTTOM" />
@@ -33,20 +31,33 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </StackedBarChart>
-                        <DatePicker fx:id="startDatePicker" layoutX="62.0" layoutY="31.0"  />
-                        <Label layoutX="78.0" layoutY="5.0" text="Productos publicados " />
-                        <Label layoutX="58.0" layoutY="142.0" text="Cantidad de contactos por vendedor" />
-                        <TextField fx:id="txtSeller" layoutX="352.0" layoutY="31.0" />
-                        <Label layoutX="309.0" layoutY="35.0" text="Cedula" />
-                        <Button fx:id="btnExport" layoutX="453.0" layoutY="372.0" mnemonicParsing="false" onAction="#onExport" stylesheets="@Css/ButtonStyle.css" text="Exportar" />
-                        <Label layoutX="327.0" layoutY="5.0" text="Productos publicados cada vendedor " />
-                        <Label layoutX="365.0" layoutY="142.0" text="Productos con mas like" />
-                        <RadioButton fx:id="rdbMaxLike" layoutX="462.0" layoutY="253.0" mnemonicParsing="false"  text="Añadir al reporte" />
-                        <RadioButton fx:id="rdbProductPubli" layoutX="22.0" layoutY="67.0" mnemonicParsing="false"  text="Añadir al reporte" />
-                        <RadioButton fx:id="rdbProductsSeller" layoutX="527.0" layoutY="35.0" mnemonicParsing="false"  text="Añadir al reporte" />
-                        <RadioButton fx:id="rdbCantSeller" layoutX="22.0" layoutY="271.0" mnemonicParsing="false"  text="Añadir al reporte" />
-                        <Label layoutX="31.0" layoutY="192.0" text="Cedula" />
-                        <TextField fx:id="txtIdNumber1" layoutX="93.0" layoutY="188.0" />
+                        <DatePicker fx:id="startDatePicker" layoutX="85.0" layoutY="42.0" stylesheets="@Css/DatePicker.css" />
+                        <Label layoutX="62.0" layoutY="15.0" text="Productos publicados entre determinada fecha" />
+                        <Label layoutX="63.0" layoutY="193.0" text="Cantidad de contactos por vendedor" />
+                        <TextField fx:id="txtUsernameAllProductPublicated" layoutX="481.0" layoutY="71.0" />
+                        <Label layoutX="415.0" layoutY="75.0" text="Username" />
+                        <Button fx:id="btnExport" layoutX="390.0" layoutY="468.0" mnemonicParsing="false" onAction="#onExport" prefHeight="49.0" prefWidth="178.0" stylesheets="@Css/ButtonStyle.css" text="Exportar reporte">
+                           <font>
+                              <Font name="Arial Black" size="14.0" />
+                           </font></Button>
+                        <Label layoutX="438.0" layoutY="24.0" text="Productos publicados cada vendedor " />
+                        <Label layoutX="488.0" layoutY="193.0" text="Productos con mas like" />
+                        <RadioButton fx:id="rdbMaxLike" layoutX="496.0" layoutY="280.0" mnemonicParsing="false" text="Añadir al reporte" />
+                        <RadioButton fx:id="rdbProductPubli" layoutX="105.0" layoutY="146.0" mnemonicParsing="false" text="Añadir al reporte" />
+                        <RadioButton fx:id="rdbProductsSeller" layoutX="500.0" layoutY="146.0" mnemonicParsing="false" text="Añadir al reporte" />
+                        <RadioButton fx:id="rdbCantSeller" layoutX="104.0" layoutY="280.0" mnemonicParsing="false" text="Añadir al reporte" />
+                        <Label layoutX="10.0" layoutY="237.0" text="Username" />
+                        <TextField fx:id="txtUsernameContacts" layoutX="85.0" layoutY="233.0" />
+                        <DatePicker fx:id="endDatePicker" layoutX="85.0" layoutY="99.0" stylesheets="@Css/DatePicker.css" />
+                        <Label layoutX="18.0" layoutY="46.0" text="Fecha inicial" />
+                        <Label layoutX="14.0" layoutY="103.0" text="Fecha final" />
+                        <TextField fx:id="txtTopLikeProducts" layoutX="477.0" layoutY="233.0" />
+                        <Label layoutX="415.0" layoutY="237.0" text="Username" />
+                        <Separator layoutX="-7.0" layoutY="163.0" prefHeight="17.0" prefWidth="772.0" stylesheets="@Css/Label.css" />
+                        <Separator layoutX="369.0" layoutY="172.0" orientation="VERTICAL" prefHeight="155.0" prefWidth="9.0" />
+                        <Separator layoutX="370.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="178.0" prefWidth="8.0" />
+                        <Label layoutX="297.0" layoutY="103.0" text="2024, 9, 15" />
+                        <Label layoutX="297.0" layoutY="49.0" text="2024, 8, 22" />
                      </children></AnchorPane>
                     </content>
                 </Tab>
