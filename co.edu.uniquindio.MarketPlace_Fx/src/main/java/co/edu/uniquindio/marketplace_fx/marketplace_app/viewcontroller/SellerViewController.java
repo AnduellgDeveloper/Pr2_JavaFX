@@ -211,7 +211,6 @@ public class SellerViewController {
         address.isEmpty()||username.isEmpty()||password.isEmpty()) {
 
         } else {
-            showMessage(TITULO_VENDEDOR_AGREGADO,BODY_VENDEDOR_AGREGADO, HEADER, Alert.AlertType.ERROR);
             return new SellerDto(Name,lastName,idNumber,address,username,password,friends);
         }
 

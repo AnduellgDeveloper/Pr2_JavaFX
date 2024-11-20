@@ -17,67 +17,22 @@
 
 <AnchorPane prefHeight="644.0" prefWidth="772.0" stylesheets="@Css/DatePicker.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.SellerViewController">
     <children>
-        <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="644.0" prefWidth="772.0">
+        <SplitPane dividerPositions="0.5" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="293.0" prefWidth="744.0" style="-fx-background-color: d76ae8;">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="293.0" prefWidth="744.0" style="-fx-background-color: d76ae8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Button fx:id="btnAddSeller" layoutX="212.0" layoutY="198.0" mnemonicParsing="false" onAction="#onAddSeller" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Add Seller">
-                            <textFill>
-                                <RadialGradient centerX="0.5115606936416185" centerY="0.41133004926108374" radius="0.6772151898734178">
-                                    <stops>
-                                        <Stop color="#99148e" />
-                                        <Stop color="#240722" offset="1.0" />
-                                    </stops>
-                                </RadialGradient>
-                            </textFill>
-                            <font>
-                                <Font name="Arial Black" size="12.0" />
-                            </font></Button>
+                        <Button fx:id="btnAddSeller" layoutX="212.0" layoutY="198.0" mnemonicParsing="false" onAction="#onAddSeller" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Add Seller" AnchorPane.leftAnchor="5.0" />
                         <ImageView fitHeight="47.0" fitWidth="50.0" layoutX="6.0" layoutY="6.0">
                             <Image url="@images/Men/DunimaSinFondo.png" />
                         </ImageView>
-                        <Button fx:id="btnRemoveSeller" layoutX="361.0" layoutY="198.0" mnemonicParsing="false" onAction="#onRemoveSeller" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Remove Seller">
-                            <textFill>
-                                <RadialGradient centerX="0.5115606936416185" centerY="0.41133004926108374" radius="0.6772151898734178">
-                                    <stops>
-                                        <Stop color="#99148e" />
-                                        <Stop color="#240722" offset="1.0" />
-                                    </stops>
-                                </RadialGradient>
-                            </textFill>
-                            <font>
-                                <Font name="Arial Black" size="12.0" />
-                            </font></Button>
-                        <Button fx:id="btnUpdateSeller" layoutX="517.0" layoutY="198.0" mnemonicParsing="false" onAction="#onUpdateSeller" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Update Seller">
-                            <textFill>
-                                <RadialGradient centerX="0.5115606936416185" centerY="0.41133004926108374" radius="0.6772151898734178">
-                                    <stops>
-                                        <Stop color="#99148e" />
-                                        <Stop color="#240722" offset="1.0" />
-                                    </stops>
-                                </RadialGradient>
-                            </textFill>
-                            <font>
-                                <Font name="Arial Black" size="12.0" />
-                            </font></Button>
+                        <Button fx:id="btnRemoveSeller" layoutX="361.0" layoutY="198.0" mnemonicParsing="false" onAction="#onRemoveSeller" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Remove Seller" />
+                        <Button fx:id="btnUpdateSeller" layoutX="517.0" layoutY="198.0" mnemonicParsing="false" onAction="#onUpdateSeller" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Update Seller" />
                         <Label layoutX="72.0" layoutY="6.0" text="Sellers">
                             <font>
                                 <Font size="36.0" />
                             </font>
                         </Label>
-                        <Button fx:id="btnClearFields" layoutX="56.0" layoutY="198.0" mnemonicParsing="false" onAction="#onClearFields" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Clear Fields">
-                            <textFill>
-                                <RadialGradient centerX="0.5115606936416185" centerY="0.41133004926108374" radius="0.6772151898734178">
-                                    <stops>
-                                        <Stop color="#99148e" />
-                                        <Stop color="#240722" offset="1.0" />
-                                    </stops>
-                                </RadialGradient>
-                            </textFill>
-                            <font>
-                                <Font name="Arial Black" size="12.0" />
-                            </font>
-                        </Button>
+                        <Button fx:id="btnClearFields" layoutX="56.0" layoutY="198.0" mnemonicParsing="false" onAction="#onClearFields" prefHeight="28.0" prefWidth="140.0" style="-fx-background-radius: 50;" text="Clear Fields" />
                         <Separator layoutX="13.0" layoutY="184.0" prefHeight="11.0" prefWidth="697.0" />
                         <Pane layoutX="6.0" layoutY="60.0" prefHeight="124.0" prefWidth="475.0">
                             <TextField fx:id="txtName" layoutX="82.0" layoutY="9.0" promptText="Name" style="-fx-background-radius: 50;">
@@ -120,26 +75,26 @@
                                     <Font size="16.0" />
                                 </font>
                             </Label>
-                     <Label alignment="CENTER_RIGHT" layoutX="2.0" layoutY="89.0" prefHeight="25.0" prefWidth="80.0" text="UserName">
-                        <font>
-                           <Font size="16.0" />
-                        </font>
-                     </Label>
-                     <Label alignment="CENTER_RIGHT" layoutX="282.0" layoutY="89.0" prefHeight="25.0" prefWidth="68.0" text="Password">
-                        <font>
-                           <Font size="16.0" />
-                        </font>
-                     </Label>
-                     <TextField fx:id="txtUserName" layoutX="82.0" layoutY="87.0" promptText="UserName" style="-fx-background-radius: 50;">
-                        <font>
-                           <Font name="Arial Black" size="13.0" />
-                        </font>
-                     </TextField>
-                     <TextField fx:id="txtPassword" layoutX="357.0" layoutY="87.0" promptText="password" style="-fx-background-radius: 50;">
-                        <font>
-                           <Font name="Arial Black" size="13.0" />
-                        </font>
-                     </TextField>
+                            <Label alignment="CENTER_RIGHT" layoutX="2.0" layoutY="89.0" prefHeight="25.0" prefWidth="80.0" text="UserName">
+                                <font>
+                                    <Font size="16.0" />
+                                </font>
+                            </Label>
+                            <Label alignment="CENTER_RIGHT" layoutX="282.0" layoutY="89.0" prefHeight="25.0" prefWidth="68.0" text="Password">
+                                <font>
+                                    <Font size="16.0" />
+                                </font>
+                            </Label>
+                            <TextField fx:id="txtUserName" layoutX="82.0" layoutY="87.0" promptText="UserName" style="-fx-background-radius: 50;">
+                                <font>
+                                    <Font name="Arial Black" size="13.0" />
+                                </font>
+                            </TextField>
+                            <TextField fx:id="txtPassword" layoutX="357.0" layoutY="87.0" promptText="password" style="-fx-background-radius: 50;">
+                                <font>
+                                    <Font name="Arial Black" size="13.0" />
+                                </font>
+                            </TextField>
                         </Pane>
                         <Separator layoutX="12.0" layoutY="54.0" prefHeight="11.0" prefWidth="697.0" />
                     </children>
