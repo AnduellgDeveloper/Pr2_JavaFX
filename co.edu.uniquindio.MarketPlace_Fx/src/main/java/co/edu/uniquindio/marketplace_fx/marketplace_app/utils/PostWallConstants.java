@@ -4,7 +4,9 @@ public class PostWallConstants {
     public static final String TITULO_ERROR_IMAGEN="Error de imagen ";
     public static final String TITULO_LIKE ="Notificacion de like";
     public static final String TITULO_COMENTARIO ="¡Deja tu comentario!";
+    public static final String TITULO_ERROR ="Error";
 
+    public static final String ERROR= "Error";
     public static final String HEADER= "Notificaciòn";
     public static final String HEADER_LIKE= "¡Toma like!";
 

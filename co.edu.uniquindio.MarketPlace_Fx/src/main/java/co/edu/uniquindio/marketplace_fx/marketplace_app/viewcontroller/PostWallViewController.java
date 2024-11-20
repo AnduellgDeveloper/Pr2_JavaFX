@@ -5,7 +5,6 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.ProductContro
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.SellerController;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.SellerDto;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Marketplace;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.Seller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.facade.Theme;
@@ -13,7 +12,6 @@ import co.edu.uniquindio.marketplace_fx.marketplace_app.model.facade.Theme;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_observer.Observer;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.service.service_abstractFactory.IComponentFactory;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.ComponentFactory;
-import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.JavaFxFeedBackPanel;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.abstractFactory_components.PostWallManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +20,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-
 import java.io.File;
 import java.net.URL;
 import java.util.*;
@@ -47,29 +44,23 @@ public class PostWallViewController implements Observer {
     @FXML
     private ListView<String> friendsList;
     @FXML
-    private Button btnAddFriend;
+    private Button btnAddFriend, btnTema;
     @FXML
     private AnchorPane fondo;
-    @FXML
-    private JavaFxFeedBackPanel feedBackPanel;
     @FXML
     private Pane Slider;
     @FXML
     private GridPane postWallContainer;
     @FXML
-    private Button btnTema;
-    @FXML
     private Label label;
     @FXML
     private ListView<String> listComments, listLikes;
-
 
     // Llama el metodo de cambiar el tema
     @FXML
     void onThem(ActionEvent event) {
         themeMode();
     }
-
     @FXML
     public void initialize() {
         this.tema = new Theme();
@@ -77,7 +68,6 @@ public class PostWallViewController implements Observer {
         setupFriendsList();
         productController.addObserver(this);
         btnAddFriend.setOnAction(event -> showAddFriendDialog());
-
         if (username != null) {
             updateCurrentSeller();
             List<ProductDto> allProducts = getAllVisibleProducts();
@@ -86,28 +76,23 @@ public class PostWallViewController implements Observer {
         listComments.getItems().clear();
         listLikes.getItems().clear();
     }
-
     // Metodo para setterar el username y actualizar el muro
     public void setUsername(String username) {
         this.username = username;
         List<ProductDto> allProducts = getAllVisibleProducts();
         populateWall(allProducts, username);
     }
-
     @Override
     public void update() {
-//        List<ProductDto> updatedProducts = productController.getProducts(username);
         List<ProductDto> products = getAllVisibleProducts();
         updateCurrentSeller();
         populateWall(products,username);
     }
-
     private void populateWall(List<ProductDto> products, String username) {
         try {
             postWallManager.clearPosts();
             List<ProductDto> sortedProducts = new ArrayList<>(products);
             sortedProducts.sort((p1, p2) -> p2.publicationDate().compareTo(p1.publicationDate()));
-
             for (ProductDto product : sortedProducts) {
                 String imagePath = product.image();
                 Image image = loadImageFromDirectories(imagePath);
@@ -124,11 +109,10 @@ public class PostWallViewController implements Observer {
             }
         } catch (Exception e) {
             logError(e);
-            showMessage("Error", "Error al poblar el muro: " + e.getMessage(), "Error", Alert.AlertType.ERROR);
+            showMessage(TITULO_ERROR, "Error al poblar el muro: " + e.getMessage(), ERROR,
+                    Alert.AlertType.ERROR);
         }
     }
-
-
     // Obtener todos los productos visibles
     private List<ProductDto> getAllVisibleProducts() {
         List<ProductDto> allProducts = new ArrayList<>();
@@ -149,7 +133,7 @@ public class PostWallViewController implements Observer {
     // Accion al dar like a un producto
     public void onLike(ProductDto product) {
         if (username == null || username.isEmpty()) {
-            showMessage("Error", "Debe estar identificado para dar 'me gusta'.", "Error", Alert.AlertType.ERROR);
+            showMessage(TITULO_ERROR, "Debe estar identificado para dar 'me gusta'.", ERROR, Alert.AlertType.ERROR);
             return;
         }
         productLikes.computeIfAbsent(product.name(), k -> new ArrayList<>()).add(username);
@@ -158,7 +142,7 @@ public class PostWallViewController implements Observer {
     // Accion al dar click en el boton de comentario
     public void onComment(ProductDto product) {
         if (username == null || username.isEmpty()) {
-            showMessage("Error", "Debe estar identificado para comentar.", "Error", Alert.AlertType.ERROR);
+            showMessage(TITULO_ERROR, "Debe estar identificado para comentar.",ERROR, Alert.AlertType.ERROR);
             return;
         }
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -288,6 +272,7 @@ public class PostWallViewController implements Observer {
         System.err.println("Error: " + e.getMessage());
         e.printStackTrace();
     }
+    // Configurar la lista de amigos
     private void setupFriendsList() {
         ContextMenu contextMenu = new ContextMenu();
         MenuItem removeItem = new MenuItem("Eliminar amigo");
@@ -305,16 +290,15 @@ public class PostWallViewController implements Observer {
             }
         });
     }
-
+    // Actualizar el usuario actual
     private void updateCurrentSeller() {
         currentSeller = marketplace.getListSellers().stream()
                 .filter(seller -> seller.getUsername().equals(username))
                 .findFirst()
                 .orElse(null);
-
         updateFriendsList();
     }
-
+    // Actualizar la lista de amigos o contactos
     private void updateFriendsList() {
         friendsList.getItems().clear();
         if (marketplace != null) {
@@ -323,13 +307,12 @@ public class PostWallViewController implements Observer {
             );
         }
     }
-
+    // Mensaje emergete para añadir un nuevo amigo o contacto
     private void showAddFriendDialog() {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Agregar Amigo");
         dialog.setHeaderText("Agregar nuevo amigo");
         dialog.setContentText("Username del vendedor:");
-
         dialog.showAndWait().ifPresent(username -> {
             try {
                 addFriend(username);
@@ -338,12 +321,11 @@ public class PostWallViewController implements Observer {
             }
         });
     }
-
+    // Metodo para añadir un amigo
     private void addFriend(String friendUsername) {
         if (marketplace == null) {
             throw new IllegalStateException("No hay un vendedor actual");
         }
-
         if (friendUsername.equals(currentSeller.getUsername())) {
             throw new IllegalArgumentException("No puedes agregarte a ti mismo como amigo");
         }
@@ -363,13 +345,12 @@ public class PostWallViewController implements Observer {
         List<ProductDto> allProducts = getAllVisibleProducts();
         populateWall(allProducts, username);
     }
-
+    // Remover amigo o contacto
     private void removeFriend() {
         String selectedFriend = friendsList.getSelectionModel().getSelectedItem();
         if (selectedFriend == null) {
             return;
         }
-
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Eliminar Amigo");
         alert.setHeaderText("¿Estás seguro de que quieres eliminar a " + selectedFriend + " de tu lista de amigos?");

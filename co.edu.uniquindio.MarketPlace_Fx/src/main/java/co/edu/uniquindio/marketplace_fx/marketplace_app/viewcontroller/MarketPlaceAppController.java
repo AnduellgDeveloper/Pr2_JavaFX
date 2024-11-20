@@ -1,29 +1,17 @@
-
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.facade.Theme;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.Session;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.SessionManager;
-
-import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class MarketPlaceAppController {
-    private MarketPlaceAppController marketPlaceAppController;
     private ProductViewController productViewController;
     private PostWallViewController postWallViewController;
     private SessionManager sessionManager = SessionManager.getInstance();
@@ -44,12 +32,12 @@ public class MarketPlaceAppController {
     @FXML
     private AnchorPane NodoMessages;
     public void setProductUsername(String username) {
-        System.out.println("productViewController: " + (productViewController != null));
-        System.out.println("postWallViewController: " + (postWallViewController != null));
+//        System.out.println("productViewController: " + (productViewController != null));
+//        System.out.println("postWallViewController: " + (postWallViewController != null));
         if (productViewController != null && postWallViewController != null) {
             productViewController.setUsername(username);
             postWallViewController.setUsername(username);
-            showMessage(username, "Username recibido en MarketPlaceAppController: " + username, "Notificación", Alert.AlertType.INFORMATION);
+//            showMessage(username, "Username recibido en MarketPlaceAppController: " + username, "Notificación", Alert.AlertType.INFORMATION);
         } else {
             System.err.println("Error: Uno de los controladores no se inicializó.");
         }
@@ -88,7 +76,7 @@ public class MarketPlaceAppController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setupNotifications();
+//        setupNotifications();
     }
 
     // Método que muestra un mensaje en un cuadro de diálogo
@@ -112,6 +100,7 @@ public class MarketPlaceAppController {
         });
         updateActiveUsersList();
     }
+    // Actualizar la lista de usuarios activos
     private void updateActiveUsersList() {
         Platform.runLater(() -> {
             activeUsersListView.getItems().clear();
@@ -120,91 +109,18 @@ public class MarketPlaceAppController {
             );
         });
     }
-    @FXML
-    private void testNotification() {
-        showNotification("¡Notificación de prueba!");
-    }
-    @FXML
-    private void debugSharedFile() {
-        String sharedFile = (String) sessionManager.getSharedData().get("sharedFile");
-        System.out.println("Archivo compartido: " + sharedFile);
-    }
-
-     private void setupNotifications() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-            Object rawNotifications = sessionManager.getSharedData().get("notifications");
-            List<String> notifications;
-            if (rawNotifications instanceof List<?>) {
-                notifications = (List<String>) rawNotifications;
-            } else {
-                notifications = new ArrayList<>();
-            }
-            for (String notification : notifications) {
-                showNotification(notification);
-            }
-            if (rawNotifications instanceof List<?>) {
-                notifications.clear();
-            }
-            sessionManager.getSharedData().put("notifications", notifications);
-        }));
-
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
-    }
-
-
-    // Obtener zona de spawn
-    private Stage getStage() {
-        return (Stage) tabPane.getScene().getWindow();
-    }
-    // Ver notificacion (Nueva más minimalista)
-    private void showNotification(String message) {
-        Platform.runLater(() -> {
-            Tooltip tooltip = new Tooltip(message);
-            tooltip.show(getStage());
-
-            PauseTransition delay = new PauseTransition(Duration.seconds(3));
-            delay.setOnFinished(e -> tooltip.hide());
-            delay.play();
-        });
-    }
-    @FXML
-    private void shareFile() {
-        FileChooser fileChooser = new FileChooser();
-        File file = fileChooser.showOpenDialog(null);
-
-        if (file != null) {
-            sessionManager.getSharedData().put("sharedFile", file.getName());
-            notifyFileshare();
-        }
-    }
-
-    private void notifyFileshare() {
-        String notification = currentSession.getUsername() + " ha compartido un archivo";
-        Object rawNotifications = sessionManager.getSharedData().get("notifications");
-        List<String> notifications;
-
-        if (rawNotifications instanceof List<?>) {
-            notifications = (List<String>) rawNotifications;
-        } else {
-            notifications = new ArrayList<>();
-        }
-        notifications.add(notification);
-        sessionManager.getSharedData().put("notifications", notifications);
-    }
-
+    // Al iniciar sesion
     private void onSessionCreated(Session session) {
         Platform.runLater(() -> {
             activeUsersListView.getItems().add(session.getUsername());
             showMessage("Nueva sesión", "El usuario " + session.getUsername() + " ha iniciado sesión.", "Notificación", Alert.AlertType.INFORMATION);
         });
     }
-
+    // Al darle a la X para cerrar la ventana
     private void onSessionClosed(Session session) {
         Platform.runLater(() -> {
             activeUsersListView.getItems().remove(session.getUsername());
             showMessage("Sesión cerrada", "El usuario " + session.getUsername() + " ha cerrado sesión.", "Notificación", Alert.AlertType.INFORMATION);
         });
     }
-
 }

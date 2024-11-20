@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="793.0" stylesheets="@Css/tab.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.MarketPlaceAppController">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="793.0" stylesheets="@Css/tab.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller.MarketPlaceAppController">
   <tabs>
     <Tab fx:id="tabPostWall" text="Muro de publicaciones">
       <content>
@@ -26,20 +22,8 @@
         <content>
           <AnchorPane fx:id="NodoMessages" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" stylesheets="@Css/anchor.css">
                <children>
-                  <TextArea fx:id="sharedNotesArea" layoutX="214.0" layoutY="124.0" prefHeight="164.0" prefWidth="374.0" promptText="Escribe notas que se compartirán con otras sesiones" stylesheets="@Css/TextA.css" />
-                  <Label alignment="CENTER" layoutX="78.0" layoutY="26.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="43.0" prefWidth="137.0" stylesheets="@Css/Label.css" text="Mensajes ">
-                     <font>
-                        <Font name="Arial Black" size="14.0" />
-                     </font></Label>
-                  <ListView fx:id="activeUsersListView" layoutY="178.0" prefHeight="437.0" prefWidth="139.0" style="-fx-background-color: #ECB0F7FF;" stylesheets="@Css/list.css" />
-                   <Button layoutX="421.0" layoutY="307.0" onAction="#testNotification" text="Probar Notificación">
-                     <stylesheets>
-
-                        <URL value="@Css/ButtonStyle.css" />
-                     </stylesheets></Button>
-                   <Button layoutX="422.0" layoutY="357.0" onAction="#shareFile" stylesheets="@Css/ButtonStyle.css" text="Compartir Archivo" />
-                   <Button layoutX="421.0" layoutY="403.0" onAction="#debugSharedFile" prefHeight="42.0" prefWidth="168.0" stylesheets="@Css/ButtonStyle.css" text="Ver Archivo Compartido" />
-                  <ListView fx:id="friendsListView" layoutX="611.0" layoutY="166.0" prefHeight="437.0" prefWidth="139.0" style="-fx-background-color: #ECB0F7FF;" stylesheets="@Css/list.css" />
+                  <TextArea fx:id="sharedNotesArea" layoutX="176.0" layoutY="35.0" prefHeight="164.0" prefWidth="374.0" promptText="Escribe notas que se compartirán con otras sesiones" stylesheets="@Css/TextA.css" />
+                  <ListView fx:id="activeUsersListView" layoutX="14.0" layoutY="35.0" prefHeight="302.0" prefWidth="139.0" style="-fx-background-color: #ECB0F7FF;" stylesheets="@Css/list.css" />
                </children>
             </AnchorPane>
         </content>

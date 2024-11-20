@@ -1,10 +1,14 @@
 package co.edu.uniquindio.marketplace_fx.marketplace_app.viewcontroller;
 
 import co.edu.uniquindio.marketplace_fx.marketplace_app.controller.LoginController;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.ProductDto;
+import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.SellerDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.mapping.dto.UserDto;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.Session;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.session.SessionManager;
 import co.edu.uniquindio.marketplace_fx.marketplace_app.model.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,10 +27,11 @@ import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.LoginConsta
 import static co.edu.uniquindio.marketplace_fx.marketplace_app.utils.ProductConstants.HEADER;
 
 public class LoginViewController {
-    AdministratorViewController adminController;
+    private ObservableList<ProductDto> products = FXCollections.observableArrayList();
+    private ObservableList<SellerDto> sellers = FXCollections.observableArrayList();
+    AdministratorViewController adminControlle;
     private LoginController loginController;
     private SessionManager sessionManager = SessionManager.getInstance();
-
     @FXML
     private ProductViewController productViewController;
     @FXML
@@ -38,6 +43,7 @@ public class LoginViewController {
 
     @FXML
     void initialize() {
+
         loginController = new LoginController();
     }
 
@@ -69,40 +75,32 @@ public class LoginViewController {
             showMessage(TITULO_DATOS_INCONRRECTOS, BODY_DATOS_INCORRECTOS, HEADER, Alert.AlertType.ERROR);
         }
     }
-
+    // Ir a la interfaz de vendedor
     private void navigateToSellerView(ActionEvent event, String username, Session session) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/MarketPlace-app.fxml"));
             Parent root = loader.load();
 
-
             MarketPlaceAppController marketPlaceController = loader.getController();
             marketPlaceController.setProductUsername(username);
             marketPlaceController.initSession(session);
 
-
-
-
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("Dunima MarketPlace - Vendedor"+
-                    "- Sesión de " + session.getUsername()+
-                    "- ID:" + session.getSessionId());
+                    "- Sesión de " + session.getUsername()+ "- ID:" + session.getSessionId());
             stage.setOnCloseRequest(eventClose -> {
                 System.out.println("La ventana del vendedor se está cerrando...");
                 sessionManager.closeSession(session.getSessionId());
             });
             stage.setScene(scene);
             stage.show();
-
 //           closeCurrentStage(event);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
-
+    // Ir a la interfaz de administrador
     private void navigateToAdminView(ActionEvent event, Session session) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace_fx/marketplace_app/Administrator-view.fxml"));
@@ -111,13 +109,14 @@ public class LoginViewController {
             stage.setTitle("Dunima MarketPlace - Administrador"+
                     "- Sesión de " + session.getUsername()+
                     "- ID:" + session.getSessionId());
+
             AdministratorViewController adminController = loader.getController();
             adminController.setUsername(session.getUsername());
 
             stage.setScene(scene);
             stage.show();
             showMessage(TITULO_INTERFAZ_ADMINISTRADOR, BODY_BIENVENIDO_ADMINISTRADOR, HEADER, Alert.AlertType.INFORMATION);
-            closeCurrentStage(event);
+//            closeCurrentStage(event);
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -128,7 +127,7 @@ public class LoginViewController {
         Stage currentStage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         currentStage.close();
     }
-
+    // Ir a la interfaz principal del menu (Welcome Dunima)
     @FXML
     void onBackToHub(ActionEvent event) {
         try {
@@ -144,7 +143,6 @@ public class LoginViewController {
             e.printStackTrace();
         }
     }
-
     // Method to display a message in a dialog
     private void showMessage(String title, String message, String header, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
